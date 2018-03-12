@@ -1,0 +1,29 @@
+﻿<div class="content-heading">
+    <ul class="breadcrumb pull-right">
+        <li>
+            <a href="#">Inicio</a>
+        </li>
+        <li class="active">Requisiciones</li>
+    </ul>
+    Requisiciones
+    <small> Administraci&oacute;n de Requisiciones.</small>
+</div>
+
+<div class="panel panel-defaul">
+    <div class="panel-heading"> DAM-FO-290</div>
+    <div class="panel-body">
+        <div class="mb-lg clearfix">
+            <div class="pull-let wd-md">
+                <input *ngIf="config.filtering" placeholder="Filtar en Columnas" [ngTableFiltering]="config.filtering" class="form-control" (tableChanged)="onChangeTable(config)" />
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <ng-table [config]="config" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
+            </ng-table>
+        </div>
+        <div class="text-right">
+            <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
+            </pagination>
+        </div>
+    </div>
+</div>
