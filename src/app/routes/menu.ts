@@ -12,9 +12,13 @@ const Reclutamiento = {
             {
                 text: 'DAMFO 290',
                 link: '/reclutamiento/290'
-            },{
+            },
+            {
               text: 'Candidatos',
               link: '/reclutamiento/candidatos'
+            },
+            {
+              text: 'Vacantes'
             }
         ]
 };
@@ -30,7 +34,12 @@ const Ventas = {
         },
         {
             text: 'Requisiciones',
-            link: '/ventas/requisicion',
+            submenu:[
+              {
+                text: 'Create' ,
+                link: '/ventas/requisicion',
+              }
+            ]
         }
 
     ]
