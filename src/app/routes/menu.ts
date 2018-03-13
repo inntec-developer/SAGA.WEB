@@ -4,6 +4,8 @@ const Home = {
     icon: 'icon-home'
 };
 
+
+
 const Reclutamiento = {
     text: 'Reclutamiento',
     link: '/reclutamiento',
@@ -18,7 +20,8 @@ const Reclutamiento = {
               link: '/reclutamiento/candidatos'
             },
             {
-              text: 'Vacantes'
+              text: 'Vacantes',
+              link: '/reclutamiento/vacantes'
             }
         ]
 };
