@@ -9,9 +9,11 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ImageCropperModule } from 'ng2-img-cropper';
 
 import { Damfo290Component } from './damfo290/damfo290.component';
+import { CandidatosComponent } from './candidatos/candidatos.component';
 
 const routes: Routes = [
-    {path: '290', component: Damfo290Component}
+    {path: '290', component: Damfo290Component},
+    {path: 'candidatos', component: CandidatosComponent}
 ];
 
 @NgModule({
@@ -27,7 +29,8 @@ const routes: Routes = [
     ],
     providers: [ColorPickerService],
     declarations: [
-        Damfo290Component
+        Damfo290Component,
+        CandidatosComponent
     ],
     exports: [
         RouterModule
