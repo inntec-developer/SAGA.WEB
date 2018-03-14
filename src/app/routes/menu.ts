@@ -39,7 +39,7 @@ const Ventas = {
             text: 'Requisiciones',
             submenu:[
               {
-                text: 'Create' ,
+                text: 'Nuevo' ,
                 link: '/ventas/requisicion',
               }
             ]
