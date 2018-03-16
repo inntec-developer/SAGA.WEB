@@ -8,30 +8,4 @@
     Candidatos
     <small> Administraci&oacute;n de Candidatos</small>
 </div>
-<form class="example-form">
-  <div class="row">
-    <div class="col-md-6">
-      <mat-form-field class="example-full-width">
-        <input matInput #postalCode maxlength="5" placeholder="Postal Code" value="">
-        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-      </mat-form-field>
-    </div>
-    <div class="col-md-6">
-      <mat-form-field class="example-full-width">
-    <input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
-     <mat-autocomplete #auto="matAutocomplete">
-       <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-         <div class="row">
-           <div class="col-md-2">
-              <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="15" />
-           </div>
-           <div class="col-md-4">
-              <small>{{ state.name }} <strong> Poblacion: </strong> {{state.population}}</small>
-           </div>
-         </div>
-       </mat-option>
-     </mat-autocomplete>
-  </mat-form-field>
-    </div>
-  </div>
-</form>
+<app-busqueda></app-busqueda>

@@ -10,5 +10,5 @@ export class ApiConection {
 
   // Agregar lsa conecciones necesarias en las cuales se hara referencia.
   public static damfo290 = 'DAMFO290/get';
-
+  public static filtropaises = 'Candidatos/get';
 }

@@ -1,9 +1,11 @@
-﻿import { NgModule } from '@angular/core';
+// Librerias necesarias para el modulo.
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { ColorPickerModule, ColorPickerService } from 'ngx-color-picker';
 import { SelectModule } from 'ng2-select';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -31,6 +33,12 @@ import { RequisicionesService } from '../../service/index';
 import { Damfo290Component } from './damfo290/damfo290.component';
 import { CandidatosComponent } from './candidatos/candidatos.component';
 import { VacantesComponent } from './vacantes/vacantes.component';
+import { BusquedaComponent } from './candidatos/busqueda/busqueda.component';
+import { PaisComponent } from './candidatos/busqueda/pais/pais.component';
+import { EstadoComponent } from './candidatos/busqueda/estado/estado.component';
+import { MunicipioComponent } from './candidatos/busqueda/municipio/municipio.component';
+import { ColoniaComponent } from './candidatos/busqueda/colonia/colonia.component';
+import { AreaExpComponent } from './candidatos/busqueda/area-exp/area-exp.component';
 
 const routes: Routes = [
     {path: '290', component: Damfo290Component},
@@ -56,14 +64,8 @@ const routes: Routes = [
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, MatOptionModule ],
     providers: [ColorPickerService],
-    declarations: [
-        Damfo290Component,
-        CandidatosComponent,
-        VacantesComponent
-    ],
-    exports: [
-        RouterModule
-    ]
+    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent],
+    exports: [ RouterModule ]
 })
 
 export class ReclutamientoModule { }
