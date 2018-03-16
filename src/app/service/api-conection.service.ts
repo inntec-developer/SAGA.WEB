@@ -10,5 +10,5 @@ export class ApiConection {
 
 
   public static damfo290 = 'DAMFO290/get';
-
+  public static filtropaises = 'Candidatos/get';
 }
