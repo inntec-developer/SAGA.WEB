@@ -2,22 +2,30 @@
 import { GridOptions } from 'ag-grid/main';
 import { HttpClient } from '@angular/common/http';
 import { TableData } from './ng2-table-data';
+import { RequisicionesService } from '../../../service/index';
 
 @Component({
     selector: 'app-requisicion',
     templateUrl: './requisicion.component.html',
-    styleUrls: ['./requisicion.component.scss']
+    styleUrls: ['./requisicion.component.scss'],
+    providers: [RequisicionesService]
 })
 
 export class RequisicionComponent implements OnInit {
 
-    public singleData;
 
-    constructor(public http: HttpClient) {
+
+    constructor(
+                  private service: RequisicionesService,
+                  private http: HttpClient
+      ) {
+
         // ng2Table
         this.length = this.ng2TableData.length;
     }
-
+    //Varaibales Globales
+    public singleData;
+    private damfo: Array<any>[];
     // ng2Table
     public rows: Array<any> = [];
     public columns: Array<any> = [
@@ -29,7 +37,7 @@ export class RequisicionComponent implements OnInit {
         { title: 'Salary ($)', name: 'salary' },
     ];
     public page: number = 1;
-    public itemsPerPage: number = 20;
+    public itemsPerPage: number = 15;
     public maxSize: number = 5;
     public numPages: number = 1;
     public length: number = 0;
@@ -43,8 +51,14 @@ export class RequisicionComponent implements OnInit {
 
     public ng2TableData: Array<any> = TableData;
 
-    public ngOnInit(): void {
+    public ngOnInit() {
         this.onChangeTable(this.config);
+
+        // this.service.getDamgo290()
+        //   .subscribe(data => {
+        //     this.damfo = data;
+        //     console.log(data);
+        //   });
     }
 
     public changePage(page: any, data: Array<any> = this.ng2TableData): Array<any> {

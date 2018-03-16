@@ -8,7 +8,7 @@ export class ApiConection {
   /*Coneccion de Produccion (?)*/
   //public static ServiceUrl = 'http://192.168.8.146:33333/api/';
 
-
+  // Agregar lsa conecciones necesarias en las cuales se hara referencia.
   public static damfo290 = 'DAMFO290/get';
 
 }

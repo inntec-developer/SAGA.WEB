@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http'
 import { ColorPickerModule, ColorPickerService } from 'ngx-color-picker';
 import { SelectModule } from 'ng2-select';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -24,9 +23,10 @@ import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
          MatStepperModule, MatTableModule, MatTabsModule,
          MatToolbarModule, MatTooltipModule, MatOptionModule
        } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
+
+import { RequisicionesService } from '../../service/index';
 
 import { Damfo290Component } from './damfo290/damfo290.component';
 import { CandidatosComponent } from './candidatos/candidatos.component';
@@ -44,7 +44,7 @@ const routes: Routes = [
         SelectModule, ColorPickerModule, TextMaskModule,
         TagInputModule, CustomFormsModule, FileUploadModule,
         ImageCropperModule, FormsModule, ReactiveFormsModule,
-        CommonModule, HttpModule, HttpClientModule,
+        CommonModule, HttpClientModule,
         MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
         MatCardModule, MatCheckboxModule, MatChipsModule,
         MatStepperModule, MatDatepickerModule, MatDialogModule,
