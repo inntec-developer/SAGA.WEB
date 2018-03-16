@@ -13,7 +13,7 @@ import { ApiConection } from '../index';
 @Injectable()
 export class RequisicionesService {
 
-  private urlRequiGet = ApiConection.ServiceUrl + ApiConection.damfo290;
+  private urlRequiGet = ApiConection.ServiceUrl + ApiConection.requisiciones;
 
   constructor(private http: Http) { }
 

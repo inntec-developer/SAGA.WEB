@@ -12,14 +12,10 @@ import { RequisicionesService } from '../../../service/index';
 })
 
 export class RequisicionComponent implements OnInit {
-
-
-
     constructor(
                   private service: RequisicionesService,
                   private http: HttpClient
       ) {
-
         // ng2Table
         this.length = this.ng2TableData.length;
     }
@@ -54,11 +50,11 @@ export class RequisicionComponent implements OnInit {
     public ngOnInit() {
         this.onChangeTable(this.config);
 
-        // this.service.getDamgo290()
-        //   .subscribe(data => {
-        //     this.damfo = data;
-        //     console.log(data);
-        //   });
+        this.service.getDamgo290()
+          .subscribe(data => {
+            this.damfo = data;
+            console.log(data);
+          });
     }
 
     public changePage(page: any, data: Array<any> = this.ng2TableData): Array<any> {
