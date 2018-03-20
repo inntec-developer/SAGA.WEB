@@ -2,11 +2,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import { Ng2TableModule, NG_TABLE_DIRECTIVES } from 'ng2-table/ng2-table';
 import { SharedModule } from '../../shared/shared.module';
-import { HttpModule} from '@angular/Http';
+import { HttpModule } from '@angular/Http';
 import { HttpClientModule } from '@angular/common/http';
 import { ProspectoComponent } from './prospectos/prospecto.component';
-import { RequisicionComponent } from './requisiciones/requisicion.componen;
-import { RequisicionNuevaComponent } from './requisiciones/components/requisicion-nueva/requisicion-nueva.component't';
+import { RequisicionComponent } from './requisiciones/requisicion.component';
+import { RequisicionNuevaComponent } from './requisiciones/components/requisicion-nueva/requisicion-nueva.component';
 
 
 const routes: Routes = [
@@ -25,8 +25,8 @@ const routes: Routes = [
     providers: [],
     declarations: [
         ProspectoComponent,
-        RequisicionCompone,
-        RequisicionNuevaComponentnt
+        RequisicionComponent,
+        RequisicionNuevaComponent
     ],
     exports: [
         RouterModule
