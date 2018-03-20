@@ -1,4 +1,4 @@
-import { Component, Output, Input } from '@angular/core';
+import { Component, Output, Input, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -6,7 +6,7 @@ import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 
 export class Filter {
-  constructor(public name: string, public flag: string) { }
+  constructor(public Id: number, public pais: string, public flag: string) { }
 }
 
 @Component({
@@ -14,40 +14,34 @@ export class Filter {
   templateUrl: './pais.component.html',
   styleUrls: ['./pais.component.scss']
 })
-export class PaisComponent {
-
-  @Input() paises: any[];
-
-  console.log(this.paises);
-
+export class PaisComponent implements OnInit{
+// Declarar variables.
+  @Input('paises') paises: Filter[];
   countryCtrl: FormControl;
   filteredCountry: Observable<any[]>;
-  pais = 'Mexico';
-  countries: Filter[] = [
-    {
-      name: 'Mexico',
-      flag: './assets/img/flags-mini/'+this.pais+'.png'
-
-    },
-    {
-      name: 'Estados Unidos',
-      flag: 'https://www.worldflags.es/imagenes/productos/1466p_USA.JPG'
-    }
-  ];
 
   constructor() {
     this.countryCtrl = new FormControl();
     this.filteredCountry = this.countryCtrl.valueChanges
       .pipe(
         startWith(''),
-        map(country => country ? this.filterCountry(country) : this.countries.slice())
+        map(country => country ? this.filterCountry(country) : this.paises.slice())
       );
-      console.log(this.countries);
   }
 
-  filterCountry(name: string) {
-    return this.countries.filter(country =>
-      country.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  ngOnInit(){
+
+  }
+
+  countries: Filter[] =
+  [ { Id: 1, pais: 'Mexico', flag: './assets/img/flags-mini/Mexico.png'
+
+    }, { Id: 2, pais: 'Estados Unidos', flag:
+    'https://www.worldflags.es/imagenes/productos/1466p_USA.JPG' } ];
+
+  filterCountry(pais: string) {
+    return this.paises.filter(country =>
+      country.pais.toLowerCase().indexOf(pais.toLowerCase()) === 0);
   }
 
 }

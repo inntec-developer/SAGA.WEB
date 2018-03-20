@@ -37,7 +37,6 @@ export class EstadoComponent {
       startWith(''),
       map(state => state ? this.filterState(state) : this.states.slice())
     );
-    console.log(this.states);
   }
 
   filterState(name: string) {

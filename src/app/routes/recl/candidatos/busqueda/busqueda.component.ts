@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { PaisComponent } from './pais/pais.component';
 
 import { CandidatosService } from '../../../../service/candidatos/candidatos.service';
+
+export class Filter {
+  constructor(public Id: number, public pais: string, public flag: string) { }
+}
 
 @Component({
   selector: 'app-busqueda',
@@ -11,14 +15,15 @@ import { CandidatosService } from '../../../../service/candidatos/candidatos.ser
 })
 export class BusquedaComponent implements OnInit {
 
- paises: any[];
+ public paises: Filter[];
 
  constructor(private service: CandidatosService){}
 
   ngOnInit(){
     this.service.getpaises()
     .subscribe(data => {
-      this.paises = data.paises;
+      this.paises = data;
+      console.log(this.paises);
     })
   }
 
