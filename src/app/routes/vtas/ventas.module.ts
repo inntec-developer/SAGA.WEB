@@ -5,7 +5,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { HttpModule} from '@angular/Http';
 import { HttpClientModule } from '@angular/common/http';
 import { ProspectoComponent } from './prospectos/prospecto.component';
-import { RequisicionComponent } from './requisiciones/requisicion.component';
+import { RequisicionComponent } from './requisiciones/requisicion.componen;
+import { RequisicionNuevaComponent } from './requisiciones/components/requisicion-nueva/requisicion-nueva.component't';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
     providers: [],
     declarations: [
         ProspectoComponent,
-        RequisicionComponent
+        RequisicionCompone,
+        RequisicionNuevaComponentnt
     ],
     exports: [
         RouterModule
