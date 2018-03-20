@@ -23,12 +23,13 @@ import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
          MatSelectModule, MatSidenavModule, MatSliderModule,
          MatSlideToggleModule, MatSnackBarModule, MatSortModule,
          MatStepperModule, MatTableModule, MatTabsModule,
-         MatToolbarModule, MatTooltipModule, MatOptionModule } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+         MatToolbarModule, MatTooltipModule, MatOptionModule
+       } from '@angular/material';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 
-// Componentes a exportar.
+import { RequisicionesService } from '../../service/index';
+
 import { Damfo290Component } from './damfo290/damfo290.component';
 import { CandidatosComponent } from './candidatos/candidatos.component';
 import { VacantesComponent } from './vacantes/vacantes.component';
@@ -51,17 +52,16 @@ const routes: Routes = [
         SelectModule, ColorPickerModule, TextMaskModule,
         TagInputModule, CustomFormsModule, FileUploadModule,
         ImageCropperModule, FormsModule, ReactiveFormsModule,
-        CommonModule, HttpModule, HttpClientModule,
+        CommonModule, HttpClientModule,
         MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
         MatCardModule, MatCheckboxModule, MatChipsModule,
         MatStepperModule, MatDatepickerModule, MatDialogModule,
         MatDividerModule, MatExpansionModule, MatGridListModule,
-        MatIconModule, MatInputModule, MatListModule,
-        MatMenuModule, MatNativeDateModule, MatPaginatorModule,
-        MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
-        MatRippleModule, MatSelectModule, MatSidenavModule,
-        MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
-        MatSortModule, MatTableModule, MatTabsModule,
+        MatIconModule, MatInputModule,   MatListModule,
+        MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule,
+        MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
+        MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+        MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, MatOptionModule ],
     providers: [ColorPickerService],
     declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent],

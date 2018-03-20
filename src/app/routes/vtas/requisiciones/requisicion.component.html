@@ -4,6 +4,7 @@
             <a href="#">Inicio</a>
         </li>
         <li class="active">Requisiciones</li>
+        <li class="active">Nuevo</li>
     </ul>
     Requisiciones
     <small> Administraci&oacute;n de Requisiciones.</small>
@@ -14,11 +15,46 @@
     <div class="panel-body">
         <div class="mb-lg clearfix">
             <div class="pull-let wd-md">
-                <input *ngIf="config.filtering" placeholder="Filtar en Columnas" [ngTableFiltering]="config.filtering" class="form-control" (tableChanged)="onChangeTable(config)" />
+                <input *ngIf="config.filtering"
+                placeholder="Filtar en Columnas"
+                [ngTableFiltering]="config.filtering"
+                class="form-control"
+                (keydown)="onChangeTable(config)" />
             </div>
         </div>
-          <ng-table [config]="config" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
-          </ng-table>
+      <table class="table tanble-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Office</th>
+              <th>Extn</th>
+              <th>Start date</th>
+              <th>Salary ($)</th>
+              <th>Accion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of ng2TableData">
+              <td>{{user.name}}</td>
+              <td>{{user.psition}}</td>
+              <td>{{user.office}}</td>
+              <td>{{user.ext}}</td>
+              <td>{{user.startDate}}</td>
+              <td>{{user.salary}}</td>
+              <td>
+                  <button class="mb-sm btn-xs btn btn-primary btn-outline" type="button">
+                    <em class="fa fa-plus"></em></button>
+                  <button class="mb-sm btn-xs btn btn-success btn-outline" type="button">
+                    <em class="fa fa-pencil"></em></button>
+                  <button class="mb-sm btn-xs btn btn-warning btn-outline" type="button">
+                    <em class="icon-note"></em></button>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- <ng-table [config]="config" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
+        </ng-table> -->
         <div class="text-right">
             <pagination *ngIf="config.paging"
                         class="pagination-sm"
