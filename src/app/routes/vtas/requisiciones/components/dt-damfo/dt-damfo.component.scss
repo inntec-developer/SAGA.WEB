@@ -1,0 +1,27 @@
+
+/* Structure */
+.dtDamfo-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
+.dtDamfo-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 12px;
+  width: 100%;
+}
+
+.mat-table {
+  font-size: 12px;
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-cell{
+  font-size: 12px;
+}

@@ -1,32 +1,60 @@
 ﻿import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Ng2TableModule, NG_TABLE_DIRECTIVES } from 'ng2-table/ng2-table';
 import { SharedModule } from '../../shared/shared.module';
 import { HttpModule } from '@angular/Http';
 import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
+         MatCardModule, MatCheckboxModule, MatChipsModule,
+         MatDatepickerModule, MatDialogModule, MatDividerModule,
+         MatExpansionModule, MatGridListModule, MatIconModule,
+         MatInputModule, MatListModule, MatMenuModule,
+         MatNativeDateModule, MatPaginatorModule, MatProgressBarModule,
+         MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
+         MatSelectModule, MatSidenavModule, MatSliderModule,
+         MatSlideToggleModule, MatSnackBarModule, MatSortModule,
+         MatStepperModule, MatTableModule, MatTabsModule,
+         MatToolbarModule, MatTooltipModule, MatOptionModule
+       } from '@angular/material';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
+
+
+
 import { ProspectoComponent } from './prospectos/prospecto.component';
 import { RequisicionComponent } from './requisiciones/requisicion.component';
 import { RequisicionNuevaComponent } from './requisiciones/components/requisicion-nueva/requisicion-nueva.component';
+import { DtDamfoComponent } from './requisiciones/components/dt-damfo/dt-damfo.component';
 
 
 const routes: Routes = [
     { path: 'prospecto', component: ProspectoComponent },
-    { path: 'requisicion', component: RequisicionComponent }
+    { path: 'requisicion', component: RequisicionComponent },
+    { path: 'requisicionNueva', component: RequisicionNuevaComponent}
 ];
 
 @NgModule({
     imports: [
         SharedModule,
         RouterModule.forChild(routes),
-        Ng2TableModule,
         HttpModule,
-        HttpClientModule
+        HttpClientModule,
+        MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
+        MatCardModule, MatCheckboxModule, MatChipsModule,
+        MatStepperModule, MatDatepickerModule, MatDialogModule,
+        MatDividerModule, MatExpansionModule, MatGridListModule,
+        MatIconModule, MatInputModule,   MatListModule,
+        MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule,
+        MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
+        MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+        MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
+        MatToolbarModule, MatTooltipModule, MatOptionModule
     ],
     providers: [],
     declarations: [
         ProspectoComponent,
         RequisicionComponent,
-        RequisicionNuevaComponent
+        RequisicionNuevaComponent,
+        DtDamfoComponent
     ],
     exports: [
         RouterModule
