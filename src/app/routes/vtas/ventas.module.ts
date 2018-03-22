@@ -2,7 +2,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { Ng2TableModule, NG_TABLE_DIRECTIVES } from 'ng2-table/ng2-table';
 import { SharedModule } from '../../shared/shared.module';
-import { HttpModule } from '@angular/Http';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ProspectoComponent } from './prospectos/prospecto.component';
 import { RequisicionComponent } from './requisiciones/requisicion.component';

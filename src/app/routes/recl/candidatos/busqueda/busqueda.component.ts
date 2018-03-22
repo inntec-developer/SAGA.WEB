@@ -1,7 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { PaisComponent } from './pais/pais.component';
+import {FormControl} from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material';
 
-import { CandidatosService } from '../../../../service/index';
+import {Observable} from 'rxjs/Observable';
+import {startWith} from 'rxjs/operators/startWith';
+import {map} from 'rxjs/operators/map';
 
 @Component({
   selector: 'app-busqueda',
@@ -10,7 +14,27 @@ import { CandidatosService } from '../../../../service/index';
 })
 export class BusquedaComponent implements OnInit {
 
- constructor(){}
+  IdPais: number;
+  IdEstado: number;
+  IdMunicipio: number;
+
+  FiltroPais(event){
+    this.IdPais = event;
+  }
+
+  FiltroEstado(event){
+    this.IdEstado = event;
+  }
+
+  FiltroMunicipio(event){
+    this.IdMunicipio = event;
+  }
+
+ constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer){
+   iconRegistry.addSvgIcon(
+        'find',
+        sanitizer.bypassSecurityTrustResourceUrl('/assets/img/icon/ic_find_in_page_24px.svg'));
+  }
 
   ngOnInit(){
 

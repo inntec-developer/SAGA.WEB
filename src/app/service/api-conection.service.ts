@@ -12,4 +12,7 @@ export class ApiConection {
   public static damfo290 = 'DAMFO290/get';
   public static requisiciones = "Requisiciones/getDamfos"
   public static filtropaises = 'Candidatos/get';
+  public static filtroestados = 'Candidatos/getestados';
+  public static filtromunicipios = 'Candidatos/getmunicipios';
+  public static filtrocolonias = 'Candidatos/getcolonias';
 }

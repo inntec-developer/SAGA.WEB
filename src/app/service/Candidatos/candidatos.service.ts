@@ -17,6 +17,9 @@ import { ApiConection } from '../api-conection.service';
 export class CandidatosService {
 // Url de servicios.
 private UrlPaises = ApiConection.ServiceUrl+ApiConection.filtropaises;
+private UrlEstados = ApiConection.ServiceUrl+ApiConection.filtroestados;
+private UrlMunicipios = ApiConection.ServiceUrl+ApiConection.filtromunicipios;
+private UrlColonias = ApiConection.ServiceUrl+ApiConection.filtrocolonias;
 
 // Error.
 private handleError(error: any) {
@@ -29,8 +32,28 @@ private handleError(error: any) {
 
 constructor(private http: Http) {  }
 
+// Servicios de controller de candidatos.
+
 getpaises(): Observable<any> { // Obtener filtro de paises.
    return this.http.get(this.UrlPaises)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getestados(pais: string): Observable<any> { // Obtener filtro de estados.
+   return this.http.get(this.UrlEstados + '?Pais=' + pais)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getmunicipios(estado: string): Observable<any> { // Obtener filtro de municipios.
+   return this.http.get(this.UrlMunicipios + '?Estado=' + estado)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getcolonias(municipio: string): Observable<any> { // Obtener filtro de colonias.
+   return this.http.get(this.UrlColonias + '?Municipio=' + municipio)
        .map(result => result.json())
        .catch(this.handleError);
 }
