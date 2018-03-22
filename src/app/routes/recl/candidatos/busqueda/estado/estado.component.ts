@@ -1,47 +1,61 @@
-import { Component } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 
-export class Filter {
-  constructor(public name: string, public flag: string) { }
-}
+// Servicios
+import { CandidatosService } from '../../../../../service/index';
 
 @Component({
   selector: 'app-estado',
   templateUrl: './estado.component.html',
-  styleUrls: ['./estado.component.scss']
+  styleUrls: ['./estado.component.scss'],
+  providers: [CandidatosService]
 })
-export class EstadoComponent {
-
+export class EstadoComponent implements OnInit {
+ // Variables
+  @Input('Pais') filtropais: any;
+  Estados: any[];
   StatesCtrl: FormControl;
   filteredStates: Observable<any[]>;
+  // Sacamos el filtro para verlo en busqueda.
+  filtroestado: any;
+  @Input() IdEstado: any = 0;
+  @Output()
+  change: EventEmitter<number> = new EventEmitter<number>();
 
-  states: Filter[] = [
-    {
-      name: 'Jalisco',
-      flag: 'http://www.esacademic.com/pictures/eswiki/80/Proposed_flag_for_Jalisco.png'
-    },
-    {
-      name: 'Edo. de México',
-      flag: 'https://vignette.wikia.nocookie.net/althistory/images/f/f3/Bandera_del_Estado_de_M%C3%A9xico.png/revision/latest?cb=20141228224100&path-prefix=es'
-    }
-  ];
-
-  constructor() {
-  this.StatesCtrl = new FormControl();
-  this.filteredStates = this.StatesCtrl.valueChanges
-    .pipe(
-      startWith(''),
-      map(state => state ? this.filterState(state) : this.states.slice())
-    );
+  constructor(private service: CandidatosService) {
+    this.StatesCtrl = new FormControl();
+    // this.StatesCtrl = new FormControl();
   }
 
-  filterState(name: string) {
-    return this.states.filter(state =>
-      state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  filterState(estado: string) {
+    return this.filtroestado = this.Estados.filter(state =>
+      state.estado.toLowerCase().indexOf(estado.toLowerCase()) === 0);
+  }
+
+  SendIdState(){
+    if (this.filtroestado != null){
+      this.IdEstado = this.filtroestado[0].id;
+      this.change.emit(this.IdEstado);
+    }else{
+      this.IdEstado = 0;
+    }
+  }
+
+  ngOnInit(){
+    if (this.filtropais > 0) {
+      this.service.getestados(this.filtropais)
+      .subscribe(data => {
+        this.Estados = data.estados;
+        this.filteredStates = this.StatesCtrl.valueChanges
+          .pipe(startWith(''),
+            map(estado => estado ? this.filterState(estado) : this.Estados.slice())
+          );
+      })
+    }
   }
 
 }

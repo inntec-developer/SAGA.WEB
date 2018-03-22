@@ -1,51 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 
-export class Filter {
-  constructor(public name: string, public flag: string) { }
-}
+// Servicios
+import { CandidatosService } from '../../../../../service/index';
 
 @Component({
   selector: 'app-municipio',
   templateUrl: './municipio.component.html',
-  styleUrls: ['./municipio.component.scss']
+  styleUrls: ['./municipio.component.scss'],
+  providers: [CandidatosService]
 })
 export class MunicipioComponent implements OnInit {
-
+ // Variables
+  @Input('Estado') filtroestado: any;
+  Municipios: any[];
   MunicipioCtrl: FormControl;
   filteredMunicipio: Observable<any[]>;
+  // Sacamos el filtro para verlo en busqueda.
+  filtromunicipio: any;
+  @Input() IdMunicipio: any = 0;
+  @Output()
+  change: EventEmitter<number> = new EventEmitter<number>();
 
-  municipios: Filter[] = [
-    {
-      name: 'Jalisco',
-      flag: 'http://www.esacademic.com/pictures/eswiki/80/Proposed_flag_for_Jalisco.png'
-    },
-    {
-      name: 'Edo. de México',
-      flag: 'https://vignette.wikia.nocookie.net/althistory/images/f/f3/Bandera_del_Estado_de_M%C3%A9xico.png/revision/latest?cb=20141228224100&path-prefix=es'
-    }
-  ];
-
-  constructor() {
-  this.MunicipioCtrl = new FormControl();
-  this.filteredMunicipio = this.MunicipioCtrl.valueChanges
-    .pipe(
-      startWith(''),
-      map(municipio => municipio ? this.filterMunicipio(municipio) : this.municipios.slice())
-    );
-    console.log(this.municipios);
+  constructor(private service: CandidatosService) {
+    this.MunicipioCtrl = new FormControl();
   }
 
-  filterMunicipio(name: string) {
-    return this.municipios.filter(municipio =>
-      municipio.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  filterMunicipio(municipio: string) {
+    return this.filtromunicipio = this.Municipios.filter(muni =>
+        muni.municipio.toLowerCase().indexOf(municipio.toLowerCase()) === 0);
+  }
+
+  SendIdMunicipio(){
+      this.IdMunicipio = this.filtromunicipio[0].id;
+      this.change.emit(this.IdMunicipio);
   }
 
   ngOnInit() {
+    if (this.filtroestado > 0) {
+      this.service.getmunicipios(this.filtroestado)
+      .subscribe(data => {
+        this.Municipios = data.municipios;
+        this.filteredMunicipio = this.MunicipioCtrl.valueChanges
+          .pipe(startWith(''),
+            map(municipio => municipio ? this.filterMunicipio(municipio) : this.Municipios.slice())
+          );
+      })
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
-import { HttpModule } from '@angular/Http';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
          MatCardModule, MatCheckboxModule, MatChipsModule,
