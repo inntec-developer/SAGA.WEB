@@ -50,11 +50,13 @@ import { IdiomasComponent } from './candidatos/busqueda/idiomas/idiomas.componen
 import { PerfilComponent } from './candidatos/busqueda/perfil/perfil.component';
 import { DtVacantesComponent } from './candidatos/dt-vacantes/dt-vacantes.component';
 import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.component';
+import { DisenadorVacanteComponent } from './vacantes/disenador-vacante/disenador-vacante.component';
 
 const routes: Routes = [
     {path: '290', component: Damfo290Component},
     {path: 'candidatos', component: CandidatosComponent},
-    {path: 'vacantes', component: VacantesComponent}
+    {path: 'vacantes', component: VacantesComponent},
+    {path: 'disenador', component: DisenadorVacanteComponent}
 ];
 
 @NgModule({
@@ -75,7 +77,7 @@ const routes: Routes = [
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, MatOptionModule ],
     providers: [ColorPickerService],
-    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent],
+    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent,DisenadorVacanteComponent],
     exports: [ RouterModule ]
 })
 
