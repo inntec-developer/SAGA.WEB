@@ -51,11 +51,13 @@ import { PerfilComponent } from './candidatos/busqueda/perfil/perfil.component';
 import { DtVacantesComponent } from './candidatos/dt-vacantes/dt-vacantes.component';
 import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.component';
 import { DialogcandidatosComponent } from './candidatos/dt-candidatos/dialogcandidatos/dialogcandidatos.component';
+import { DisenadorVacanteComponent } from './vacantes/disenador-vacante/disenador-vacante.component';
 
 const routes: Routes = [
     {path: '290', component: Damfo290Component},
     {path: 'candidatos', component: CandidatosComponent},
-    {path: 'vacantes', component: VacantesComponent}
+    {path: 'vacantes', component: VacantesComponent},
+    {path: 'disenador', component: DisenadorVacanteComponent}
 ];
 
 @NgModule({
@@ -76,7 +78,7 @@ const routes: Routes = [
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule ],
     providers: [ColorPickerService],
-    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent, DialogcandidatosComponent],
+    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent, DialogcandidatosComponent, DisenadorVacanteComponent],
     entryComponents: [
        DialogcandidatosComponent],
     exports: [ RouterModule ]

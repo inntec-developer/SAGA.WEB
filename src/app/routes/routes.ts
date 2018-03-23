@@ -30,6 +30,6 @@ export const routes = [
     { path: '500', component: Error500Component },
 
     // Not found
-    { path: '**', redirectTo: 'login' }
+    { path: '**', redirectTo: '404' }
 
 ];

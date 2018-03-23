@@ -29,7 +29,7 @@ import { DtDamfoComponent } from './requisiciones/components/dt-damfo/dt-damfo.c
 const routes: Routes = [
     { path: 'prospecto', component: ProspectoComponent },
     { path: 'requisicion', component: RequisicionComponent },
-    { path: 'requisicionNueva', component: RequisicionNuevaComponent}
+    { path: 'requisicionNueva/', component: RequisicionNuevaComponent}
 ];
 
 @NgModule({
