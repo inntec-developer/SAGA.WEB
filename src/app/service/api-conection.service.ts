@@ -15,4 +15,5 @@ export class ApiConection {
   public static filtroestados = 'Candidatos/getestados';
   public static filtromunicipios = 'Candidatos/getmunicipios';
   public static filtrocolonias = 'Candidatos/getcolonias';
+  public static Candidatos = 'Candidatos/getcandidatos';
 }

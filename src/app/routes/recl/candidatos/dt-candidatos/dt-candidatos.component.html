@@ -7,28 +7,34 @@
 
   <mat-table #table [dataSource]="dataSource">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    <!-- Candidato Column -->
+    <ng-container matColumnDef="Candidato">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos.candidato}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    <!-- Codigo Postal Column -->
+    <ng-container matColumnDef="CodigoPostal">
+      <mat-header-cell *matHeaderCellDef> Codigo Postal </mat-header-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos.cp}} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    <!-- Curp Column -->
+    <ng-container matColumnDef="Curp">
+      <mat-header-cell *matHeaderCellDef> Curp </mat-header-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos.curp}} </mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    <!-- Rfc Column -->
+    <ng-container matColumnDef="Rfc">
+      <mat-header-cell *matHeaderCellDef> Rfc </mat-header-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos.rfc}} </mat-cell>
+    </ng-container>
+
+    <!-- Nss Column -->
+    <ng-container matColumnDef="Nss">
+      <mat-header-cell *matHeaderCellDef> Nss </mat-header-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos.nss}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
