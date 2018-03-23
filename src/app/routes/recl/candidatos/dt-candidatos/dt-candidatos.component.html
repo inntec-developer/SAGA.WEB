@@ -1,3 +1,13 @@
+<mat-accordion class="example-headers-align">
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <em class="fa fa-users"></em>
+    </mat-panel-title>
+    <mat-panel-description>
+      Resultado de Candidatos
+    </mat-panel-description>
+  </mat-expansion-panel-header>
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
     <mat-form-field>
@@ -10,7 +20,7 @@
     <!-- Candidato Column -->
     <ng-container matColumnDef="Candidato">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let candidatos"> {{candidatos.candidato}} </mat-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos.nombre}} {{candidatos.apellidoPaterno}} {{candidatos.apellidoMaterno}} </mat-cell>
     </ng-container>
 
     <!-- Codigo Postal Column -->
@@ -37,6 +47,16 @@
       <mat-cell *matCellDef="let candidatos"> {{candidatos.nss}} </mat-cell>
     </ng-container>
 
+    <!-- Accion -->
+    <ng-container matColumnDef="accion">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let candidatos">
+          <button class="mb-sm btn-sm btn btn-green btn-outline" type="button" (click)="openDialog()">
+            Detalle
+            <em class="fa fa-eye"></em></button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
@@ -53,3 +73,5 @@
   <div>Page index: {{pageEvent.pageIndex}}</div>
 </div>
 </div>
+</mat-expansion-panel>
+</mat-accordion>

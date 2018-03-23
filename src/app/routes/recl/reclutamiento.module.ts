@@ -50,6 +50,7 @@ import { IdiomasComponent } from './candidatos/busqueda/idiomas/idiomas.componen
 import { PerfilComponent } from './candidatos/busqueda/perfil/perfil.component';
 import { DtVacantesComponent } from './candidatos/dt-vacantes/dt-vacantes.component';
 import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.component';
+import { DialogcandidatosComponent } from './candidatos/dt-candidatos/dialogcandidatos/dialogcandidatos.component';
 
 const routes: Routes = [
     {path: '290', component: Damfo290Component},
@@ -73,9 +74,11 @@ const routes: Routes = [
         MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, MatOptionModule ],
+        MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule ],
     providers: [ColorPickerService],
-    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent],
+    declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent, DialogcandidatosComponent],
+    entryComponents: [
+       DialogcandidatosComponent],
     exports: [ RouterModule ]
 })
 
