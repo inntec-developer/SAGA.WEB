@@ -11,7 +11,7 @@
     <!-- Cliente <Razon Social> Column -->
     <ng-container matColumnDef="cliente">
       <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.cliente.razonSocial}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
     </ng-container>
     <!-- Nombre Perfil Column -->
     <ng-container matColumnDef="nombrePerfil">
@@ -22,24 +22,24 @@
     <!-- Giro Empresas <Giro Empresa> Column -->
     <ng-container matColumnDef="giroEmpresa">
       <mat-header-cell *matHeaderCellDef> Giro Empresa </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.cliente?.giroEmpresas.giroEmpresa}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.giroEmpresa}} </mat-cell>
     </ng-container>
 
     <!-- Actividad Empresas <Actividad Empresa> Column -->
     <ng-container matColumnDef="actividadEmpresa">
       <mat-header-cell *matHeaderCellDef> Actividad Empresa</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.cliente?.actividadEmpresas.actividadEmpresa}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.actividadEmpresa}} </mat-cell>
     </ng-container>
 
     <!-- Tipo Reclutamiento  <Actividad Empresa> Column -->
     <ng-container matColumnDef="tipoReclutamiento">
       <mat-header-cell *matHeaderCellDef> Tipo Reclutamiento</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.tipoReclutamiento.tipoReclutamiento}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.tipoReclutamiento}} </mat-cell>
     </ng-container>
     <!-- Clase Reclutamiento  <Actividad Empresa> Column -->
     <ng-container matColumnDef="claseReclutamiento">
       <mat-header-cell *matHeaderCellDef> Clase Reclutamiento</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.claseReclutamiento.clasesReclutamiento}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.claseReclutamiento}} </mat-cell>
     </ng-container>
 
     <!-- Sueldo minimo Column -->
@@ -64,12 +64,12 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mb-sm btn-xs btn btn-primary btn-outline" type="button">
-            <em class="fa fa-plus"></em></button>
-          <button class="mb-sm btn-xs btn btn-success btn-outline" type="button">
-            <em class="fa fa-pencil"></em></button>
-          <button class="mb-sm btn-xs btn btn-warning btn-outline" type="button">
-            <em class="icon-note"></em></button>
+          <button class="mb-sm btn-sm btn btn-success btn-outline" (click)="createRequi(element.id)" type="button" placement="bottom" tooltip="Crear Requisición">
+            <em class="icon-docs"></em>
+          </button>
+          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showDamfo(element.nombrePerfil)" type="button" placement="bottom" tooltip="Ver Damfo - 290">
+            <em class="fa fa-eye"></em>
+          </button>
       </mat-cell>
 
     </ng-container>
