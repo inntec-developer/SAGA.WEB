@@ -47,7 +47,7 @@ export class DtDamfoComponent implements OnInit {
   }
 
   createRequi(id){
-    this._Router.navigate(['requisicionNueva']);
+    this._Router.navigate(['/ventas/requisicionNueva', id], {skipLocationChange:true});
   }
   showDamfo(event){
     console.log(event);

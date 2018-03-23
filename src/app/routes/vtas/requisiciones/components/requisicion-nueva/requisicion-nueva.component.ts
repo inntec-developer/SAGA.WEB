@@ -8,10 +8,11 @@ import { CatalogosService } from '../../../../../service/index';
 @Component({
   selector: 'app-requisicion-nueva',
   templateUrl: './requisicion-nueva.component.html',
-  styleUrls: ['./requisicion-nueva.component.scss']
+  styleUrls: ['./requisicion-nueva.component.scss'],
+  providers:[CatalogosService]
 })
 export class RequisicionNuevaComponent implements OnInit {
-  damfoId: string;
+  public damfoId: string;
 
   constructor(
     private serviceCatalogo: CatalogosService,
@@ -20,8 +21,10 @@ export class RequisicionNuevaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var params = this._Route.params.subscribe( params =>{
-      this.damfoId = params["id"];
+    this._Route.params.subscribe(params => {
+      if(params['id'] != null){
+        this.damfoId = params['id'];
+      }
     });
   }
 }

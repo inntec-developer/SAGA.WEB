@@ -4,9 +4,6 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
     </mat-form-field>
   </div>
-  <div  class="table table-hover table-bordered">
-
-  </div>
   <mat-table #table [dataSource]="dataSource">
     <!-- Cliente <Razon Social> Column -->
     <ng-container matColumnDef="cliente">
