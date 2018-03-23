@@ -23,5 +23,27 @@
 }
 
 .mat-cell{
-  font-size: 11px;
+  font-size: 10px;
+}
+
+.mat-header-row {
+    min-height: 40px;
+    background-color: dodgerblue;
+}
+
+.mat-header-cell{
+
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.mat-header-row, .mat-row {
+  border-collapse: separate;
+  table-layout: auto;
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  padding: 0px 7px;
+  box-sizing: border-box;
 }

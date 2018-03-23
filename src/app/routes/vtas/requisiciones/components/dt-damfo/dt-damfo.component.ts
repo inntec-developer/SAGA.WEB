@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 //Servicios
 import { RequisicionesService } from '../../../../../service/index';
 //Element  Angular Material
@@ -14,6 +15,8 @@ export class DtDamfoComponent implements OnInit {
 
   constructor(
     private service: RequisicionesService,
+    private _Router: Router,
+    private _Route: ActivatedRoute
   ) { }
 
   //Varaibales Globales
@@ -42,9 +45,17 @@ export class DtDamfoComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
+
+  createRequi(id){
+    this._Router.navigate(['requisicionNueva']);
+  }
+  showDamfo(event){
+    console.log(event);
+  }
 }
 
 export interface Element {
+  id: string;
   cliente: string;
   nombrePerfil: string;
   giroEmpresa: string;
