@@ -1,6 +1,7 @@
 export class ApiConection {
   /*Servicio de purbeas locales*/
   public static ServiceUrl = 'http://localhost:33333/api/';
+   public static ServiceUrlTemporal = 'http://localhost:54462/api/';
   /*Coneccion en servidor de purebas sistemas (SandBoxSAGA)*/
   //public static ServiceUrl = 'http://192.168.8.146:33333/api/';
   /*Coneccion en servidor de purebas Usarios (DataBaseSAGA)*/
@@ -16,4 +17,6 @@ export class ApiConection {
   public static filtromunicipios = 'Candidatos/getmunicipios';
   public static filtrocolonias = 'Candidatos/getcolonias';
   public static Candidatos = 'Candidatos/getcandidatos';
+  public static getRequis = '/dvacante/get';
+   public static getDisenioRequis = '/dvacante/disenio';
 }
