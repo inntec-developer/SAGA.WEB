@@ -1,0 +1,80 @@
+<div class="dtDamfo-container mat-elevation-z8">
+  <div class="dtDamfo-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+    </mat-form-field>
+  </div>
+  <div  class="table table-hover table-bordered">
+
+  </div>
+  <mat-table #table [dataSource]="dataSource">
+    <!-- Cliente <Razon Social> Column -->
+    <ng-container matColumnDef="cliente">
+      <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cliente.razonSocial}} </mat-cell>
+    </ng-container>
+    <!-- Nombre Perfil Column -->
+    <ng-container matColumnDef="nombrePerfil">
+      <mat-header-cell *matHeaderCellDef> Nombre Perfil </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombrePerfil}} </mat-cell>
+    </ng-container>
+
+    <!-- Giro Empresas <Giro Empresa> Column -->
+    <ng-container matColumnDef="giroEmpresa">
+      <mat-header-cell *matHeaderCellDef> Giro Empresa </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cliente?.giroEmpresas.giroEmpresa}} </mat-cell>
+    </ng-container>
+
+    <!-- Actividad Empresas <Actividad Empresa> Column -->
+    <ng-container matColumnDef="actividadEmpresa">
+      <mat-header-cell *matHeaderCellDef> Actividad Empresa</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cliente?.actividadEmpresas.actividadEmpresa}} </mat-cell>
+    </ng-container>
+
+    <!-- Tipo Reclutamiento  <Actividad Empresa> Column -->
+    <ng-container matColumnDef="tipoReclutamiento">
+      <mat-header-cell *matHeaderCellDef> Tipo Reclutamiento</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tipoReclutamiento.tipoReclutamiento}} </mat-cell>
+    </ng-container>
+    <!-- Clase Reclutamiento  <Actividad Empresa> Column -->
+    <ng-container matColumnDef="claseReclutamiento">
+      <mat-header-cell *matHeaderCellDef> Clase Reclutamiento</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.claseReclutamiento.clasesReclutamiento}} </mat-cell>
+    </ng-container>
+
+    <!-- Sueldo minimo Column -->
+    <ng-container matColumnDef="sueldoMinimo">
+      <mat-header-cell *matHeaderCellDef> Sueldo Mn. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sueldoMinimo | currency: $}} </mat-cell>
+    </ng-container>
+
+    <!-- Sueldo Maximo -->
+    <ng-container matColumnDef="sueldoMaximo">
+      <mat-header-cell *matHeaderCellDef> Sueldo Mx. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sueldoMaximo | currency: $}} </mat-cell>
+    </ng-container>
+
+    <!-- Fecha Creacion Maximo -->
+    <ng-container matColumnDef="fch_Creacion">
+      <mat-header-cell *matHeaderCellDef> Fecha Creación </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fch_Creacion | date:'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+
+    <!-- Accion -->
+    <ng-container matColumnDef="accion">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button class="mb-sm btn-xs btn btn-primary btn-outline" type="button">
+            <em class="fa fa-plus"></em></button>
+          <button class="mb-sm btn-xs btn btn-success btn-outline" type="button">
+            <em class="fa fa-pencil"></em></button>
+          <button class="mb-sm btn-xs btn btn-warning btn-outline" type="button">
+            <em class="icon-note"></em></button>
+      </mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

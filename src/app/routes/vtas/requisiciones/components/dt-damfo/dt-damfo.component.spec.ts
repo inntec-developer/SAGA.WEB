@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RequisicionNuevaComponent } from './requisicion-nueva.component';
+import { DtDamfoComponent } from './dt-damfo.component';
 
-describe('RequisicionNuevaComponent', () => {
-  let component: RequisicionNuevaComponent;
-  let fixture: ComponentFixture<RequisicionNuevaComponent>;
+describe('DtDamfoComponent', () => {
+  let component: DtDamfoComponent;
+  let fixture: ComponentFixture<DtDamfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RequisicionNuevaComponent ]
+      declarations: [ DtDamfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RequisicionNuevaComponent);
+    fixture = TestBed.createComponent(DtDamfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
