@@ -36,12 +36,6 @@ export class MunicipioComponent implements OnInit {
   }
 
   SendIdMunicipio(){
-      this.IdMunicipio = this.filtromunicipio[0].id;
-      this.change.emit(this.IdMunicipio);
-  }
-
-  ngOnInit() {
-    if (this.filtroestado > 0) {
       this.service.getmunicipios(this.filtroestado)
       .subscribe(data => {
         this.Municipios = data.municipios;
@@ -50,7 +44,13 @@ export class MunicipioComponent implements OnInit {
             map(municipio => municipio ? this.filterMunicipio(municipio) : this.Municipios.slice())
           );
       })
-    }
+    
+      this.IdMunicipio = this.filtromunicipio[0].id;
+      this.change.emit(this.IdMunicipio);
+  }
+
+  ngOnInit() {
+
   }
 
 }

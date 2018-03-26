@@ -1,7 +1,497 @@
-<h1 mat-dialog-title>Hi</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput>
-  </mat-form-field>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card card-default">
+            <div class="card-body text-center">
+                <div class="py-4">
+                    <img class="img-fluid rounded-circle img-thumbnail thumb96" src="assets/img/user/02.jpg" alt="Contact" />
+                </div>
+                <h3 class="m-0 text-bold">{{data[0]?.candidato?.nombre}} {{data[0]?.candidato?.apellidoPaterno}} {{data[0]?.candidato?.apellidoMaterno}}</h3>
+                <div class="my-3">
+                    <p>{{data[0]?.aboutMe[0]?.acercaDeMi}}</p>
+                </div>
+                <div class="col-md-12">
+                  <strong>Genero: </strong> {{data[0]?.candidato?.genero?.genero}}
+                </div>
+                <div class="my-3" *ngFor="let correo of data[0].candidato.emails">
+                  <strong>Correos:</strong> <strong class="text-success">{{correo?.email}}</strong>
+                </div>
+                <div class="my-3" *ngFor="let tel of data[0].candidato.telefonos">
+                  <strong>Telefonos:</strong> <strong class="text-success">{{tel?.telefono}}</strong>
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-labeled btn-success mb-2" type="button">
+                  <span class="btn-label"><i class="fa fa-check"></i>
+                  </span>Apartado</button>
+                  <button class="btn btn-labeled btn-info mb-2" type="button">
+                    <span class="btn-label"><i class="fa fa-exclamation"></i>
+               </span>Liberado</button>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+          <h4 class="card-title">
+            <label class="text-warning">Comentarios del reclutador</label>
+          </h4>
+         <div class="card-body">
+            <div class="card-body mh0">
+                <textarea class="form-control note-editor note-editor-margin" rows="5"></textarea>
+            </div>
+            <p class="card-text">
+               <span class="text-sm text-muted">Actualizado hace 3 minutos.</span>
+            </p>
+         </div>
+        </div>
+        <div class="card mb-4">
+         <div class="card-body">
+            <h4 class="card-title">Vacante.</h4>
+            <hr>
+            <p class="card-text">Aqui va la vacante.</p>
+            <p class="card-text">
+               <span class="text-sm text-muted">Actualizado hace 3 minutos.</span>
+            </p>
+         </div>
+        </div>
+        <!-- <mat-accordion class="example-headers-align">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-archive" style="color: red;"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              <label class="text-danger">Confidencial</label>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        </mat-accordion> -->
+    </div>
+    <div class="col-lg-8">
+      <div class="card mb-4">
+       <div class="card-body">
+          <h2 class="card-title">Información del candidato.</h2>
+          <hr>
+          <!-- Seccion de Acerca de mi -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Acerca de Mi.
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-user"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de nacimiento: </strong> {{data[0]?.candidato?.fechaNacimiento | date}}
+              </div>
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Lugar de nacimiento: </strong> {{data[0]?.candidato?.municipioNacimiento?.municipio}}, {{data[0]?.candidato?.estadoNacimiento?.estado}}, {{data[0]?.candidato?.paisNacimiento?.pais}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Estado civil: </strong> {{data[0]?.candidato?.estadoCivil}}
+              </div>
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Puede viajar:  </strong>
+                  <strong *ngIf="data[0].candidato.puedeViajar">SI</strong>
+                  <strong *ngIf="!data[0].candidato.puedeViajar">NO</strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Disapacitado: </strong>
+                  <strong *ngIf="data[0].candidato.esDiscapacitado">SI</strong>
+                  <strong *ngIf="!data[0].candidato.esDiscapacitado">NO</strong>
+              </div>
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Tipo de discapacidad: </strong> {{data[0]?.candidato?.tipoDiscapacidad}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Licencia de conducir: </strong>
+                  <strong *ngIf="data[0].candidato.tieneLicenciaConducir">SI</strong>
+                  <strong *ngIf="!data[0].candidato.tieneLicenciaConducir">NO</strong>
+              </div>
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Tipo de Licencia: </strong> {{data[0]?.candidato?.tipoLicencia}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Puesto deseado:</strong> {{data[0]?.aboutMe[0]?.puestoDeseado}}
+              </div>
+              <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Salario aceptable:</strong> {{data[0]?.aboutMe[0]?.salarioAceptable | currency:'CAD':'Mxn':'4.2-2'}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                <strong class="text-primary">Salario deseado:</strong> {{data[0]?.aboutMe[0]?.salarioDeseado | currency:'CAD':'Mxn':'4.2-2'}}
+              </div>
+              <div class="col-md-6 text-muted">
+                <strong class="text-primary">Area de experiencia:</strong>  {{data[0]?.aboutMe[0]?.areaExperiencia?.areaExperiencia}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                <strong class="text-primary">Intereses:</strong> {{data[0]?.aboutMe[0]?.areaInteres?.areaInteres}}
+              </div>
+              <div class="col-md-6 text-muted">
+                <strong class="text-primary">Perfil:</strong> {{data[0]?.aboutMe[0]?.perfilExperiencia?.perfilExperiencia}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-muted">
+                <strong class="text-primary">Sitio Web: </strong> {{data[0]?.aboutMe[0]?.sitioWeb}}
+              </div>
+              <div class="col-md-6 text-muted">
+                <strong class="text-primary">Vehiculo propio: </strong>
+                <strong *ngIf="data[0].candidato.tieneVehiculoPropio">SI</strong>
+                <strong *ngIf="!data[0].candidato.tieneVehiculoPropio">NO</strong>
+              </div>
+            </div>
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de direccion -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Direccion
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-home"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let direccion of data[0].candidato.direcciones">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Calle: </strong> {{direccion?.calle}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Num Ext-Int: </strong> {{direccion?.numeroExterior}} - {{direccion?.numeroInterior}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Colonia: </strong> {{direccion?.colonia?.colonia}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Código Postal: </strong> {{direccion?.codigoPostal}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Localidad: </strong> {{direccion?.municipio?.municipio}}, {{direccion?.estado?.estado}}, {{direccion?.pais?.pais}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Tipo de direccion: </strong> {{direccion?.tipoDireccion?.tipoDireccion}}
+                </div>
+              </div>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de Identificaciones -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Identificaciones
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-credit-card"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row">
+              <div class="col-md-4 text-muted">
+                <strong class="text-primary">Curp: </strong> {{data[0]?.candidato?.curp}}
+              </div>
+              <div class="col-md-4 text-muted">
+                <strong class="text-primary">Rfc: </strong> {{data[0]?.candidato?.rfc}}
+              </div>
+              <div class="col-md-4 text-muted">
+                <strong class="text-primary">Nss: </strong> {{data[0]?.candidato?.nss}}
+              </div>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de Redes sociales -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Redes Sociales
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-facebook"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de experiencia profesional -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Experiencia Profesional
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-suitcase"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let exp of data[0].experiencias">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Empresa: </strong> {{exp?.empresa}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Giro: </strong> {{exp?.giroEmpresa}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Cargo asignado: </strong> {{exp?.cargoAsignado}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Tareas: </strong> {{exp?.descripcion}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Area:  </strong> {{exp?.area?.nombre}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Salario: </strong> {{exp?.salario | currency:'CAD':'Mxn':'4.2-2'}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Trabajo actual: </strong>
+                  <strong *ngIf="exp.trabajoActual">SI</strong>
+                  <strong *ngIf="!exp.trabajoActual">NO</strong>
+                </div>
+              </div>
+              <br>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de formacion -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Formacion
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-university"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let formacion of data[0].formaciones">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Carrera: </strong> {{formacion?.carrera?.carrera}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Institucion : </strong> {{formacion?.institucionEducativa?.institucionEducativa}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Grado estudio: </strong> {{formacion?.gradosEstudio}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Estado estudio : </strong> {{formacion?.estadoEstudio}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-muted">
+                  <strong class="text-primary">Documento validador: </strong> {{formacion?.documentoValidador}}
+                </div>
+              </div>
+              <br>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de Certificaciones -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Certificaciones
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-certificate"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let certificacion of data[0].certificaciones">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Certificación: </strong> {{certificacion?.certificacion}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Licencia: </strong> {{certificacion?.licencia}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Auridad emisora: </strong> {{certificacion?.autoridadEmisora}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Sin vencimiento: </strong>
+                  <strong *ngIf="certificacion.noVence">SI</strong>
+                  <strong *ngIf="!certificacion.noVence">NO</strong>
+                </div>
+              </div>
+              <br>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de idiomas -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Idiomas
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-language"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let idioma of data[0].idiomas">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                    <strong class="text-primary">Idioma: </strong> {{idioma?.idioma?.idioma}}
+                </div>
+                <div class="col-md-6 text-muted">
+                    <strong class="text-primary">Nivel escrito:</strong> {{idioma?.nivelEscrito?.nivel}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-muted">
+                    <strong class="text-primary">Nivel hablado:</strong> {{idioma?.nivelHablado?.nivel}}
+                </div>
+              </div>
+              <br>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de cursos -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Cursos
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-graduation-cap"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let curso of data[0].cursos">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Curso: </strong> {{curso?.curso}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Institucion: </strong> {{curso?.institucionEducativa}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-muted">
+                  <strong class="text-primary">Horas: </strong> {{curso?.horas}}
+                </div>
+              </div>
+              <br>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Seccion de conocimientos y habilidades -->
+          <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 9" (opened)="setStep(9)" hideToggle="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Conocimientos y habilidades
+              </mat-panel-title>
+              <mat-panel-description>
+                Detalles
+                <mat-icon><em class="fa fa-magic"></em></mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row" *ngFor="let conocimiento of data[0].conocimientos">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Conocimiento: </strong> {{conocimiento?.conocimiento}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Institución educativa:</strong> {{conocimiento?.institucionEducativa}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Herramienta: </strong> {{conocimiento?.herramienta}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Nivel:</strong> {{conocimiento?.nivel?.nivel}}
+                </div>
+              </div>
+              <br>
+            </div>
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+          <hr>
+          <p class="card-text">
+             <span class="text-sm text-muted">Actualizado hace 3 minutos.</span>
+          </p>
+       </div>
+      </div>
+    </div>
 </div>

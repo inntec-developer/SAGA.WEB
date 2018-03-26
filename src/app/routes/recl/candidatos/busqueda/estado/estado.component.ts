@@ -37,6 +37,15 @@ export class EstadoComponent implements OnInit {
   }
 
   SendIdState(){
+      this.service.getestados(this.filtropais)
+      .subscribe(data => {
+        this.Estados = data.estados;
+        this.filteredStates = this.StatesCtrl.valueChanges
+          .pipe(startWith(''),
+            map(estado => estado ? this.filterState(estado) : this.Estados.slice())
+          );
+      })
+        
     if (this.filtroestado != null){
       this.IdEstado = this.filtroestado[0].id;
       this.change.emit(this.IdEstado);
@@ -46,16 +55,6 @@ export class EstadoComponent implements OnInit {
   }
 
   ngOnInit(){
-    if (this.filtropais > 0) {
-      this.service.getestados(this.filtropais)
-      .subscribe(data => {
-        this.Estados = data.estados;
-        this.filteredStates = this.StatesCtrl.valueChanges
-          .pipe(startWith(''),
-            map(estado => estado ? this.filterState(estado) : this.Estados.slice())
-          );
-      })
-    }
   }
 
 }

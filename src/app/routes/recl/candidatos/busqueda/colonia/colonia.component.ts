@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output ,EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -21,6 +21,11 @@ export class ColoniaComponent implements OnInit {
    Colonias: any[];
    ColoniaCtrl: FormControl;
    filteredColonia: Observable<any[]>;
+   // Sacamos el filtro para verlo en busqueda.
+   filtroColonia: any;
+   @Input() IdColonia: any = 0;
+   @Output()
+   change: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private service: CandidatosService) {
     this.ColoniaCtrl = new FormControl();
@@ -31,7 +36,7 @@ export class ColoniaComponent implements OnInit {
         col.colonia.toLowerCase().indexOf(colonia.toLowerCase()) === 0);
   }
 
-  ngOnInit() {
+  SendIdColonia(){
     this.service.getcolonias(this.filtromunicipio)
     .subscribe(data => {
       this.Colonias = data.colonias;
@@ -40,6 +45,12 @@ export class ColoniaComponent implements OnInit {
           map(colonia => colonia ? this.filterColonia(colonia) : this.Colonias.slice())
         );
     })
+
+      this.IdColonia  = this.filtroColonia[0].id;
+      this.change.emit(this.IdColonia);
+  }
+
+  ngOnInit() {
   }
 
 }

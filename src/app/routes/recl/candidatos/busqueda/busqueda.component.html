@@ -15,13 +15,13 @@
             <!-- Inicio de filtros. Filtro de Paises. -->
             <div class="col-md-2"><app-pais [IdPais]="FPais" (change)="FiltroPais($event)"></app-pais></div>
             <!-- Filtro de Estados -->
-            <div class="col-md-2"><app-estado *ngIf="IdPais > 0" [Pais]='IdPais' [IdEstado]="FEstado" (change)="FiltroEstado($event)"></app-estado></div>
+            <div class="col-md-2"><app-estado [Pais]='IdPais' [IdEstado]="FEstado" (change)="FiltroEstado($event)"></app-estado></div>
             <!-- Filtro de Municipios -->
-            <div class="col-md-2"><app-municipio *ngIf="IdEstado > 0" [Estado]='IdEstado' [IdMunicipio]="FMunicipio" (change)="FiltroMunicipio($event)"></app-municipio></div>
+            <div class="col-md-2"><app-municipio [Estado]='IdEstado' [IdMunicipio]="FMunicipio" (change)="FiltroMunicipio($event)"></app-municipio></div>
             <!-- Filtro de Colonias -->
-            <div class="col-md-2"><app-colonia *ngIf="IdMunicipio > 0" [Municipio]="IdMunicipio"></app-colonia></div>
+            <div class="col-md-2"><app-colonia [Municipio]="IdMunicipio" [IdColonia]="FColonia" (change)="FiltroColonia($event)"></app-colonia></div>
             <!-- Filtro de C.P. -->
-            <div class="col-md-2"><app-cp></app-cp></div>
+            <div class="col-md-2"><app-cp (change)="FiltroCp($event)"></app-cp></div>
             <!-- Filtro de Area de experiencia -->
             <div class="col-md-2"><app-area-exp></app-area-exp></div>
           </div>

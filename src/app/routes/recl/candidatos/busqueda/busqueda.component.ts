@@ -17,6 +17,8 @@ export class BusquedaComponent implements OnInit {
   IdPais: number;
   IdEstado: number;
   IdMunicipio: number;
+  IdColonia: number;
+  IdCp: number;
 
   FiltroPais(event){
     this.IdPais = event;
@@ -28,6 +30,14 @@ export class BusquedaComponent implements OnInit {
 
   FiltroMunicipio(event){
     this.IdMunicipio = event;
+  }
+
+  FiltroColonia(event){
+    this.IdColonia = event;
+  }
+
+  FiltroCp(event){
+    this.IdCp = event;
   }
 
  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer){

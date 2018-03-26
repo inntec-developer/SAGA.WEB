@@ -18,5 +18,6 @@ export class ApiConection {
   public static filtrocolonias = 'Candidatos/getcolonias';
   public static Candidatos = 'Candidatos/getcandidatos';
   public static getRequis = '/dvacante/get';
-   public static getDisenioRequis = '/dvacante/disenio';
+  public static getDisenioRequis = '/dvacante/disenio';
+  public static Candidatodetail = 'Candidatos/getcandidatoid';   
 }
