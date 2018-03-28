@@ -22,6 +22,7 @@ private UrlMunicipios = ApiConection.ServiceUrl+ApiConection.filtromunicipios;
 private UrlColonias = ApiConection.ServiceUrl+ApiConection.filtrocolonias;
 private UrlCandidatos = ApiConection.ServiceUrl+ApiConection.Candidatos;
 private UrlCandidatoDtl = ApiConection.ServiceUrl+ApiConection.Candidatodetail;
+private UrlPostulaciones = ApiConection.ServiceUrl+ApiConection.Postulaciones;
 
 // Error.
 private handleError(error: any) {
@@ -68,6 +69,12 @@ getcandidatos(): Observable<any> { // Obtener filtro de colonias.
 
 getcandidatodtl(Id: any): Observable<any> { // Obtener filtro de colonias.
    return this.http.get(this.UrlCandidatoDtl + '?Id='+ Id)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getpostulaciones(Id: any): Observable<any> { // Obtener filtro de colonias.
+   return this.http.get(this.UrlPostulaciones + '?IdCandidato='+ Id)
        .map(result => result.json())
        .catch(this.handleError);
 }

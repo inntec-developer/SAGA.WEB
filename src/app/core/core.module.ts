@@ -16,8 +16,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
         TranslatorService,
         MenuService
     ],
-    declarations: [
-    ],
+    declarations: [],
     exports: [
     ]
 })

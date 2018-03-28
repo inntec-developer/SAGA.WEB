@@ -24,45 +24,74 @@
                   </span>Apartado</button>
                   <button class="btn btn-labeled btn-info mb-2" type="button">
                     <span class="btn-label"><i class="fa fa-exclamation"></i>
-               </span>Liberado</button>
+                  </span>Liberado</button>
                 </div>
             </div>
         </div>
-        <div class="card mb-4">
-          <h4 class="card-title">
-            <label class="text-warning">Comentarios del reclutador</label>
-          </h4>
-         <div class="card-body">
-            <div class="card-body mh0">
-                <textarea class="form-control note-editor note-editor-margin" rows="5"></textarea>
+        <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-comments-o" style="color: orange;"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              <label class="text-warning">Comentarios</label>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <textarea class="form-control note-editor note-editor-margin" rows="5" placeholder="Aqui los comentarios anteriores."></textarea>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-sm text-muted">Act. hace 3 minutos.</span>
             </div>
-            <p class="card-text">
-               <span class="text-sm text-muted">Actualizado hace 3 minutos.</span>
-            </p>
-         </div>
-        </div>
-        <div class="card mb-4">
-         <div class="card-body">
-            <h4 class="card-title">Vacante.</h4>
-            <hr>
-            <p class="card-text">Aqui va la vacante.</p>
-            <p class="card-text">
-               <span class="text-sm text-muted">Actualizado hace 3 minutos.</span>
-            </p>
-         </div>
-        </div>
-        <!-- <mat-accordion class="example-headers-align">
+            <div class="col-md-6 text-center">
+              <button class="btn btn-labeled btn-warning mb-2" type="button">
+                <span class="btn-label"><i class="fa fa-plus"></i>
+                </span>Agregar
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <!-- Seccion Postulaciones -->
+        <mat-accordion class="example-headers-align">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <em class="fa fa-archive" style="color: red;"></em>
+              <em class="fa fa-list-ul" style="color: #2874A6;"></em>
             </mat-panel-title>
             <mat-panel-description>
-              <label class="text-danger">Confidencial</label>
+              <label class="text-primary">Postulaciones</label>
             </mat-panel-description>
           </mat-expansion-panel-header>
+          <mat-table #table [dataSource]="dataSource">
+
+            <!-- Vacante Column -->
+            <ng-container matColumnDef="Vacante">
+              <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
+              <mat-cell *matCellDef="let postulaciones"> {{postulaciones.vBtra}} </mat-cell>
+            </ng-container>
+
+            <!-- Fecha de postulacion Column -->
+            <!-- <ng-container matColumnDef="Fecha">
+              <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+              <mat-cell *matCellDef="let postulaciones">  </mat-cell>
+            </ng-container> -->
+
+            <!-- Estatus Column -->
+            <ng-container matColumnDef="Estatus">
+              <mat-header-cell *matHeaderCellDef> Estatus </mat-header-cell>
+              <mat-cell *matCellDef="let postulaciones"> {{postulaciones.status}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
         </mat-expansion-panel>
-        </mat-accordion> -->
+        </mat-accordion>
     </div>
     <div class="col-lg-8">
       <div class="card mb-4">
@@ -288,6 +317,14 @@
               </div>
               <div class="row">
                 <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de inicio: </strong>  {{exp?.monthInicio?.month}}-{{exp?.yearInicio?.year}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de termino: </strong> {{exp?.monthTermino?.month}}-{{exp?.yearTermino?.year}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
                   <strong class="text-primary">Trabajo actual: </strong>
                   <strong *ngIf="exp.trabajoActual">SI</strong>
                   <strong *ngIf="!exp.trabajoActual">NO</strong>
@@ -331,6 +368,14 @@
                 </div>
               </div>
               <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de inicio: </strong> {{formacion?.monthInicio?.month}}-{{formacion?.yearInicio?.year}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de termino: </strong> {{formacion?.monthTermino?.month}}-{{formacion?.yearTermino?.year}}
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-12 text-muted">
                   <strong class="text-primary">Documento validador: </strong> {{formacion?.documentoValidador}}
                 </div>
@@ -366,12 +411,20 @@
               </div>
               <div class="row">
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Auridad emisora: </strong> {{certificacion?.autoridadEmisora}}
+                  <strong class="text-primary">Autoridad emisora: </strong> {{certificacion?.autoridadEmisora}}
                 </div>
                 <div class="col-md-6 text-muted">
                   <strong class="text-primary">Sin vencimiento: </strong>
                   <strong *ngIf="certificacion.noVence">SI</strong>
                   <strong *ngIf="!certificacion.noVence">NO</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de inicio: </strong>  {{certificacion?.monthInicio?.month}}-{{certificacion?.yearInicio?.year}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de termino: </strong> {{certificacion?.monthTermino?.month}}-{{certificacion?.yearTermino?.year}}
                 </div>
               </div>
               <br>
@@ -435,6 +488,14 @@
                 </div>
                 <div class="col-md-6 text-muted">
                   <strong class="text-primary">Institucion: </strong> {{curso?.institucionEducativa}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de inicio: </strong>  {{curso?.monthInicio?.month}}-{{curso?.yearInicio?.year}}
+                </div>
+                <div class="col-md-6 text-muted">
+                  <strong class="text-primary">Fecha de termino: </strong> {{curso?.monthTermino?.month}}-{{curso?.yearTermino?.year}}
                 </div>
               </div>
               <div class="row">

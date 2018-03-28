@@ -23,10 +23,11 @@ import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
          MatSelectModule, MatSidenavModule, MatSliderModule,
          MatSlideToggleModule, MatSnackBarModule, MatSortModule,
          MatStepperModule, MatTableModule, MatTabsModule,
-         MatToolbarModule, MatTooltipModule, MatOptionModule
+         MatToolbarModule, MatTooltipModule, MatOptionModule, MatPaginatorIntl
        } from '@angular/material';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 import { Damfo290Component } from './damfo290/damfo290.component';
@@ -53,6 +54,10 @@ import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.
 import { DialogcandidatosComponent } from './candidatos/dt-candidatos/dialogcandidatos/dialogcandidatos.component';
 import { DisenadorVacanteComponent } from './vacantes/disenador-vacante/disenador-vacante.component';
 
+//Providers
+import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
+
+
 const routes: Routes = [
     {path: '290', component: Damfo290Component},
     {path: 'candidatos', component: CandidatosComponent},
@@ -76,8 +81,8 @@ const routes: Routes = [
         MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule ],
-    providers: [ColorPickerService],
+        MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule, PaginatorModule ],
+    providers: [ColorPickerService, { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
     declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent, DialogcandidatosComponent, DisenadorVacanteComponent],
     entryComponents: [
        DialogcandidatosComponent],

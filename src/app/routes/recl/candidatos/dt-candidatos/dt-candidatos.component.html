@@ -1,5 +1,5 @@
 <mat-accordion class="example-headers-align">
-<mat-expansion-panel>
+<mat-expansion-panel [expanded]="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <em class="fa fa-users"></em>
@@ -14,42 +14,41 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrado">
     </mat-form-field>
   </div>
-
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- Candidato Column -->
     <ng-container matColumnDef="Candidato">
-      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let candidatos"> {{candidatos.nombre}} {{candidatos.apellidoPaterno}} {{candidatos.apellidoMaterno}} </mat-cell>
     </ng-container>
 
     <!-- Codigo Postal Column -->
     <ng-container matColumnDef="CodigoPostal">
-      <mat-header-cell *matHeaderCellDef> Codigo Postal </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo Postal </mat-header-cell>
       <mat-cell *matCellDef="let candidatos"> {{candidatos.cp}} </mat-cell>
     </ng-container>
 
     <!-- Curp Column -->
     <ng-container matColumnDef="Curp">
-      <mat-header-cell *matHeaderCellDef> Curp </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Curp </mat-header-cell>
       <mat-cell *matCellDef="let candidatos"> {{candidatos.curp}} </mat-cell>
     </ng-container>
 
     <!-- Rfc Column -->
     <ng-container matColumnDef="Rfc">
-      <mat-header-cell *matHeaderCellDef> Rfc </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Rfc </mat-header-cell>
       <mat-cell *matCellDef="let candidatos"> {{candidatos.rfc}} </mat-cell>
     </ng-container>
 
     <!-- Nss Column -->
     <ng-container matColumnDef="Nss">
-      <mat-header-cell *matHeaderCellDef> Nss </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nss </mat-header-cell>
       <mat-cell *matCellDef="let candidatos"> {{candidatos.nss}} </mat-cell>
     </ng-container>
 
     <!-- Accion -->
     <ng-container matColumnDef="accion">
-      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let candidatos">
           <button class="mb-sm btn-sm btn btn-green btn-outline" type="button" (click)="openDialog(candidatos.id)">
             Detalle
@@ -60,18 +59,12 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [length]="length"
-              [pageSize]="pageSize"
-              [pageSizeOptions]="pageSizeOptions"
-              (page)="pageEvent = $event">
-</mat-paginator>
-
-<div *ngIf="pageEvent">
-  <h5>Page Change Event Properties</h5>
-  <div>List length: {{pageEvent.length}}</div>
-  <div>Page size: {{pageEvent.pageSize}}</div>
-  <div>Page index: {{pageEvent.pageIndex}}</div>
-</div>
+  <mat-paginator [showFirstLastButtons]="true"
+                 [length]="TotalRecords"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = paginate($event)">
+  </mat-paginator>
 </div>
 </mat-expansion-panel>
 </mat-accordion>

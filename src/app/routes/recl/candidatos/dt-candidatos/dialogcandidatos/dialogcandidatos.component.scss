@@ -163,3 +163,59 @@ CSS
 .font-color{
   color: #2874A6;
 }
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 12px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 100%;
+}
+
+.mat-cell{
+  font-size: 10px;
+}
+
+.mat-header-row {
+    min-height: 40px;
+    background-color: dodgerblue;
+}
+
+.mat-header-cell{
+
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.mat-header-row, .mat-row {
+  border-collapse: separate;
+  table-layout: auto;
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  padding: 0px 7px;
+  box-sizing: border-box;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
