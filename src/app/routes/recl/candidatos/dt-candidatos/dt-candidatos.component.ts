@@ -26,9 +26,7 @@ export class DtCandidatosComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit() {
-    console.log(this.sort);
     this.dataSource.sort = this.sort;
-    console.log(this.dataSource.sort);
   }
 
   applyFilter(filterValue: string) {
@@ -68,7 +66,7 @@ export class DtCandidatosComponent implements OnInit {
   // Parametros para paginador.
   length = 0;
   pageSize = 10;
-  pageSizeOptions = [10, 30, 50];
+  pageSizeOptions = [10, 20, 30, 50];
 
   pageEvent: PageEvent;
 
@@ -79,13 +77,14 @@ export class DtCandidatosComponent implements OnInit {
     TotalRecords: number = 0;
     paginate(event?: PageEvent)
     {
-        console.log(event);
-
-        this.first = event.pageIndex;
-        this.rows = event.pageSize;
-        this.page = event.pageIndex;
-        this.pageCount = event.length;
-
+        if (event.length > event.pageSize){
+          this.first = event.pageIndex;
+          this.rows = event.pageSize;
+          this.page = event.pageIndex;
+          this.pageCount = event.length;
+        }else{
+          this.rows = event.length;
+        }
         this.paginador();
     }
 
