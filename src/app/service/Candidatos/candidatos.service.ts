@@ -23,6 +23,13 @@ private UrlColonias = ApiConection.ServiceUrl+ApiConection.filtrocolonias;
 private UrlCandidatos = ApiConection.ServiceUrl+ApiConection.Candidatos;
 private UrlCandidatoDtl = ApiConection.ServiceUrl+ApiConection.Candidatodetail;
 private UrlPostulaciones = ApiConection.ServiceUrl+ApiConection.Postulaciones;
+private UrlAreaExp = ApiConection.ServiceUrl+ApiConection.Areasexp;
+private UrlPerfiles = ApiConection.ServiceUrl+ApiConection.Perfiles;
+private UrlGeneros = ApiConection.ServiceUrl+ApiConection.Generos;
+private UrlDiscapacidad = ApiConection.ServiceUrl+ApiConection.Discapacidad;
+private UrlTpLicencia = ApiConection.ServiceUrl+ApiConection.TpLicencia;
+private UrlNivelEstudios = ApiConection.ServiceUrl+ApiConection.NivelEstudio;
+private UrlIdiomas = ApiConection.ServiceUrl+ApiConection.Idiomas;
 
 // Error.
 private handleError(error: any) {
@@ -73,8 +80,50 @@ getcandidatodtl(Id: any): Observable<any> { // Obtener filtro de colonias.
        .catch(this.handleError);
 }
 
-getpostulaciones(Id: any): Observable<any> { // Obtener filtro de colonias.
+getpostulaciones(Id: any): Observable<any> { // Obtenemos las postulaciones del candidato.
    return this.http.get(this.UrlPostulaciones + '?IdCandidato='+ Id)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getareasexp(): Observable<any> { // Obtener filtro de areas de experiencia.
+   return this.http.get(this.UrlAreaExp)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getperfiles(): Observable<any> { // Obtener filtro de areas de perfiles.
+   return this.http.get(this.UrlPerfiles)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getgeneros(): Observable<any> { // Obtener filtro de areas de generos.
+   return this.http.get(this.UrlGeneros)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getdiscapacidad(): Observable<any> { // Obtener filtro de areas de Discapacidad.
+   return this.http.get(this.UrlDiscapacidad)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+gettplicencia(): Observable<any> { // Obtener filtro de areas de tplicencia.
+   return this.http.get(this.UrlTpLicencia)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getnivelestudio(): Observable<any> { // Obtener filtro de areas de nivel estudio.
+   return this.http.get(this.UrlNivelEstudios)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getidiomas(): Observable<any> { // Obtener filtro de idiomas.
+   return this.http.get(this.UrlIdiomas)
        .map(result => result.json())
        .catch(this.handleError);
 }

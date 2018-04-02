@@ -20,5 +20,12 @@ export class ApiConection {
   public static getRequis = '/dvacante/get';
   public static getDisenioRequis = '/dvacante/disenio';
   public static Candidatodetail = 'Candidatos/getcandidatoid';
-  public static Postulaciones = 'Candidatos/getpostulaciones';  
+  public static Postulaciones = 'Candidatos/getpostulaciones';
+  public static Areasexp = 'Candidatos/getareasexp';
+  public static Perfiles = 'Candidatos/getperfiles';
+  public static Generos = 'Candidatos/getgeneros';
+  public static Discapacidad = 'Candidatos/getdescapacidad';
+  public static TpLicencia = 'Candidatos/gettplicencia';
+  public static NivelEstudio = 'Candidatos/getnivelestudio';
+  public static Idiomas = 'Candidatos/getidiomas';
 }

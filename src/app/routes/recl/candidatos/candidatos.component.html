@@ -10,10 +10,10 @@
 </div>
  <!-- Componente Busqueda -->
 <div class="row">
-  <app-busqueda></app-busqueda>
+  <app-busqueda [Candidatos]="Candidatos" (blur)="Filtrado($event)"></app-busqueda>
 </div>
 <br>
 <!-- Componente datatable vacantes -->
 <div class="row">
-  <app-dt-candidatos></app-dt-candidatos>
+  <app-dt-candidatos [Filtrado]='Candidatos'></app-dt-candidatos>
 </div>

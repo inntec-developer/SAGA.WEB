@@ -1,15 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+
+import {Observable} from 'rxjs/Observable';
+import {startWith} from 'rxjs/operators/startWith';
+import {map} from 'rxjs/operators/map';
+
+// Servicios
+import { CandidatosService } from '../../../../../service/index';
 
 @Component({
   selector: 'app-tplicencia',
   templateUrl: './tplicencia.component.html',
-  styleUrls: ['./tplicencia.component.scss']
+  styleUrls: ['./tplicencia.component.scss'],
+  providers: [CandidatosService]
 })
 export class TplicenciaComponent implements OnInit {
 
-  constructor() { }
+  // Declarar variables.
+    tplicencia: any[];
+    tplicCtrl: FormControl;
+    filteredtplicencia: Observable<any[]>;
+
+  constructor(private service: CandidatosService) {
+    this.tplicCtrl = new FormControl();
+  }
 
   ngOnInit() {
+    this.service.gettplicencia()
+    .subscribe(data => {
+      this.tplicencia = data;
+      this.filteredtplicencia = this.tplicCtrl.valueChanges
+        .pipe(startWith(''),
+        map(tp => tp ? this.filtertplicencia(tp) : this.tplicencia.slice()));
+    })
   }
+
+  filtertplicencia(tplic: string) {
+    return this.tplicencia.filter(tp =>
+      tp.descripcion.toLowerCase().indexOf(tplic.toLowerCase()) === 0);
+  }
+
 
 }

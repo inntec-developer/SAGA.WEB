@@ -12,4 +12,10 @@ import {map} from 'rxjs/operators/map';
 })
 export class CandidatosComponent {
 
+  public filtradocandidatos: any;
+
+  Filtrado(event){
+    this.filtradocandidatos = event;
+    console.log(this.filtradocandidatos);
+  }
 }

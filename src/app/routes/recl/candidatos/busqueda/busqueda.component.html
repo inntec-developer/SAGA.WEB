@@ -19,7 +19,7 @@
             <!-- Filtro de Municipios -->
             <div class="col-md-2"><app-municipio [Estado]='IdEstado' [IdMunicipio]="FMunicipio" (change)="FiltroMunicipio($event)"></app-municipio></div>
             <!-- Filtro de Colonias -->
-            <div class="col-md-2"><app-colonia [Municipio]="IdMunicipio" [IdColonia]="FColonia" (change)="FiltroColonia($event)"></app-colonia></div>
+            <div class="col-md-2"><app-colonia [Municipio]='IdMunicipio' [IdColonia]="FColonia" (change)="FiltroColonia($event)"></app-colonia></div>
             <!-- Filtro de C.P. -->
             <div class="col-md-2"><app-cp (change)="FiltroCp($event)"></app-cp></div>
             <!-- Filtro de Area de experiencia -->
@@ -59,7 +59,7 @@
     </form>
   </div>
   <div class="row">
-    <button mat-raised-button class="button-find">Buscar</button>
+    <button mat-raised-button class="button-find" (click)="Filtro()">Buscar</button>
     <button mat-raised-button class="button-clean">Limpiar filtros</button>
   </div>
 </mat-expansion-panel>
