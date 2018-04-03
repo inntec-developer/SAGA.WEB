@@ -7,9 +7,6 @@ import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 
-// Componentes
-import { DtCandidatosComponent } from '../dt-candidatos/dt-candidatos.component';
-
 // Servicios
 import { CandidatosService } from '../../../../service/index';
 
@@ -26,9 +23,8 @@ export class BusquedaComponent implements OnInit {
   IdMunicipio: number;
   IdColonia: number;
   IdCp: number;
-  @Input('Candidatos') Candidatos: any;
-  @Output()
-  filtro: EventEmitter<number> = new EventEmitter<number>();
+  Candidatos: any;
+  @Output() filtro: EventEmitter<any> = new EventEmitter<any>();
 
   FiltroPais(event){
     this.IdPais = event;
@@ -56,12 +52,11 @@ export class BusquedaComponent implements OnInit {
         sanitizer.bypassSecurityTrustResourceUrl('/assets/img/icon/ic_find_in_page_24px.svg'));
   }
 
-  Filtro(){
+  Filtro(event){
     this.service.getcandidatos()
     .subscribe(data => {
       this.Candidatos = data;
       this.filtro.emit(this.Candidatos);
-      console.log(this.Candidatos);
     })
   }
 

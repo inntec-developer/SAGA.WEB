@@ -28,7 +28,6 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     this.service.getperfiles()
     .subscribe(data => {
-          console.log(data);
       this.Perfiles = data;
       this.filteredperfil = this.perfilCtrl.valueChanges
         .pipe(startWith(''),

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -15,12 +15,12 @@ import { CandidatosService } from '../../../../service/index';
   styleUrls: ['./dt-candidatos.component.scss'],
   providers: [CandidatosService]
 })
-export class DtCandidatosComponent implements OnInit {
+export class DtCandidatosComponent implements OnInit, AfterViewInit {
 
   candidatodtl: any[];
   candidatos: any;
   arraycandidatos: any[];
-  @Input('Filtrado') public FCandidatos: any[]; //Datos que reciben del filtro.
+  @Input('Filtrado') FCandidatos: any; //Datos que reciben del filtro.
 
   displayedColumns = ['Candidato', 'CodigoPostal', 'Curp', 'Rfc', 'Nss', 'accion'];
   public dataSource = new MatTableDataSource(<any>[]);
@@ -37,20 +37,26 @@ export class DtCandidatosComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
   constructor(private service: CandidatosService, public dialog: MatDialog, private _Router: Router,
-      private _Route: ActivatedRoute) { }
+      private _Route: ActivatedRoute) {   }
 
   ngOnInit() {
-    this.service.getcandidatos()
-    .subscribe(data => {
-      this.dataSource =  new MatTableDataSource(data);
-      this.candidatos = data;
-      this.arraycandidatos = data;
-      this.pageCount = Math.round(this.candidatos.length / this.rows);
-      this.TotalRecords = this.candidatos.length;
-      this.paginador();
-    })
-    console.log(this.FCandidatos);
+    // this.service.getcandidatos()
+    // .subscribe(data => {
+    //   this.dataSource =  new MatTableDataSource(data);
+    //   this.candidatos = data;
+    //   this.arraycandidatos = data;
+    //   this.pageCount = Math.round(this.candidatos.length / this.rows);
+    //   this.TotalRecords = this.candidatos.length;
+    //   this.paginador();
+    // })
+    this.dataSource =  new MatTableDataSource(this.FCandidatos);
+    this.candidatos = this.FCandidatos;
+    this.arraycandidatos = this.candidatos;
+    this.pageCount = Math.round(this.candidatos.length / this.rows);
+    this.TotalRecords = this.candidatos.length;
+    this.paginador();
   }
+
  // Abrir detalle del candidato
   openDialog(id): void {
     this.service.getcandidatodtl(id)
