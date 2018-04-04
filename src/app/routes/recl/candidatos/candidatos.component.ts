@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
 
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
@@ -10,12 +11,15 @@ import {map} from 'rxjs/operators/map';
   templateUrl: './candidatos.component.html',
   styleUrls: ['./candidatos.component.scss']
 })
-export class CandidatosComponent {
+export class CandidatosComponent implements OnInit {
 
-  public filtradocandidatos: any;
+  filtradocandidatos: any;
 
-  Filtrado(event){
+  Filtrado(event) {
     this.filtradocandidatos = event;
-    console.log(this.filtradocandidatos);
+  }
+
+  ngOnInit(){
+
   }
 }

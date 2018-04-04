@@ -10,10 +10,10 @@
 </div>
  <!-- Componente Busqueda -->
 <div class="row">
-  <app-busqueda [Candidatos]="Candidatos" (blur)="Filtrado($event)"></app-busqueda>
+  <app-busqueda (filtro)="Filtrado($event)"></app-busqueda>
 </div>
 <br>
 <!-- Componente datatable vacantes -->
 <div class="row">
-  <app-dt-candidatos [Filtrado]='Candidatos'></app-dt-candidatos>
+  <app-dt-candidatos *ngIf="filtradocandidatos" [Filtrado]='filtradocandidatos'></app-dt-candidatos>
 </div>
