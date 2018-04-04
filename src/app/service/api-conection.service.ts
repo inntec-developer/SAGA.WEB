@@ -13,7 +13,7 @@ export class ApiConection {
   /* Ventas */
   public static damfo290 = 'DAMFO290/get';
   public static requisiciones = "Requisiciones/getDamfos";
-  public static AddressCliente = "Requisiciones/getAddress";
+  public static AddressCliente = "Requisiciones/getAddress?Id=";
 
   /* Candidatos */
   public static filtropaises = 'Candidatos/get';
@@ -33,5 +33,13 @@ export class ApiConection {
 
   /*Vacantes*/
   public static getRequis = '/dvacante/get';
-  public static getDisenioRequis = '/dvacante/disenio';
+  public static getGeneral = '/dvacante/getGenerales';
+  public static getContrato = '/dvacante/getContrato';
+  public static getPuestoReclutar = '/dvacante/getPuestoReclutar';
+  public static getHorario = '/dvacante/getHorario';
+  public static getsueldo = '/dvacante/getsueldo';
+  public static getOtros = '/dvacante/getOtros';
+  public static setDetalle = '/dvacante/setDetalle';
+  public static setResumen = '/dvacante/setResumen';
+
 }
