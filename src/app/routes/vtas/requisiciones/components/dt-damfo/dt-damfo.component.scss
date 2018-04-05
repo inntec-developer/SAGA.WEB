@@ -1,4 +1,3 @@
-
 /* Structure */
 .dtDamfo-container {
   display: flex;
@@ -19,7 +18,7 @@
 .mat-table {
   font-size: 12px;
   overflow: auto;
-  max-height: 500px;
+  max-height:100%;;
 }
 
 .mat-cell{
@@ -46,4 +45,35 @@
   align-items: center;
   padding: 0px 7px;
   box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Table response
+/* ---------------------------------------------------------------------- */
+
+@media screen and (max-width: 600px) {
+       mat-table {
+           width:100%;
+       }
+       mat-header-row {
+           display: none !important;
+       }
+       mat-row:nth-of-type(2n) {
+           background-color: inherit !important;
+       }
+       mat-row mat-cell:first-child {
+           background: #1e90ff !important;
+           color: white;
+           font-weight:bold !important;
+           font-size:1.3em !important;
+       }
+       mat-row mat-cell {
+           display: block !important;
+           text-align:center !important;
+       }
+       mat-row, mat-cell:before {
+           content: attr(data-th) !important;
+           display: block !important;
+           text-align:center !important;
+       }
 }

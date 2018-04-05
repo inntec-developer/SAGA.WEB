@@ -10,10 +10,14 @@ export class ApiConection {
   //public static ServiceUrl = 'http://192.168.8.146:33333/api/';
 
   // Agregar lsa conecciones necesarias en las cuales se hara referencia.
+
+  /*Reclutamiento*/
+  public static damfo290GetById = 'damfo290/getById';
+  public static getViewDamfos = "damfo290/getViewDamfos";
+
   /* Ventas */
-  public static damfo290 = 'DAMFO290/get';
-  public static requisiciones = "Requisiciones/getDamfos";
   public static AddressCliente = "Requisiciones/getAddress?Id=";
+  public static CreateRequi = "Requisiciones/createRequi"
 
   /* Candidatos */
   public static filtropaises = 'Candidatos/get';

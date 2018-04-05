@@ -1,0 +1,59 @@
+<div>
+  <h3>Generar nueva requisici&oacute;n</h3>
+</div>
+<mat-divider>n</mat-divider>
+<div mat-dialog-content>
+    <div class="row">
+      <div class="col-sm-6">
+        <small><strong>Cliente: </strong> {{data.cliente}}</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <small><strong>Giro: </strong>{{data.giroEmpresa}}</small>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <small><strong>Actividad: </strong>{{data.actividadEmpresa}}</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <small><strong>Puesto: </strong>{{data.nombrePerfil}}</small>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <small><strong>Sueldo Minimo: </strong>{{data.sueldoMinimo | currency: $}}</small>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <small><strong>Sueldo Maximo: </strong>{{data.sueldoMaximo | currency: $}}</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+         <small><strong>Clase Reclutamiento: </strong>{{data.claseReclutamiento}}</small>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <small><strong>Tipo Reclutamiento: </strong>{{data.tipoReclutamiento}}</small>
+      </div>
+    </div>
+    <br>
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <app-direccionauto [Damfo]='IdDamfo' [IdDireccion]='FDireccion' (change)='FiltroDireccion($event)'></app-direccionauto>
+        </div>
+      </div>
+</div>
+<mat-divider>n</mat-divider>
+<div mat-dialog-actions>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <button  cdkFocusInitial class="btn btn-sm btn-labeled btn-outline btn-danger mb-2" (click)="onNoClick()" type="button">
+        <span class="btn-label"><i class="fa fa-times"></i>
+      </span>Cancelar</button>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <button class="btn btn-sm btn-labeled btn-outline btn-success mb-2" type="button" (click)="createRequisicion()">
+      <span class="btn-label"><i class="fa fa-check"></i>
+      </span>Aceptar</button>
+    </div>
+  </div>
+</div>

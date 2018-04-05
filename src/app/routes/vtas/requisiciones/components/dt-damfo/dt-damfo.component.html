@@ -1,4 +1,7 @@
+<ngx-spinner bdOpacity = 0.7 bdColor = "#333" size = "default" color = "#fff" type = "square-spin"></ngx-spinner>
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 <div class="dtDamfo-container mat-elevation-z8">
+
   <div class="dtDamfo-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
@@ -61,10 +64,10 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mb-sm btn-sm btn btn-success btn-outline" (click)="createRequi(element.id)" type="button" placement="bottom" tooltip="Crear Requisición">
+          <button class="mb-sm btn-sm btn btn-success btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Crear Requisición">
             <em class="icon-docs"></em>
           </button>
-          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showDamfo(element.nombrePerfil)" type="button" placement="bottom" tooltip="Ver Damfo - 290">
+          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showDamfo(element)" type="button"  matTooltip="Ver DAM-FO-290">
             <em class="fa fa-eye"></em>
           </button>
       </mat-cell>
@@ -74,4 +77,10 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <mat-paginator [showFirstLastButtons]="true"
+                 [length]="TotalRecords"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = paginate($event)">
+  </mat-paginator>
 </div>

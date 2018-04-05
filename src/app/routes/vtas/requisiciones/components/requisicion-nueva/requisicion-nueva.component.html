@@ -1,3 +1,4 @@
+<ngx-spinner bdOpacity = 0.7 bdColor = "#333" size = "default" color = "#fff" type = "square-spin"></ngx-spinner>
 <div class="content-heading">
     <ul class="breadcrumb pull-right">
         <li><a [routerLink]="['/home']" >Inicio</a></li>
@@ -7,6 +8,20 @@
     Nueva Requisicion
     <small> Generador de Requisiciones.</small>
 </div>
-
-
-<h3>El Id de damfo es {{damfoId}}</h3>
+<div *ngIf="createRequi">
+  <h3>El Id de damfo es {{damfoId}}</h3>
+  <h5>El Id de la Direccion es {{direccionId}}</h5>
+  <h5>El Id de la Requisicion es {{requisicionId}}</h5>
+  <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Ball Triangle Path</div>
+            <div class="panel-body loader-demo">
+                <div class="ball-triangle-path">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

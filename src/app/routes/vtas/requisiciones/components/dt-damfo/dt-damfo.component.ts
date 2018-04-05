@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import {MatTableDataSource, PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster/angular2-toaster';
 //Servicios
 import { RequisicionesService } from '../../../../../service/index';
-//Element  Angular Material
-import {MatTableDataSource} from '@angular/material';
+//Components
+import { DialogdamfoComponent} from '../dialogdamfo/dialogdamfo.component'
+
+
 
 @Component({
   selector: 'app-dt-damfo',
@@ -15,17 +20,129 @@ export class DtDamfoComponent implements OnInit {
 
   constructor(
     private service: RequisicionesService,
+    private dialog: MatDialog,
     private _Router: Router,
-    private _Route: ActivatedRoute
-  ) { }
+    private _Route: ActivatedRoute,
+    private spinner: NgxSpinnerService,
+    private toasterService: ToasterService
+  ) {
+   }
+
+   toaster: any;
+     toasterConfig: any;
+     toasterconfig: ToasterConfig = new ToasterConfig({
+       positionClass: 'toast-bottom-right',
+       limit: 7,tapToDismiss: false,
+       showCloseButton: true,
+       mouseoverTimerStop: true,
+     });
+
+   popToast(type, title, body ) {
+     var toast : Toast = {
+       type: type,
+       title: title,
+       timeout:5000,
+       body: body
+     }
+     this.toasterService.pop(toast);
+   }
+
 
   //Varaibales Globales
+  damfo: any;
+  arrayDamfo: any[];
   public dataSource: MatTableDataSource<any[]>;
+
   ngOnInit() {
-    this.service.getDamgo290().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-      });
+    /** spinner starts on init */
+    this.spinner.show();
+
+    setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.service.getDamgo290().subscribe(data => {
+            this.dataSource = new MatTableDataSource(data);
+            this.damfo = data;
+            this.arrayDamfo = data;
+            this.pageCount = Math.round(this.damfo.length / this.rows);
+            this.TotalRecords = this.damfo.length;
+            this.paginador();
+          });
+        this.spinner.hide();
+    },1500);
+
   }
+
+  createRequi(id){
+    //mandamos la información por medio de la URL sin que esta se muestre en la liga.
+    this._Router.navigate(['/ventas/requisicionNueva', id], {skipLocationChange:true});
+  }
+  showDamfo(event){
+    this.popToast('success', 'Prueba','Mensaje a mostar' );
+  }
+
+  openDialog(element){
+    let dialogRef = this.dialog.open(DialogdamfoComponent,{
+      width: '50%',
+      height: 'auto',
+      data: element
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
+
+
+
+//*******************************-- GRID-- *********************************************//
+  // Paginador.
+  length = 0;
+  pageSize = 10;
+  pageSizeOptions = [10, 30, 50];
+
+
+  rows: number = 10;
+  first: number = 0;
+  page: number = 1;
+  pageCount: number = 0;
+  TotalRecords: number = 0;
+  paginate(event?: PageEvent)
+  {
+      if(event.length > event.pageSize )
+      {
+        this.first = event.pageIndex;
+        this.rows = event.pageSize;
+        this.page = event.pageIndex;
+        this.pageCount = event.length;
+      }
+      else{
+        this.rows = event.length;
+      }
+      this.paginador();
+  }
+
+  paginador()
+  {
+      if (this.page < this.pageCount) {
+          this.damfo = new Array(this.rows);
+          for (var i = 0; i < this.rows; i++) {
+              this.damfo[i] = this.arrayDamfo[this.first + i];
+          }
+      }
+      else {
+          let lenght = this.arrayDamfo.length - this.first;
+
+          this.damfo = new Array(lenght);
+          for (var i = 0; i < lenght; i++) {
+              this.damfo[i] = this.arrayDamfo[this.first + i];
+          }
+      }
+
+      this.dataSource =  new MatTableDataSource(this.damfo);
+  }
+  //termina paginador
+
+
   // Display para mostrar los objetos en el Grid
   displayedColumns = [
     'cliente',
@@ -46,12 +163,7 @@ export class DtDamfoComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  createRequi(id){
-    this._Router.navigate(['/ventas/requisicionNueva', id], {skipLocationChange:true});
-  }
-  showDamfo(event){
-    console.log(event);
-  }
+
 }
 
 export interface Element {

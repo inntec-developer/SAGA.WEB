@@ -16,7 +16,11 @@ import { ApiConection } from '../api-conection.service';
 @Injectable()
 export class RequisicionesService {
 
-  private urlRequiGet = ApiConection.ServiceUrl + ApiConection.requisiciones;
+
+
+  private urlRequiGet = ApiConection.ServiceUrl + ApiConection.getViewDamfos;
+  private urlAddress = ApiConection.ServiceUrl + ApiConection.AddressCliente;
+  private createRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
 
   constructor(private http: Http) { }
 
@@ -24,7 +28,20 @@ export class RequisicionesService {
     return this.http.get(this.urlRequiGet)
       .map(result => result.json())
       .catch(this.handleError);
+  }
 
+  getAddress(damfoId: string): Observable<any>{
+    return this.http.get(this.urlAddress + damfoId)
+      .map(result => result.json())
+      .catch(this.handleError);
+  }
+
+  getNewRequi(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type' : 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.createRequi, JSON.stringify(data), options )
+            .map(result => result.json())
+            .catch(this.handleError);
   }
 
   public handleError(error: any ){
