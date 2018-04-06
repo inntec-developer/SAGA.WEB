@@ -12,12 +12,13 @@ export class ApiConection {
   // Agregar lsa conecciones necesarias en las cuales se hara referencia.
 
   /*Reclutamiento*/
-  public static damfo290GetById = 'damfo290/getById';
-  public static getViewDamfos = "damfo290/getViewDamfos";
+  public static Damfo290GetById = 'Damfo290/getById?id=';
+  public static GetViewDamfos = "Damfo290/getViewDamfos";
 
   /* Ventas */
   public static AddressCliente = "Requisiciones/getAddress?Id=";
-  public static CreateRequi = "Requisiciones/createRequi"
+  public static CreateRequi = "Requisiciones/createRequi";
+  public static GetRequisicionById = "Requisicion/getById?Id=";
 
   /* Candidatos */
   public static filtropaises = 'Candidatos/get';

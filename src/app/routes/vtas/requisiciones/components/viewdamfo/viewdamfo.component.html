@@ -1,0 +1,69 @@
+<ngx-spinner bdOpacity = 0.5 bdColor = "#333" size = "default" color = "#fff" type = "ball-atom"></ngx-spinner>
+<div class="content-heading">
+    <ul class="breadcrumb pull-right">
+        <li><a [routerLink]="['/home']" >Inicio</a></li>
+        <li><a [routerLink]="['/ventas/requisicion']" >Requisiciones</a></li>
+        <li class="active">DAM-FO-290</li>
+    </ul>
+    Visaulizar DAM-FO-290
+    <small>Caracteristicas de DAM-FO-290</small>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <em class="fa fa-user"></em>
+        </mat-panel-title>
+        <mat-panel-description>
+          Información General
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row"><!--Agregar la información que ira en el panel-->
+        <form class="find-form">
+          <h4><p><small><strong>Nom. Comercial: </strong>{{damfo290?.cliente?.nombrecomercial}}</small></p></h4>
+          <h4><p><small><strong>Razón Social: </strong>{{damfo290?.cliente?.razonSocial}}</small></p></h4>
+          <h4><p><small><strong>RFC: </strong>{{damfo290?.cliente?.rfc}}</small></p></h4>
+          <h4><p><small><strong>Giro: </strong>{{damfo290?.cliente?.giroEmpresas?.giroEmpresa}}</small></p></h4>
+          <h4><p><small><strong>Actividad: </strong>{{damfo290?.cliente?.actividadEmpresas?.actividadEmpresa}}</small></p></h4>
+        </form>
+      </div>
+    </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="col-md-4">
+    <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <em class="fa fa-archive"></em>
+        </mat-panel-title>
+        <mat-panel-description>
+          Reclutamiento
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row"><!--Agregar la información que ira en el panel-->
+        <h4><p><small><strong>Tipo: </strong>{{damfo290?.tipoReclutamiento?.tipoReclutamiento}}</small></p></h4>
+        <h4><p><small><strong>Clase: </strong>{{damfo290?.claseReclutamiento?.clasesReclutamiento}}</small></p></h4>
+      </div>
+    </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="col-md-4">
+    <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <em class="fa fa-eye"></em>
+        </mat-panel-title>
+        <mat-panel-description>
+          Tipo Reclutamiento
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row"><!--Agregar la información que ira en el panel-->
+      </div>
+    </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

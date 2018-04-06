@@ -38,6 +38,7 @@ export class DtDamfoComponent implements OnInit {
      });
 
    popToast(type, title, body ) {
+
      var toast : Toast = {
        type: type,
        title: title,
@@ -68,7 +69,7 @@ export class DtDamfoComponent implements OnInit {
             this.paginador();
           });
         this.spinner.hide();
-    },1500);
+    },1700);
 
   }
 
@@ -76,8 +77,8 @@ export class DtDamfoComponent implements OnInit {
     //mandamos la información por medio de la URL sin que esta se muestre en la liga.
     this._Router.navigate(['/ventas/requisicionNueva', id], {skipLocationChange:true});
   }
-  showDamfo(event){
-    this.popToast('success', 'Prueba','Mensaje a mostar' );
+  showDamfo(id){
+    this._Router.navigate(['/ventas/visualizarDamfo290', id], {skipLocationChange:true});
   }
 
   openDialog(element){
