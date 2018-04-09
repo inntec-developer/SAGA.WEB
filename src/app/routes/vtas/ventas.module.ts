@@ -40,7 +40,8 @@ import { ViewdamfoComponent } from './requisiciones/components/viewdamfo/viewdam
 const routes: Routes = [
     { path: 'prospecto', component: ProspectoComponent },
     { path: 'requisicion', component: RequisicionComponent },
-    { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent}
+    { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent},
+    { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent},
 ];
 
 @NgModule({

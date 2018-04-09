@@ -28,6 +28,7 @@ export class RequisicionNuevaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+<<<<<<< HEAD
     // this.spinner.show();
     // setTimeout(() => {
     //   debugger;
@@ -44,6 +45,23 @@ export class RequisicionNuevaComponent implements OnInit {
     //   // });
     //   this.spinner.hide();
     // }, 2000);
+=======
+    this.spinner.show();
+    setTimeout(() => {
+      this._Route.params.subscribe(params => {
+        if(params['IdDamfo'] != null && params['IdDireccion'] != null){
+          this.damfoId = params['IdDamfo'];
+          this.direccionId = params['IdDireccion']
+          this.createRequi = true;
+        }else{
+          this.createRequi = false;
+        }
+        if(this.createRequi)
+          this.createRequisicion();
+      });
+      this.spinner.hide();
+    }, 2000);
+>>>>>>> 2d4d2e780e0829ec1693f28b8cb06f194cf09067
 
   }
 
