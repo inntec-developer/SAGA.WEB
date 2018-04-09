@@ -1,9 +1,14 @@
 <div class="row">
     <div class="col-lg-4">
         <div class="card card-default">
+          <div class="card-header">
+                <a class="float-right text-muted" (click)="favContact2=!favContact2">
+                    <em class="fa" [ngClass]="favContact2 ? 'fa fa-unlock' : 'fa fa-lock'" style="color: #CC2A2A;"></em>
+                </a>
+            </div>
             <div class="card-body text-center">
                 <div class="py-4">
-                    <img class="img-fluid rounded-circle img-thumbnail thumb96" src="assets/img/user/02.jpg" alt="Contact" />
+                  <img class="img-fluid rounded-circle img-thumbnail thumb96" src="assets/img/user/02.jpg" alt="Contact" />
                 </div>
                 <h3 class="m-0 text-bold">{{data[0]?.candidato?.nombre}} {{data[0]?.candidato?.apellidoPaterno}} {{data[0]?.candidato?.apellidoMaterno}}</h3>
                 <div class="my-3">
@@ -19,12 +24,12 @@
                   <strong>Telefonos:</strong> <strong class="text-success">{{tel?.telefono}}</strong>
                 </div>
                 <div class="text-center">
-                  <button class="btn btn-labeled btn-success mb-2" type="button">
+                  <button class="btn btn-sm btn-labeled btn-outline btn-success mb-2" type="button">
                   <span class="btn-label"><i class="fa fa-check"></i>
-                  </span>Apartado</button>
-                  <button class="btn btn-labeled btn-info mb-2" type="button">
+                  </span>Apartar</button>
+                  <button class="btn btn-sm btn-labeled btn-outline btn-info mb-2" type="button">
                     <span class="btn-label"><i class="fa fa-exclamation"></i>
-                  </span>Liberado</button>
+                  </span>Liberar</button>
                 </div>
             </div>
         </div>
@@ -47,7 +52,7 @@
               <span class="text-sm text-muted">Act. hace 3 minutos.</span>
             </div>
             <div class="col-md-6 text-center">
-              <button class="btn btn-labeled btn-warning mb-2" type="button">
+              <button class="btn btn-sm btn-labeled btn-outline btn-warning mb-2" type="button">
                 <span class="btn-label"><i class="fa fa-plus"></i>
                 </span>Agregar
               </button>
@@ -108,7 +113,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-user"></em></mat-icon>
+                <mat-icon><em class="fa fa-user" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row">
@@ -197,7 +202,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-home"></em></mat-icon>
+                <mat-icon><em class="fa fa-home" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let direccion of data[0].candidato.direcciones">
@@ -241,7 +246,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-credit-card"></em></mat-icon>
+                <mat-icon><em class="fa fa-credit-card" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row">
@@ -270,7 +275,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-facebook"></em></mat-icon>
+                <mat-icon><em class="fa fa-facebook" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-action-row>
@@ -288,7 +293,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-suitcase"></em></mat-icon>
+                <mat-icon><em class="fa fa-suitcase" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let exp of data[0].experiencias">
@@ -348,7 +353,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-university"></em></mat-icon>
+                <mat-icon><em class="fa fa-university" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let formacion of data[0].formaciones">
@@ -398,7 +403,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-certificate"></em></mat-icon>
+                <mat-icon><em class="fa fa-certificate" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let certificacion of data[0].certificaciones">
@@ -445,7 +450,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-language"></em></mat-icon>
+                <mat-icon><em class="fa fa-language" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let idioma of data[0].idiomas">
@@ -479,7 +484,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-graduation-cap"></em></mat-icon>
+                <mat-icon><em class="fa fa-graduation-cap" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let curso of data[0].cursos">
@@ -521,7 +526,7 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-magic"></em></mat-icon>
+                <mat-icon><em class="fa fa-magic" style="color: #2874A6;"></em></mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row" *ngFor="let conocimiento of data[0].conocimientos">

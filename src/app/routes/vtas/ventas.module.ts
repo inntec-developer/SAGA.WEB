@@ -32,6 +32,7 @@ import { DtDamfoComponent } from './requisiciones/components/dt-damfo/dt-damfo.c
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
 import { DireccionautoComponent } from './requisiciones/components/direccionauto/direccionauto.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ViewdamfoComponent } from './requisiciones/components/viewdamfo/viewdamfo.component';
 
 
 
@@ -66,7 +67,8 @@ const routes: Routes = [
         RequisicionNuevaComponent,
         DtDamfoComponent,
         DialogdamfoComponent,
-        DireccionautoComponent
+        DireccionautoComponent,
+        ViewdamfoComponent
     ],
     entryComponents: [DialogdamfoComponent],
     exports: [

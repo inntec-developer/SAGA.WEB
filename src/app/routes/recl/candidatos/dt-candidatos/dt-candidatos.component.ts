@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { CandidatosService } from '../../../../service/index';
   styleUrls: ['./dt-candidatos.component.scss'],
   providers: [CandidatosService]
 })
-export class DtCandidatosComponent implements OnInit, AfterViewInit {
+export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
   candidatodtl: any[];
   candidatos: any;
@@ -38,6 +38,12 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit {
   }
   constructor(private service: CandidatosService, public dialog: MatDialog, private _Router: Router,
       private _Route: ActivatedRoute) {   }
+
+ ngOnChanges(changes: SimpleChanges){
+       if(changes.FCandidatos && !changes.FCandidatos.isFirstChange()) {
+        this.ngOnInit();
+       }
+     }
 
   ngOnInit() {
     // this.service.getcandidatos()

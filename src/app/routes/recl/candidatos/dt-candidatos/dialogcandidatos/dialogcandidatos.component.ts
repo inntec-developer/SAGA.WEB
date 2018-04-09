@@ -32,7 +32,6 @@ export class DialogcandidatosComponent implements OnInit {
       this.service.getpostulaciones(data[0].candidatoId)
       .subscribe(data => {
         this.dataSource =  new MatTableDataSource(data);
-        console.log(data);
       })
     }
 

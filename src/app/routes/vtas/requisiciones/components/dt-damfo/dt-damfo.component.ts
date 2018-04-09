@@ -38,6 +38,7 @@ export class DtDamfoComponent implements OnInit {
      });
 
    popToast(type, title, body ) {
+
      var toast : Toast = {
        type: type,
        title: title,
@@ -68,7 +69,7 @@ export class DtDamfoComponent implements OnInit {
             this.paginador();
           });
         this.spinner.hide();
-    },1500);
+    },1700);
 
   }
 

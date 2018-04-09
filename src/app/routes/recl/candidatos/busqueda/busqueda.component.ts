@@ -1,11 +1,14 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl,  FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+
+// Modelos
+import { Filtros } from '../../../../models/recl/candidatos';
 
 // Servicios
 import { CandidatosService } from '../../../../service/index';
@@ -24,7 +27,18 @@ export class BusquedaComponent implements OnInit {
   IdColonia: number;
   IdCp: number;
   Candidatos: any;
+  // Decorador para envio de busqueda a tabla de candidatos.
   @Output() filtro: EventEmitter<any> = new EventEmitter<any>();
+  // Objeto de filtros de busqueda.
+  public Filtros: FormGroup;
+
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private service: CandidatosService){
+    iconRegistry.addSvgIcon(
+         'find',
+         sanitizer.bypassSecurityTrustResourceUrl('/assets/img/icon/ic_find_in_page_24px.svg'));
+   }
+
+   ngOnInit(){  }
 
   FiltroPais(event){
     this.IdPais = event;
@@ -46,22 +60,20 @@ export class BusquedaComponent implements OnInit {
     this.IdCp = event;
   }
 
- constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private service: CandidatosService){
-   iconRegistry.addSvgIcon(
-        'find',
-        sanitizer.bypassSecurityTrustResourceUrl('/assets/img/icon/ic_find_in_page_24px.svg'));
-  }
+  // Busqueda de candidatos segun filtros de busqueda.
+  Buscar(){
+  let filtroX: Filtros = new Filtros();
 
-  Filtro(event){
-    this.service.getcandidatos()
+    filtroX.IdPais = this.IdPais;
+    filtroX.IdEstado = this.IdEstado;
+    filtroX.IdMunicipio = this.IdMunicipio;
+    filtroX.Cp = this.IdCp;
+    // filtroX.palabraClave = this.FiltroVacantes.get('palabraClave').value;
+    this.service.getcandidatos(filtroX)
     .subscribe(data => {
       this.Candidatos = data;
-      this.filtro.emit(this.Candidatos);
+      this.filtro.emit(this.Candidatos); // Envio de filtro a tabla de candidatos.
     })
-  }
-
-  ngOnInit(){
-
   }
 
 }

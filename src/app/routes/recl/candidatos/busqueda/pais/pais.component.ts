@@ -39,7 +39,6 @@ export class PaisComponent implements OnInit {
   SendIdCountry(){
     if (this.filtropais != null){
       this.IdPais = this.filtropais[0].id;
-      console.log(this.IdPais);
       this.change.emit(this.IdPais);
     }else{
       this.IdPais = 0;

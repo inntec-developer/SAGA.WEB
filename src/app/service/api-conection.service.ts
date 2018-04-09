@@ -17,7 +17,8 @@ export class ApiConection {
 
   /* Ventas */
   public static AddressCliente = "Requisiciones/getAddress?Id=";
-  public static CreateRequi = "Requisiciones/createRequi"
+  public static CreateRequi = "Requisiciones/createRequi";
+  public static GetRequisicionById = "Requisicion/getById?Id=";
 
   /* Candidatos */
   public static filtropaises = 'Candidatos/get';

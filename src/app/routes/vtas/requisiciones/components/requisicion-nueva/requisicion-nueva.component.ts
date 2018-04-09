@@ -28,22 +28,22 @@ export class RequisicionNuevaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spinner.show();
-    setTimeout(() => {
-      debugger;
-      // this._Route.params.subscribe(params => {
-      //   if(params['IdDamfo'] != null && params['IdDireccion'] != null){
-      //     this.damfoId = params['IdDamfo'];
-      //     this.direccionId = params['IdDireccion']
-      //     this.createRequi = true;
-      //   }else{
-      //     this.createRequi = false;
-      //   }
-      //   if(this.createRequi)
-      //     this.createRequisicion();
-      // });
-      this.spinner.hide();
-    });
+    // this.spinner.show();
+    // setTimeout(() => {
+    //   debugger;
+    //   // this._Route.params.subscribe(params => {
+    //   //   if(params['IdDamfo'] != null && params['IdDireccion'] != null){
+    //   //     this.damfoId = params['IdDamfo'];
+    //   //     this.direccionId = params['IdDireccion']
+    //   //     this.createRequi = true;
+    //   //   }else{
+    //   //     this.createRequi = false;
+    //   //   }
+    //   //   if(this.createRequi)
+    //   //     this.createRequisicion();
+    //   // });
+    //   this.spinner.hide();
+    // }, 2000);
 
   }
 
@@ -52,7 +52,7 @@ export class RequisicionNuevaComponent implements OnInit {
     let datas: CreateRequisicion = new CreateRequisicion();
     datas.IdDamfo = this.damfoId;
     datas.IdAddress = this.direccionId;
-    this.serviceRequisiciones.getNewRequi(datas)
+    this.serviceRequisiciones.createNewRequi(datas)
         .subscribe(data => {
           this.requisicionId = data;
         })

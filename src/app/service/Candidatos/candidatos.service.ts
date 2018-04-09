@@ -68,24 +68,6 @@ getcolonias(municipio: string): Observable<any> { // Obtener filtro de colonias.
        .catch(this.handleError);
 }
 
-getcandidatos(): Observable<any> { // Obtener filtro de colonias.
-   return this.http.get(this.UrlCandidatos)
-       .map(result => result.json())
-       .catch(this.handleError);
-}
-
-getcandidatodtl(Id: any): Observable<any> { // Obtener filtro de colonias.
-   return this.http.get(this.UrlCandidatoDtl + '?Id='+ Id)
-       .map(result => result.json())
-       .catch(this.handleError);
-}
-
-getpostulaciones(Id: any): Observable<any> { // Obtenemos las postulaciones del candidato.
-   return this.http.get(this.UrlPostulaciones + '?IdCandidato='+ Id)
-       .map(result => result.json())
-       .catch(this.handleError);
-}
-
 getareasexp(): Observable<any> { // Obtener filtro de areas de experiencia.
    return this.http.get(this.UrlAreaExp)
        .map(result => result.json())
@@ -127,5 +109,29 @@ getidiomas(): Observable<any> { // Obtener filtro de idiomas.
        .map(result => result.json())
        .catch(this.handleError);
 }
+
+getcandidatos(filtrox: any): Observable<any> { // Obtener filtro de candidatos.
+  let headers = new Headers({ 'Content-Type': 'application/json' });
+  let options = new RequestOptions({ headers: headers });
+  return this.http.post(this.UrlCandidatos, JSON.stringify(filtrox), options)
+    .map(result => result.json())
+    .catch(this.handleError);
+   // return this.http.get(this.UrlCandidatos)
+   //     .map(result => result.json())
+   //     .catch(this.handleError);
+}
+
+getcandidatodtl(Id: any): Observable<any> { // Obtener detalle de candidatos.
+   return this.http.get(this.UrlCandidatoDtl + '?Id='+ Id)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getpostulaciones(Id: any): Observable<any> { // Obtenemos las postulaciones del candidato.
+   return this.http.get(this.UrlPostulaciones + '?IdCandidato='+ Id)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
 
 }

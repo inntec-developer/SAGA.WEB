@@ -2,6 +2,7 @@ import { Component, OnInit , Inject, OnChanges, SimpleChanges, Input } from '@an
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { FormGroup, FormControl, ReactiveFormsModule, NgForm, Validator } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster/angular2-toaster';
 //Services
 import { RequisicionesService } from '../../../../../service/index';
 
@@ -20,9 +21,30 @@ export class DialogdamfoComponent implements OnInit, OnChanges {
     public dialogRef: MatDialogRef<DialogdamfoComponent>,
     private _Router: Router,
     private _Route: ActivatedRoute,
+    private toasterService: ToasterService,
     @Inject(MAT_DIALOG_DATA) public data: any, private service: RequisicionesService
   ) {
 
+  }
+
+  toaster: any;
+    toasterConfig: any;
+    toasterconfig: ToasterConfig = new ToasterConfig({
+      positionClass: 'toast-bottom-right',
+      limit: 7,tapToDismiss: false,
+      showCloseButton: true,
+      mouseoverTimerStop: true,
+    });
+
+  popToast(type, title, body ) {
+
+    var toast : Toast = {
+      type: type,
+      title: title,
+      timeout:2000,
+      body: body
+    }
+    this.toasterService.pop(toast);
   }
 
   ngOnInit() {
@@ -52,7 +74,7 @@ export class DialogdamfoComponent implements OnInit, OnChanges {
       this._Router.navigate(['/ventas/requisicionNueva', this.IdDamfo, this.IdDireccion], {skipLocationChange:true});
       this.onNoClick();
     }else{
-      alert('Seleccione una direccion para continuar.');
+      this.popToast('error', 'Ups!!','Seleccione una dirección para continuar' );
     }
 
   }

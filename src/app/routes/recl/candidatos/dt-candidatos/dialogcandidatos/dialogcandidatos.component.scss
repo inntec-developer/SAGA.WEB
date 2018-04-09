@@ -219,3 +219,36 @@ CSS
   justify-content: space-between;
   align-items: center;
 }
+.contenedor {
+position:relative;
+margin-left:10px;
+margin-bottom:100px;
+z-index:300;
+}
+
+.imagenes {
+position:absolute;
+left:0; top:0;
+}
+
+.slide {display:block;
+border:0;
+text-decoration:none;
+float:left;
+border-right:1px solid #fff;
+}
+
+.ultimo{border:0;}
+
+.slide img {
+display:block;
+border:0;
+width:60px;
+height:40px;
+cursor:pointer;
+-webkit-transition-duration: .7s;
+-moz-transition-duration: .7s;
+-o-transition-duration: .7s;
+}
+
+.slide:hover img {width:480px; height:320px;}

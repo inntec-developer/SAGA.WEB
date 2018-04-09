@@ -18,14 +18,15 @@ export class RequisicionesService {
 
 
 
-  private urlRequiGet = ApiConection.ServiceUrl + ApiConection.getViewDamfos;
+  private urlGetViewDamfos = ApiConection.ServiceUrl + ApiConection.getViewDamfos;
   private urlAddress = ApiConection.ServiceUrl + ApiConection.AddressCliente;
-  private createRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
+  private urlCreateRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
+  private urlGetRequisicionById = ApiConection.ServiceUrl + ApiConection.GetRequisicionById;
 
   constructor(private http: Http) { }
 
   getDamgo290(): Observable<any>{
-    return this.http.get(this.urlRequiGet)
+    return this.http.get(this.urlGetViewDamfos)
       .map(result => result.json())
       .catch(this.handleError);
   }
@@ -36,12 +37,18 @@ export class RequisicionesService {
       .catch(this.handleError);
   }
 
-  getNewRequi(data: any): Observable<any>{
+  createNewRequi(data: any): Observable<any>{
     let headers = new Headers({'Content-Type' : 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.post(this.createRequi, JSON.stringify(data), options )
+    return this.http.post(this.urlCreateRequi, JSON.stringify(data), options )
             .map(result => result.json())
             .catch(this.handleError);
+  }
+
+  getNewRequi(requisicionId : string){
+    return this.http.get(this.urlGetRequisicionById + requisicionId)
+              .map(result => result.json())
+              .catch(this.handleError);
   }
 
   public handleError(error: any ){

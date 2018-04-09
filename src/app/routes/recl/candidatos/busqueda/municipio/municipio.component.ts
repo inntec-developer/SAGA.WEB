@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -14,7 +14,7 @@ import { CandidatosService } from '../../../../../service/index';
   styleUrls: ['./municipio.component.scss'],
   providers: [CandidatosService]
 })
-export class MunicipioComponent implements OnInit {
+export class MunicipioComponent implements OnInit, OnChanges {
  // Variables
   @Input('Estado') filtroestado: any;
   Municipios: any[];
@@ -29,6 +29,13 @@ export class MunicipioComponent implements OnInit {
   constructor(private service: CandidatosService) {
     this.MunicipioCtrl = new FormControl();
   }
+  ngOnInit() {
+  }
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.filtroestado && !changes.filtroestado.isFirstChange()){
+      this.SendIdMunicipio();
+    }
+  }
 
   filterMunicipio(municipio: string) {
     return this.filtromunicipio = this.Municipios.filter(muni =>
@@ -36,6 +43,7 @@ export class MunicipioComponent implements OnInit {
   }
 
   SendIdMunicipio(){
+    if(this.filtroestado != null){
       this.service.getmunicipios(this.filtroestado)
       .subscribe(data => {
         this.Municipios = data.municipios;
@@ -44,13 +52,10 @@ export class MunicipioComponent implements OnInit {
             map(municipio => municipio ? this.filterMunicipio(municipio) : this.Municipios.slice())
           );
       })
-    
+      if(this.filtromunicipio != null){
       this.IdMunicipio = this.filtromunicipio[0].id;
       this.change.emit(this.IdMunicipio);
+      }
+      }
   }
-
-  ngOnInit() {
-
-  }
-
 }

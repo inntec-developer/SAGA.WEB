@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output ,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output ,EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -14,7 +14,7 @@ import { CandidatosService } from '../../../../../service/index';
   styleUrls: ['./colonia.component.scss'],
   providers: [CandidatosService]
 })
-export class ColoniaComponent implements OnInit {
+export class ColoniaComponent implements OnInit, OnChanges {
 
   // Variables
    @Input('Municipio') filtromunicipio: any;
@@ -30,6 +30,13 @@ export class ColoniaComponent implements OnInit {
   constructor(private service: CandidatosService) {
     this.ColoniaCtrl = new FormControl();
   }
+  ngOnInit() {
+  }
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.filtromunicipio && !changes.filtromunicipio.isFirstChange()){
+      this.SendIdColonia();
+    }
+  }
 
   filterColonia(colonia: string) {
     return this.Colonias.filter(col =>
@@ -37,6 +44,7 @@ export class ColoniaComponent implements OnInit {
   }
 
   SendIdColonia(){
+    if(this.filtromunicipio != null){
     this.service.getcolonias(this.filtromunicipio)
     .subscribe(data => {
       this.Colonias = data.colonias;
@@ -45,12 +53,10 @@ export class ColoniaComponent implements OnInit {
           map(colonia => colonia ? this.filterColonia(colonia) : this.Colonias.slice())
         );
     })
-
-      this.IdColonia  = this.filtroColonia[0].id;
+    if(this.filtroColonia != null){
+      this.IdColonia = this.filtroColonia[0].id;
       this.change.emit(this.IdColonia);
-  }
-
-  ngOnInit() {
-  }
-
+      }
+    }
+}
 }
