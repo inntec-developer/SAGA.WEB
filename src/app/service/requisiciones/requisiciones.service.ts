@@ -18,18 +18,12 @@ export class RequisicionesService {
 
 
 
-<<<<<<< HEAD
-  private urlGetViewDamfos = ApiConection.ServiceUrl + ApiConection.getViewDamfos;
-  private urlAddress = ApiConection.ServiceUrl + ApiConection.AddressCliente;
-  private urlCreateRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
-  private urlGetRequisicionById = ApiConection.ServiceUrl + ApiConection.GetRequisicionById;
-=======
+
   private urlGetViewDamfos = ApiConection.ServiceUrl + ApiConection.GetViewDamfos;
   private urlAddress = ApiConection.ServiceUrl + ApiConection.AddressCliente;
   private urlCreateRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
   private urlGetRequisicionById = ApiConection.ServiceUrl + ApiConection.GetRequisicionById;
   private urlGetDamfoById = ApiConection.ServiceUrl + ApiConection.Damfo290GetById;
->>>>>>> 2d4d2e780e0829ec1693f28b8cb06f194cf09067
 
   constructor(private http: Http) { }
   //Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -44,11 +38,7 @@ export class RequisicionesService {
       .map(result => result.json())
       .catch(this.handleError);
   }
-<<<<<<< HEAD
-
-=======
   // Generea una nueva requisicion y posteriormente regresa el ID de la nueva requisicion.
->>>>>>> 2d4d2e780e0829ec1693f28b8cb06f194cf09067
   createNewRequi(data: any): Observable<any>{
     let headers = new Headers({'Content-Type' : 'application/json'});
     let options = new RequestOptions({headers: headers});
@@ -56,19 +46,12 @@ export class RequisicionesService {
             .map(result => result.json())
             .catch(this.handleError);
   }
-<<<<<<< HEAD
-
-=======
   // Recupera la informacion completa de la requisicion que se requiera
->>>>>>> 2d4d2e780e0829ec1693f28b8cb06f194cf09067
   getNewRequi(requisicionId : string){
     return this.http.get(this.urlGetRequisicionById + requisicionId)
               .map(result => result.json())
               .catch(this.handleError);
   }
-<<<<<<< HEAD
-
-=======
   //Recupera la información completa del DAMFO-290 que se requiera.
   getDamfoById(damfoId: string){
     return this.http.get(this.urlGetDamfoById + damfoId)
@@ -76,7 +59,6 @@ export class RequisicionesService {
               .catch(this.handleError);
   }
   //Muestra un error en consola y regresa el mismo al Frond-End en caso de que se genere el mismo.
->>>>>>> 2d4d2e780e0829ec1693f28b8cb06f194cf09067
   public handleError(error: any ){
     console.log('Error Internar Server', error);
     if(error instanceof Response){
