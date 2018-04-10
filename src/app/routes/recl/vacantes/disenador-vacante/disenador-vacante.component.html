@@ -1,39 +1,429 @@
-<p>
-  disenador-vacante works!
-</p>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<div class="panel-body">
+    <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+</div>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<div class="content-heading">
+    <ul class="breadcrumb pull-right">
+        <li>
+            <a href="#" (click)="LlamarVacante()" >Vacantes</a>
+        </li>
+        <li class="active">Diseño de Vacante</li>
+    </ul>
+    Diseño Vacantes
+    <small> Administraci&oacute;n de Diseño Vacantes</small>
+</div>
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Personal data
+      </mat-panel-title>
+      <mat-panel-description>
+        Type your name and age
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="First name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" min="1" placeholder="Age">
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Destination
+      </mat-panel-title>
+      <mat-panel-description>
+        Type the country name
+        <mat-icon>map</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="Country">
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Day of the trip
+      </mat-panel-title>
+      <mat-panel-description>
+        Inform the date you wish to travel
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
+    </mat-form-field>
+    <mat-datepicker #picker></mat-datepicker>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">End</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
 
 <div class="container ">
-    <div class="col-xs-12">
+    <div class="col-xs-12 row">
             <div class="col-xs-12">
-                <h4>Operacion</h4>
+                  <h4>Datos generales</h4>
             </div>
-                    <div class="col-xs-3 row">
-                        <div class="list-group panel-default">
-                            <a href="#" class="list-group-item panel-heading">Nombre</a>
-                            <a href="#" class="list-group-item">
-                                resumen
-                                <div class="material-switch pull-right">
-                                    <input id="Resumen1" name="someSwitchOption001" type="checkbox" />
-                                    <label for="Resumen1" class="label-success"></label>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                detalle
-                                <div class="material-switch pull-right">
-                                    <input id="Detalle1" name="someSwitchOption001" type="checkbox" />
-                                    <label for="Detalle1" class="label-success"></label>
-                                </div>
-                            </a>
+            <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of General">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover"  >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{item.nombre}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>
+                                          <label   class="switch  switch-lg danger">
+                                            <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                              <ng-template #pintaSI>
+                                                <input  checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <ng-template #pintaNo>
+                                                <input   id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <span></span>
+                                          </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalle</td>
+                                        <td>
+                                            <label class="switch switch-lg">
+                                              <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                                <ng-template #pintaSId>
+                                                  <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                                <ng-template #pintaNod>
+                                                <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                              <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
+                </div>
+            </div>
+    </div>
+    <div class="col-xs-12">
+            <div class="col-xs-12">
+                <h4>Tipos de Contrato</h4>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Contrato">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover"  >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{item.nombre}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>
+                                          <label  class="switch switch-lg">
+                                            <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                              <ng-template #pintaSI>
+                                                <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <ng-template #pintaNo>
+                                                <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <span></span>
+                                          </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalle</td>
+                                        <td>
+                                            <label class="switch switch-lg">
+                                              <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                                <ng-template #pintaSId>
+                                                  <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                                <ng-template #pintaNod>
+                                                <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                              <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="col-xs-12">
+            <div class="col-xs-12">
+                <h4>Puesto a Reclutar</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of PuestoReclutar">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover"  >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{item.nombre}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>
+                                          <label  class="switch switch-lg">
+                                            <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                              <ng-template #pintaSI>
+                                                <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <ng-template #pintaNo>
+                                                <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <span></span>
+                                          </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalle</td>
+                                        <td>
+                                            <label class="switch switch-lg">
+                                              <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                                <ng-template #pintaSId>
+                                                  <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                                <ng-template #pintaNod>
+                                                <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                              <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <div class="col-xs-12">
+            <div class="col-xs-12">
+                <h4>Horario</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Horario">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover"  >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{item.nombre}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>
+                                          <label  class="switch switch-lg">
+                                            <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                              <ng-template #pintaSI>
+                                                <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <ng-template #pintaNo>
+                                                <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <span></span>
+                                          </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalle</td>
+                                        <td>
+                                            <label class="switch switch-lg">
+                                              <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                                <ng-template #pintaSId>
+                                                  <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                                <ng-template #pintaNod>
+                                                <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                              <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <div class="col-xs-12">
+            <div class="col-xs-12">
+                <h4>Sueldos</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of sueldo">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover"  >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{item.nombre}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>
+                                          <label  class="switch switch-lg">
+                                            <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                              <ng-template #pintaSI>
+                                                <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <ng-template #pintaNo>
+                                                <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <span></span>
+                                          </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalle</td>
+                                        <td>
+                                            <label class="switch switch-lg">
+                                              <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                                <ng-template #pintaSId>
+                                                  <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                                <ng-template #pintaNod>
+                                                <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                              <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <div class="col-xs-12">
+            <div class="col-xs-12">
+                <h4>Extras</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Otros">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover"  >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{item.nombre}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>
+                                          <label  class="switch switch-lg">
+                                            <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                              <ng-template #pintaSI>
+                                                <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <ng-template #pintaNo>
+                                                <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                              </ng-template>
+                                              <span></span>
+                                          </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalle</td>
+                                        <td>
+                                            <label class="switch switch-lg">
+                                              <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                                <ng-template #pintaSId>
+                                                  <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                                <ng-template #pintaNod>
+                                                <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                                </ng-template>
+                                              <span></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     </div>
 </div>
