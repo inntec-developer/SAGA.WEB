@@ -53,6 +53,7 @@ import { DtVacantesComponent } from './candidatos/dt-vacantes/dt-vacantes.compon
 import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.component';
 import { DialogcandidatosComponent } from './candidatos/dt-candidatos/dialogcandidatos/dialogcandidatos.component';
 import { DisenadorVacanteComponent } from './vacantes/disenador-vacante/disenador-vacante.component';
+import {ToasterModule,ToasterService} from 'angular2-toaster';
 
 //Providers
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
@@ -81,8 +82,9 @@ const routes: Routes = [
         MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule, PaginatorModule ],
-    providers: [ColorPickerService, { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
+        MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule, PaginatorModule,
+        ToasterModule ],
+    providers: [ColorPickerService, { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },ToasterService],
     declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent, BusquedaComponent, PaisComponent, EstadoComponent, MunicipioComponent, ColoniaComponent, AreaExpComponent, CpComponent, GeneroComponent, EdadComponent, ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent, VehpropioComponent, NivestudiosComponent, IdiomasComponent, PerfilComponent, DtVacantesComponent, DtCandidatosComponent, DialogcandidatosComponent, DisenadorVacanteComponent],
     entryComponents: [
        DialogcandidatosComponent],
