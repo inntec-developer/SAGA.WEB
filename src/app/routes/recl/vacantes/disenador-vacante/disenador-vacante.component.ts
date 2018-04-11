@@ -6,8 +6,6 @@ import {Http} from '@angular/http';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {ToasterService,ToasterConfig} from 'angular2-toaster';
 
-
-
 @Component({
   selector: 'app-disenador-vacante',
   templateUrl: './disenador-vacante.component.html',
@@ -21,10 +19,11 @@ public PuestoReclutar : any[];
 public Horario : any[];
 public sueldo : any[];
 public Otros : any[];
-public Requi : any[];
-public Mensaje :any[];
+public Requi : string;
+public Mensaje :string;
 public variable:boolean = false;
 private toasterService: ToasterService;
+public bol:boolean;
 step = 0;
 toaster: any;
 toasterConfig: any;
@@ -46,7 +45,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
         }
 
   ngOnInit() {
-    this.Requi = this.route.queryParams._value.Requi
+    this.Requi = this.route.queryParams._value.Requi;
     console.log(this.Requi);
     this.service.getGeneral(this.Requi)
     .subscribe( data => {
@@ -80,11 +79,11 @@ toasterconfig: ToasterConfig = new ToasterConfig({
   }
 
   SetDetalle(id,titulo){
-    var bol = document.getElementById('Detalle_' + id).checked
-    this.Config.SetDetalle(this.Requi,id,bol)
+    this.bol = document.getElementById('Detalle_' + id).checked;
+    this.Config.SetDetalle(this.Requi,id,this.bol)
     .subscribe( data => {
       this.Mensaje = data;
-      this.pop(this.Mensaje.mensaje,this.Mensaje.bandera,bol,titulo,'Detalle');
+      this.pop(this.Mensaje.mensaje,this.Mensaje.bandera,this.bol,titulo,'Detalle');
       console.log(this.Mensaje)
     });
   }
@@ -92,15 +91,16 @@ toasterconfig: ToasterConfig = new ToasterConfig({
 
 
   SetResumen(id,titulo){
-    var bol = document.getElementById('Resumen_' + id).checked
-    this.Config.SetResumen(this.Requi,id,bol)
+
+     this.bol = document.getElementById('Resumen_' + id).checked;
+    this.Config.SetResumen(this.Requi,id,this.bol)
     .subscribe( data => {
       this.Mensaje = data;
-      this.pop(this.Mensaje.mensaje,this.Mensaje.bandera,bol,titulo,'Resumen');
+      this.pop(this.Mensaje.mensaje,this.Mensaje.bandera,this.bol,titulo,'Resumen');
     });
   }
 
-  pop(mensaje,bandera,tipo,titulo,area) {
+  pop(mensaje:string,bandera:boolean,tipo:boolean,titulo:string,area:string) {
     var type = 'success';
     mensaje = 'Se mostrara en  ' + area;
     if (tipo == false) {
