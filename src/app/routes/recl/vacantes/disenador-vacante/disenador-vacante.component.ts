@@ -5,8 +5,7 @@ import { ActivatedRoute,Router} from '@angular/router/';
 import {Http} from '@angular/http';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {ToasterService,ToasterConfig} from 'angular2-toaster';
-import { MatIconModule} from '@angular/material';
-//import {MatIconModule} from '@angular/material/icon';
+
 
 
 @Component({
