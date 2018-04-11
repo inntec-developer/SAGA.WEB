@@ -34,25 +34,25 @@
     <!-- Puesto a cubrir Column -->
     <ng-container matColumnDef="vBtra">
       <mat-header-cell *matHeaderCellDef> Puesto a Cubrir </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.vBtra}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element?.vBtra}} </mat-cell>
     </ng-container>
 
     <!-- Giro Empresas <Experiencia Solicitada> Column -->
     <ng-container matColumnDef="experiencia">
       <mat-header-cell *matHeaderCellDef> Experiencia Solicitada</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.experiencia}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element?.experiencia}} </mat-cell>
     </ng-container>
 
     <!-- Actividad Empresas <Area Nombre> Column -->
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef> Area Nombre</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.area.nombre}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element?.area?.nombre}} </mat-cell>
     </ng-container>
 
     <!-- Actividad Empresas <Tipo de Reclutamiento> Column -->
     <ng-container matColumnDef="claseReclutamiento">
       <mat-header-cell *matHeaderCellDef> Tipo de Reclutamiento</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.claseReclutamiento.clasesReclutamiento}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element?.tipoReclutamiento?.tipoReclutamiento}} </mat-cell>
     </ng-container>
 
 
