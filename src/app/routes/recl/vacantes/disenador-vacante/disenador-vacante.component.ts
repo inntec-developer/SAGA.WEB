@@ -5,13 +5,15 @@ import { ActivatedRoute,Router} from '@angular/router/';
 import {Http} from '@angular/http';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {ToasterService,ToasterConfig} from 'angular2-toaster';
+import { MatIconModule} from '@angular/material';
+//import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-disenador-vacante',
   templateUrl: './disenador-vacante.component.html',
   styleUrls: ['./disenador-vacante.component.scss'],
-  providers:[CatalogoConfiguracionService,ConfiguracionService]
+  providers:[CatalogoConfiguracionService,ConfiguracionService],
 })
 export class DisenadorVacanteComponent implements OnInit {
 public General : any[];
