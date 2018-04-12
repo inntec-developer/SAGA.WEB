@@ -32,7 +32,6 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     showCloseButton: true
 });
 
-
   constructor(
           private service: CatalogoConfiguracionService
           ,private http: Http
