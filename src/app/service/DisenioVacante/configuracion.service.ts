@@ -12,11 +12,13 @@ import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
 
 import { ApiConection } from '../api-conection.service';
-
+console.log('hola mundo')
 @Injectable()
-export class Requis {
+export class ConfiguracionService {
 // Url de servicios.
-private Url = ApiConection.ServiceUrl+ApiConection.getRequis;
+private Url = ApiConection.ServiceUrl+ApiConection.setResumen;
+private Url2 = ApiConection.ServiceUrl+ApiConection.setDetalle;
+
 
 // Error.
 private handleError(error: any) {
@@ -29,10 +31,18 @@ private handleError(error: any) {
 
 constructor(private http: Http) {  }
 
-getRequis(): Observable<any> { 
-   return this.http.get(this.Url)
+SetDetalle(RequiID:string,Idcampo:number,detalle:boolean): Observable<any> {
+   return this.http.get(this.Url2 + '?Requi='+RequiID+'&Idcampo='+Idcampo+'&detalle='+detalle)
        .map(result => result.json())
        .catch(this.handleError);
 }
+
+SetResumen(RequiID:string,Idcampo:number,detalle:boolean): Observable<any> {
+   return this.http.get(this.Url + '?Requi='+RequiID+'&Idcampo='+Idcampo+'&resumen='+detalle)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+
 
 }

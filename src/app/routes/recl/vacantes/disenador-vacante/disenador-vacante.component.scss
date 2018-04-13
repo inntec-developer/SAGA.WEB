@@ -1,7 +1,29 @@
+
+
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.switch input:checked + span  {
+    background-color: #72bf72 !important;
+    border-color: green !important;
+    transition: all .5s !important;
+}
+
 .material-switch > input[type="checkbox"] {
        display: none;
    }
-
+.verde{
+  background-color: green;
+}
    .material-switch > label {
        cursor: pointer;
        height: 0px;
@@ -44,4 +66,8 @@
    .material-switch > input[type="checkbox"]:checked + label::after {
        background: inherit;
        left: 20px;
+   }
+
+   .modal-content {
+       top: 100px;
    }
