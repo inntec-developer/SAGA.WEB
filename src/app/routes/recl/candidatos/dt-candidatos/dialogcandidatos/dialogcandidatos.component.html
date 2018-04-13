@@ -5,8 +5,8 @@
                 <a class="float-right text-muted" (click)="favContact2=!favContact2">
                     <em class="fa" [ngClass]="favContact2 ? 'fa fa-unlock' : 'fa fa-lock'" style="color: #CC2A2A;"></em>
                 </a>
-            </div>
-            <div class="card-body text-center">
+          </div>
+          <div class="card-body text-center">
                 <div class="py-4">
                   <img class="img-fluid rounded-circle img-thumbnail thumb96" src="assets/img/user/02.jpg" alt="Contact" />
                 </div>
@@ -23,16 +23,54 @@
                 <div class="my-3" *ngFor="let tel of data[0].candidato.telefonos">
                   <strong>Telefonos:</strong> <strong class="text-success">{{tel?.telefono}}</strong>
                 </div>
-                <div class="text-center">
-                  <button class="btn btn-sm btn-labeled btn-outline btn-success mb-2" type="button">
-                  <span class="btn-label"><i class="fa fa-check"></i>
-                  </span>Apartar</button>
-                  <button class="btn btn-sm btn-labeled btn-outline btn-info mb-2" type="button">
-                    <span class="btn-label"><i class="fa fa-exclamation"></i>
-                  </span>Liberar</button>
+          </div>
+          <div class="card-body text-center bg-gray-dark">
+                <div class="row">
+                  <div class="col-md-8">
+
+                  </div>
+                    <div class="col-8">
+                        <h3 class="m-0">Juan Pablo Cervantes Lomeli</h3>
+                        <p class="m-0">Te restan 10 hrs.</p>
+                    </div>
                 </div>
             </div>
         </div>
+        <mat-accordion class="example-headers-align">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-list-ul" style="color: #2874A6;"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              <label class="text-primary">Mis vacantes</label>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-table #table [dataSource]="dataSourcev">
+
+            <ng-container matColumnDef="Vacante">
+              <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
+              <mat-cell *matCellDef="let vacantes"> {{vacantes.vBtra}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Accion">
+              <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let vacantes">
+                  <button class="mb-sm btn-sm btn btn-warning btn-outline" type="button" matTooltip="Detalle">
+                    <em class="fa fa-eye"></em></button>
+                    <button class="mb-sm btn-sm btn btn-success btn-outline" type="button" matTooltip="Apartar">
+                      <em class="fa fa-thumbs-o-up"></em></button>
+                      <button class="mb-sm btn-sm btn btn-danger btn-outline" type="button" matTooltip="Liberar">
+                        <em class="fa fa-thumbs-o-down"></em></button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsVacantes"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumnsVacantes;"></mat-row>
+          </mat-table>
+        </mat-expansion-panel>
+        </mat-accordion>
+        <br>
         <mat-accordion class="example-headers-align">
         <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
