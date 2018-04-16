@@ -48,10 +48,9 @@
 
     <!-- Accion -->
     <ng-container matColumnDef="accion">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </mat-header-cell>
         <mat-cell *matCellDef="let candidatos">
-          <button class="mb-sm btn-sm btn btn-green btn-outline" type="button" (click)="openDialog(candidatos.idCandidato)">
-            Detalle
+          <button class="mb-sm btn-sm btn btn-warning btn-outline" type="button" (click)="openDialog(candidatos.idCandidato)">
             <em class="fa fa-eye"></em></button>
       </mat-cell>
     </ng-container>

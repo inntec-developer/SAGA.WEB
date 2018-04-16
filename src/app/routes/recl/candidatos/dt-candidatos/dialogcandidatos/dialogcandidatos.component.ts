@@ -39,6 +39,7 @@ export class DialogcandidatosComponent implements OnInit {
       .subscribe(vacantes => {
         this.dataSourcev =  new MatTableDataSource(vacantes);
       })
+      console.log(data);
     }
 
   onNoClick(): void {

@@ -2,16 +2,14 @@
     <div class="col-lg-4">
         <div class="card card-default">
           <div class="card-header">
-                <a class="float-right text-muted" (click)="favContact2=!favContact2">
-                    <em class="fa" [ngClass]="favContact2 ? 'fa fa-unlock' : 'fa fa-lock'" style="color: #CC2A2A;"></em>
-                </a>
+                <a class="float-right text-muted" (click)="favContact2=!favContact2"></a>
           </div>
           <div class="card-body text-center">
                 <div class="py-4">
                   <img class="img-fluid rounded-circle img-thumbnail thumb96" src="assets/img/user/02.jpg" alt="Contact" />
                 </div>
                 <h3 class="m-0 text-bold">{{data[0]?.candidato?.nombre}} {{data[0]?.candidato?.apellidoPaterno}} {{data[0]?.candidato?.apellidoMaterno}}</h3>
-                <div class="my-3">
+                <div class="my-3 text-left">
                     <p>{{data[0]?.aboutMe[0]?.acercaDeMi}}</p>
                 </div>
                 <div class="col-md-12">
@@ -26,10 +24,10 @@
           </div>
           <div class="card-body text-center bg-gray-dark">
                 <div class="row">
-                  <div class="col-md-8">
-
+                  <div class="col-md-2 text-center">
+                    <mat-icon>lock_outline</mat-icon>
                   </div>
-                    <div class="col-8">
+                    <div class="col-md-10">
                         <h3 class="m-0">Juan Pablo Cervantes Lomeli</h3>
                         <p class="m-0">Te restan 10 hrs.</p>
                     </div>
@@ -57,11 +55,14 @@
               <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
                 <mat-cell *matCellDef="let vacantes">
                   <button class="mb-sm btn-sm btn btn-warning btn-outline" type="button" matTooltip="Detalle">
-                    <em class="fa fa-eye"></em></button>
-                    <button class="mb-sm btn-sm btn btn-success btn-outline" type="button" matTooltip="Apartar">
-                      <em class="fa fa-thumbs-o-up"></em></button>
-                      <button class="mb-sm btn-sm btn btn-danger btn-outline" type="button" matTooltip="Liberar">
-                        <em class="fa fa-thumbs-o-down"></em></button>
+                    <em class="fa fa-eye"></em>
+                  </button>
+                  <button class="mb-sm btn-sm btn btn-success btn-outline" type="button" matTooltip="Apartar">
+                      <em class="fa fa-thumbs-o-up"></em>
+                  </button>
+                  <button class="mb-sm btn-sm btn btn-danger btn-outline" type="button" matTooltip="Liberar">
+                        <em class="fa fa-thumbs-o-down"></em>
+                  </button>
               </mat-cell>
             </ng-container>
 
@@ -151,7 +152,8 @@
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
-                <mat-icon><em class="fa fa-user" style="color: #2874A6;"></em></mat-icon>
+                <mat-icon style="color: #2874A6;">account_circle
+                </mat-icon>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row">
@@ -164,7 +166,7 @@
             </div>
             <div class="row">
               <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Estado civil: </strong> {{data[0]?.candidato?.estadoCivil}}
+                  <strong class="text-primary">Estado civil: </strong> {{data[0]?.candidato?.estadoCivil?.estadoCivil}}
               </div>
               <div class="col-md-6 text-muted">
                   <strong class="text-primary">Puede viajar:  </strong>
@@ -179,7 +181,7 @@
                   <strong *ngIf="!data[0].candidato.esDiscapacitado">NO</strong>
               </div>
               <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Tipo de discapacidad: </strong> {{data[0]?.candidato?.tipoDiscapacidad}}
+                  <strong class="text-primary">Tipo de discapacidad: </strong> {{data[0]?.candidato?.tipoDiscapacidad?.tipoDiscapacidad}}
               </div>
             </div>
             <div class="row">
@@ -189,7 +191,7 @@
                   <strong *ngIf="!data[0].candidato.tieneLicenciaConducir">NO</strong>
               </div>
               <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Tipo de Licencia: </strong> {{data[0]?.candidato?.tipoLicencia}}
+                  <strong class="text-primary">Tipo de Licencia: </strong> {{data[0]?.candidato?.tipoLicencia?.tipoLicencia}}
               </div>
             </div>
             <div class="row">
@@ -405,7 +407,7 @@
               </div>
               <div class="row">
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Grado estudio: </strong> {{formacion?.gradosEstudio}}
+                  <strong class="text-primary">Grado estudio: </strong> {{data[0]?.formaciones[0]?.gradosEstudio?.gradoEstudio}}
                 </div>
                 <div class="col-md-6 text-muted">
                   <strong class="text-primary">Estado estudio : </strong> {{formacion?.estadoEstudio}}
