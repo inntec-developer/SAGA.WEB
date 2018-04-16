@@ -38,6 +38,7 @@ public datos : any[]
     'vBtra',
     'experiencia',
     'nombre',
+    'actividad',
     'claseReclutamiento',
     'accion',
   ];
@@ -65,5 +66,5 @@ export interface Element {
   experiencia: string;
   nombre: string;
   claseReclutamiento:string;
-
+  actividad:string;
 }

@@ -49,10 +49,16 @@
       <mat-cell *matCellDef="let element"> {{element?.area?.nombre}} </mat-cell>
     </ng-container>
 
+    <!-- Actividad Empresas <Actividad a realizar> Column -->
+    <ng-container matColumnDef="actividad">
+      <mat-header-cell *matHeaderCellDef> Actividad a realizar</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.actividad}} </mat-cell>
+    </ng-container>
+
     <!-- Actividad Empresas <Tipo de Reclutamiento> Column -->
     <ng-container matColumnDef="claseReclutamiento">
       <mat-header-cell *matHeaderCellDef> Tipo de Reclutamiento</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element?.tipoReclutamiento?.tipoReclutamiento}} </mat-cell>
+      <mat-cell style="margin:10px"  *matCellDef="let element"> {{element?.tipoReclutamiento?.tipoReclutamiento}} </mat-cell>
     </ng-container>
 
 
@@ -62,7 +68,8 @@
       <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button class=" mb-sm btn-sm btn btn-primary btn-outline" (click)="Onclick(element.id)" type="button" placement="bottom" tooltip="Configurar Vacante">
-            <em class="fa fa-cogs"></em>
+
+            <mat-icon>settings_input_component</mat-icon>
           </button>
       </mat-cell>
     </ng-container>

@@ -12,6 +12,7 @@ import {ToasterService,ToasterConfig} from 'angular2-toaster';
   styleUrls: ['./disenador-vacante.component.scss'],
   providers:[CatalogoConfiguracionService,ConfiguracionService],
 })
+
 export class DisenadorVacanteComponent implements OnInit {
 public General : any[];
 public Contrato : any[];
@@ -82,7 +83,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     this.Config.SetDetalle(this.Requi,id,this.bol)
     .subscribe( data => {
       this.Mensaje = data;
-      this.pop(this.Mensaje.mensaje,this.Mensaje.bandera,this.bol,titulo,'Detalle');
+      this.pop(data.mensaje,data.bandera,this.bol,titulo,'Detalle');
       console.log(this.Mensaje)
     });
   }
@@ -95,7 +96,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     this.Config.SetResumen(this.Requi,id,this.bol)
     .subscribe( data => {
       this.Mensaje = data;
-      this.pop(this.Mensaje.mensaje,this.Mensaje.bandera,this.bol,titulo,'Resumen');
+      this.pop(data.mensaje,data.bandera,this.bol,titulo,'Resumen');
     });
   }
 
