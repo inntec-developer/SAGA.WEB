@@ -39,13 +39,17 @@ export class ApiConection {
 
   /*Vacantes*/
   public static getRequis = '/dvacante/get';
+  public static setDetalle = '/dvacante/setDetalle';
+  public static setResumen = '/dvacante/setResumen';
   public static getGeneral = '/dvacante/getGenerales';
   public static getContrato = '/dvacante/getContrato';
   public static getPuestoReclutar = '/dvacante/getPuestoReclutar';
   public static getHorario = '/dvacante/getHorario';
   public static getsueldo = '/dvacante/getsueldo';
   public static getOtros = '/dvacante/getOtros';
-  public static setDetalle = '/dvacante/setDetalle';
-  public static setResumen = '/dvacante/setResumen';
+  public static getActividad = '/dvacante/getActividad';
+  public static getBeneficio = '/dvacante/getBeneficio';
+  public static getDireccion = '/dvacante/getDireccion';
+  public static getTelefono = '/dvacante/getTelefono';
 
 }
