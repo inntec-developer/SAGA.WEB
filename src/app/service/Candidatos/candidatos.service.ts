@@ -30,6 +30,7 @@ private UrlDiscapacidad = ApiConection.ServiceUrl+ApiConection.Discapacidad;
 private UrlTpLicencia = ApiConection.ServiceUrl+ApiConection.TpLicencia;
 private UrlNivelEstudios = ApiConection.ServiceUrl+ApiConection.NivelEstudio;
 private UrlIdiomas = ApiConection.ServiceUrl+ApiConection.Idiomas;
+private UrlVacantes = ApiConection.ServiceUrl+ApiConection.Vacantes;
 
 // Error.
 private handleError(error: any) {
@@ -133,5 +134,10 @@ getpostulaciones(Id: any): Observable<any> { // Obtenemos las postulaciones del 
        .catch(this.handleError);
 }
 
+getvacantes(){
+  return this.http.get(this.UrlVacantes)
+        .map(result => result.json())
+        .catch(this.handleError);
+}
 
 }
