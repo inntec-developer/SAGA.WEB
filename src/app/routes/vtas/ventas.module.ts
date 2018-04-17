@@ -43,11 +43,14 @@ import { DtBeneficiosComponent } from './requisiciones/components/dt-beneficios/
 import { DtCompetenciaCardinalComponent } from './requisiciones/components/competencias/dt-competencia-cardinal/dt-competencia-cardinal.component';
 import { DtCompetenciaAreaComponent } from './requisiciones/components/competencias/dt-competencia-area/dt-competencia-area.component';
 import { DtCompetenciaGerencialComponent } from './requisiciones/components/competencias/dt-competencia-gerencial/dt-competencia-gerencial.component';
+import { DtCrearRequisicionComponent } from './requisiciones/components/dt-crear-requisicion/dt-crear-requisicion.component';
+import { DtRequisicionComponent } from './requisiciones/components/dt-requisicion/dt-requisicion.component';
 
 
 const routes: Routes = [
     { path: 'prospecto', component: ProspectoComponent },
     { path: 'requisicion', component: RequisicionComponent },
+    { path: 'crearRequisicion', component: DtCrearRequisicionComponent },
     { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent},
     { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent},
 ];
@@ -88,7 +91,9 @@ const routes: Routes = [
         DtBeneficiosComponent,
         DtCompetenciaCardinalComponent,
         DtCompetenciaAreaComponent,
-        DtCompetenciaGerencialComponent
+        DtCompetenciaGerencialComponent,
+        DtCrearRequisicionComponent,
+        DtRequisicionComponent
     ],
     entryComponents: [DialogdamfoComponent],
     exports: [
