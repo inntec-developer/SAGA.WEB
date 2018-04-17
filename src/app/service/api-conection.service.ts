@@ -11,6 +11,10 @@ export class ApiConection {
 
   // Agregar lsa conecciones necesarias en las cuales se hara referencia.
 
+  /*Catalogos*/
+  public static GetDocumentosDamsa = 'Catalogos/getDocDamsa';
+  public static GetPrestacionesLey = 'Catalogos/getPrestacionesLey';
+
   /*Reclutamiento*/
   public static Damfo290GetById = 'Damfo290/getById?id=';
   public static GetViewDamfos = "Damfo290/getViewDamfos";
