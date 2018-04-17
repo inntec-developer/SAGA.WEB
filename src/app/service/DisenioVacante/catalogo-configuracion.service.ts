@@ -16,12 +16,16 @@ import { ApiConection } from '../api-conection.service';
 @Injectable()
 export class CatalogoConfiguracionService {
 // Url de servicios.
-private Url = ApiConection.ServiceUrl+ApiConection.getGeneral;
-private Url2 = ApiConection.ServiceUrl+ApiConection.getContrato;
-private Url3 = ApiConection.ServiceUrl+ApiConection.getPuestoReclutar;
-private Url4 = ApiConection.ServiceUrl+ApiConection.getHorario;
-private Url5 = ApiConection.ServiceUrl+ApiConection.getsueldo;
-private Url6 = ApiConection.ServiceUrl+ApiConection.getOtros;
+private UrlGeneral = ApiConection.ServiceUrl+ApiConection.getGeneral;
+private UrlContrato = ApiConection.ServiceUrl+ApiConection.getContrato;
+private UrlPuestoReclutar = ApiConection.ServiceUrl+ApiConection.getPuestoReclutar;
+private UrlHorario = ApiConection.ServiceUrl+ApiConection.getHorario;
+private Urlsueldo = ApiConection.ServiceUrl+ApiConection.getsueldo;
+private UrlOtros = ApiConection.ServiceUrl+ApiConection.getOtros;
+private UrlActividad = ApiConection.ServiceUrl+ApiConection.getActividad;
+private UrlBeneficio = ApiConection.ServiceUrl+ApiConection.getBeneficio;
+private UrlDireccion = ApiConection.ServiceUrl+ApiConection.getDireccion;
+private UrlTelefono = ApiConection.ServiceUrl+ApiConection.getTelefono;
 
 // Error.
 private handleError(error: any) {
@@ -35,37 +39,62 @@ private handleError(error: any) {
 constructor(private http: Http) {  }
 
 getGeneral(RequiID:string): Observable<any> {
-   return this.http.get(this.Url + '?Requi='+RequiID)
+   return this.http.get(this.UrlGeneral + '?Requi='+RequiID)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 getContrato(RequiID:string): Observable<any> {
-   return this.http.get(this.Url2 + '?Requi='+RequiID)
+   return this.http.get(this.UrlContrato + '?Requi='+RequiID)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 getPuestoReclutar(RequiID:string): Observable<any> {
-   return this.http.get(this.Url3 + '?Requi='+RequiID)
+   return this.http.get(this.UrlPuestoReclutar + '?Requi='+RequiID)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 getHorario(RequiID:string): Observable<any> {
-   return this.http.get(this.Url4 + '?Requi='+RequiID)
+   return this.http.get(this.UrlHorario + '?Requi='+RequiID)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 getsueldo(RequiID:string): Observable<any> {
-   return this.http.get(this.Url5 + '?Requi='+RequiID)
+   return this.http.get(this.Urlsueldo + '?Requi='+RequiID)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 getOtros(RequiID:string): Observable<any> {
-   return this.http.get(this.Url6 + '?Requi='+RequiID)
+   return this.http.get(this.UrlOtros + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+
+getActividad(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlActividad + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getDireccion(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlDireccion + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getTelefono(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlTelefono + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getBeneficio(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlBeneficio + '?Requi='+RequiID)
        .map(result => result.json())
        .catch(this.handleError);
 }

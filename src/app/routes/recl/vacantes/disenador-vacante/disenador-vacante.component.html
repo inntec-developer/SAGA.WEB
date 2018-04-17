@@ -368,6 +368,286 @@
   <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
+        Actividades y Observaciones
+      </mat-panel-title>
+      <mat-panel-description>
+        Informacion de la actividad de la vacante
+        <mat-icon>note_add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Actividad">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="table-responsive">
+
+                      <table class="table table-hover"  >
+                          <thead>
+                              <tr>
+                                  <th colspan="2">{{item.nombre}}</th>
+
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Resumen</td>
+                                  <td>
+                                    <label  class="switch switch-lg">
+                                      <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                        <ng-template #pintaSI>
+                                          <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <ng-template #pintaNo>
+                                          <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <span></span>
+                                    </label>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Detalle</td>
+                                  <td>
+                                      <label class="switch switch-lg">
+                                        <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                          <ng-template #pintaSId>
+                                            <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                          <ng-template #pintaNod>
+                                          <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                        <span></span>
+                                      </label>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Atras</button>
+      <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Beneficio
+      </mat-panel-title>
+      <mat-panel-description>
+        Informacion de los Beneficios de la vacante
+        <mat-icon>note_add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Beneficio">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="table-responsive">
+
+                      <table class="table table-hover"  >
+                          <thead>
+                              <tr>
+                                  <th colspan="2">{{item.nombre}}</th>
+
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Resumen</td>
+                                  <td>
+                                    <label  class="switch switch-lg">
+                                      <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                        <ng-template #pintaSI>
+                                          <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <ng-template #pintaNo>
+                                          <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <span></span>
+                                    </label>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Detalle</td>
+                                  <td>
+                                      <label class="switch switch-lg">
+                                        <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                          <ng-template #pintaSId>
+                                            <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                          <ng-template #pintaNod>
+                                          <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                        <span></span>
+                                      </label>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Atras</button>
+      <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Direccion
+      </mat-panel-title>
+      <mat-panel-description>
+        Informacion de las direcciones
+        <mat-icon>note_add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Direccion">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="table-responsive">
+
+                      <table class="table table-hover"  >
+                          <thead>
+                              <tr>
+                                  <th colspan="2">{{item.nombre}}</th>
+
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Resumen</td>
+                                  <td>
+                                    <label  class="switch switch-lg">
+                                      <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                        <ng-template #pintaSI>
+                                          <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <ng-template #pintaNo>
+                                          <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <span></span>
+                                    </label>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Detalle</td>
+                                  <td>
+                                      <label class="switch switch-lg">
+                                        <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                          <ng-template #pintaSId>
+                                            <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                          <ng-template #pintaNod>
+                                          <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                        <span></span>
+                                      </label>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Atras</button>
+      <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 9" (opened)="setStep(9)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Telefonos
+      </mat-panel-title>
+      <mat-panel-description>
+        Informacion de los Telefonos
+        <mat-icon>note_add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngFor="let item of Telefono">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="table-responsive">
+
+                      <table class="table table-hover"  >
+                          <thead>
+                              <tr>
+                                  <th colspan="2">{{item.nombre}}</th>
+
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Resumen</td>
+                                  <td>
+                                    <label  class="switch switch-lg">
+                                      <div *ngIf="item.resumen; then pintaSI else pintaNo"></div>
+                                        <ng-template #pintaSI>
+                                          <input checked id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <ng-template #pintaNo>
+                                          <input  id="Resumen_{{item.id}}" (click)="SetResumen(item.id,item.nombre)" type="checkbox"  />
+                                        </ng-template>
+                                        <span></span>
+                                    </label>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Detalle</td>
+                                  <td>
+                                      <label class="switch switch-lg">
+                                        <div *ngIf="item.detalle; then pintaSId else pintaNod"></div>
+                                          <ng-template #pintaSId>
+                                            <input checked  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                          <ng-template #pintaNod>
+                                          <input  id="Detalle_{{item.id}}" (click)="SetDetalle(item.id,item.nombre)" type="checkbox"  />
+                                          </ng-template>
+                                        <span></span>
+                                      </label>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Atras</button>
+      <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 10" (opened)="setStep(10)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         Prestaciones
       </mat-panel-title>
       <mat-panel-description>

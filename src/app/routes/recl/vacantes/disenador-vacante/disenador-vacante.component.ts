@@ -20,6 +20,10 @@ public PuestoReclutar : any[];
 public Horario : any[];
 public sueldo : any[];
 public Otros : any[];
+public Actividad : any[];
+public Beneficio : any[];
+public Direccion : any[];
+public Telefono : any[];
 public Requi : string;
 public Mensaje :string;
 public variable:boolean = false;
@@ -45,8 +49,17 @@ toasterconfig: ToasterConfig = new ToasterConfig({
         }
 
   ngOnInit() {
-    this.Requi = this.route.queryParams._value.Requi;
-    console.log(this.Requi);
+    // this.route.params.subscribe(params => {
+    //     this.Requi = params['Requi'];
+    // });
+    this.route.queryParams
+      .filter(params => params.Requi)
+      .subscribe(params => {
+        this.Requi = params.Requi;
+        console.log(this.Requi); // popular
+      });
+  //  this.Requi = this.route.queryParams._value.Requi;
+
     this.service.getGeneral(this.Requi)
     .subscribe( data => {
       this.General = data;
@@ -76,23 +89,50 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     .subscribe( data => {
       this.Otros = data;
     });
+
+    this.service.getActividad(this.Requi)
+    .subscribe( data => {
+      this.Actividad = data;
+    });
+
+    this.service.getBeneficio(this.Requi)
+    .subscribe( data => {
+      this.Beneficio = data;
+    });
+
+    this.service.getDireccion(this.Requi)
+    .subscribe( data => {
+      this.Direccion = data;
+    });
+
+    this.service.getTelefono(this.Requi)
+    .subscribe( data => {
+      this.Telefono = data;
+    });
   }
 
   SetDetalle(id,titulo){
-    this.bol = document.getElementById('Detalle_' + id).checked;
-    this.Config.SetDetalle(this.Requi,id,this.bol)
+
+
+    // let e2 = document.getElementById('Detalle_' + id);
+    // let algo = (<HTMLInputElement>e2).checked;
+
+    let e = document.getElementById('Detalle_' + id);
+    let bol = e['checked'];
+
+
+    this.Config.SetDetalle(this.Requi,id,bol)
     .subscribe( data => {
       this.Mensaje = data;
-      this.pop(data.mensaje,data.bandera,this.bol,titulo,'Detalle');
+      this.pop(data.mensaje,data.bandera,bol,titulo,'Detalle');
       console.log(this.Mensaje)
     });
   }
 
 
-
   SetResumen(id,titulo){
-
-     this.bol = document.getElementById('Resumen_' + id).checked;
+    let e = document.getElementById('Detalle_' + id);
+    this.bol = e['checked'];
     this.Config.SetResumen(this.Requi,id,this.bol)
     .subscribe( data => {
       this.Mensaje = data;

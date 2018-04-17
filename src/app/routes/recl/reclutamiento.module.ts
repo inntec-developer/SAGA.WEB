@@ -63,7 +63,8 @@ const routes: Routes = [
     {path: '290', component: Damfo290Component},
     {path: 'candidatos', component: CandidatosComponent},
     {path: 'vacantes', component: VacantesComponent},
-    {path: 'disenador', component: DisenadorVacanteComponent}
+    {path: 'disenador', component: DisenadorVacanteComponent},
+    { path: 'configuracionVacante/:Requi', component: DisenadorVacanteComponent}
 ];
 
 @NgModule({

@@ -52,6 +52,7 @@ public datos : any[]
 
   Onclick(id:string){
     this.router.navigate(['/reclutamiento/disenador'], { queryParams: { Requi: id } });
+  //  this.router.navigate(['/reclutamiento/configuracionVacante',id],{skipLocationChange:true});
     //this.router.navigate(['/systems'], { queryParams: { x: x } });
    //window.location.href = '/reclutamiento/disenador';
   }
