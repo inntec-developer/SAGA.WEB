@@ -18,7 +18,9 @@ export class DialogcandidatosComponent implements OnInit {
   Genero: string;
   idcandidato: any;
 
+  displayedColumnsVacantes = ['Vacante', 'Accion']
   displayedColumns = ['Vacante', 'Estatus'];
+  public dataSourcev = new MatTableDataSource(<any>[]);
   public dataSource = new MatTableDataSource(<any>[]);
 
   applyFilter(filterValue: string) {
@@ -30,9 +32,14 @@ export class DialogcandidatosComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogcandidatosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private service: CandidatosService) {
       this.service.getpostulaciones(data[0].candidatoId)
-      .subscribe(data => {
-        this.dataSource =  new MatTableDataSource(data);
+      .subscribe(postulaciones => {
+        this.dataSource =  new MatTableDataSource(postulaciones);
       })
+      this.service.getvacantes()
+      .subscribe(vacantes => {
+        this.dataSourcev =  new MatTableDataSource(vacantes);
+      })
+      console.log(data);
     }
 
   onNoClick(): void {
@@ -62,4 +69,8 @@ export class DialogcandidatosComponent implements OnInit {
   export interface postulaciones {
     Vacante: string;
     Estatus: string;
+  }
+
+  export interface vacantes {
+    Vacante:   string;
   }
