@@ -36,6 +36,8 @@ export class ApiConection {
   public static NivelEstudio = 'Candidatos/getnivelestudio';
   public static Idiomas = 'Candidatos/getidiomas';
   public static Vacantes = 'Candidatos/getvacantes';
+  public static Apartar = 'Candidatos/postapartado';
+  public static GetEstatus = 'Candidatos/getestatuscandidato';
 
   /*Vacantes*/
   public static getRequis = '/dvacante/get';
