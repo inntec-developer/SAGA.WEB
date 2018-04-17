@@ -19,8 +19,6 @@ export class DtDireccionComponent implements OnInit,  AfterViewInit {
   ngAfterContentChecked(){
     if(this.Direcciones != null){
       this.cargarDirecciones(this.Direcciones);
-    }else{
-      console.log('Concha tu madre no hay datos en direcciones');
     }
   }
 

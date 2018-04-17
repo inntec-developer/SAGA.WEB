@@ -9,9 +9,9 @@
     <small>Caracteristicas de DAM-FO-290</small>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <button (click)="print()">Imprimir</button>
-</div>
+</div> -->
 <div id="print-section">
   <div class="row">
     <div class="col-md-4">
@@ -266,6 +266,85 @@
                 <h4><p>{{damfo290?.sueldoMaximo / 30.6 | currency:"MX $"}}</p></h4>
               </div>
             </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="ico icon-docs"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Documentos DAMSA
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+              <li *ngFor="let x of documentosDamsa"><small>{{x.documentoDamsa}}</small></li>
+            </ol>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="ico icon-docs"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Documentos Cliente
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+              <li *ngFor="let x of damfo290?.documentosCliente"><small>{{x.documento}}</small></li>
+            </ol>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-legal"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Prestaciones de Ley
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+              <li *ngFor="let x of prestacionesLey"><small>{{x.prestacionLey}}</small></li>
+            </ol>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-gift"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Prestaciones Superiores
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+              <li *ngFor="let x of damfo290?.prestacionesCliente"><small>{{x.prestamo}}</small></li>
+            </ol>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

@@ -23,7 +23,6 @@ export class DtContactosComponent implements OnInit {
 
   cargarContactos(data){
     if(!this.getPhone){
-      console.log(this.Contactos);
       this.dataSource =  new MatTableDataSource(data);
       this.getPhone = true;
     }

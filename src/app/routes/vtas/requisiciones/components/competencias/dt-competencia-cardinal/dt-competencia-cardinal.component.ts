@@ -22,7 +22,6 @@ export class DtCompetenciaCardinalComponent implements OnInit {
 
   cargarCompetencia(data){
     if(!this.getCompetencia){
-      console.log(data)
       this.dataSource = new MatTableDataSource(data);
       this.getCompetencia  = true;
     }
