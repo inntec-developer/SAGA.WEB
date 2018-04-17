@@ -1,11 +1,12 @@
+
 /* Structure */
-.dtDamfo-container {
+.dt-container {
   display: flex;
   flex-direction: column;
   min-width: 100%;
 }
 
-.dtDamfo-header {
+.dt-header {
   min-height: 64px;
   padding: 8px 24px 0;
 }
@@ -21,12 +22,17 @@
   max-height:100%;;
 }
 
+.mat-header-cell {
+    font-weight: bold;
+    color: whitesmoke;
+}
+
 .mat-cell{
   font-size: 10px;
 }
 
 .mat-header-row {
-    min-height: 40px;
+    min-height: auto;
     background-color: dodgerblue;
 }
 
@@ -45,6 +51,19 @@
   align-items: center;
   padding: 0px 7px;
   box-sizing: border-box;
+}
+
+.mat-row {
+    min-height: 25px;
+}
+
+
+.mat-cell-right{
+  text-align: right;
+  margin-right: 15px;
+}
+.mat-cell-center{
+  text-align: center;
 }
 
 /* ---------------------------------------------------------------------- */

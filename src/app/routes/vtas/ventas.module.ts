@@ -33,8 +33,16 @@ import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dia
 import { DireccionautoComponent } from './requisiciones/components/direccionauto/direccionauto.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ViewdamfoComponent } from './requisiciones/components/viewdamfo/viewdamfo.component';
-
-
+import { DtDireccionComponent } from './requisiciones/components/dt-direccion/dt-direccion.component';
+import { DtTelefonosComponent } from './requisiciones/components/dt-telefonos/dt-telefonos.component';
+import { DtContactosComponent } from './requisiciones/components/dt-contactos/dt-contactos.component';
+import { DtHorariosComponent } from './requisiciones/components/dt-horarios/dt-horarios.component';
+import { DtPsicometriasDamsaComponent } from './requisiciones/components/dt-psicometrias-damsa/dt-psicometrias-damsa.component';
+import { DtPsicometriasClienteComponent } from './requisiciones/components/dt-psicometrias-cliente/dt-psicometrias-cliente.component';
+import { DtBeneficiosComponent } from './requisiciones/components/dt-beneficios/dt-beneficios.component';
+import { DtCompetenciaCardinalComponent } from './requisiciones/components/competencias/dt-competencia-cardinal/dt-competencia-cardinal.component';
+import { DtCompetenciaAreaComponent } from './requisiciones/components/competencias/dt-competencia-area/dt-competencia-area.component';
+import { DtCompetenciaGerencialComponent } from './requisiciones/components/competencias/dt-competencia-gerencial/dt-competencia-gerencial.component';
 
 
 const routes: Routes = [
@@ -69,7 +77,18 @@ const routes: Routes = [
         DtDamfoComponent,
         DialogdamfoComponent,
         DireccionautoComponent,
-        ViewdamfoComponent
+        ViewdamfoComponent,
+        DtDireccionComponent,
+        DtTelefonosComponent,
+        DtDamfoComponent,
+        DtContactosComponent,
+        DtHorariosComponent,
+        DtPsicometriasDamsaComponent,
+        DtPsicometriasClienteComponent,
+        DtBeneficiosComponent,
+        DtCompetenciaCardinalComponent,
+        DtCompetenciaAreaComponent,
+        DtCompetenciaGerencialComponent
     ],
     entryComponents: [DialogdamfoComponent],
     exports: [

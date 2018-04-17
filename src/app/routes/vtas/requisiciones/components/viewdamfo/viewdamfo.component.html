@@ -8,62 +8,292 @@
     Visaulizar DAM-FO-290
     <small>Caracteristicas de DAM-FO-290</small>
 </div>
+
 <div class="row">
-  <div class="col-md-4">
-    <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <em class="fa fa-user"></em>
-        </mat-panel-title>
-        <mat-panel-description>
-          Información General
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="row"><!--Agregar la información que ira en el panel-->
-        <form class="find-form">
-          <h4><p><small><strong>Nom. Comercial: </strong>{{damfo290?.cliente?.nombrecomercial}}</small></p></h4>
-          <h4><p><small><strong>Razón Social: </strong>{{damfo290?.cliente?.razonSocial}}</small></p></h4>
-          <h4><p><small><strong>RFC: </strong>{{damfo290?.cliente?.rfc}}</small></p></h4>
-          <h4><p><small><strong>Giro: </strong>{{damfo290?.cliente?.giroEmpresas?.giroEmpresa}}</small></p></h4>
-          <h4><p><small><strong>Actividad: </strong>{{damfo290?.cliente?.actividadEmpresas?.actividadEmpresa}}</small></p></h4>
-        </form>
-      </div>
-    </mat-expansion-panel>
-    </mat-accordion>
+  <button (click)="print()">Imprimir</button>
+</div>
+<div id="print-section">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-user"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Información General
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <h4><p><small><strong>Nom. Comercial: </strong>{{damfo290?.cliente?.nombrecomercial}}</small></p></h4>
+            <h4><p><small><strong>Razón Social: </strong>{{damfo290?.cliente?.razonSocial}}</small></p></h4>
+            <h4><p><small><strong>RFC: </strong>{{damfo290?.cliente?.rfc}}</small></p></h4>
+            <h4><p><small><strong>Giro: </strong>{{damfo290?.cliente?.giroEmpresas?.giroEmpresa}}</small></p></h4>
+            <h4><p><small><strong>Actividad: </strong>{{damfo290?.cliente?.actividadEmpresas?.actividadEmpresa}}</small></p></h4>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-4" >
+      <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <em class="fa fa-archive"></em>
+          </mat-panel-title>
+          <mat-panel-description>
+            Reclutamiento
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row"><!--Agregar la información que ira en el panel-->
+          <h4><p><small><strong>Tipo: </strong>{{damfo290?.tipoReclutamiento?.tipoReclutamiento}}</small></p></h4>
+          <h4><p><small><strong>Clase: </strong>{{damfo290?.claseReclutamiento?.clasesReclutamiento}}</small></p></h4>
+        </div>
+      </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-4">
+      <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <em class="fa fa-eye"></em>
+          </mat-panel-title>
+          <mat-panel-description>
+            Contrato
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row"><!--Agregar la información que ira en el panel-->
+          <h4><p><small><strong>Tipo: </strong>{{damfo290?.contratoInicial?.tipoContrato}}</small></p></h4>
+          <h4 *ngIf="damfo290?.contratoInicial?.id == 2"><p><small><strong>Días Prueba: </strong>{{damfo290?.tiempoContrato?.tiempo}}</small></p></h4>
+        </div>
+      </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </div>
-  <div class="col-md-4">
-    <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <em class="fa fa-archive"></em>
-        </mat-panel-title>
-        <mat-panel-description>
-          Reclutamiento
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="row"><!--Agregar la información que ira en el panel-->
-        <h4><p><small><strong>Tipo: </strong>{{damfo290?.tipoReclutamiento?.tipoReclutamiento}}</small></p></h4>
-        <h4><p><small><strong>Clase: </strong>{{damfo290?.claseReclutamiento?.clasesReclutamiento}}</small></p></h4>
-      </div>
-    </mat-expansion-panel>
-    </mat-accordion>
+  <br/>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- DIRECCIONES -->
+      <app-dt-direccion [Direcciones]="damfo290?.cliente?.direcciones"></app-dt-direccion>
+    </div>
   </div>
-  <div class="col-md-4">
-    <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <em class="fa fa-eye"></em>
-        </mat-panel-title>
-        <mat-panel-description>
-          Tipo Reclutamiento
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="row"><!--Agregar la información que ira en el panel-->
-      </div>
-    </mat-expansion-panel>
-    </mat-accordion>
+  <br/>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- TELEFONOS -->
+      <app-dt-telefonos [Telefonos]="damfo290?.cliente?.telefonos"></app-dt-telefonos>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-10">
+      <!-- CONTACTOS -->
+      <app-dt-contactos [Contactos]="damfo290?.cliente?.contactos"></app-dt-contactos>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-child"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Puesto a Reclutar
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <div class="col-lg-3 col-md-3">
+              <h4><p><small><strong>Nombre Perfil </strong>{{damfo290?.nombrePerfil}}</small></p></h4>
+              <h4><p><small><strong>Sexo: </strong>{{damfo290?.genero?.genero}}</small></p></h4>
+              <h4><p><small><strong>Edad Minima: </strong>{{damfo290?.edadMinima}}</small></p></h4>
+              <h4><p><small><strong>Edad Maxima: </strong>{{damfo290?.edadMaxima}}</small></p></h4>
+              <h4><p><small><strong>Estado Civil: </strong>{{damfo290?.estadoCivil?.estadoCivil}}</small></p></h4>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <h4><p><small><strong>Estudios / Escolaridades </strong></small></p></h4>
+              <h4><p><small><strong>Nivel: </strong>{{damfo290?.escolardadesPerfil[0]?.estadoEstudio?.estadoEstudio}}</small></p></h4>
+              <h4><p><small><strong>Escolaridades:  </strong></small></p></h4>
+              <ol>
+                  <li *ngFor="let x of damfo290?.escolardadesPerfil"><small>{{x.escolaridad.gradoEstudio}}</small></li>
+              </ol>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <h4><p><small><strong>Aptitudes:  </strong></small></p></h4>
+                    <ol>
+                        <li *ngFor="let x of damfo290?.aptitudesPerfil"><small>{{x.aptitud.aptitud}}</small></li>
+                    </ol>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <h4><p><small><strong>Experiencia:  </strong></small></p></h4>
+                <h4><p><small>{{damfo290?.experiencia}}</small></p></h4>
+
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <br/>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- HORARIOS -->
+      <app-dt-horarios [Horarios]="damfo290?.horariosPerfil"></app-dt-horarios>
+    </div>
+    <div class="col-md-6">
+      <!-- BENEFICIOS -->
+      <app-dt-beneficios [Beneficios]="damfo290?.beneficiosPerfil"></app-dt-beneficios>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-book"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Actividades
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+                <li *ngFor="let x of damfo290?.actividadesPerfil"><small>{{x.actividades}}</small></li>
+            </ol>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-book"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Observaciones
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+               <li *ngFor="let x of damfo290?.observacionesPerfil"><small>{{x.observaciones}}</small></li>
+           </ol>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-book"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Proceso
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <ol>
+               <li *ngFor="let x of damfo290?.procesoPerfil"><small>{{x.proceso}}</small></li>
+           </ol>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-dollar"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Sueldos
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+            <div class="row"><!--Agregar la información que ira en el panel-->
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>D&iacute;as Corte: </strong>{{damfo290?.diaCorte?.diaSemana}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>Tipo de Nomina: </strong>{{damfo290?.tipoNomina?.tipoDeNomina}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>D&iacute;as de Pago: </strong>{{damfo290?.diaPago?.diaSemana}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>Periodo de Pago: </strong>{{damfo290?.periodoPago?.periodoPago}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p *ngIf="damfo290?.periodoPago.id == 5"><small><strong>Especificaci&oacute;n: </strong>{{damfo290?.especifique}}</small></p></h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Sueldo mensual minimo </strong></small></p></h4>
+                <h4><p>{{damfo290?.sueldoMinimo | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo semanal minimo</strong></small></p></h4>
+                <h4><p>{{damfo290?.sueldoMinimo / 7 | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo diario minimo</strong></small></p></h4>
+                <h4><p>{{damfo290?.sueldoMinimo / 30.6 | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Sueldo mensual maximo </strong></small></p></h4>
+                <h4><p>{{damfo290?.sueldoMaximo | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo semanal maximo</strong></small></p></h4>
+                <h4><p>{{damfo290?.sueldoMaximo / 7 | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo diario maximo </strong></small></p></h4>
+                <h4><p>{{damfo290?.sueldoMaximo / 30.6 | currency:"MX $"}}</p></h4>
+              </div>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- PSICOMETRIAS DAMSA -->
+      <app-dt-psicometrias-damsa [Psicometrias]="damfo290?.psicometriasDamsa"></app-dt-psicometrias-damsa>
+    </div>
+    <div class="col-md-6">
+      <!-- PSICOMETRIA CLIENTE -->
+      <app-dt-psicometrias-cliente [Psicometrias]="damfo290?.psicometriasCliente"></app-dt-psicometrias-cliente>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-4 col-lg-4">
+      <!-- COMPTENCIAS CARDINALES -->
+      <app-dt-competencia-cardinal [Competencias]="damfo290?.competenciasCardinalPerfil"></app-dt-competencia-cardinal>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <!-- COMPETENCIAS POR AREA -->
+      <app-dt-competencia-area [Competencias]="damfo290?.competenciasAreaPerfil"></app-dt-competencia-area>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <!-- COMPETENCIAS GERENCIALES -->
+      <app-dt-competencia-gerencial [Competencias]="damfo290?.competetenciasGerencialPerfil"></app-dt-competencia-gerencial>
+    </div>
   </div>
 </div>

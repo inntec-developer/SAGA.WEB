@@ -27,7 +27,7 @@ export class DtDamfoComponent implements OnInit {
     private toasterService: ToasterService
   ) {
    }
-
+   //Mensaje
    toaster: any;
      toasterConfig: any;
      toasterconfig: ToasterConfig = new ToasterConfig({
@@ -36,7 +36,7 @@ export class DtDamfoComponent implements OnInit {
        showCloseButton: true,
        mouseoverTimerStop: true,
      });
-
+  //Crear el mensaje
    popToast(type, title, body ) {
 
      var toast : Toast = {
@@ -57,19 +57,15 @@ export class DtDamfoComponent implements OnInit {
   ngOnInit() {
     /** spinner starts on init */
     this.spinner.show();
-
-    setTimeout(() => {
-        /** spinner ends after 5 seconds */
-        this.service.getDamgo290().subscribe(data => {
-            this.dataSource = new MatTableDataSource(data);
-            this.damfo = data;
-            this.arrayDamfo = data;
-            this.pageCount = Math.round(this.damfo.length / this.rows);
-            this.TotalRecords = this.damfo.length;
-            this.paginador();
-          });
+    this.service.getDamgo290().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.damfo = data;
+        this.arrayDamfo = data;
+        this.pageCount = Math.round(this.damfo.length / this.rows);
+        this.TotalRecords = this.damfo.length;
+        this.paginador();
         this.spinner.hide();
-    },1700);
+      });
 
   }
 
@@ -78,6 +74,7 @@ export class DtDamfoComponent implements OnInit {
     this._Router.navigate(['/ventas/requisicionNueva', id], {skipLocationChange:true});
   }
   showDamfo(id){
+    //mandamos la información por medio de la URL sin que esta se muestre en la liga.
     this._Router.navigate(['/ventas/visualizarDamfo290', id], {skipLocationChange:true});
   }
 

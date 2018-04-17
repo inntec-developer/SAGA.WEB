@@ -29,7 +29,6 @@ export class RequisicionNuevaComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    setTimeout(() => {
       this._Route.params.subscribe(params => {
         if(params['IdDamfo'] != null && params['IdDireccion'] != null){
           this.damfoId = params['IdDamfo'];
@@ -38,11 +37,11 @@ export class RequisicionNuevaComponent implements OnInit {
         }else{
           this.createRequi = false;
         }
-        if(this.createRequi)
+        if(this.createRequi){
           this.createRequisicion();
+          this.spinner.hide();
+        }
       });
-      this.spinner.hide();
-    }, 2000);
   }
 
   createRequisicion(){

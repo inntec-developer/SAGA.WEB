@@ -1,7 +1,7 @@
 <ngx-spinner bdOpacity = 0.5 bdColor = "#333 "size = "default" color = "#fff" type = "ball-atom"></ngx-spinner>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
-<div class="dtDamfo-container mat-elevation-z8">
-  <div class="dtDamfo-header">
+<div class="dt-container mat-elevation-z8">
+  <div class="dt-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
     </mat-form-field>
@@ -44,13 +44,13 @@
     <!-- Sueldo minimo Column -->
     <ng-container matColumnDef="sueldoMinimo">
       <mat-header-cell *matHeaderCellDef> Sueldo Mn. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.sueldoMinimo | currency: $}} </mat-cell>
+      <mat-cell calss="mat-cell-right" *matCellDef="let element"> {{element.sueldoMinimo | currency: $}} </mat-cell>
     </ng-container>
 
     <!-- Sueldo Maximo -->
     <ng-container matColumnDef="sueldoMaximo">
       <mat-header-cell *matHeaderCellDef> Sueldo Mx. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.sueldoMaximo | currency: $}} </mat-cell>
+      <mat-cell calss="mat-cell-right" *matCellDef="let element"> {{element.sueldoMaximo | currency: $}} </mat-cell>
     </ng-container>
 
     <!-- Fecha Creacion Maximo -->
