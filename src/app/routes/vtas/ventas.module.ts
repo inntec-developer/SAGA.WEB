@@ -45,6 +45,13 @@ import { DtCompetenciaAreaComponent } from './requisiciones/components/competenc
 import { DtCompetenciaGerencialComponent } from './requisiciones/components/competencias/dt-competencia-gerencial/dt-competencia-gerencial.component';
 import { DtCrearRequisicionComponent } from './requisiciones/components/dt-crear-requisicion/dt-crear-requisicion.component';
 import { DtRequisicionComponent } from './requisiciones/components/dt-requisicion/dt-requisicion.component';
+import { DocumentosDamsaComponent } from './requisiciones/components/documentos-damsa/documentos-damsa.component';
+import { DocumentosClienteComponent } from './requisiciones/components/documentos-cliente/documentos-cliente.component';
+import { PrestacionesLeyComponent } from './requisiciones/components/prestaciones-ley/prestaciones-ley.component';
+import { PrestacionesClienteComponent } from './requisiciones/components/prestaciones-cliente/prestaciones-cliente.component';
+import { ActividadesComponent } from './requisiciones/components/actividades/actividades.component';
+import { ObservacionesComponent } from './requisiciones/components/observaciones/observaciones.component';
+import { ProcesosComponent } from './requisiciones/components/procesos/procesos.component';
 
 
 const routes: Routes = [
@@ -93,7 +100,14 @@ const routes: Routes = [
         DtCompetenciaAreaComponent,
         DtCompetenciaGerencialComponent,
         DtCrearRequisicionComponent,
-        DtRequisicionComponent
+        DtRequisicionComponent,
+        DocumentosDamsaComponent,
+        DocumentosClienteComponent,
+        PrestacionesLeyComponent,
+        PrestacionesClienteComponent,
+        ActividadesComponent,
+        ObservacionesComponent,
+        ProcesosComponent,
     ],
     entryComponents: [DialogdamfoComponent],
     exports: [

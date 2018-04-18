@@ -2,7 +2,8 @@
 <div class="content-heading">
     <ul class="breadcrumb pull-right">
         <li><a [routerLink]="['/home']" >Inicio</a></li>
-        <li><a [routerLink]="['/ventas/requisicion']" >Requisiciones</a></li>
+        <li><a [routerLink]="['/ventas/requisicion']" >Requisicion</a></li>
+        <li><a [routerLink]="['/ventas/crearRequisicion']" >Crear Requisicion</a></li>
         <li class="active">DAM-FO-290</li>
     </ul>
     Visaulizar DAM-FO-290
@@ -153,61 +154,17 @@
   <br/>
   <div class="row">
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="fa fa-book"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Actividades
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-                <li *ngFor="let x of damfo290?.actividadesPerfil"><small>{{x.actividades}}</small></li>
-            </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- ACTIVIDADES -->
+      <app-actividades [Actividades]="damfo290?.actividadesPerfil"></app-actividades>
     </div>
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="fa fa-book"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Observaciones
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-               <li *ngFor="let x of damfo290?.observacionesPerfil"><small>{{x.observaciones}}</small></li>
-           </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- OBSERVACIONES -->
+      <!-- damfo290?.observacionesPerfil -->
+    <app-observaciones [Observaciones]="damfo290?.observacionesPerfil"></app-observaciones>
     </div>
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="fa fa-book"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Proceso
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-               <li *ngFor="let x of damfo290?.procesoPerfil"><small>{{x.proceso}}</small></li>
-           </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- PROCESO -->
+      <app-procesos [Proceso]="damfo290?.procesoPerfil"></app-procesos>
     </div>
   </div>
   <br/>
@@ -273,80 +230,20 @@
   <br/>
   <div class="row">
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="ico icon-docs"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Documentos DAMSA
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-              <li *ngFor="let x of documentosDamsa"><small>{{x.documentoDamsa}}</small></li>
-            </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- DOCUMENTOS dAMSA -->
+      <app-documentos-damsa></app-documentos-damsa>
     </div>
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="ico icon-docs"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Documentos Cliente
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-              <li *ngFor="let x of damfo290?.documentosCliente"><small>{{x.documento}}</small></li>
-            </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- DOCUMENTOS CLIENTE -->
+      <app-documentos-cliente [Documentos]="damfo290?.documentosCliente"></app-documentos-cliente>
     </div>
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="fa fa-legal"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Prestaciones de Ley
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-              <li *ngFor="let x of prestacionesLey"><small>{{x.prestacionLey}}</small></li>
-            </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- PRESTACIONES LEY -->
+      <app-prestaciones-ley></app-prestaciones-ley>
     </div>
     <div class="col-md-3">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <em class="fa fa-gift"></em>
-            </mat-panel-title>
-            <mat-panel-description>
-              Prestaciones Superiores
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row"><!--Agregar la información que ira en el panel-->
-            <ol>
-              <li *ngFor="let x of damfo290?.prestacionesCliente"><small>{{x.prestamo}}</small></li>
-            </ol>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- PRESTACIONES SUPERIORES -->
+      <app-prestaciones-cliente [Prestaciones]="damfo290?.prestacionesCliente"></app-prestaciones-cliente>
     </div>
   </div>
   <br/>

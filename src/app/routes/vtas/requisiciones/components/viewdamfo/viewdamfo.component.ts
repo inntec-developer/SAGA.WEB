@@ -10,17 +10,14 @@ import { RequisicionesService, CatalogosService } from '../../../../../service/i
   selector: 'app-viewdamfo',
   templateUrl: './viewdamfo.component.html',
   styleUrls: ['./viewdamfo.component.scss'],
-  providers: [RequisicionesService, CatalogosService]
+  providers: [RequisicionesService]
 })
 export class ViewdamfoComponent implements OnInit {
   private damfoId: string;
   private damfo290: any[];
-  private documentosDamsa: any[];
-  private prestacionesLey: any[];
 
   constructor(
     private serviceRequisiciones: RequisicionesService,
-    private serviceCatalogos: CatalogosService,
     private _Router: Router,
     private _Route: ActivatedRoute,
     private spinner:  NgxSpinnerService
@@ -33,14 +30,6 @@ export class ViewdamfoComponent implements OnInit {
     this._Route.params.subscribe(params => {
       if(params['IdDamfo'] != null){
         this.damfoId = params['IdDamfo'];
-        this.serviceCatalogos.getDocumentosDamsa()
-            .subscribe(data => {
-              this.documentosDamsa = data;
-            });
-        this.serviceCatalogos.getPrestacionesLey()
-            .subscribe(data => {
-              this.prestacionesLey = data;
-            })
         this.serviceRequisiciones.getDamfoById(this.damfoId)
             .subscribe(data => {
               this.damfo290 = data;
