@@ -31,6 +31,8 @@ private UrlTpLicencia = ApiConection.ServiceUrl+ApiConection.TpLicencia;
 private UrlNivelEstudios = ApiConection.ServiceUrl+ApiConection.NivelEstudio;
 private UrlIdiomas = ApiConection.ServiceUrl+ApiConection.Idiomas;
 private UrlVacantes = ApiConection.ServiceUrl+ApiConection.Vacantes;
+private UrlApartar = ApiConection.ServiceUrl+ApiConection.Apartar;
+private UrlGetEstatus = ApiConection.ServiceUrl+ApiConection.GetEstatus;
 
 // Error.
 private handleError(error: any) {
@@ -138,6 +140,20 @@ getvacantes(){
   return this.http.get(this.UrlVacantes)
         .map(result => result.json())
         .catch(this.handleError);
+}
+
+postApartar(candidato: any): Observable<any> { // Obtener filtro de candidatos.
+  let headers = new Headers({ 'Content-Type': 'application/json' });
+  let options = new RequestOptions({ headers: headers });
+  return this.http.post(this.UrlApartar, JSON.stringify(candidato), options)
+    .map(result => result.json())
+    .catch(this.handleError);
+}
+
+getEstatusCandidato(Id: any): Observable<any> { // Obtener el esatus del candidato para las banderas de mostrar la información.
+  return this.http.get(this.UrlGetEstatus + '?Id=' + Id)
+  .map(result => result.json())
+  .catch(this.handleError);
 }
 
 }

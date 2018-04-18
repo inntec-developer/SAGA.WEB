@@ -12,3 +12,11 @@ export class Filtros {
     // SMin: number;
     // SMax: number;
 }
+
+export class Apartado {
+  RequisicionId: any;
+  CandidatoId: any;
+  Reclutador: any;
+  Estatus: any;
+  TpContrato: number;
+}
