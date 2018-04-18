@@ -1,4 +1,6 @@
-<div class="row">
+
+
+<!-- <div class="row">
     <div class="col-lg-4">
         <div class="card card-default">
           <div class="card-header">
@@ -15,21 +17,26 @@
                 <div class="col-md-12">
                   <strong>Genero: </strong> {{data[0]?.candidato?.genero?.genero}}
                 </div>
+                <div *ngIf="Status == 0">
                 <div class="my-3" *ngFor="let correo of data[0].candidato.emails">
-                  <strong>Correos:</strong> <strong class="text-success">{{correo?.email}}</strong>
+                    <strong>Correos:</strong> <strong class="text-success">{{correo?.email}}</strong>
                 </div>
                 <div class="my-3" *ngFor="let tel of data[0].candidato.telefonos">
                   <strong>Telefonos:</strong> <strong class="text-success">{{tel?.telefono}}</strong>
                 </div>
+                </div>
           </div>
-          <div class="card-body text-center bg-gray-dark">
+          <div class="card-body bg-gray-dark">
                 <div class="row">
                   <div class="col-md-2 text-center">
-                    <mat-icon>lock_outline</mat-icon>
+                    <em *ngIf="Status == 0" class="fa fa-unlock m-0" style="color: white;"></em>
+                    <em *ngIf="!Status == 0" class="fa fa-lock m-0" style="color: white;"></em>
                   </div>
                     <div class="col-md-10">
-                        <h3 class="m-0">Juan Pablo Cervantes Lomeli</h3>
-                        <p class="m-0">Te restan 10 hrs.</p>
+                        <h3 *ngIf="!Status == 0" class="m-0">Apartado por: {{Reclutador}}</h3>
+                        <h3 *ngIf="Status == 0" >{{Reclutador}}</h3>
+                        <p *ngIf="!Status == 0" ></p>
+                        <p *ngIf="!Status == 0" >Te restan 10 hrs.</p>
                     </div>
                 </div>
             </div>
@@ -44,11 +51,16 @@
               <label class="text-primary">Mis vacantes</label>
             </mat-panel-description>
           </mat-expansion-panel-header>
+          <div class="example-header">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+            </mat-form-field>
+          </div>
           <mat-table #table [dataSource]="dataSourcev">
 
             <ng-container matColumnDef="Vacante">
               <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"> {{vacantes.vBtra}} </mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId}">{{vacantes.vBtra}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Accion">
@@ -57,10 +69,10 @@
                   <button class="mb-sm btn-sm btn btn-warning btn-outline" type="button" matTooltip="Detalle">
                     <em class="fa fa-eye"></em>
                   </button>
-                  <button class="mb-sm btn-sm btn btn-success btn-outline" type="button" matTooltip="Apartar">
+                  <button [disabled]="vacantes.id != requisicionId && Status != 0" type="button" matTooltip="Apartar" (click)="Apartar(vacantes.id)" [ngClass]="(Status == 0 || vacantes.id == requisicionId)?'mb-sm btn-sm btn btn-success btn-outline':'mb-sm btn-sm btn btn-outline-secondary'">
                       <em class="fa fa-thumbs-o-up"></em>
                   </button>
-                  <button class="mb-sm btn-sm btn btn-danger btn-outline" type="button" matTooltip="Liberar">
+                  <button [disabled]="vacantes.id != requisicionId && Status != 0" type="button" matTooltip="Liberar" [ngClass]="(Status == 0 || vacantes.id == requisicionId)?'mb-sm btn-sm btn btn-danger btn-outline':'mb-sm btn-sm btn btn-outline-secondary'">
                         <em class="fa fa-thumbs-o-down"></em>
                   </button>
               </mat-cell>
@@ -99,9 +111,9 @@
           </div>
         </mat-expansion-panel>
         </mat-accordion>
-        <br>
+        <br> -->
         <!-- Seccion Postulaciones -->
-        <mat-accordion class="example-headers-align">
+        <!-- <mat-accordion class="example-headers-align">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -111,13 +123,13 @@
               <label class="text-primary">Postulaciones</label>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <mat-table #table [dataSource]="dataSource">
+          <mat-table #table [dataSource]="dataSource"> -->
 
             <!-- Vacante Column -->
-            <ng-container matColumnDef="Vacante">
+            <!-- <ng-container matColumnDef="Vacante">
               <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
               <mat-cell *matCellDef="let postulaciones"> {{postulaciones.vBtra}} </mat-cell>
-            </ng-container>
+            </ng-container> -->
 
             <!-- Fecha de postulacion Column -->
             <!-- <ng-container matColumnDef="Fecha">
@@ -126,7 +138,7 @@
             </ng-container> -->
 
             <!-- Estatus Column -->
-            <ng-container matColumnDef="Estatus">
+            <!-- <ng-container matColumnDef="Estatus">
               <mat-header-cell *matHeaderCellDef> Estatus </mat-header-cell>
               <mat-cell *matCellDef="let postulaciones"> {{postulaciones.status}} </mat-cell>
             </ng-container>
@@ -142,13 +154,13 @@
       <div class="card mb-4">
        <div class="card-body">
           <h2 class="card-title">Información del candidato.</h2>
-          <hr>
+          <hr> -->
           <!-- Seccion de Acerca de mi -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Acerca de Mi.
+                Acerca de Mí.
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
@@ -176,7 +188,7 @@
             </div>
             <div class="row">
               <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Disapacitado: </strong>
+                  <strong class="text-primary">Discapacidad: </strong>
                   <strong *ngIf="data[0].candidato.esDiscapacitado">SI</strong>
                   <strong *ngIf="!data[0].candidato.esDiscapacitado">NO</strong>
               </div>
@@ -191,7 +203,7 @@
                   <strong *ngIf="!data[0].candidato.tieneLicenciaConducir">NO</strong>
               </div>
               <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Tipo de Licencia: </strong> {{data[0]?.candidato?.tipoLicencia?.tipoLicencia}}
+                  <strong class="text-primary">Tipo de licencia: </strong> {{data[0]?.candidato?.tipoLicencia?.tipoLicencia}}
               </div>
             </div>
             <div class="row">
@@ -207,7 +219,7 @@
                 <strong class="text-primary">Salario deseado:</strong> {{data[0]?.aboutMe[0]?.salarioDeseado | currency:'CAD':'Mxn':'4.2-2'}}
               </div>
               <div class="col-md-6 text-muted">
-                <strong class="text-primary">Area de experiencia:</strong>  {{data[0]?.aboutMe[0]?.areaExperiencia?.areaExperiencia}}
+                <strong class="text-primary">Área de experiencia:</strong>  {{data[0]?.aboutMe[0]?.areaExperiencia?.areaExperiencia}}
               </div>
             </div>
             <div class="row">
@@ -223,7 +235,7 @@
                 <strong class="text-primary">Sitio Web: </strong> {{data[0]?.aboutMe[0]?.sitioWeb}}
               </div>
               <div class="col-md-6 text-muted">
-                <strong class="text-primary">Vehiculo propio: </strong>
+                <strong class="text-primary">Vehículo propio: </strong>
                 <strong *ngIf="data[0].candidato.tieneVehiculoPropio">SI</strong>
                 <strong *ngIf="!data[0].candidato.tieneVehiculoPropio">NO</strong>
               </div>
@@ -232,13 +244,13 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de direccion -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Direccion
+                Dirección
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
@@ -251,7 +263,7 @@
                   <strong class="text-primary">Calle: </strong> {{direccion?.calle}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Num Ext-Int: </strong> {{direccion?.numeroExterior}} - {{direccion?.numeroInterior}}
+                  <strong class="text-primary">Num. Ext/Int: </strong> {{direccion?.numeroExterior}} - {{direccion?.numeroInterior}}
                 </div>
               </div>
               <div class="row">
@@ -259,7 +271,7 @@
                   <strong class="text-primary">Colonia: </strong> {{direccion?.colonia?.colonia}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Código Postal: </strong> {{direccion?.codigoPostal}}
+                  <strong class="text-primary">Código postal: </strong> {{direccion?.codigoPostal}}
                 </div>
               </div>
               <div class="row">
@@ -267,7 +279,7 @@
                   <strong class="text-primary">Localidad: </strong> {{direccion?.municipio?.municipio}}, {{direccion?.estado?.estado}}, {{direccion?.pais?.pais}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Tipo de direccion: </strong> {{direccion?.tipoDireccion?.tipoDireccion}}
+                  <strong class="text-primary">Tipo de dirección: </strong> {{direccion?.tipoDireccion?.tipoDireccion}}
                 </div>
               </div>
             </div>
@@ -276,9 +288,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de Identificaciones -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -291,13 +303,13 @@
             </mat-expansion-panel-header>
             <div class="row">
               <div class="col-md-4 text-muted">
-                <strong class="text-primary">Curp: </strong> {{data[0]?.candidato?.curp}}
+                <strong class="text-primary">CURP: </strong> {{data[0]?.candidato?.curp}}
               </div>
               <div class="col-md-4 text-muted">
-                <strong class="text-primary">Rfc: </strong> {{data[0]?.candidato?.rfc}}
+                <strong class="text-primary">RFC: </strong> {{data[0]?.candidato?.rfc}}
               </div>
               <div class="col-md-4 text-muted">
-                <strong class="text-primary">Nss: </strong> {{data[0]?.candidato?.nss}}
+                <strong class="text-primary">NSS: </strong> {{data[0]?.candidato?.nss}}
               </div>
             </div>
             <mat-action-row>
@@ -305,9 +317,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de Redes sociales -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -323,9 +335,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de experiencia profesional -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -355,7 +367,7 @@
               </div>
               <div class="row">
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Area:  </strong> {{exp?.area?.nombre}}
+                  <strong class="text-primary">Área:  </strong> {{exp?.area?.nombre}}
                 </div>
                 <div class="col-md-6 text-muted">
                   <strong class="text-primary">Salario: </strong> {{exp?.salario | currency:'CAD':'Mxn':'4.2-2'}}
@@ -366,7 +378,7 @@
                   <strong class="text-primary">Fecha de inicio: </strong>  {{exp?.monthInicio?.month}}-{{exp?.yearInicio?.year}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Fecha de termino: </strong> {{exp?.monthTermino?.month}}-{{exp?.yearTermino?.year}}
+                  <strong class="text-primary">Fecha de término: </strong> {{exp?.monthTermino?.month}}-{{exp?.yearTermino?.year}}
                 </div>
               </div>
               <div class="row">
@@ -383,13 +395,13 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de formacion -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Formacion
+                Formación
               </mat-panel-title>
               <mat-panel-description>
                 Detalles
@@ -402,7 +414,7 @@
                   <strong class="text-primary">Carrera: </strong> {{formacion?.carrera?.carrera}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Institucion : </strong> {{formacion?.institucionEducativa?.institucionEducativa}}
+                  <strong class="text-primary">Institución : </strong> {{formacion?.institucionEducativa?.institucionEducativa}}
                 </div>
               </div>
               <div class="row">
@@ -418,7 +430,7 @@
                   <strong class="text-primary">Fecha de inicio: </strong> {{formacion?.monthInicio?.month}}-{{formacion?.yearInicio?.year}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Fecha de termino: </strong> {{formacion?.monthTermino?.month}}-{{formacion?.yearTermino?.year}}
+                  <strong class="text-primary">Fecha de término: </strong> {{formacion?.monthTermino?.month}}-{{formacion?.yearTermino?.year}}
                 </div>
               </div>
               <div class="row">
@@ -433,9 +445,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de Certificaciones -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -470,7 +482,7 @@
                   <strong class="text-primary">Fecha de inicio: </strong>  {{certificacion?.monthInicio?.month}}-{{certificacion?.yearInicio?.year}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Fecha de termino: </strong> {{certificacion?.monthTermino?.month}}-{{certificacion?.yearTermino?.year}}
+                  <strong class="text-primary">Fecha de término: </strong> {{certificacion?.monthTermino?.month}}-{{certificacion?.yearTermino?.year}}
                 </div>
               </div>
               <br>
@@ -480,9 +492,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de idiomas -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -514,9 +526,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de cursos -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -533,7 +545,7 @@
                   <strong class="text-primary">Curso: </strong> {{curso?.curso}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Institucion: </strong> {{curso?.institucionEducativa}}
+                  <strong class="text-primary">Institución: </strong> {{curso?.institucionEducativa}}
                 </div>
               </div>
               <div class="row">
@@ -541,7 +553,7 @@
                   <strong class="text-primary">Fecha de inicio: </strong>  {{curso?.monthInicio?.month}}-{{curso?.yearInicio?.year}}
                 </div>
                 <div class="col-md-6 text-muted">
-                  <strong class="text-primary">Fecha de termino: </strong> {{curso?.monthTermino?.month}}-{{curso?.yearTermino?.year}}
+                  <strong class="text-primary">Fecha de término: </strong> {{curso?.monthTermino?.month}}-{{curso?.yearTermino?.year}}
                 </div>
               </div>
               <div class="row">
@@ -556,9 +568,9 @@
               <button mat-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
           </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
           <!-- Seccion de conocimientos y habilidades -->
-          <mat-accordion class="example-headers-align">
+          <!-- <mat-accordion class="example-headers-align">
           <mat-expansion-panel [expanded]="step === 9" (opened)="setStep(9)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -601,4 +613,4 @@
        </div>
       </div>
     </div>
-</div>
+</div> -->

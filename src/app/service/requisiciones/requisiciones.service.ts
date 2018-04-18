@@ -24,6 +24,7 @@ export class RequisicionesService {
   private urlCreateRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
   private urlGetRequisicionById = ApiConection.ServiceUrl + ApiConection.GetRequisicionById;
   private urlGetDamfoById = ApiConection.ServiceUrl + ApiConection.Damfo290GetById;
+  private utlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
 
   constructor(private http: Http) { }
   //Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -58,6 +59,12 @@ export class RequisicionesService {
               .map(result => result.json())
               .catch(this.handleError);
   }
+  //Recupera la información de las requisiciones que se an generado.
+  getRequisiciones() : Observable<any>{
+    return this.http.get(this.utlGetRequisicionesAll)
+      .map(result => result.json())
+      .catch(this.handleError);
+  }
   //Muestra un error en consola y regresa el mismo al Frond-End en caso de que se genere el mismo.
   public handleError(error: any ){
     console.log('Error Internar Server', error);
@@ -66,5 +73,7 @@ export class RequisicionesService {
     }
     return Observable.throw(error || 'Back-End server error');
   }
+
+
 
 }

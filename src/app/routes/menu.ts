@@ -37,12 +37,7 @@ const Ventas = {
         },
         {
             text: 'Requisiciones',
-            submenu:[
-              {
-                text: 'Nueva' ,
-                link: '/ventas/requisicion',
-              }
-            ]
+            link: '/ventas/requisicion',
         }
 
     ]

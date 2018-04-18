@@ -12,7 +12,7 @@ import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
 
 import { ApiConection } from '../api-conection.service';
-console.log('hola mundo')
+// console.log('hola mundo')
 @Injectable()
 export class ConfiguracionService {
 // Url de servicios.

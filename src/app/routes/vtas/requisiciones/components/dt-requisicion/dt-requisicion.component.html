@@ -1,0 +1,93 @@
+<ngx-spinner bdOpacity = 0.5 bdColor = "#333 "size = "default" color = "#fff" type = "ball-atom"></ngx-spinner>
+<!-- <toaster-container [toasterconfig]="toasterconfig"></toaster-container> -->
+<div class="dt-container mat-elevation-z8">
+  <div class="dt-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+    </mat-form-field>
+  </div>
+  <button class="mb-sm btn-md btn btn-primary btn-outline"
+          [routerLink]="['/ventas/crearRequisicion']" type="button"  matTooltip="Nueva Requisición">
+    <em class="fa fa-plus"></em> Nueva Requisición
+  </button>
+  <mat-table #table [dataSource]="dataSource">
+    <!-- Cliente <Razon Social> Column -->
+    <ng-container matColumnDef="cliente">
+      <mat-header-cell *matHeaderCellDef>Cliente </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.cliente?.nombrecomercial}} </mat-cell>
+    </ng-container>
+
+    <!-- Cliente <Razon Social> Column -->
+    <ng-container matColumnDef="rfc">
+      <mat-header-cell *matHeaderCellDef>RFC </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.cliente?.rfc}} </mat-cell>
+    </ng-container>
+
+    <!-- Nombre Perfil Column -->
+    <ng-container matColumnDef="vBtra">
+      <mat-header-cell *matHeaderCellDef>Nombre Perfil </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.vBtra}} </mat-cell>
+    </ng-container>
+
+    <!-- Giro Empresas <Giro Empresa> Column -->
+    <ng-container matColumnDef="empresa">
+      <mat-header-cell *matHeaderCellDef>Empresa </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.cliente?.giroEmpresas?.giroEmpresa}} - {{element?.cliente?.actividadEmpresas?.actividadEmpresa}}</mat-cell>
+    </ng-container>
+
+    <!-- Tipo Reclutamiento  <Actividad Empresa> Column -->
+    <ng-container matColumnDef="reclutamiento">
+      <mat-header-cell *matHeaderCellDef>Reclutamiento</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.tipoReclutamiento?.tipoReclutamiento}} - {{element?.claseReclutamiento?.clasesReclutamiento}} </mat-cell>
+    </ng-container>
+
+    <!-- Sueldo minimo Column -->
+    <ng-container matColumnDef="sueldoMinimo">
+      <mat-header-cell class="mat-cell-right"  *matHeaderCellDef>Sueldo Mn.</mat-header-cell>
+      <mat-cell class="mat-cell-right" *matCellDef="let element"> {{element?.sueldoMinimo | currency: $}} </mat-cell>
+    </ng-container>
+
+    <!-- Sueldo Maximo -->
+    <ng-container matColumnDef="sueldoMaximo">
+      <mat-header-cell class="mat-cell-right" *matHeaderCellDef>Sueldo Mx.</mat-header-cell>
+      <mat-cell class="mat-cell-right"  *matCellDef="let element"> {{element?.sueldoMaximo | currency: $}} </mat-cell>
+    </ng-container>
+
+    <!-- Fecha Creacion Maximo -->
+    <ng-container matColumnDef="fch_Creacion">
+      <mat-header-cell *matHeaderCellDef>Creación</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.fch_Creacion | date:'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fch_Cumplimiento">
+      <mat-header-cell *matHeaderCellDef>Cumplimiento</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.fch_Cumplimiento | date:'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+
+    <!-- Accion -->
+    <ng-container matColumnDef="accion">
+      <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showDamfo(element.id)" type="button"  matTooltip="Ver Requisición">
+            <em class="fa fa-eye"></em>
+          </button>
+          <button class="mb-sm btn-sm btn btn-primary btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Editar Requisición">
+            <em class="icon-pencil"></em>
+          </button>
+          <button class="mb-sm btn-sm btn btn-danger btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Eliminar Requisición">
+            <em class="icon-trash"></em>
+          </button>
+      </mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [showFirstLastButtons]="true"
+                 [length]="TotalRecords"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = paginate($event)">
+  </mat-paginator>
+</div>

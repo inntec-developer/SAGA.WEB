@@ -1,6 +1,10 @@
 import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
+import {FormControl,  FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+
+// Modelos
+import { Apartado } from '../../../../models/recl/candidatos';
 
 // Componentes
 import { DialogcandidatosComponent } from './dialogcandidatos/dialogcandidatos.component';
@@ -20,12 +24,39 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   candidatodtl: any[];
   candidatos: any;
   arraycandidatos: any[];
-  @Input('Filtrado') FCandidatos: any; //Datos que reciben del filtro.
+  expandir: boolean;
+  Status: any;
+  Reclutador: any;
+  requisicionId: string;
+  vacantes: any[];
 
-  displayedColumns = ['Candidato', 'CodigoPostal', 'Curp', 'Rfc', 'Nss', 'accion'];
+  // Objeto para el apartado de candidato.
+  public Apartado: FormGroup;
+
+ // Estructura de las tablas a mostrar.
+  @Input('Filtrado') FCandidatos: any; //Datos que reciben del filtro.
+  displayedColumnsVacantes = ['Vacante', 'FechaCreacion', 'Cliente', 'Reclutamiento', 'Area', 'Accion'];
+  public dataSourcev = new MatTableDataSource(<any>[]);
+  displayedColumnsp = ['Vacante', 'Estatus'];
+  public dataSourcep = new MatTableDataSource(<any>[]);
+  displayedColumns = ['Candidato','Experiencias', 'AreaInteres', 'Curp', 'Rfc', 'accion'];
   public dataSource = new MatTableDataSource(<any>[]);
 
   @ViewChild(MatSort) sort: MatSort;
+
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+ }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -46,15 +77,6 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
      }
 
   ngOnInit() {
-    // this.service.getcandidatos()
-    // .subscribe(data => {
-    //   this.dataSource =  new MatTableDataSource(data);
-    //   this.candidatos = data;
-    //   this.arraycandidatos = data;
-    //   this.pageCount = Math.round(this.candidatos.length / this.rows);
-    //   this.TotalRecords = this.candidatos.length;
-    //   this.paginador();
-    // })
     this.dataSource =  new MatTableDataSource(this.FCandidatos);
     this.candidatos = this.FCandidatos;
     this.arraycandidatos = this.candidatos;
@@ -68,14 +90,58 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.service.getcandidatodtl(id)
     .subscribe(data => {
       this.candidatodtl = data;
-      let dialogRef = this.dialog.open(DialogcandidatosComponent, {
-        width: '1200px',
-        height: '700px',
-        data: this.candidatodtl
-      });
-      dialogRef.afterClosed().subscribe(result => {
-      });
+      this.expandir = true;
+    this.service.getEstatusCandidato(this.candidatodtl[0].candidatoId)
+      .subscribe(estatus => {
+        if (estatus.length == 0){
+          this.Status = estatus.length;
+          this.Reclutador = 'Candidato disponible';
+        }else{
+          this.Status = estatus[0].estatus;
+          this.Reclutador = estatus[0].reclutador;
+          this.requisicionId = estatus[0].requisicionId;
+        }
+      })
+      this.service.getpostulaciones(this.candidatodtl[0].candidatoId)
+      .subscribe(postulaciones => {
+        this.dataSourcep =  new MatTableDataSource(postulaciones);
+      })
+      this.service.getvacantes()
+      .subscribe(vacantes => {
+        this.vacantes = vacantes;
+        this.dataSourcev =  new MatTableDataSource(vacantes);
+      })
+      // let dialogRef = this.dialog.open(DialogcandidatosComponent, {
+      //   width: '1200px',
+      //   height: '700px',
+      //   data: this.candidatodtl
+      // });
+      // dialogRef.afterClosed().subscribe(result => {
+      // });
     });
+  }
+
+  OpenDtl(Id): void {
+    let dialogRef = this.dialog.open(DialogcandidatosComponent, {
+      width: '1200px',
+      height: '700px',
+      data: this.vacantes
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  Apartar(idvct: any){
+    let Apartar: Apartado = new Apartado();
+    Apartar.CandidatoId = this.candidatodtl[0].candidatoId;
+    Apartar.RequisicionId = idvct;
+    Apartar.Reclutador = 'Inntec';
+    Apartar.Estatus = 1;
+    Apartar.TpContrato = 2;
+    // Se manda el objeto con los datos necesarios paa su inserción al servicio.
+    this.service.postApartar(Apartar)
+    .subscribe(data => {
+    })
   }
 
   // Parametros para paginador.
@@ -131,5 +197,18 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     CodigoPostal: string;
     Curp: string;
     Rfc: string;
-    Nss: string;
+    Experiencias: string;
+    AreaInteres: string;
+  }
+  export interface postulaciones {
+    Vacante: string;
+    Estatus: string;
+  }
+
+  export interface vacantes {
+    Vacante:   string;
+    FechaCreacion: string;
+    Cliente: string;
+    Reclutamiento: string;
+    Area: string;
   }

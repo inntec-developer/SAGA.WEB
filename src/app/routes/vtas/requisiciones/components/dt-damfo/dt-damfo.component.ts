@@ -8,8 +8,6 @@ import { RequisicionesService } from '../../../../../service/index';
 //Components
 import { DialogdamfoComponent} from '../dialogdamfo/dialogdamfo.component'
 
-
-
 @Component({
   selector: 'app-dt-damfo',
   templateUrl: './dt-damfo.component.html',
@@ -25,8 +23,7 @@ export class DtDamfoComponent implements OnInit {
     private _Route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private toasterService: ToasterService
-  ) {
-   }
+  ) {}
    //Mensaje
    toaster: any;
      toasterConfig: any;
@@ -66,7 +63,6 @@ export class DtDamfoComponent implements OnInit {
         this.paginador();
         this.spinner.hide();
       });
-
   }
 
   createRequi(id){
@@ -98,14 +94,12 @@ export class DtDamfoComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions = [10, 30, 50];
 
-
   rows: number = 10;
   first: number = 0;
   page: number = 1;
   pageCount: number = 0;
   TotalRecords: number = 0;
-  paginate(event?: PageEvent)
-  {
+  paginate(event?: PageEvent){
       if(event.length > event.pageSize )
       {
         this.first = event.pageIndex;
@@ -119,8 +113,7 @@ export class DtDamfoComponent implements OnInit {
       this.paginador();
   }
 
-  paginador()
-  {
+  paginador(){
       if (this.page < this.pageCount) {
           this.damfo = new Array(this.rows);
           for (var i = 0; i < this.rows; i++) {
@@ -128,27 +121,22 @@ export class DtDamfoComponent implements OnInit {
           }
       }
       else {
-          let lenght = this.arrayDamfo.length - this.first;
-
-          this.damfo = new Array(lenght);
-          for (var i = 0; i < lenght; i++) {
+          let length = this.arrayDamfo.length - this.first;
+          this.damfo = new Array(length);
+          for (var i = 0; i < length; i++) {
               this.damfo[i] = this.arrayDamfo[this.first + i];
           }
       }
-
       this.dataSource =  new MatTableDataSource(this.damfo);
   }
   //termina paginador
-
 
   // Display para mostrar los objetos en el Grid
   displayedColumns = [
     'cliente',
     'nombrePerfil',
-    'giroEmpresa',
-    'actividadEmpresa',
-    'tipoReclutamiento',
-    'claseReclutamiento',
+    'empresa',
+    'reclutamiento',
     'sueldoMinimo',
     'sueldoMaximo',
     'fch_Creacion',
@@ -160,10 +148,7 @@ export class DtDamfoComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-
-
 }
-
 export interface Element {
   id: string;
   cliente: string;
