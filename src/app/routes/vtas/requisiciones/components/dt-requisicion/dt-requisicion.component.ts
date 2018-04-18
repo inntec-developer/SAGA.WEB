@@ -97,6 +97,8 @@ export class DtRequisicionComponent implements OnInit {
     'sueldoMaximo',
     'fch_Creacion',
     'fch_Cumplimiento',
+    'estatus',
+    'prioridad',
     'accion'
   ];
   // Filtro dentro del Grid
@@ -117,4 +119,6 @@ export interface Element {
   sueldoMaximo: string;
   fch_Creacion: string;
   fch_Cumplimiento: string;
+  estatus: number;
+  prioridad: number;
 }
