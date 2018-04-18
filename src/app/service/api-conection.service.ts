@@ -57,5 +57,10 @@ export class ApiConection {
   public static getBeneficio = '/dvacante/getBeneficio';
   public static getDireccion = '/dvacante/getDireccion';
   public static getTelefono = '/dvacante/getTelefono';
+  public static getContacto = '/dvacante/getContacto';
+  public static getPsicometria = '/dvacante/getPsicometria';
+  public static getDocumento = '/dvacante/getDocumento';
+  public static getProceso = '/dvacante/getProceso';
+  public static getCopetencia = '/dvacante/getCopetencia';
 
 }
