@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
 import {FormControl,  FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
+import {ToasterService,ToasterConfig} from 'angular2-toaster';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Modelos
@@ -28,7 +29,16 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   Status: any;
   Reclutador: any;
   requisicionId: string;
+  StatusId: any;
+  tpcontrato: any;
   vacantes: any[];
+  private toasterService: ToasterService;
+  toaster: any;
+  toasterConfig: any;
+  toasterconfig: ToasterConfig = new ToasterConfig({
+      positionClass: 'toast-bottom-right',
+      showCloseButton: true
+  });
 
   // Objeto para el apartado de candidato.
   public Apartado: FormGroup;
@@ -50,7 +60,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.step = index;
   }
 
-  nextStep() {
+  SiguienteStep() {
     this.step++;
   }
 
@@ -68,7 +78,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.dataSource.filter = filterValue;
   }
   constructor(private service: CandidatosService, public dialog: MatDialog, private _Router: Router,
-      private _Route: ActivatedRoute) {   }
+      private _Route: ActivatedRoute, toasterService: ToasterService) { this.toasterService = toasterService;  }
 
  ngOnChanges(changes: SimpleChanges){
        if(changes.FCandidatos && !changes.FCandidatos.isFirstChange()) {
@@ -100,7 +110,10 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
           this.Status = estatus[0].estatus;
           this.Reclutador = estatus[0].reclutador;
           this.requisicionId = estatus[0].requisicionId;
+          this.StatusId = estatus[0].id;
+          this.tpcontrato = estatus[0].tpContrato
         }
+         console.log(estatus);
       })
       this.service.getpostulaciones(this.candidatodtl[0].candidatoId)
       .subscribe(postulaciones => {
@@ -138,11 +151,47 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     Apartar.Reclutador = 'Inntec';
     Apartar.Estatus = 1;
     Apartar.TpContrato = 2;
-    // Se manda el objeto con los datos necesarios paa su inserción al servicio.
+    // Se manda el objeto con los datos necesarios para su inserción al servicio.
     this.service.postApartar(Apartar)
     .subscribe(data => {
+      console.log(data);
+      this.pop(data.mensaje,true,data.estatus,'Apartado',data.reclutador);
     })
+    // Recargamos de nuevo la vacante con el apartado.
+    this.openDialog(this.candidatodtl[0].candidatoId)
   }
+
+  Liberar(idvct: any){
+    this.service.Liberar(this.StatusId)
+    .subscribe(data => {
+      this.pop('Hola',false,0,'Liberado',data);
+    })
+    // Recargamos de nuevo la vacante con el borrado.
+    this.openDialog(this.candidatodtl[0].candidatoId)
+  }
+
+  // Mensajes de confirmación u error.
+  pop(mensaje:string,bandera:boolean,estatus:number,titulo:string,candidato:string) {
+    if (bandera == true){ // estamos mandando la validación del apartado
+      if (estatus > 0){
+        var type = 'success';
+        mensaje='Candidato apartado por: '+candidato;
+      }else{
+        var type = 'error';
+        mensaje='El candidato no se pudo apartar correctamente.';
+      }
+    }else{ // mandamos la validación del liberado.
+      if (estatus ==0){
+      var type = 'error';
+      mensaje='Candidato liberado';
+    }else{
+      var type = 'warning';
+      mensaje='El candidato no se pudo liberar correctamente.';
+    }
+    }
+      this.toasterService.pop(type, titulo, mensaje);
+  }
+
 
   // Parametros para paginador.
   length = 0;

@@ -207,27 +207,27 @@
 
             <ng-container matColumnDef="Vacante">
               <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId}">{{vacantes?.vBtra}}</small></h5></mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.vBtra}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="FechaCreacion">
               <mat-header-cell *matHeaderCellDef> Fecha creación </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId}">{{vacantes?.fch_Creacion}}</small></h5></mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.fch_Creacion}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Cliente">
               <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId}">{{vacantes?.cliente?.nombrecomercial}}</small></h5></mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.cliente?.nombrecomercial}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Reclutamiento">
               <mat-header-cell *matHeaderCellDef> Reclutamiento </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId}">{{vacantes?.claseReclutamiento?.clasesReclutamiento}}</small></h5></mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.claseReclutamiento?.clasesReclutamiento}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Area">
               <mat-header-cell *matHeaderCellDef> Area experiencia </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId}">{{vacantes?.area?.nombre}}</small></h5></mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.area?.nombre}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Accion">
@@ -239,7 +239,7 @@
                   <button [disabled]="vacantes.id != requisicionId && Status != 0" type="button" matTooltip="Apartar" (click)="Apartar(vacantes.id)" [ngClass]="(Status == 0 || vacantes.id == requisicionId)?'mb-sm btn-sm btn btn-success btn-outline':'mb-sm btn-sm btn btn-outline-secondary'">
                       <em class="fa fa-thumbs-o-up"></em>
                   </button>
-                  <button [disabled]="vacantes.id != requisicionId && Status != 0" type="button" matTooltip="Liberar" [ngClass]="(Status == 0 || vacantes.id == requisicionId)?'mb-sm btn-sm btn btn-danger btn-outline':'mb-sm btn-sm btn btn-outline-secondary'">
+                  <button [disabled]="vacantes.id != requisicionId && Status != 0" type="button" matTooltip="Liberar" (click)="Liberar(vacantes.id)" [ngClass]="(Status == 0 || vacantes.id == requisicionId)?'mb-sm btn-sm btn btn-danger btn-outline':'mb-sm btn-sm btn btn-outline-secondary'">
                         <em class="fa fa-thumbs-o-down"></em>
                   </button>
               </mat-cell>
@@ -342,7 +342,7 @@
                 </div>
               </div>
               <mat-action-row>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -385,8 +385,8 @@
                 </div>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -414,8 +414,8 @@
                 </div>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -432,8 +432,8 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -492,8 +492,8 @@
                 <br>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -542,8 +542,8 @@
                 <br>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -589,8 +589,8 @@
                 <br>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -623,8 +623,8 @@
                 <br>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -665,8 +665,8 @@
                 <br>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -702,8 +702,8 @@
                 <br>
               </div>
               <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
+                <button mat-button color="warn" (click)="prevStep()">Previo</button>
+                <button mat-button color="primary" (click)="SiguienteStep()">Siguiente</button>
               </mat-action-row>
             </mat-expansion-panel>
             </mat-accordion>
@@ -715,8 +715,10 @@
         </div> -->
       </div>
   </div>
-
-
   <!-- Termina el detalle del candidato. -->
 </mat-expansion-panel>
 </mat-accordion>
+
+<div class="panel-body">
+    <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+</div>

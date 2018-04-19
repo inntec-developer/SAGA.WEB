@@ -33,6 +33,7 @@ private UrlIdiomas = ApiConection.ServiceUrl+ApiConection.Idiomas;
 private UrlVacantes = ApiConection.ServiceUrl+ApiConection.Vacantes;
 private UrlApartar = ApiConection.ServiceUrl+ApiConection.Apartar;
 private UrlGetEstatus = ApiConection.ServiceUrl+ApiConection.GetEstatus;
+private UrlLiberar = ApiConection.ServiceUrl+ApiConection.Liberar;
 
 // Error.
 private handleError(error: any) {
@@ -142,7 +143,7 @@ getvacantes(){
         .catch(this.handleError);
 }
 
-postApartar(candidato: any): Observable<any> { // Obtener filtro de candidatos.
+postApartar(candidato: any): Observable<any> { // Apartar el candidato y ligar a la vacante.
   let headers = new Headers({ 'Content-Type': 'application/json' });
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.UrlApartar, JSON.stringify(candidato), options)
@@ -152,6 +153,20 @@ postApartar(candidato: any): Observable<any> { // Obtener filtro de candidatos.
 
 getEstatusCandidato(Id: any): Observable<any> { // Obtener el esatus del candidato para las banderas de mostrar la información.
   return this.http.get(this.UrlGetEstatus + '?Id=' + Id)
+  .map(result => result.json())
+  .catch(this.handleError);
+}
+
+// postLiberar(candidato: any): Observable<any> { // Eliminar el candidato por liberación.
+//   let headers = new Headers({ 'Content-Type': 'application/json' });
+//   let options = new RequestOptions({ headers: headers });
+//   return this.http.post(this.UrlLiberar, JSON.stringify(candidato), options)
+//     .map(result => result.json())
+//     .catch(this.handleError);
+// }
+
+Liberar(candidato: any): Observable<any> { // Eliminar el candidato por liberación.
+  return this.http.get(this.UrlLiberar + '?Id=' + candidato)
   .map(result => result.json())
   .catch(this.handleError);
 }
