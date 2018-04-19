@@ -14,6 +14,7 @@ export class Filtros {
 }
 
 export class Apartado {
+  Id: any;
   RequisicionId: any;
   CandidatoId: any;
   Reclutador: any;
