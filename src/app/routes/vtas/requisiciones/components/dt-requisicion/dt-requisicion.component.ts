@@ -85,6 +85,7 @@ export class DtRequisicionComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.requisicion);
   }
   //Termino de Paginador
+  
 
   //Display para mostrar los objetos en el Grid
   displayedColumns = [
