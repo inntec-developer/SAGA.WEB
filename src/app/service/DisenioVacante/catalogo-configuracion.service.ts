@@ -26,6 +26,11 @@ private UrlActividad = ApiConection.ServiceUrl+ApiConection.getActividad;
 private UrlBeneficio = ApiConection.ServiceUrl+ApiConection.getBeneficio;
 private UrlDireccion = ApiConection.ServiceUrl+ApiConection.getDireccion;
 private UrlTelefono = ApiConection.ServiceUrl+ApiConection.getTelefono;
+private UrlContacto = ApiConection.ServiceUrl+ApiConection.getContacto;
+private UrlPsicometria = ApiConection.ServiceUrl+ApiConection.getPsicometria;
+private UrlDocumento = ApiConection.ServiceUrl+ApiConection.getDocumento;
+private UrlProceso = ApiConection.ServiceUrl+ApiConection.getProceso;
+private UrlCopetencia = ApiConection.ServiceUrl+ApiConection.getCopetencia;
 
 // Error.
 private handleError(error: any) {
@@ -98,5 +103,36 @@ getBeneficio(RequiID:string): Observable<any> {
        .map(result => result.json())
        .catch(this.handleError);
 }
+
+getContacto(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlContacto + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getPsicometria(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlPsicometria + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getDocumento(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlDocumento + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getProceso(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlProceso + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getCopetencia(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlCopetencia + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
 
 }

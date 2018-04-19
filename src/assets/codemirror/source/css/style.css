@@ -81,9 +81,9 @@
 /*  Table response
 /* ---------------------------------------------------------------------- */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px;) {
        mat-table {
-           width:100%;
+           width:100% !important;
        }
        mat-header-row {
            display: none !important;

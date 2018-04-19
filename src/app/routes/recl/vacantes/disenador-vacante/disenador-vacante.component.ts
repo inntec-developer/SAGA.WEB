@@ -24,6 +24,11 @@ public Actividad : any[];
 public Beneficio : any[];
 public Direccion : any[];
 public Telefono : any[];
+public Contacto : any[];
+public Psicometria : any[];
+public Documento : any[];
+public Proceso : any[];
+public Copetencia : any[];
 public Requi : string;
 public Mensaje :string;
 public variable:boolean = false;
@@ -109,18 +114,38 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     .subscribe( data => {
       this.Telefono = data;
     });
+
+    this.service.getContacto(this.Requi)
+    .subscribe( data => {
+      this.Contacto = data;
+    });
+
+    this.service.getPsicometria(this.Requi)
+    .subscribe( data => {
+      this.Psicometria = data;
+    });
+
+    this.service.getDocumento(this.Requi)
+    .subscribe( data => {
+      this.Documento = data;
+    });
+
+    this.service.getProceso(this.Requi)
+    .subscribe( data => {
+      this.Proceso = data;
+    });
+
+    this.service.getCopetencia(this.Requi)
+    .subscribe( data => {
+      this.Copetencia = data;
+    });
   }
 
   SetDetalle(id,titulo){
-
-
     // let e2 = document.getElementById('Detalle_' + id);
     // let algo = (<HTMLInputElement>e2).checked;
-
     let e = document.getElementById('Detalle_' + id);
     let bol = e['checked'];
-
-
     this.Config.SetDetalle(this.Requi,id,bol)
     .subscribe( data => {
       this.Mensaje = data;
