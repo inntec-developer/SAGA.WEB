@@ -156,7 +156,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
 
 
   SetResumen(id,titulo){
-    let e = document.getElementById('Detalle_' + id);
+    let e = document.getElementById('Resumen_' + id);
     this.bol = e['checked'];
     this.Config.SetResumen(this.Requi,id,this.bol)
     .subscribe( data => {
