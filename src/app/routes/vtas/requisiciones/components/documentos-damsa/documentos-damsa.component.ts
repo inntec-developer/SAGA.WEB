@@ -8,7 +8,7 @@ import { CatalogosService } from '../../../../../service/index';
 })
 export class DocumentosDamsaComponent implements OnInit {
 
-  private documentosDamsa: any[];
+  public documentosDamsa: any[];
   constructor(
     private serviceCatalogos: CatalogosService
   ) { }

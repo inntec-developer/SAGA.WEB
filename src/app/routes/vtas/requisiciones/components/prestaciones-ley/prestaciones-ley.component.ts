@@ -8,7 +8,7 @@ import { CatalogosService } from '../../../../../service/index';
   providers: [CatalogosService]
 })
 export class PrestacionesLeyComponent implements OnInit {
-  private prestacionesLey: any[];
+  public prestacionesLey: any[];
   constructor(
     private serviceCatalogos: CatalogosService
   ) { }

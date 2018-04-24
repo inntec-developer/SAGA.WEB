@@ -84,10 +84,6 @@ export class DtDamfoComponent implements OnInit {
     });
   }
 
-
-
-
-
 //*******************************-- GRID-- *********************************************//
   // Paginador.
   length = 0;

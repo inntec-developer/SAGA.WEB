@@ -3,16 +3,29 @@
     <ul class="breadcrumb pull-right">
         <li><a [routerLink]="['/home']" >Inicio</a></li>
         <li><a [routerLink]="['/ventas/requisicion']" >Requisicion</a></li>
-        <li><a [routerLink]="['/ventas/crearRequisicion']" >Crear Requisicion</a></li>
+        <li><a [routerLink]="['/ventas/crearRequisicion']" >Revisión DAM-FO-290</a></li>
         <li class="active">DAM-FO-290</li>
     </ul>
-    Visaulizar DAM-FO-290
+    Visualizar DAM-FO-290
     <small>Caracteristicas de DAM-FO-290</small>
 </div>
 
-<!-- <div class="row">
-  <button (click)="print()">Imprimir</button>
-</div> -->
+<div class="row">
+  <!-- <button (click)="print()">Imprimir</button> -->
+  <div class="col-md-12 text-right">
+    <button class="mb-md btn-md btn btn-success btn-outline"  type="button"  matTooltip="Generar Requisición">
+      <em class="icon-docs"></em>
+    </button>
+    <button class="mb-md btn-md btn btn-warning btn-outline"
+            type="button"
+            matTooltip="Regresar"
+            [routerLink]="['/ventas/crearRequisicion']">
+      <em class="icon-action-undo"></em>
+    </button>
+  </div>
+
+</div>
+<br/>
 <div id="print-section">
   <div class="row">
     <div class="col-md-4">
