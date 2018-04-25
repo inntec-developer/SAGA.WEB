@@ -13,8 +13,33 @@ import { RequisicionesService, CatalogosService } from '../../../../../service/i
   providers: [RequisicionesService]
 })
 export class ViewdamfoComponent implements OnInit {
-  private damfoId: string;
-  private damfo290: any[];
+  public damfoId: string;
+  public damfo290: any[];
+  //datos a mostrar
+  public cliente: any[];
+  public tipoReclutamiento: any[];
+  public nombrePerfil : any[];
+  public genero : any[];
+  public edadMinima : any[];
+  public edadMaxima : any[];
+  public estadiCivil : any[];
+  public escolaridadesPerfil : any[];
+  public observacionesPerfil : any[];
+  public procesoPerfil : any[];
+  public diaCorte : any[];
+  public tipoNomina : any[];
+  public diaPago : any[];
+  public sueldoMinimo : any[];
+  public sueldoMAximo : any[];
+  public documentosCliente : any[];
+  public prestacionesCliente : any[];
+  public psicometriasDamsa : any[];
+  public psicometriascliente : any[];
+  public competenciasCardinalPerfil : any[];
+  public competenciasAreaPerfil : any[];
+  public competetenciasGerencialPerfil : any[];
+
+
 
   constructor(
     private serviceRequisiciones: RequisicionesService,

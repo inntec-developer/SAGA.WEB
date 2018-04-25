@@ -13,11 +13,11 @@ import { CreateRequisicion } from '../../../../../models/vtas/Requisicion';
   providers:[CatalogosService, RequisicionesService]
 })
 export class RequisicionNuevaComponent implements OnInit {
-  private damfoId: string;
-  private direccionId: string;
-  private requisicionId: string;
-  private createRequi: boolean;
-  private dataRequisicion : any[];
+  public damfoId: string;
+  public direccionId: string;
+  public requisicionId: string;
+  public createRequi: boolean;
+  public dataRequisicion : any[];
 
   constructor(
     private serviceCatalogo: CatalogosService,
