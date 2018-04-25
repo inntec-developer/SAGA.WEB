@@ -1,10 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, CanDeactivate, Router, } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {MatTableDataSource, PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 //Services
 import { RequisicionesService, CatalogosService } from '../../../../../service/index';
 
 //Components
+import { DialogdamfoComponent } from '../dialogdamfo/dialogdamfo.component'
+
 
 @Component({
   selector: 'app-viewdamfo',
@@ -43,6 +46,7 @@ export class ViewdamfoComponent implements OnInit {
 
   constructor(
     private serviceRequisiciones: RequisicionesService,
+    private dialog: MatDialog,
     private _Router: Router,
     private _Route: ActivatedRoute,
     private spinner:  NgxSpinnerService
@@ -64,6 +68,16 @@ export class ViewdamfoComponent implements OnInit {
           this.spinner.hide();
           console.log('Error al ccargar información');
       }
+    });
+  }
+
+  openDialog(){
+    let dialogRef = this.dialog.open(DialogdamfoComponent,{
+      width: '50%',
+      height: 'auto',
+      data: this.damfo290
+    });
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 

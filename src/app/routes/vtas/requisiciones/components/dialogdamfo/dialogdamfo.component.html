@@ -6,15 +6,15 @@
 <div mat-dialog-content>
     <div class="row">
       <div class="col-sm-6">
-        <small><strong>Cliente: </strong> {{data.cliente}}</small>
+        <small><strong>Cliente: </strong> {{data.cliente?.razonSocial}}</small>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 col-sm-4">
-        <small><strong>Giro: </strong>{{data.giroEmpresa}}</small>
+        <small><strong>Giro: </strong>{{data.cliente?.giroEmpresas?.giroEmpresa}}</small>
       </div>
       <div class="col-md-4 col-sm-4">
-        <small><strong>Actividad: </strong>{{data.actividadEmpresa}}</small>
+        <small><strong>Actividad: </strong>{{data.cliente?.actividadEmpresas?.actividadEmpresa}}</small>
       </div>
     </div>
     <div class="row">
@@ -30,10 +30,10 @@
     </div>
     <div class="row">
       <div class="col-md-4 col-sm-4">
-         <small><strong>Clase Reclutamiento: </strong>{{data.claseReclutamiento}}</small>
+         <small><strong>Clase Reclutamiento: </strong>{{data.claseReclutamiento?.clasesReclutamiento}}</small>
       </div>
       <div class="col-md-4 col-sm-4">
-        <small><strong>Tipo Reclutamiento: </strong>{{data.tipoReclutamiento}}</small>
+        <small><strong>Tipo Reclutamiento: </strong>{{data.tipoReclutamiento?.tipoReclutamiento}}</small>
       </div>
     </div>
     <br>

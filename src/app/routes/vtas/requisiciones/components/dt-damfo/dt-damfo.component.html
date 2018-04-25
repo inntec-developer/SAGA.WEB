@@ -10,7 +10,7 @@
     <!-- Cliente <Razon Social> Column -->
     <ng-container matColumnDef="cliente">
       <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element?.cliente}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element?.cliente?.razonSocial}} </mat-cell>
     </ng-container>
     <!-- Nombre Perfil Column -->
     <ng-container matColumnDef="nombrePerfil">
@@ -21,13 +21,13 @@
     <!-- Giro Empresas <Giro Empresa> Column -->
     <ng-container matColumnDef="empresa">
       <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element?.giroEmpresa}} - {{element?.actividadEmpresa}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element?.cliente?.giroEmpresas?.giroEmpresa}} - {{element?.cliente?.actividadEmpresas?.actividadEmpresa}} </mat-cell>
     </ng-container>
 
     <!-- Tipo Reclutamiento  <Actividad Empresa> Column -->
     <ng-container matColumnDef="reclutamiento">
       <mat-header-cell *matHeaderCellDef>Reclutamiento</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element?.tipoReclutamiento}} - {{element?.claseReclutamiento}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element?.claseReclutamiento?.claseReclutamiento}} - {{element?.tipoReclutamiento?.tipoReclutamiento}} </mat-cell>
     </ng-container>
 
     <!-- Sueldo minimo Column -->
