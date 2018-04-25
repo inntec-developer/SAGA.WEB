@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -20,6 +20,10 @@ export class NivestudiosComponent implements OnInit {
     nvestuidios: any[];
     nvestudiosCtrl: FormControl;
     filterednvestudios: Observable<any[]>;
+    filtronv: any;
+    Idnv: number;
+    @Output()
+    change: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private service: CandidatosService) {
     this.nvestudiosCtrl = new FormControl();
@@ -36,8 +40,19 @@ export class NivestudiosComponent implements OnInit {
   }
 
   filternvestudio(nvest: string) {
-    return this.nvestuidios.filter(nv =>
+    return this.filtronv = this.nvestuidios.filter(nv =>
       nv.gradoEstudio.toLowerCase().indexOf(nvest.toLowerCase()) === 0);
+  }
+
+  SendIdnv(){
+    this.filterednvestudios = this.nvestudiosCtrl.valueChanges
+      .pipe(startWith(''),
+      map(nv => nv ? this.filternvestudio(nv) : this.nvestuidios.slice()));
+
+   if(this.filtronv != null){
+          this.Idnv = this.filtronv[0].id;
+          this.change.emit(this.Idnv);
+        }
   }
 
 

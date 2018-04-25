@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -20,6 +20,11 @@ export class IdiomasComponent implements OnInit {
     idiomas: any[];
     idiomasCtrl: FormControl;
     filteredidiomas: Observable<any[]>;
+    filtroidioma: any;
+    Ididioma: number;
+    @Output()
+    change: EventEmitter<number> = new EventEmitter<number>();
+
 
   constructor(private service: CandidatosService) {
     this.idiomasCtrl = new FormControl();
@@ -36,8 +41,20 @@ export class IdiomasComponent implements OnInit {
   }
 
   filternvestudio(idiom: string) {
-    return this.idiomas.filter(id =>
+    return this.filtroidioma = this.idiomas.filter(id =>
       id.idioma.toLowerCase().indexOf(idiom.toLowerCase()) === 0);
+  }
+
+  SendIdIdioma(){
+    this.filteredidiomas = this.idiomasCtrl.valueChanges
+      .pipe(startWith(''),
+      map(id => id ? this.filternvestudio(id) : this.idiomas.slice()));
+
+    if(this.filtroidioma != null){
+          this.Ididioma = this.filtroidioma[0].id;
+          this.change.emit(this.Ididioma);
+        }
+
   }
 
 }

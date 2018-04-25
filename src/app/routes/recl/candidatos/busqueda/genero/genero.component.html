@@ -1,5 +1,5 @@
 <mat-form-field class="fieldautocomplete-full-width">
-  <input matInput placeholder="Genero" aria-label="Genero" [matAutocomplete]="auto" [formControl]="generoCtrl">
+  <input matInput placeholder="Genero" aria-label="Genero" [matAutocomplete]="auto" [formControl]="generoCtrl" (blur)="SendIdGenero()">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let genero of filteredgenero | async" [value]="genero.genero">
         <div class="row">
