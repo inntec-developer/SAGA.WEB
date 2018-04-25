@@ -43,14 +43,14 @@
     <!-- Nss Column -->
     <ng-container matColumnDef="AreaInteres">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Area de interes </mat-header-cell>
-      <mat-cell *matCellDef="let candidatos"> {{candidatos.nss}} </mat-cell>
+      <mat-cell *matCellDef="let candidatos"> {{candidatos?.acercademi[0]?.areaInteres?.areaInteres}} </mat-cell>
     </ng-container>
 
     <!-- Accion -->
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </mat-header-cell>
         <mat-cell *matCellDef="let candidatos">
-          <button class="btn btn-warning btn-outline" type="button" (click)="openDialog(candidatos.idCandidato)">
+          <button class="btn btn-warning btn-outline" type="button" (click)="openDialog(candidatos.idCandidato)" matTooltip="Ver detalles">
             <em class="fa fa-eye"></em></button>
       </mat-cell>
     </ng-container>
@@ -106,7 +106,7 @@
             <div class="card-body bg-gray-dark">
                   <div class="row">
                     <div class="col-md-2 text-center">
-                      <em *ngIf="Status == 0" class="fa fa-unlock m-0" style="color: white;"></em>
+                      <em *ngIf="Status == 0" class="fa fa-unlock m-0 " style="color: white;"></em>
                       <em *ngIf="!Status == 0" class="fa fa-lock m-0" style="color: white;"></em>
                     </div>
                       <div class="col-md-10">
@@ -156,7 +156,7 @@
                 <mat-icon class="text-primary">assignment_turned_in</mat-icon>
               </mat-panel-title>
               <mat-panel-description>
-                <label class="text-primary">Postulaciones</label>
+                <label class="text-primary">Postulaciones  ({{NumPostulaciones}})</label>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-table #table [dataSource]="dataSourcep">
@@ -166,12 +166,6 @@
                 <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
                 <mat-cell *matCellDef="let postulaciones"> {{postulaciones.vBtra}} </mat-cell>
               </ng-container>
-
-              <!-- Fecha de postulacion Column -->
-              <!-- <ng-container matColumnDef="Fecha">
-                <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-                <mat-cell *matCellDef="let postulaciones">  </mat-cell>
-              </ng-container> -->
 
               <!-- Estatus Column -->
               <ng-container matColumnDef="Estatus">
@@ -195,12 +189,12 @@
               <mat-icon class="text-primary">assignment</mat-icon>
             </mat-panel-title>
             <mat-panel-description>
-              <label class="text-primary">Mis vacantes</label>
+              <label class="text-primary">Mis vacantes ({{NumVacantes}})</label>
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="example-header">
             <mat-form-field>
-              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+              <input matInput (keyup)="applyFilterv($event.target.value)" placeholder="Filtrar">
             </mat-form-field>
           </div>
           <mat-table #table [dataSource]="dataSourcev">
@@ -212,7 +206,7 @@
 
             <ng-container matColumnDef="FechaCreacion">
               <mat-header-cell *matHeaderCellDef> Fecha creación </mat-header-cell>
-              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.fch_Creacion}}</small></h5></mat-cell>
+              <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.fch_Creacion | date:"dd/MM/yyyy"}}</small></h5></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Cliente">
@@ -248,6 +242,12 @@
             <mat-header-row *matHeaderRowDef="displayedColumnsVacantes"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumnsVacantes;"></mat-row>
           </mat-table>
+          <mat-paginator [showFirstLastButtons]="true"
+                         [length]="TotalRecordsv"
+                         [pageSize]="pageSizev"
+                         [pageSizeOptions]="pageSizeOptionsv"
+                         (page)="pageEventv = paginatev($event)">
+          </mat-paginator>
         </mat-expansion-panel>
         </mat-accordion>
         <br>
@@ -520,10 +520,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6 text-muted">
-                    <strong class="text-primary">Grado estudio: </strong> {{candidatodtl[0]?.formaciones[0]?.gradosEstudio?.gradoEstudio}}
+                    <strong class="text-primary">Grado estudio: </strong> {{formacion?.gradosEstudio?.gradoEstudio}}
                   </div>
                   <div class="col-md-6 text-muted">
-                    <strong class="text-primary">Estado estudio : </strong> {{formacion?.estadoEstudio}}
+                    <strong class="text-primary">Estado estudio : </strong> {{formacion?.estadoEstudio?.estadoEstudio}}
                   </div>
                 </div>
                 <div class="row">
@@ -646,7 +646,7 @@
                     <strong class="text-primary">Curso: </strong> {{curso?.curso}}
                   </div>
                   <div class="col-md-6 text-muted">
-                    <strong class="text-primary">Institución: </strong> {{curso?.institucionEducativa}}
+                    <strong class="text-primary">Institución: </strong> {{curso?.institucionEducativa?.institucionEducativa}}
                   </div>
                 </div>
                 <div class="row">
@@ -688,7 +688,7 @@
                     <strong class="text-primary">Conocimiento: </strong> {{conocimiento?.conocimiento}}
                   </div>
                   <div class="col-md-6 text-muted">
-                    <strong class="text-primary">Institución educativa:</strong> {{conocimiento?.institucionEducativa}}
+                    <strong class="text-primary">Institución educativa:</strong> {{conocimiento?.institucionEducativa?.institucionEducativa}}
                   </div>
                 </div>
                 <div class="row">

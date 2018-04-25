@@ -26,6 +26,13 @@ export class BusquedaComponent implements OnInit {
   IdMunicipio: number;
   IdColonia: number;
   IdCp: number;
+  Idexp: number;
+  IdPerfil: number;
+  IdGenero: number;
+  IdPd: number;
+  IdTpLic: number;
+  IdNv: number;
+  IdIdioma: number;
   Candidatos: any;
   // Decorador para envio de busqueda a tabla de candidatos.
   @Output() filtro: EventEmitter<any> = new EventEmitter<any>();
@@ -60,6 +67,34 @@ export class BusquedaComponent implements OnInit {
     this.IdCp = event;
   }
 
+  Filtroareaexp(event){
+    this.Idexp = event;
+  }
+
+  Filtroperfil(event){
+    this.IdPerfil = event;
+  }
+
+  FiltroGenero(event){
+    this.IdGenero = event;
+  }
+
+  FiltroPd(event){
+    this.IdPd = event;
+  }
+
+  FiltroTpLic(event){
+    this.IdTpLic = event;
+  }
+
+  FiltroNv(event){
+    this.IdNv = event;
+  }
+
+  FiltroIdioma(event){
+    this.IdIdioma = event;
+  }
+
   // Busqueda de candidatos segun filtros de busqueda.
   Buscar(){
   let filtroX: Filtros = new Filtros();
@@ -68,6 +103,12 @@ export class BusquedaComponent implements OnInit {
     filtroX.IdEstado = this.IdEstado;
     filtroX.IdMunicipio = this.IdMunicipio;
     filtroX.Cp = this.IdCp;
+    filtroX.IdAreaExp = this.Idexp;
+    filtroX.IdPerfil = this.IdPerfil;
+    filtroX.IdGenero = this.IdGenero;
+    filtroX.IdPDiscapacidad = this.IdPd;
+    filtroX.IdNvEstudios = this.IdNv;
+    filtroX.IdIdiomas = this.IdIdioma;
     // filtroX.palabraClave = this.FiltroVacantes.get('palabraClave').value;
     this.service.getcandidatos(filtroX)
     .subscribe(data => {

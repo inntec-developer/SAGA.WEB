@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
@@ -16,9 +16,13 @@ import { CandidatosService } from '../../../../../service/index';
 })
 export class AreaExpComponent implements OnInit {
   // Declarar variables.
-    Areasexp: any[];
-    aresexpCtrl: FormControl;
-    filteredareaexp: Observable<any[]>;
+  Areasexp: any[];
+  aresexpCtrl: FormControl;
+  filteredareaexp: Observable<any[]>;
+  filtroareaexp: any;
+  IdExp: number;
+  @Output()
+  change: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private service: CandidatosService) {
     this.aresexpCtrl = new FormControl();
@@ -31,12 +35,24 @@ export class AreaExpComponent implements OnInit {
       this.filteredareaexp = this.aresexpCtrl.valueChanges
         .pipe(startWith(''),
         map(area => area ? this.filterareaexp(area) : this.Areasexp.slice()));
-    })
+    });
   }
 
   filterareaexp(area: string) {
-    return this.Areasexp.filter(areaexp =>
+    return this.filtroareaexp = this.Areasexp.filter(areaexp =>
       areaexp.areaExperiencia.toLowerCase().indexOf(area.toLowerCase()) === 0);
+  }
+
+  SendIdExp(){
+    this.filteredareaexp = this.aresexpCtrl.valueChanges
+      .pipe(startWith(''),
+      map(area => area ? this.filterareaexp(area) : this.Areasexp.slice()));
+
+    if(this.filtroareaexp != null){
+      this.IdExp = this.filtroareaexp[0].id;
+      this.change.emit(this.IdExp);
+      }
+
   }
 
 }
