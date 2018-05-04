@@ -31,7 +31,7 @@
             <!-- Filtro de Salario -->
             <div class="col-md-2">
               <mat-form-field class="fieldautocomplete-full-width">
-                <input matInput placeholder="Salario" type="number" class="example-right-align">
+                <input matInput placeholder="Salario" type="number" class="example-right-align" #Salario (blur)="FiltroSalario(Salario.value)">
                 <span matPrefix>$&nbsp;</span>
                 <span matSuffix>.00</span>
               </mat-form-field>
@@ -39,9 +39,9 @@
             <!-- Filtro de Genero -->
             <div class="col-md-2"><app-genero (change)="FiltroGenero($event)"></app-genero></div>
             <!-- Filtro de Edad -->
-            <div class="col-md-2"><app-edad></app-edad></div>
+            <div class="col-md-2"><app-edad (change)="FiltroEdad($event)"></app-edad></div>
             <!-- Filtro de Reubicacion -->
-            <div class="col-md-2"><app-reubicacion></app-reubicacion></div>
+            <div class="col-md-2"><app-reubicacion (change)="FiltroRe($event)"></app-reubicacion></div>
             <!-- Filtro de Persona con discapasidad -->
             <div class="col-md-2"><app-pcondiscapacidad (change)="FiltroPd($event)"></app-pcondiscapacidad></div>
           </div>
@@ -49,7 +49,7 @@
             <!-- Filtro de Tipo de licencia -->
             <div class="col-md-2"><app-tplicencia (change)="FiltroTpLic($event)"></app-tplicencia></div>
             <!-- Filtro de vehiculo propio -->
-            <div class="col-md-2"><app-vehpropio></app-vehpropio></div>
+            <div class="col-md-2"><app-vehpropio (change)="FiltroVh($event)"></app-vehpropio></div>
             <!-- Filtro de Nivel de estudios -->
             <div class="col-md-2"><app-nivestudios (change)="FiltroNv($event)"></app-nivestudios></div>
             <!-- Filtro de Idiomas -->

@@ -74,7 +74,7 @@ export class DialogdamfoComponent implements OnInit, OnChanges {
       this._Router.navigate(['/ventas/requisicionNueva', this.IdDamfo, this.IdDireccion], {skipLocationChange:true});
       this.onNoClick();
     }else{
-      this.popToast('error', 'Ups!!','Seleccione una dirección para continuar' );
+      this.popToast('error', 'Oops!!','Seleccione una dirección para continuar' );
     }
 
   }

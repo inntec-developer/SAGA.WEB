@@ -34,6 +34,10 @@ export class BusquedaComponent implements OnInit {
   IdNv: number;
   IdIdioma: number;
   Candidatos: any;
+  Salario: number;
+  Edad: number;
+  Reubicacion: number;
+  TpVehiculo: number;
   // Decorador para envio de busqueda a tabla de candidatos.
   @Output() filtro: EventEmitter<any> = new EventEmitter<any>();
   // Objeto de filtros de busqueda.
@@ -95,6 +99,22 @@ export class BusquedaComponent implements OnInit {
     this.IdIdioma = event;
   }
 
+  FiltroSalario(salario: number){
+    this.Salario = salario;
+  }
+
+  FiltroEdad(event){
+    this.Edad = event;
+  }
+
+  FiltroRe(event){
+    this.Reubicacion = event;
+  }
+
+  FiltroVh(event){
+    this.TpVehiculo = event;
+  }
+
   // Busqueda de candidatos segun filtros de busqueda.
   Buscar(){
   let filtroX: Filtros = new Filtros();
@@ -109,6 +129,10 @@ export class BusquedaComponent implements OnInit {
     filtroX.IdPDiscapacidad = this.IdPd;
     filtroX.IdNvEstudios = this.IdNv;
     filtroX.IdIdiomas = this.IdIdioma;
+    filtroX.Salario = this.Salario;
+    filtroX.Edad = this.Edad;
+    filtroX.Reubica = this.Reubicacion;
+    filtroX.TpVehiculo = this.TpVehiculo;
     // filtroX.palabraClave = this.FiltroVacantes.get('palabraClave').value;
     this.service.getcandidatos(filtroX)
     .subscribe(data => {

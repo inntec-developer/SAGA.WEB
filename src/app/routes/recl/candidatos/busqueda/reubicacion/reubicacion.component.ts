@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-reubicacion',
@@ -8,13 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class ReubicacionComponent implements OnInit {
 
   checked = false;
-  indeterminate = false;
-  align = 'start';
-  disabled = false;
+  Activo: number;
+  @Output()
+  change: EventEmitter<number> = new EventEmitter<number>();
+
+  Filtro(){
+    if(this.checked){
+      this.Activo = 1;
+    }else{
+      this.Activo = 0;
+    }
+    this.change.emit(this.Activo);
+  }
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

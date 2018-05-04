@@ -16,6 +16,7 @@ export class RequisicionNuevaComponent implements OnInit {
   public damfoId: string;
   public direccionId: string;
   public requisicionId: string;
+  public requisicion: any[];
   public createRequi: boolean;
   public dataRequisicion : any[];
 
@@ -52,5 +53,9 @@ export class RequisicionNuevaComponent implements OnInit {
         .subscribe(data => {
           this.requisicionId = data;
         })
+  }
+
+  getNewRequisicion(){
+    
   }
 }
