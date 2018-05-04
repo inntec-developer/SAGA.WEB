@@ -177,8 +177,12 @@ toasterconfig: ToasterConfig = new ToasterConfig({
    this.Config.UpdatePublicar(this.ListaCon)
    .subscribe( data => {
     console.log(data)
-    this.pop('',data.bandera,true,'Publicacion guardada','la pagina');
+    this.popGenerico(data.mensaje,data.bandera,'Publicacion');
    });
+  }
+
+  Descripcion(){
+    this.toasterService.pop('success', 'Guardado', 'Se cambio la forma de como guardar la configuracion');
   }
 
   SetDetalle(id,titulo){
@@ -202,6 +206,17 @@ toasterconfig: ToasterConfig = new ToasterConfig({
       this.Mensaje = data;
       this.pop(data.mensaje,data.bandera,this.bol,titulo,'Resumen');
     });
+  }
+
+  popGenerico(mensaje:string,bandera:boolean,titulo:string) {
+    var type = 'success';
+    if (bandera == false) {
+          console.log(mensaje);
+          type = 'error';
+          mensaje = 'Ocurrio algo inesperado intentelo mas tarde';
+
+      }
+      this.toasterService.pop(type, titulo, mensaje);
   }
 
   pop(mensaje:string,bandera:boolean,tipo:boolean,titulo:string,area:string) {
