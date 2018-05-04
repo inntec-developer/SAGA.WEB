@@ -182,7 +182,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
   }
 
   Descripcion(){
-    this.toasterService.pop('success', 'Guardado', 'Se cambio la forma de como guardar la configuracion');
+    this.toasterService.pop('warning', 'Trabajando', 'Se cambio la forma de como guardar la configuracion');
   }
 
   SetDetalle(id,titulo){
