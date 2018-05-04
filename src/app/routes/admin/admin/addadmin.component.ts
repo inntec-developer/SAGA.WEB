@@ -39,12 +39,12 @@ export class AddadminComponent implements OnInit {
     {
       this.nomgrupo = $event.target.value;
       var mocos = this.listGrupos.indexOf(item => item.id === $event.target.value);
-      console.log(this.listGrupos.splice((item => item.id !== $event.target.value), 1))
+      //console.log(this.listGrupos.splice((item => item.id !== $event.target.value), 1))
 
     }
 
     popPerson(nemp:any) {
-      this.ListaPersonas.splice((item => item === nemp.nombre), 1);
+      //this.ListaPersonas.splice((item => item === nemp.nombre), 1);
     }
 
     ngOnInit() {

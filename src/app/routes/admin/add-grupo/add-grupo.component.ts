@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import { ViewChild } from '@angular/core';
+import { MatCheckbox } from '@angular/material'
 
 @Component({
   selector: 'app-add-grupo',
