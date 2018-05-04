@@ -9,12 +9,12 @@ export class Filtros {
     Salario: number;
     IdGenero: number;
     Edad: number;
-    Reubica: boolean;
+    Reubica: number;
     IdPDiscapacidad: number;
     IdTpLicencia: number;
-    Vehiculo: boolean;
     IdNvEstudios: number;
     IdIdiomas: number;
+    TpVehiculo: number;
     // palabraClave: string;
     // filtroEstados: number[];
     // filtrosmunicipio: number[];
