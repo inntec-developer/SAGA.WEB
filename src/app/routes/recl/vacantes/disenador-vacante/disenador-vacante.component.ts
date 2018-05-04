@@ -30,7 +30,7 @@ public Documento : any[];
 public Proceso : any[];
 public Copetencia : any[];
 public Ubicacion : any[];
-public ListaCampo : any[];
+//public ListaCampo : any[];
 public ListaCon : Array<any> = [];
 
 public Requi : string;
@@ -151,6 +151,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
 
     this.service.getCampos()
     .subscribe( data => {
+      let ListaCampo : any[];
       this.ListaCampo = data;
     //  this.Publicar()
     });
@@ -179,6 +180,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     console.log(data)
     this.popGenerico(data.mensaje,data.bandera,'Publicacion');
    });
+   this.ListaCampo = 0;
   }
 
   Descripcion(){
