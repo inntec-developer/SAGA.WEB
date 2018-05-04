@@ -16,7 +16,7 @@ const Administracion = {
           {
             text: 'Registrar Personal',
             link: '/admin/agregar'
-          }
+          },
           {
             text: 'Asignar Permisos',
             link: '/admin/grupo'
