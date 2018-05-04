@@ -31,6 +31,9 @@ private UrlPsicometria = ApiConection.ServiceUrl+ApiConection.getPsicometria;
 private UrlDocumento = ApiConection.ServiceUrl+ApiConection.getDocumento;
 private UrlProceso = ApiConection.ServiceUrl+ApiConection.getProceso;
 private UrlCopetencia = ApiConection.ServiceUrl+ApiConection.getCopetencia;
+private UrlUbicacion = ApiConection.ServiceUrl+ApiConection.getUbicacion;
+private UrlgetCampos = ApiConection.ServiceUrl+ApiConection.getCampos;
+
 
 // Error.
 private handleError(error: any) {
@@ -133,6 +136,19 @@ getCopetencia(RequiID:string): Observable<any> {
        .map(result => result.json())
        .catch(this.handleError);
 }
+
+getUbicacion(RequiID:string): Observable<any> {
+   return this.http.get(this.UrlUbicacion + '?Requi='+RequiID)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
+getCampos(): Observable<any> {
+   return this.http.get(this.UrlgetCampos)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
+
 
 
 }

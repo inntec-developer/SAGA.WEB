@@ -1,0 +1,60 @@
+<div class="content-heading">
+    <ul class="breadcrumb pull-right">
+        <li>
+            <a href="/home">Inicio</a>
+        </li>
+        <li class="active">Administrador</li>
+    </ul>
+    <small>Crear Grupos</small>
+</div>
+
+<div class="row">
+   <div class="col-md-8">
+      <!-- START panel-->
+      <div class="panel panel-default">
+        <div class="panel-body">
+               <fieldset>
+                 <div class="row">
+                   <div class="col-md-6">
+                     <label>Nombre Grupo</label>
+                     <select class="form-control" (change)="selected($event)" >
+                         <option>Seleccionar Grupo</option>
+                         <option *ngFor="let user of listGrupos" value="{{user.tipo}}">
+                               {{user.tipo}}
+                         </option>
+                     </select>
+                   </div>
+                   <div class="col-md-4">
+                     <br/>
+                      <button type="button" class="btn btn-sm btn-oval btn-success"><i class="material-icons">add</i></button>
+                   </div>
+                 </div>
+               </fieldset>
+
+             <fieldset>
+             <div class="row">
+                <div class="col-lg-2">
+                    <label class="control-label">Permisos:</label>
+                </div>
+                <div class="col-lg-2 checkbox">
+                      <mat-checkbox #myCheckbox [checked]>Create</mat-checkbox>
+                </div>
+                <div class="col-lg-2">
+                      <mat-checkbox class="checkbox">Read</mat-checkbox>
+                </div>
+                <div class="col-lg-2">
+                      <mat-checkbox class="checkbox">Update</mat-checkbox>
+                </div>
+                <div class="col-lg-2">
+                      <mat-checkbox class="checkbox">Delete</mat-checkbox>
+                </div>
+           </div>
+         </fieldset>
+              <div class="row">
+                  <div class="col-md-4">
+                      <button class="btn btn-lg btn-oval btn-primary">Asignar</button>
+                  </div>
+             </div>
+      </div>
+   </div>
+</div>

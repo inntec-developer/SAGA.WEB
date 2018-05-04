@@ -16,9 +16,9 @@ import { ApiConection } from '../api-conection.service';
 @Injectable()
 export class ConfiguracionService {
 // Url de servicios.
-private Url = ApiConection.ServiceUrl+ApiConection.setResumen;
-private Url2 = ApiConection.ServiceUrl+ApiConection.setDetalle;
-
+private UrlResumen = ApiConection.ServiceUrl+ApiConection.setResumen;
+private UrlDetalle = ApiConection.ServiceUrl+ApiConection.setDetalle;
+private UrlPublicar = ApiConection.ServiceUrl+ApiConection.updatePublicar;
 
 // Error.
 private handleError(error: any) {
@@ -30,19 +30,30 @@ private handleError(error: any) {
    }
 
 constructor(private http: Http) {  }
-
 SetDetalle(RequiID:string,Idcampo:number,detalle:boolean): Observable<any> {
-   return this.http.get(this.Url2 + '?Requi='+RequiID+'&Idcampo='+Idcampo+'&detalle='+detalle)
+   return this.http.get(this.UrlDetalle + '?Requi='+RequiID+'&Idcampo='+Idcampo+'&detalle='+detalle)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 SetResumen(RequiID:string,Idcampo:number,detalle:boolean): Observable<any> {
-   return this.http.get(this.Url + '?Requi='+RequiID+'&Idcampo='+Idcampo+'&resumen='+detalle)
+   return this.http.get(this.UrlResumen + '?Requi='+RequiID+'&Idcampo='+Idcampo+'&resumen='+detalle)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
+// UpdatePublicar2(RequiID:string, lista:any[]): Observable<any> {
+//    return this.http.post(this.UrlPublicar + '?Requi='+RequiID+'&ListadoJson='+lista)
+//        .map(result => result.json())
+//        .catch(this.handleError);
+// }
 
+UpdatePublicar(data: any): Observable<any>{
+  let headers = new Headers({'Content-Type' : 'application/json'});
+  let options = new RequestOptions({headers: headers});
+  return this.http.post(this.UrlPublicar, JSON.stringify(data), options )
+          .map(result => result.json())
+          .catch(this.handleError);
+}
 
 }

@@ -29,6 +29,10 @@ public Psicometria : any[];
 public Documento : any[];
 public Proceso : any[];
 public Copetencia : any[];
+public Ubicacion : any[];
+public ListaCampo : any[];
+public ListaCon : Array<any> = [];
+
 public Requi : string;
 public Mensaje :string;
 public variable:boolean = false;
@@ -139,6 +143,46 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     .subscribe( data => {
       this.Copetencia = data;
     });
+
+    this.service.getUbicacion(this.Requi)
+    .subscribe( data => {
+      this.Ubicacion = data;
+    });
+
+    this.service.getCampos()
+    .subscribe( data => {
+      this.ListaCampo = data;
+    //  this.Publicar()
+    });
+
+  }
+
+  Publicar(){
+
+    for (let item of this.ListaCampo) {
+      let d = document.getElementById('Detalle_' + item.id);
+      let r = document.getElementById('Resumen_' + item.id);
+      let det = d['checked'];
+      let res = r['checked'];
+      let config = {
+                      detalle:det,
+                      resumen:res,
+                      idCampo:item.id,
+                      nombre:item.nombre,
+                      id:this.Requi
+                   }
+      this.ListaCon.push(config);
+   }
+   console.log(this.ListaCon)
+   this.Config.UpdatePublicar(this.ListaCon)
+   .subscribe( data => {
+    console.log(data)
+    this.popGenerico(data.mensaje,data.bandera,'Publicacion');
+   });
+  }
+
+  Descripcion(){
+    this.toasterService.pop('warning', 'Trabajando', 'Se cambio la forma de como guardar la configuracion');
   }
 
   SetDetalle(id,titulo){
@@ -148,9 +192,8 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     let bol = e['checked'];
     this.Config.SetDetalle(this.Requi,id,bol)
     .subscribe( data => {
-      this.Mensaje = data;
+      console.log(data.Mensaje)
       this.pop(data.mensaje,data.bandera,bol,titulo,'Detalle');
-      console.log(this.Mensaje)
     });
   }
 
@@ -163,6 +206,17 @@ toasterconfig: ToasterConfig = new ToasterConfig({
       this.Mensaje = data;
       this.pop(data.mensaje,data.bandera,this.bol,titulo,'Resumen');
     });
+  }
+
+  popGenerico(mensaje:string,bandera:boolean,titulo:string) {
+    var type = 'success';
+    if (bandera == false) {
+          console.log(mensaje);
+          type = 'error';
+          mensaje = 'Ocurrio algo inesperado intentelo mas tarde';
+
+      }
+      this.toasterService.pop(type, titulo, mensaje);
   }
 
   pop(mensaje:string,bandera:boolean,tipo:boolean,titulo:string,area:string) {

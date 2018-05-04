@@ -1,14 +1,33 @@
 
+td{
+  color: #656565;
+}
+
+.margen{
+  margin-top:15px
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
 
 
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
+  color: #656565 !important;
 }
 
 .example-headers-align .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
+  color: #656565 !important;
 }
 
 

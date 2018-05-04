@@ -64,11 +64,6 @@ export class DtDamfoComponent implements OnInit {
         this.spinner.hide();
       });
   }
-
-  createRequi(id){
-    //mandamos la información por medio de la URL sin que esta se muestre en la liga.
-    this._Router.navigate(['/ventas/requisicionNueva', id], {skipLocationChange:true});
-  }
   showDamfo(id){
     //mandamos la información por medio de la URL sin que esta se muestre en la liga.
     this._Router.navigate(['/ventas/visualizarDamfo290', id], {skipLocationChange:true});
