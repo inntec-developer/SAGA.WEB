@@ -44,7 +44,7 @@ export class AddadminComponent implements OnInit {
     }
 
     popPerson(nemp:any) {
-      //this.ListaPersonas.splice((item => item === nemp.nombre), 1);
+      this.ListaPersonas.splice((item => item === nemp.nombre), 1);
     }
 
     ngOnInit() {
