@@ -33,7 +33,7 @@ import { AddGrupoComponent } from './add-grupo/add-grupo.component';
 
 const routes: Routes = [
     { path: 'roles', component: AddadminComponent },
-    { path: 'agregar', component: AddPersonaComponent }
+    { path: 'agregar', component: AddPersonaComponent },
     { path: 'grupo', component: AddGrupoComponent }
 ];
 
