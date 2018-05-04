@@ -68,4 +68,7 @@ export class ApiConection {
   public static updatePublicar = '/dvacante/updatePublicar';
   public static getCampos = '/dvacante/getCampos';
 
+  /*Admin*/
+  public static getDtosPersonal = '/admin/get';
+  public static getTiposUsuarios = '/admin/getTipos';
 }

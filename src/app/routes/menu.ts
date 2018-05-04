@@ -4,7 +4,25 @@ const Home = {
     icon: 'icon-home'
 };
 
-
+const Administracion = {
+    text: 'Administracion',
+    link: '/admin',
+    icon: 'icon-people',
+        submenu:[
+          {
+            text: 'Asignar Grupos',
+            link: '/admin/roles'
+          },
+          {
+            text: 'Registrar Personal',
+            link: '/admin/agregar'
+          }
+          {
+            text: 'Asignar Permisos',
+            link: '/admin/grupo'
+          }
+        ]
+};
 
 const Reclutamiento = {
     text: 'Reclutamiento',
@@ -52,5 +70,6 @@ export const menu = [
     headingMain,
     Home,
     Reclutamiento,
-    Ventas
+    Ventas,
+    Administracion
 ];
