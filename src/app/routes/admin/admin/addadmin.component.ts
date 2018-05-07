@@ -24,7 +24,6 @@ export class AddadminComponent implements OnInit {
     addToGroups($event)
     {
       this.ListaPG.push($event.dragData);
-      this.popPerson($event.dragData)
     }
 
     resetBasket() {
@@ -32,19 +31,13 @@ export class AddadminComponent implements OnInit {
         this.addPersonas();
     }
 
-    orderedProduct($event) {
+    popPerson(p: any, i: any) {
+      this.ListaPersonas.splice(i, 1)
     }
 
     selected($event)
     {
       this.nomgrupo = $event.target.value;
-      var mocos = this.listGrupos.indexOf(item => item.id === $event.target.value);
-      //console.log(this.listGrupos.splice((item => item.id !== $event.target.value), 1))
-
-    }
-
-    popPerson(nemp:any) {
-      this.ListaPersonas.splice((item => item === nemp.nombre), 1);
     }
 
     ngOnInit() {
@@ -58,7 +51,6 @@ export class AddadminComponent implements OnInit {
       .subscribe(
         e=>{
           this.ListaPersonas = e;
-          console.log(e);
         })
     }
 

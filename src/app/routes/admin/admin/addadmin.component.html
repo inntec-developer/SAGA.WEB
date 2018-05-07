@@ -20,7 +20,7 @@
         </select>
       </div>
     </div>
-    
+
   </div>
   <div class="row">
         <div class="col-md-6">
@@ -29,7 +29,7 @@
               <div class="panel-heading">Personas</div>
               <div class="panel-body">
                 <p></p>
-                <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="orderedProduct($event)" [dropZones]="['demo1']">
+                <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
                   <div class="panel-body">
                       <a class="pull-left" href="">
                         <img class="media-object img-responsive img-circle" src="assets/img/user/01.jpg" alt="" />

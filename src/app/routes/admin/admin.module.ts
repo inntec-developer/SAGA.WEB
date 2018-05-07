@@ -15,7 +15,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import {MatDatepickerModule} from '@angular/material/datepicker';;
 import { NativeDateAdapter, DateAdapter } from '@angular/material';
-import { DateFormat } from './add-persona/formatFecha';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from "ng2-bootstrap/pagination"; // from ng2-bootstrap
 import {MatCheckboxModule} from '@angular/material/checkbox'
@@ -69,14 +68,9 @@ const routes: Routes = [
     ],
     exports: [
         RouterModule
-    ],
-    providers: [
-      {  provide: DateAdapter, useClass: DateFormat }
-  ]
+    ]
 })
 
 export class AdminModule {
-  constructor(private dateAdapter:DateAdapter<Date>) {
-		dateAdapter.setLocale('en-in'); // DD/MM/YYYY
-	}
+  constructor() {	}
  }
