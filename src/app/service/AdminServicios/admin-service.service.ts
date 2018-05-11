@@ -19,6 +19,10 @@ export class AdminServiceService {
   // Url de servicios.
   private Url = ApiConection.ServiceUrl+ApiConection.getDtosPersonal;
   private UrlTiposUsuarios = ApiConection.ServiceUrl+ApiConection.getTiposUsuarios;
+  private UrlAddRol = ApiConection.ServiceUrl+ApiConection.addRol;
+  private UrlAddGrupo = ApiConection.ServiceUrl+ApiConection.addGrupo;
+  private UrlGetDepas = ApiConection.ServiceUrl+ApiConection.getDepartamentos;
+
 
   // Error.
   private handleError(error: any) {
@@ -40,6 +44,13 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  getDepas(): Observable<any>
+  {
+     return this.http.get(this.UrlGetDepas)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
   getTipos(): Observable<any>
   {
      return this.http.get(this.UrlTiposUsuarios)
@@ -47,4 +58,18 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
-}
+  addGrupos(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddGrupo, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  AddRoles(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddRol, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }

@@ -27,13 +27,17 @@ import { AddadminComponent } from './admin/addadmin.component';
 import { AddPersonaComponent } from './add-persona/add-persona.component';
 import { DtPersonasComponent } from './add-persona/dt-personas/dt-personas.component';
 import { AddGrupoComponent } from './add-grupo/add-grupo.component';
+import { AddRolesComponent } from './add-roles/add-roles.component';
+import { CropImgComponent } from './crop-img/crop-img.component';
 
 
 
 const routes: Routes = [
-    { path: 'roles', component: AddadminComponent },
+    { path: 'roles', component: AddRolesComponent },
     { path: 'agregar', component: AddPersonaComponent },
-    { path: 'grupo', component: AddGrupoComponent }
+    { path: 'grupo', component: AddadminComponent },
+    { path: 'grupoAdd', component: AddGrupoComponent }
+
 ];
 
 
@@ -64,7 +68,9 @@ const routes: Routes = [
       AddadminComponent,
       AddPersonaComponent,
       DtPersonasComponent,
-      AddGrupoComponent
+      AddGrupoComponent,
+      AddRolesComponent,
+      CropImgComponent
     ],
     exports: [
         RouterModule

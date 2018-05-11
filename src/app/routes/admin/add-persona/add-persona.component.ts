@@ -1,72 +1,55 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
-
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 
 
 @Component({
   selector: 'app-add-persona',
   templateUrl: './add-persona.component.html',
   styleUrls: ['./add-persona.component.scss'],
+  providers:[ AdminServiceService ]
 
 })
 export class AddPersonaComponent implements OnInit {
 
-  name: string;
-  data1: any;
-  cropperSettings: CropperSettings;
+  formUsuarios: FormGroup;
+  public ListDepas: Array<any> = [];
+  DepasControl = new FormControl('', [Validators.required]);
 
-  @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
-
-
-  public ListDepas: Array<string> = ['INNTEC'];
-
-  constructor()
+ selectedValue: string;
+  constructor(private service: AdminServiceService ,public fb: FormBuilder)
   {
-    this.name = 'Angular2';
-    this.cropperSettings = new CropperSettings();
 
-    this.cropperSettings.noFileInput = true;
+    this.formUsuarios = this.fb.group({
+    Clave: ['', [Validators.required]],
+    Nombre: ['', [Validators.required]],
+    ApellidoPaterno: ['', [Validators.required]],
+    ApellidoMaterno: ['', [Validators.required]],
+    Email: '',
+    Usuario: 'Damsa',
 
-    this.cropperSettings.width = 200;
-    this.cropperSettings.height = 200;
+    // Create:0,
+    // Read:1,
+    // Update:0,
+    // Delete:0,
+    // Especial:0;
+  });
 
-    this.cropperSettings.croppedWidth = 200;
-    this.cropperSettings.croppedHeight = 200;
-
-    this.cropperSettings.canvasWidth = 442;
-    this.cropperSettings.canvasHeight = 390;
-
-    this.cropperSettings.minWidth = 100;
-    this.cropperSettings.minHeight = 100;
-
-    this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
-    this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
-
-    this.cropperSettings.rounded = false;
-
-    this.data1 = {};
   }
 
-  cropped(bounds: Bounds) {
-      console.log(bounds);
-  }
 
-  fileChangeListener($event)
+  getDepartamentos()
   {
-      let image: any = new Image();
-      let file: File = $event.target.files[0];
-      let myReader: FileReader = new FileReader();
-      let that = this;
-      myReader.onloadend = function(loadEvent: any)
-      {
-          image.src = loadEvent.target.result;
-          that.cropper.setImage(image);
-      };
-
-      myReader.readAsDataURL(file);
+    this.service.getDepas()
+    .subscribe(
+      e=>{
+        this.ListDepas = e;
+        console.log(e)
+      })
   }
 
   ngOnInit() {
+    this.getDepartamentos();
   }
 
 }

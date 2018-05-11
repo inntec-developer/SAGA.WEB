@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import { ViewChild } from '@angular/core';
-import { MatCheckbox } from '@angular/material'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-add-grupo',
@@ -11,28 +12,37 @@ import { MatCheckbox } from '@angular/material'
 })
 export class AddGrupoComponent implements OnInit {
 
- @ViewChild('myCheckbox') private myCheckbox: MatCheckbox;
+  formGrupos: FormGroup;
+  msj: string;
 
-  listGrupos:  Array<any> = [];
-  constructor( private service: AdminServiceService ) { }
-
-  selected($event)
+  constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
-
-    console.log($event.target.value)
-  this.limpiarCheckBox();
+    this.iniciarForm();
+    this.msj = '';
   }
 
-  limpiarCheckBox(){
-    this.myCheckbox.checked = false;
-}
+  iniciarForm()
+  {
+      this.formGrupos = this.fb.group({
+      Grupo: ['', [Validators.required]],
+      Descripcion: ""
+      Activo: 1;
+
+    });
+
+  }
+
+  saveData()
+  {
+    this.service.addGrupos(this.formGrupos.value)
+    .subscribe( data => {
+     this.msj = data;
+     this.iniciarForm();
+    });
+  }
 
   ngOnInit() {
-    this.service.getTipos()
-    .subscribe(
-      e=>{
-        this.listGrupos = e;
-      })
+
   }
 
 }

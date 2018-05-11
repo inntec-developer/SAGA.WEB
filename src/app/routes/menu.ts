@@ -10,7 +10,11 @@ const Administracion = {
     icon: 'icon-people',
         submenu:[
           {
-            text: 'Asignar Grupos',
+            text: 'Agregar Grupos',
+            link: '/admin/grupoAdd'
+          },
+          {
+            text: 'Agregar Roles',
             link: '/admin/roles'
           },
           {

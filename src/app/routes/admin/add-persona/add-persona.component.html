@@ -11,80 +11,82 @@
 <div class="row">
    <div class="col-md-8">
       <!-- START panel-->
+      <form [formGroup]="formUsuarios">
       <div class="panel panel-default">
          <div class="panel-heading">Datos Personales</div>
          <div class="panel-body">
-            <form role="form">
-                <div class="form-group">
-                  <label>DAL</label>
-                  <input class="form-control" type="text" placeholder="Numero de Empleado" />
-               </div>
-                <div class="form-group">
-                   <label>Nombre</label>
-                   <input class="form-control" type="text" placeholder="Nombre" />
-                </div>
-                <div class="form-group">
-                   <label>Apellido Paterno</label>
-                   <input class="form-control" type="text" placeholder="Apellido Paterno" />
-                </div>
-                <div class="form-group">
-                   <label>Apellido Materno</label>
-                   <input class="form-control" type="text" placeholder="Apellido Materno" />
-                </div>
-                <div class="form-group">
-                   <label>Correo Electrónico</label>
-                   <input class="form-control" type="email" placeholder="Correo Electronico" />
-                </div>
-                <div class="form-group">
-                   <label>Dirección</label>
-                   <input class="form-control" type="text" placeholder="Dirección" />
-                </div>
-                <div class="form-group">
-                   <label>Teléfono</label>
-                   <input class="form-control" type="text" placeholder="Teléfono" />
-                </div>
-                <div class="form-group">
+                  <mat-form-field>
+                    <input matInput formControlName="Clave" placeholder="Número de Empleado">
+                  </mat-form-field>
+                  <p><span *ngIf="formUsuarios.controls['Clave'].touched && !formUsuarios.controls['Clave'].valid">Número de empleado es requerido</span></p>
 
-                      <label>Áreas</label>
-                      <ng-select [allowClear]="true"
-                                  [items]="ListDepas"
-                                  [disabled]="disabled"
-                                  placeholder="Seleccionar Área">
-                      </ng-select>
+                  <mat-form-field>
+                    <input matInput formControlName="Nombre" placeholder="Nombre">
+                  </mat-form-field>
+                  <p><span *ngIf="formUsuarios.controls['Nombre'].touched && !formUsuarios.controls['Nombre'].valid">Nombre es requerido</span></p>
 
-                </div>
+                  <mat-form-field>
+                    <input matInput formControlName="ApellidoPaterno" placeholder="Apellido Paterno">
+                  </mat-form-field>
+                  <p><span *ngIf="formUsuarios.controls['ApellidoPaterno'].touched && !formUsuarios.controls['ApellidoPaterno'].valid">Apellido Paterno es requerido</span></p>
 
-                <!-- <label>Tipo</label>
-                <ng-select [allowClear]="true" [items]="tipos" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)" (typed)="typed($event)" placeholder="Seleccionar">
-                </ng-select> -->
-            </form>
+                  <mat-form-field>
+                    <input matInput formControlName="ApellidoMaterno" placeholder="Apellido Materno">
+                  </mat-form-field>
+                  <p><span *ngIf="formUsuarios.controls['ApellidoMaterno'].touched && !formUsuarios.controls['ApellidoMaterno'].valid">Apellido Materno es requerido</span></p>
+
+                  <mat-form-field>
+                    <input matInput formControlName="Email" placeholder="Correo Electrónico">
+                  </mat-form-field>
+
+
+
+                  <mat-form-field>
+                    <mat-select placeholder="Seleccionar Departamento" [formControl]="DepasControl" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let d of ListDepas" [value]="d.id">
+                          {{ d.nombre }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="DepasControl.hasError('required')">Debe selecciona un departamento</mat-error>
+                    <!-- <mat-hint>{{animalControl.value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                  <!--
+                  <mat-form-field>
+
+                    <mat-select placeholder="Seleccionar Departamento">
+                      <mat-option *ngFor="let d of ListDepas" [value]="d.id">
+                        {{ d.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
          </div>
          <div class="panel panel-footer">
-         <div class="row">
-           <div class="col-md-4">
-               <button class="btn btn-lg btn-oval btn-primary">Registrar </button>
-               <button class="btn btn-lg btn-oval btn-success">Limpiar datos</button>
-             </div>
-             <div class="col-lg-2">
-
-             </div>
+           <div class="row">
+             <div class="pull-right">
+               <span><button class="btn btn-lg btn-primary">Registrar </button></span>
+                <span ><button class="btn btn-lg btn-success" (click)="changeAlias()">Limpiar datos</button></span>
+            </div>
            </div>
-         </div>
+        </div>
       </div>
+    </form>
 
-      <!-- END panel-->
    </div>
+
    <div class="col-md-4">
       <!-- START panel-->
       <div class="panel panel-default">
          <div class="panel-heading">Perfil</div>
          <div class="panel-body">
               <div class="panel-body">
-                <div class="form-group">
-                   <label>Alias</label>
-                   <input class="form-control" type="text" placeholder="Alias" />
-                </div>
-                <div class="form-group">
+                  <mat-form-field>
+                    <input matInput formControlName="Usuario" placeholder="Damsa.{{formUsuarios.controls['Nombre'].value}}">
+                  </mat-form-field>
+
+                <app-crop-img></app-crop-img>
+                <!-- <div class="form-group">
                   <div class="panel-heading">Selecciona una imagen</div>
                   <div class="panel-body">
                       <label for="image-input" class="file-upload">
@@ -100,7 +102,7 @@
                       <img-cropper #cropper [image]="data1" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
                     </div>
                   </div>
-              </div>
+              </div> -->
          </div>
       </div>
       <!-- END panel-->

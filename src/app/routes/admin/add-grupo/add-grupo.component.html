@@ -8,15 +8,49 @@
     <small>Crear Grupos</small>
 </div>
 
-<div class="row">
+
+<form [formGroup]="formGrupos" (ngSubmit)="saveData()" novalidate >
+    <div class="panel">
+      <div class="panel-body">
+        <section>
+            <mat-form-field>
+              <input matInput formControlName="Grupo" placeholder="Nombre">
+            </mat-form-field>
+            <p><span *ngIf="formGrupos.controls['Grupo'].touched && !formGrupos.controls['Grupo'].valid">Nombre es requerido</span></p>
+            <mat-form-field>
+              <textarea matInput formControlName="Descripcion" placeholder="Descripción" maxlength="80" rows="1"></textarea>
+            </mat-form-field>
+
+          </section>
+
+          <input matInput placeholder="Grupo Activo">
+          <section>
+            <mat-checkbox class="checkbox" formControlName="Activo"></mat-checkbox>
+          </section>
+
+        <section>
+          <app-crop-img></app-crop-img>
+        </section>
+
+        <section>
+          <div class="col-md-6" >
+            <input matInput placeholder="{{msj}}">
+          </div>
+            <button [disabled]="formGrupos.invalid" class="btn btn-primary example-label pull-right">Guardar</button>
+        </section>
+      </div>
+    </div>
+</form>
+
+<!-- <div class="row">
    <div class="col-md-8">
-      <!-- START panel-->
+
       <div class="panel panel-default">
         <div class="panel-body">
                <fieldset>
                  <div class="row">
                    <div class="col-md-6">
-                     <label>Nombre Grupo</label>
+                     <label>Nombre</label>
                      <select class="form-control" (change)="selected($event)" >
                          <option>Seleccionar Grupo</option>
                          <option *ngFor="let user of listGrupos" value="{{user.tipo}}">
@@ -57,4 +91,4 @@
              </div>
       </div>
    </div>
-</div>
+</div> -->
