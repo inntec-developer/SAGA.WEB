@@ -40,7 +40,6 @@ export class RequisicionNuevaComponent implements OnInit {
         }
         if(this.createRequi){
           this.createRequisicion();
-          this.spinner.hide();
         }
       });
   }
@@ -52,10 +51,15 @@ export class RequisicionNuevaComponent implements OnInit {
     this.serviceRequisiciones.createNewRequi(datas)
         .subscribe(data => {
           this.requisicionId = data;
+          this.getRequisicion(this.requisicionId);
         })
   }
 
-  getNewRequisicion(){
-    
+getRequisicion(id){
+    this.serviceRequisiciones.getNewRequi(id)
+      .subscribe(data => {
+        this.requisicion = data;
+        this.spinner.hide();
+      });
   }
 }

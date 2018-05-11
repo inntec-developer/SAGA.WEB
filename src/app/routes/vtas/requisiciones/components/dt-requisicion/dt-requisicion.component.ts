@@ -43,6 +43,11 @@ export class DtRequisicionComponent implements OnInit {
     });
   }
 
+  showRequi(id){
+    //mandamos la información por medio de la URL sin que esta se muestre en la liga.
+    this._Router.navigate(['/ventas/visualizarRequisicion/', id], {skipLocationChange:true});
+  }
+
   //*******************************-- GRID-- *********************************************//
   // Paginador.
   length = 0;
@@ -85,10 +90,11 @@ export class DtRequisicionComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.requisicion);
   }
   //Termino de Paginador
-  
+
 
   //Display para mostrar los objetos en el Grid
   displayedColumns = [
+    'folio',
     'cliente',
     'rfc',
     'vBtra',
@@ -110,6 +116,7 @@ export class DtRequisicionComponent implements OnInit {
   }
 }
 export interface Element {
+  folio: string;
   id: string;
   cliente: string;
   rfc: string;
