@@ -20,6 +20,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { SelectModule } from 'ng2-select';
 
 //Providers
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
@@ -80,7 +81,8 @@ const routes: Routes = [
         MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, MatOptionModule, NgxSpinnerModule, ToasterModule
+        MatToolbarModule, MatTooltipModule, MatOptionModule, NgxSpinnerModule, ToasterModule,
+        SelectModule
     ],
     providers: [ColorPickerService, { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }, ToasterService ],
     declarations: [

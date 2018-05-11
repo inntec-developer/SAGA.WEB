@@ -1,3 +1,24 @@
-<p>
-  grupos-usuarios works!
-</p>
+<ng-select
+  class="ng-touched"
+  (data)="value"
+  [allowClear]="true"
+  [multiple]="true"
+  [items]="items"
+  [disabled]="disabled"
+  (data)="refreshValue($event)"
+  (selected)="selected($event)"
+  (removed)="removed($event)"
+  placeholder="Grupos / Usuarios" required>
+</ng-select>
+<br/>
+<mat-form-field class="fieldautocomplete-full-width">
+  <input matInput placeholder="Dirección" aria-label="Address" [matAutocomplete]="auto" [formControl]="AddressCtrl" (blur)="SendIdDireccion()" required>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let address of filteredAddress | async" [value]="address.calle">
+          <span>{{ address.calle }}</span>
+      </mat-option>
+    </mat-autocomplete>
+    <mat-hint align="end">Seleccione la Direcci&oacute;n a reclutar</mat-hint>
+    <br>
+</mat-form-field>
+<br/>
