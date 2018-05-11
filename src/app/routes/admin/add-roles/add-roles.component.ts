@@ -29,8 +29,8 @@ export class AddRolesComponent implements OnInit {
       Read:1,
       Update:0,
       Delete:0,
-      Especial:0;
-      Activo: 1;
+      Especial:0,
+      Activo: 1
     });
 
 

@@ -25,8 +25,8 @@ export class AddGrupoComponent implements OnInit {
   {
       this.formGrupos = this.fb.group({
       Grupo: ['', [Validators.required]],
-      Descripcion: ""
-      Activo: 1;
+      Descripcion: "",
+      Activo: 1
 
     });
 

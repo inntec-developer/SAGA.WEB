@@ -26,7 +26,7 @@ export class AddPersonaComponent implements OnInit {
     ApellidoPaterno: ['', [Validators.required]],
     ApellidoMaterno: ['', [Validators.required]],
     Email: '',
-    Usuario: 'Damsa',
+    Usuario: 'Damsa'
 
     // Create:0,
     // Read:1,
