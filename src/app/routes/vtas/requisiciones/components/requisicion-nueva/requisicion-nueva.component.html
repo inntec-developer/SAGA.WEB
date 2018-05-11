@@ -9,19 +9,251 @@
     <small> Generador de Requisiciones.</small>
 </div>
 <div *ngIf="createRequi">
-  <h3>El Id de damfo es {{damfoId}}</h3>
-  <h5>El Id de la Direccion es {{direccionId}}</h5>
-  <h5>El Id de la Requisicion es {{requisicionId}}</h5>
-  <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">Ball Triangle Path</div>
-            <div class="panel-body loader-demo">
-                <div class="ball-triangle-path">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Folio: {{requisicion?.folio}}</h3>
     </div>
+    <div class="col-md-8 text-right">
+      <button class="mb-md btn-md btn btn-warning btn-outline"
+              type="button"
+              matTooltip="Regresar"
+              [routerLink]="['/ventas/requisicion']">
+        <em class="icon-action-undo"></em>
+      </button>
+    </div>
+  </div>
+  <br/>
+  <!-- Contenido de la Requisición -->
+  <div class="row">
+    <div class="col-md-4">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-user"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Información General
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <h4><p><small><strong>Nom. Comercial: </strong>{{requisicion?.cliente?.nombrecomercial}}</small></p></h4>
+            <h4><p><small><strong>Razón Social: </strong>{{requisicion?.cliente?.razonSocial}}</small></p></h4>
+            <h4><p><small><strong>RFC: </strong>{{requisicion?.cliente?.rfc}}</small></p></h4>
+            <h4><p><small><strong>Giro: </strong>{{requisicion?.cliente?.giroEmpresas?.giroEmpresa}}</small></p></h4>
+            <h4><p><small><strong>Actividad: </strong>{{requisicion?.cliente?.actividadEmpresas?.actividadEmpresa}}</small></p></h4>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-4" >
+      <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <em class="fa fa-archive"></em>
+          </mat-panel-title>
+          <mat-panel-description>
+            Reclutamiento
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row"><!--Agregar la información que ira en el panel-->
+          <h4><p><small><strong>Tipo: </strong>{{requisicion?.tipoReclutamiento?.tipoReclutamiento}}</small></p></h4>
+          <h4><p><small><strong>Clase: </strong>{{requisicion?.claseReclutamiento?.clasesReclutamiento}}</small></p></h4>
+        </div>
+      </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-4">
+      <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <em class="fa fa-eye"></em>
+          </mat-panel-title>
+          <mat-panel-description>
+            Contrato
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row"><!--Agregar la información que ira en el panel-->
+          <h4><p><small><strong>Tipo: </strong>{{requisicion?.contratoInicial?.tipoContrato}}</small></p></h4>
+          <h4 *ngIf="requisicion?.contratoInicial?.id == 2"><p><small><strong>Días Prueba: </strong>{{requisicion?.tiempoContrato?.tiempo}}</small></p></h4>
+        </div>
+      </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br/>
+  <!-- CONTACTOS -->
+  <div class="row">
+    <div class="col-md-10">
+      <app-dt-contactos [Contactos]="requisicion?.cliente?.contactos"></app-dt-contactos>
+    </div>
+  </div>
+  <br/>
+  <!-- PUESTO A RECLUTAR -->
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-child"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Puesto a Reclutar
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row"><!--Agregar la información que ira en el panel-->
+            <div class="col-lg-3 col-md-3">
+              <h4><p><small><strong>Nombre Perfil: </strong>{{requisicion?.vBtra}}</small></p></h4>
+              <h4><p><small><strong>Sexo: </strong>{{requisicion?.genero?.genero}}</small></p></h4>
+              <h4><p><small><strong>Edad Minima: </strong>{{requisicion?.edadMinima}}</small></p></h4>
+              <h4><p><small><strong>Edad Maxima: </strong>{{requisicion?.edadMaxima}}</small></p></h4>
+              <h4><p><small><strong>Estado Civil: </strong>{{requisicion?.estadoCivil?.estadoCivil}}</small></p></h4>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <h4><p><small><strong>Estudios / Escolaridades </strong></small></p></h4>
+              <h4><p><small><strong>Nivel: </strong>{{requisicion?.escolaridadesRequi[0]?.estadoEstudio?.estadoEstudio}}</small></p></h4>
+              <h4><p><small><strong>Escolaridades:  </strong></small></p></h4>
+              <ol>
+                  <li *ngFor="let x of requisicion?.escolaridadesRequi"><small>{{x.escolaridad.gradoEstudio}}</small></li>
+              </ol>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <h4><p><small><strong>Aptitudes:  </strong></small></p></h4>
+                <ol>
+                    <li *ngFor="let x of requisicion?.aptitudesRequi"><small>{{x.aptitud.aptitud}}</small></li>
+                </ol>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <h4><p><small><strong>Experiencia:  </strong></small></p></h4>
+                <h4><p><small>{{requisicion?.experiencia}}</small></p></h4>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br/>
+  <!-- BENEFICIOS ACTIVIDADES OBSERVACIONES PROCESO-->
+  <div class="row">
+    <div class="col-md-3">
+      <app-dt-beneficios [Beneficios]="requisicion?.beneficiosRequi"></app-dt-beneficios>
+    </div>
+    <div class="col-md-3">
+      <app-actividades [Actividades]="requisicion?.actividadesRequi"></app-actividades>
+    </div>
+    <div class="col-md-3">
+      <app-observaciones [Observaciones]="requisicion?.observacionesRequi"></app-observaciones>
+    </div>
+    <div class="col-md-3">
+      <app-procesos [Proceso]="requisicion?.procesoRequi"></app-procesos>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <em class="fa fa-dollar"></em>
+            </mat-panel-title>
+            <mat-panel-description>
+              Sueldos
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+            <div class="row"><!--Agregar la información que ira en el panel-->
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>D&iacute;as Corte: </strong>{{requisicion?.diaCorte?.diaSemana}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>Tipo de Nomina: </strong>{{requisicion?.tipoNomina?.tipoDeNomina}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>D&iacute;as de Pago: </strong>{{requisicion?.diaPago?.diaSemana}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p><small><strong>Periodo de Pago: </strong>{{requisicion?.periodoPago?.periodoPago}}</small></p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                    <h4><p *ngIf="requisicion?.periodoPago.id == 5"><small><strong>Especificaci&oacute;n: </strong>{{requisicion?.especifique}}</small></p></h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Sueldo mensual minimo </strong></small></p></h4>
+                <h4><p>{{requisicion?.sueldoMinimo | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo semanal minimo</strong></small></p></h4>
+                <h4><p>{{requisicion?.sueldoMinimo / 7 | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo diario minimo</strong></small></p></h4>
+                <h4><p>{{requisicion?.sueldoMinimo / 30.6 | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Sueldo mensual maximo </strong></small></p></h4>
+                <h4><p>{{requisicion?.sueldoMaximo | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo semanal maximo</strong></small></p></h4>
+                <h4><p>{{requisicion?.sueldoMaximo / 7 | currency:"MX $"}}</p></h4>
+              </div>
+              <div class="col-md-2 col-lg-2">
+                <h4><p><small><strong>Calculo diario maximo </strong></small></p></h4>
+                <h4><p>{{requisicion?.sueldoMaximo / 30.6 | currency:"MX $"}}</p></h4>
+              </div>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-3">
+      <!-- DOCUMENTOS dAMSA -->
+      <app-documentos-damsa></app-documentos-damsa>
+    </div>
+    <div class="col-md-3">
+      <!-- DOCUMENTOS CLIENTE -->
+      <app-documentos-cliente [Documentos]="requisicion?.documentosClienteRequi"></app-documentos-cliente>
+    </div>
+    <div class="col-md-3">
+      <!-- PRESTACIONES LEY -->
+      <app-prestaciones-ley></app-prestaciones-ley>
+    </div>
+    <div class="col-md-3">
+      <!-- PRESTACIONES SUPERIORES -->
+      <app-prestaciones-cliente [Prestaciones]="requisicion?.prestacionesClienteRequi"></app-prestaciones-cliente>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- PSICOMETRIAS DAMSA -->
+      <app-dt-psicometrias-damsa [Psicometrias]="requisicion?.psicometriasDamsaRequi"></app-dt-psicometrias-damsa>
+    </div>
+    <div class="col-md-6">
+      <!-- PSICOMETRIA CLIENTE -->
+      <app-dt-psicometrias-cliente [Psicometrias]="requisicion?.psicometriasClienteRequi"></app-dt-psicometrias-cliente>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-4 col-lg-4">
+      <!-- COMPTENCIAS CARDINALES -->
+      <app-dt-competencia-cardinal [Competencias]="requisicion?.competenciasCardinalRequi"></app-dt-competencia-cardinal>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <!-- COMPETENCIAS POR AREA -->
+      <app-dt-competencia-area [Competencias]="requisicion?.competenciasAreaRequi"></app-dt-competencia-area>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <!-- COMPETENCIAS GERENCIALES -->
+      <app-dt-competencia-gerencial [Competencias]="requisicion?.competetenciasGerencialRequi"></app-dt-competencia-gerencial>
+    </div>
+  </div>
 </div>

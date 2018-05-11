@@ -52,14 +52,17 @@ import { PrestacionesClienteComponent } from './requisiciones/components/prestac
 import { ActividadesComponent } from './requisiciones/components/actividades/actividades.component';
 import { ObservacionesComponent } from './requisiciones/components/observaciones/observaciones.component';
 import { ProcesosComponent } from './requisiciones/components/procesos/procesos.component';
+import { ViewRequisicionComponent } from './requisiciones/components/view-requisicion/view-requisicion.component';
+import { GruposUsuariosComponent } from './requisiciones/components/grupos-usuarios/grupos-usuarios.component';
 
 
 const routes: Routes = [
     { path: 'prospecto', component: ProspectoComponent },
     { path: 'requisicion', component: RequisicionComponent },
     { path: 'crearRequisicion', component: DtCrearRequisicionComponent },
-    { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent},
-    { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent},
+    { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent },
+    { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent },
+    { path: 'visualizarRequisicion/:IdRequi', component: ViewRequisicionComponent },
 ];
 
 @NgModule({
@@ -108,6 +111,8 @@ const routes: Routes = [
         ActividadesComponent,
         ObservacionesComponent,
         ProcesosComponent,
+        ViewRequisicionComponent,
+        GruposUsuariosComponent,
     ],
     entryComponents: [DialogdamfoComponent],
     exports: [

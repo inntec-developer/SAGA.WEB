@@ -11,6 +11,11 @@
     <em class="fa fa-plus"></em> Nueva Requisición
   </button>
   <mat-table #table [dataSource]="dataSource">
+    <!-- Folio -->
+    <ng-container matColumnDef="folio">
+      <mat-header-cell *matHeaderCellDef>Folio </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.folio}} </mat-cell>
+    </ng-container>
     <!-- Cliente <Razon Social> Column -->
     <ng-container matColumnDef="cliente">
       <mat-header-cell *matHeaderCellDef>Cliente </mat-header-cell>
@@ -92,15 +97,15 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showDamfo(element.id)" type="button"  matTooltip="Ver Requisición">
+          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showRequi(element.id)" type="button"  matTooltip="Ver Requisición">
             <em class="fa fa-eye"></em>
           </button>
-          <button class="mb-sm btn-sm btn btn-primary btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Editar Requisición">
+          <button class="mb-sm btn-sm btn btn-primary btn-outline" (click)="openDialog(element.id)" type="button"  matTooltip="Editar Requisición">
             <em class="icon-pencil"></em>
           </button>
-          <button class="mb-sm btn-sm btn btn-danger btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Eliminar Requisición">
+          <!-- <button class="mb-sm btn-sm btn btn-danger btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Eliminar Requisición">
             <em class="icon-trash"></em>
-          </button>
+          </button> -->
       </mat-cell>
 
     </ng-container>
