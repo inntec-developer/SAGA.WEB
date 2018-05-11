@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { ActivatedRoute, CanDeactivate, Router  } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {MatTableDataSource, PageEvent, MAT_DIALOG_DATA} from '@angular/material';
+=======
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, CanDeactivate, Router  } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import {MatTableDataSource, PageEvent, MAT_DIALOG_DATA} from '@angular/material';
+import { GruposUsuariosComponent } from '../grupos-usuarios/grupos-usuarios.component'
+
+>>>>>>> 22a463bc030b20212b417d9741fbc9866c040173
 
 //Services
 import { RequisicionesService, CatalogosService } from '../../../../../service/index';
