@@ -42,14 +42,13 @@
 
 
                   <mat-form-field>
-                    <mat-select placeholder="Seleccionar Departamento" [formControl]="DepasControl" required>
-                      <mat-option>--</mat-option>
+                    <mat-select matInput formControlName="DepartamentoId" placeholder="Seleccionar Departamento" required>
                       <mat-option *ngFor="let d of ListDepas" [value]="d.id">
                           {{ d.nombre }}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="DepasControl.hasError('required')">Debe selecciona un departamento</mat-error>
-                    <!-- <mat-hint>{{animalControl.value?.sound}}</mat-hint> -->
+                    <mat-error *ngIf="formUsuarios.controls['DepartamentoId'].hasError('required')">Debe selecciona un departamento</mat-error>
+
                   </mat-form-field>
                   <!--
                   <mat-form-field>
@@ -65,8 +64,8 @@
          <div class="panel panel-footer">
            <div class="row">
              <div class="pull-right">
-               <span><button class="btn btn-lg btn-primary">Registrar </button></span>
-                <span ><button class="btn btn-lg btn-success" (click)="changeAlias()">Limpiar datos</button></span>
+               <span><button class="btn btn-lg btn-primary" (click)="saveData()">Registrar </button></span>
+                <span ><button class="btn btn-lg btn-success">Limpiar datos</button></span>
             </div>
            </div>
         </div>

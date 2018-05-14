@@ -10,6 +10,7 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { Error404Component } from './error404/error404.component';
 import { Error500Component } from './error500/error500.component';
 
+
  //Use this routes definition in case you want to make them lazy-loaded */
 const routes: Routes = [
     { path: 'login', component: LoginComponent },

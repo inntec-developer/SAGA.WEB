@@ -6,8 +6,9 @@ import { AdminServiceService } from '../../../service/AdminServicios/admin-servi
   selector: 'app-add-roles',
   templateUrl: './add-roles.component.html',
   styleUrls: ['./add-roles.component.scss'],
-  providers:[ AdminServiceService ]
+  providers: [ AdminServiceService ]
 })
+
 export class AddRolesComponent implements OnInit {
 
   formRoles: FormGroup;
@@ -17,8 +18,7 @@ export class AddRolesComponent implements OnInit {
               ,public fb: FormBuilder )
   {
     this.iniciarForm();
-    this.msj: '';
-
+    this.msj = '';
   }
 
   iniciarForm()
@@ -36,6 +36,7 @@ export class AddRolesComponent implements OnInit {
 
   }
   saveData(){
+  
     this.service.AddRoles(this.formRoles.value)
     .subscribe( data => {
       this.msj = data;
@@ -45,7 +46,6 @@ export class AddRolesComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

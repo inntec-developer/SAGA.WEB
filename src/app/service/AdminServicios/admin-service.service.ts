@@ -22,7 +22,7 @@ export class AdminServiceService {
   private UrlAddRol = ApiConection.ServiceUrl+ApiConection.addRol;
   private UrlAddGrupo = ApiConection.ServiceUrl+ApiConection.addGrupo;
   private UrlGetDepas = ApiConection.ServiceUrl+ApiConection.getDepartamentos;
-
+  private UrlAddUser = ApiConection.ServiceUrl+ApiConection.addUser;
 
   // Error.
   private handleError(error: any) {
@@ -73,3 +73,12 @@ export class AdminServiceService {
             .map(result => result.json())
             .catch(this.handleError);
   }
+
+  AddUsers(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddUser, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+}

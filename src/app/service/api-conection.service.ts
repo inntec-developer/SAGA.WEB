@@ -75,4 +75,5 @@ export class ApiConection {
   public static getDepartamentos = '/admin/getDepa';
   public static addRol = '/admin/agregarRol';
   public static addGrupo = '/admin/agregarGrupo';
+  public static addUser = '/admin/addUsuario';
 }

@@ -12,31 +12,40 @@ import { AdminServiceService } from '../../../service/AdminServicios/admin-servi
 })
 export class AddPersonaComponent implements OnInit {
 
-  formUsuarios: FormGroup;
+  public formUsuarios: FormGroup;
   public ListDepas: Array<any> = [];
-  DepasControl = new FormControl('', [Validators.required]);
-
+  public email: Array<any>=[];
+  // DepasControl = new formControl('', [Validators.required]);
+  msj: string;
  selectedValue: string;
   constructor(private service: AdminServiceService ,public fb: FormBuilder)
   {
-
-    this.formUsuarios = this.fb.group({
-    Clave: ['', [Validators.required]],
-    Nombre: ['', [Validators.required]],
-    ApellidoPaterno: ['', [Validators.required]],
-    ApellidoMaterno: ['', [Validators.required]],
-    Email: '',
-    Usuario: 'Damsa'
-
-    // Create:0,
-    // Read:1,
-    // Update:0,
-    // Delete:0,
-    // Especial:0;
-  });
-
   }
 
+
+  saveData(){
+
+
+    this.email.push({email: this.formUsuarios.controls['Email'].value, UsuarioAlta: 'INNTEC'});
+    let persona = {
+        Clave: this.formUsuarios.controls['Clave'].value,
+        Nombre: this.formUsuarios.controls['Nombre'].value,
+        ApellidoPaterno: this.formUsuarios.controls['ApellidoPaterno'].value,
+        ApellidoMaterno: this.formUsuarios.controls['ApellidoMaterno'].value,
+        Usuario: this.formUsuarios.controls['Usuario'].value,
+        DepartamentoId: this.formUsuarios.controls['DepartamentoId'].value,
+        Email: this.email
+
+    };
+    console.log(persona);
+    // this.formUsuarios.controls['Email'] = this.email;
+    // alert(JSON.stringify(this.formUsuarios.value))
+    this.service.AddUsers(persona)
+    .subscribe( data => {
+      this.msj = data;
+    });
+
+  }
 
   getDepartamentos()
   {
@@ -44,12 +53,21 @@ export class AddPersonaComponent implements OnInit {
     .subscribe(
       e=>{
         this.ListDepas = e;
-        console.log(e)
       })
   }
 
   ngOnInit() {
     this.getDepartamentos();
+        this.formUsuarios = this.fb.group({
+          DepartamentoId : [ '', [Validators.required]],
+          Clave: ['', [Validators.required]],
+          Nombre: ['', [Validators.required]],
+          ApellidoPaterno: ['', [Validators.required]],
+          ApellidoMaterno: ['', [Validators.required]],
+          Email: '',
+          Usuario: 'Damsa'
+
+          });
   }
 
 }
