@@ -14,6 +14,8 @@ export class ApiConection {
   /*Catalogos*/
   public static GetDocumentosDamsa = 'Catalogos/getDocDamsa';
   public static GetPrestacionesLey = 'Catalogos/getPrestacionesLey';
+  public static getTiposUsuarios = 'Catalogos/getTipos';
+  public static getDepartamentos = 'Catalogos/getDepa';
 
   /*Reclutamiento*/
   public static Damfo290GetById = 'Damfo290/getById?id=';
@@ -71,8 +73,6 @@ export class ApiConection {
 
   /*Admin*/
   public static getDtosPersonal = '/admin/get';
-  public static getTiposUsuarios = '/admin/getTipos';
-  public static getDepartamentos = '/admin/getDepa';
   public static addRol = '/admin/agregarRol';
   public static addGrupo = '/admin/agregarGrupo';
   public static addUser = '/admin/addUsuario';
