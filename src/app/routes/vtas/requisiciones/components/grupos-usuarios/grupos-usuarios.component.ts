@@ -17,6 +17,7 @@ export class GruposUsuariosComponent implements OnInit, AfterContentChecked {
 @Input() Folios: string;
 public checked : boolean = false;
 public Prioridades : any[];
+public Estatus : any[];
 
 public formRequi : FormGroup;
 
@@ -26,18 +27,26 @@ public formRequi : FormGroup;
     public serviceRequisicion: RequisicionesService,
     public serviceCatalogos: CatalogosService
   ) {
-    this.formRequi = new FormGroup({
-           prioridad: new FormControl(),
-           fch_Cumplimiento: new FormControl(),
-           folio: new FormControl()
-        });
+      this.formRequi = new FormGroup({
+        folio: new FormControl(),
+        fch_Solicitud: new FormControl(),
+        prioridad: new FormControl(),
+        fch_Cumplimiento: new FormControl(),
+        confidencial: new FormControl(),
+        estatus:  new FormControl(),
+      });
    }
 
   ngOnInit() {
+    this.getPrioridades();
+    this.getEsattus(2);
     this.formRequi = this.fb.group({
-      prioridad: [{value: ''}, Validators.required],
+      folio : [{value: this.Folios, disabled: true}],
+      fch_Solicitud: [{value: '', disabled:true}],
+      prioridad: [{value: ''}, Validators.required ],
       fch_Cumplimiento: [{value: ''}, Validators.required],
-      folio : [{value: this.Folios, disabled: true}]
+      confidencial: [false],
+      estatus: [{value: ''}, Validators.required]
     });
   }
 
@@ -50,18 +59,38 @@ public formRequi : FormGroup;
   }
 
   getInitialData(){
-    this.getPrioridades();
-    this.formRequi.patchValue({
-      folio: this.Folios
+    this.serviceRequisicion.getRequiFolio(this.Folios)
+      .subscribe(DataRequisicion => {
+        this.formRequi.patchValue({
+          folio: this.Folios,
+          fch_Solicitud: DataRequisicion.fch_Creacion,
+          prioridad: DataRequisicion.prioridad.id,
+          fch_Cumplimiento: DataRequisicion.fch_Cumplimiento,
+          confidencial: DataRequisicion.confidencial,
+          estatus: DataRequisicion.estatus
+      })
+
+
     });
+    console.log(this.formRequi);
   }
 
+
+
   getPrioridades(){
-      this.serviceCatalogos.getPrioridades()
-        .subscribe(data => {
-          this.Prioridades = data;
-          console.log(this.Prioridades);
-        })
+    this.serviceCatalogos.getPrioridades()
+      .subscribe(data => {
+        this.Prioridades = data;
+        console.log(this.Prioridades);
+      })
+  }
+
+  getEsattus(tipoMov: number){
+    this.serviceCatalogos.getEstatusRequi(tipoMov)
+      .subscribe(data => {
+        this.Estatus = data;
+        console.log(this.Estatus);
+      });
   }
 
 }

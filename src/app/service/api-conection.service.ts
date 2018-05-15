@@ -17,6 +17,7 @@ export class ApiConection {
   public static getTiposUsuarios = 'Catalogos/getTipos';
   public static getDepartamentos = 'Catalogos/getDepa';
   public static GetPrioridades = 'Catalogos/getPrioridades';
+  public static GetEstatusRequi = 'Catalogos/getEstatus?tipoMov=';
 
   /*Reclutamiento*/
   public static Damfo290GetById = 'Damfo290/getById?id=';
