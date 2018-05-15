@@ -19,6 +19,7 @@ export class CatalogosService {
 
   private urlGetDocumentosDamsa = ApiConection.ServiceUrl + ApiConection.GetDocumentosDamsa;
   private urlGetPrestacionesLey = ApiConection.ServiceUrl + ApiConection.GetPrestacionesLey;
+  private UrlGetPrioridades = ApiConection.ServiceUrl + ApiConection.GetPrioridades;
 
   constructor(private http: Http) { }
 
@@ -30,6 +31,12 @@ export class CatalogosService {
 
   getPrestacionesLey() : Observable<any>{
     return this.http.get(this.urlGetPrestacionesLey)
+      .map(result => result.json())
+      .catch(this.handleError);
+  }
+
+  getPrioridades() : Observable<any>{
+    return this.http.get(this.UrlGetPrioridades)
       .map(result => result.json())
       .catch(this.handleError);
   }

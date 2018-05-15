@@ -23,6 +23,7 @@ export class RequisicionesService {
   private urlAddress = ApiConection.ServiceUrl + ApiConection.AddressCliente;
   private urlCreateRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
   private urlGetRequisicionById = ApiConection.ServiceUrl + ApiConection.GetRequisicionById;
+  private urlGetRequisicionByFolio = ApiConection.ServiceUrl + ApiConection.GetRequisicionByFolio;
   private urlGetDamfoById = ApiConection.ServiceUrl + ApiConection.Damfo290GetById;
   private utlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
 
@@ -50,6 +51,11 @@ export class RequisicionesService {
   // Recupera la informacion completa de la requisicion que se requiera
   getNewRequi(requisicionId : string){
     return this.http.get(this.urlGetRequisicionById + requisicionId)
+              .map(result => result.json())
+              .catch(this.handleError);
+  }
+  getRequiFolio(folio : string){
+    return this.http.get(this.urlGetRequisicionByFolio + folio)
               .map(result => result.json())
               .catch(this.handleError);
   }

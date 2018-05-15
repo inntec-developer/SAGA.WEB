@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { ActivatedRoute, CanDeactivate, Router  } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {MatTableDataSource, PageEvent, MAT_DIALOG_DATA} from '@angular/material';
@@ -15,13 +15,15 @@ import { RequisicionesService, CatalogosService } from '../../../../../service/i
   providers: [RequisicionesService]
 })
 export class ViewRequisicionComponent implements OnInit {
+
   public requiId : string;
   public requisicion: any[];
   constructor(
     private serviceRequisiciones: RequisicionesService,
     private _Router: Router,
     private _Route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+
   ) { }
 
   ngOnInit() {

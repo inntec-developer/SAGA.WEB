@@ -10,10 +10,7 @@
 </div>
 <!-- Botones superiores Izquierdos -->
 <div class="row">
-  <div class="col-md-4">
-    <h3>Folio: {{requisicion?.folio}}</h3>
-  </div>
-  <div class="col-md-8 text-right">
+  <div class="col-md-12 text-right">
     <button
             class="mb-md btn-md btn btn-success btn-outline"
             type="button"
@@ -29,8 +26,8 @@
   </div>
 </div>
 <br/>
-<!-- Agregar la información necesaria para la Requisicion -->
-<app-grupos-usuarios></app-grupos-usuarios>
+<app-grupos-usuarios [Folios]= "requisicion?.folio"></app-grupos-usuarios>
+<br/>
 <!-- Contenido de la Requisición -->
 <div class="row">
   <div class="col-md-4">

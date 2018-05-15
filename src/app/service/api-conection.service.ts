@@ -16,6 +16,7 @@ export class ApiConection {
   public static GetPrestacionesLey = 'Catalogos/getPrestacionesLey';
   public static getTiposUsuarios = 'Catalogos/getTipos';
   public static getDepartamentos = 'Catalogos/getDepa';
+  public static GetPrioridades = 'Catalogos/getPrioridades';
 
   /*Reclutamiento*/
   public static Damfo290GetById = 'Damfo290/getById?id=';
@@ -25,6 +26,7 @@ export class ApiConection {
   public static AddressCliente = "Requisiciones/getAddress?Id=";
   public static CreateRequi = "Requisiciones/createRequi";
   public static GetRequisicionById = "Requisiciones/getById?Id=";
+  public static GetRequisicionByFolio = "Requisiciones/getByFolio?folio=";
   public static GetRequisicionesAll = "Requisiciones/getRequisiciones"
 
   /* Candidatos */
