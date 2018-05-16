@@ -1,5 +1,5 @@
 <!-- <alert [type]="'info'">None of this examples are based on the official jQuery-Datatables</alert> -->
-
+<!--
 <div class="mb-lg clearfix">
     <div class="pull-let wd-md">
         <input *ngIf="config.filtering" placeholder="Filter all columns" [ngTableFiltering]="config.filtering" class="form-control" (tableChanged)="onChangeTable(config)" />
@@ -12,14 +12,14 @@
 <div class="text-right">
     <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
     </pagination>
-</div>
+</div> -->
 <!-- <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre> -->
 
 
 
 
 <!-- START panel-->
-<!-- <div class="panel panel-default">
+<div class="panel panel-default">
     <div class="panel-heading">Personas</div>
 
     <div class="table-responsive">
@@ -93,5 +93,5 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 <!-- END panel-->
