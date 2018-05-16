@@ -25,6 +25,7 @@ export class AdminServiceService {
   private UrlAddUser = ApiConection.ServiceUrl+ApiConection.addUser;
   private UrlUdActivo = ApiConection.ServiceUrl+ApiConection.udActivoUser;
   private UrlGetByDepa = ApiConection.ServiceUrl+ApiConection.getUsuariosByDepa;
+  private UrlGetGrupos = ApiConection.ServiceUrl+ApiConection.GetGrupos;
 
   // Error.
   private handleError(error: any) {
@@ -56,6 +57,13 @@ export class AdminServiceService {
   getTipos(): Observable<any>
   {
      return this.http.get(this.UrlTiposUsuarios)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
+  getGrupos(): Observable<any>
+  {
+     return this.http.get(this.UrlGetGrupos)
          .map(result => result.json())
          .catch(this.handleError);
   }

@@ -55,7 +55,7 @@ export class AddadminComponent implements OnInit {
 
     ngOnInit() {
       this.addPersonas();
-      this.getTiposU();
+      this.GetGrupos();
       this.getDepartamentos();
     }
 
@@ -68,12 +68,13 @@ export class AddadminComponent implements OnInit {
         })
     }
 
-    getTiposU()
+    GetGrupos()
     {
-      this.service.getTipos()
+      this.service.getGrupos()
       .subscribe(
         e=>{
           this.listGrupos = e;
+          console.log(e)
         })
     }
 

@@ -53,8 +53,8 @@
               <div class="panel-heading">
                  <select class="form-control width-mio" (change)="selected($event)" >
                     <option>Seleccionar Grupo</option>
-                    <option *ngFor="let user of listGrupos" [value]="user.tipo">
-                        {{user.tipo}}
+                    <option *ngFor="let user of listGrupos" [value]="user.id">
+                        {{user.grupo}}
                     </option>
                   </select>
 
