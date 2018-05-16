@@ -76,7 +76,9 @@ export class ApiConection {
 
   /*Admin*/
   public static getDtosPersonal = '/admin/get';
+  public static getUsuariosByDepa = '/admin/getUsuarioByDepa';
   public static addRol = '/admin/agregarRol';
   public static addGrupo = '/admin/agregarGrupo';
   public static addUser = '/admin/addUsuario';
+  public static udActivoUser = '/admin/udActivo';
 }
