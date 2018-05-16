@@ -30,6 +30,7 @@ export class ApiConection {
   public static GetRequisicionByFolio = "Requisiciones/getByFolio?folio=";
   public static GetRequisicionesAll = "Requisiciones/getRequisiciones";
   public static UpdateRequisicion = "Requisicion/updateRequisiciones";
+  
 
   /* Candidatos */
   public static filtropaises = 'Candidatos/get';
