@@ -14,6 +14,7 @@ export class AddadminComponent implements OnInit {
 
     ListaPersonas: Array<any> = [];
     ListaPG: Array<any> = [];
+    ListDepas: Array<any> = [];
     listGrupos:  Array<any> = [];
 
     public value: any[];
@@ -35,6 +36,18 @@ export class AddadminComponent implements OnInit {
       this.ListaPersonas.splice(i, 1)
     }
 
+    filtrar($event)
+    {
+      console.log($event.target.value)
+      this.service.GetUsuariosByDepa($event.target.value)
+      .subscribe(
+        e=>{
+          this.ListaPersonas = [];
+          this.ListaPersonas = e;
+        })
+
+    }
+
     selected($event)
     {
       this.nomgrupo = $event.target.value;
@@ -43,6 +56,7 @@ export class AddadminComponent implements OnInit {
     ngOnInit() {
       this.addPersonas();
       this.getTiposU();
+      this.getDepartamentos();
     }
 
     addPersonas()
@@ -60,6 +74,15 @@ export class AddadminComponent implements OnInit {
       .subscribe(
         e=>{
           this.listGrupos = e;
+        })
+    }
+
+    getDepartamentos()
+    {
+      this.service.getDepas()
+      .subscribe(
+        e=>{
+          this.ListDepas = e;
         })
     }
 

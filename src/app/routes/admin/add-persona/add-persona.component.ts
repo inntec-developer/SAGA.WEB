@@ -12,62 +12,30 @@ import { AdminServiceService } from '../../../service/AdminServicios/admin-servi
 })
 export class AddPersonaComponent implements OnInit {
 
-  public formUsuarios: FormGroup;
-  public ListDepas: Array<any> = [];
-  public email: Array<any>=[];
-  // DepasControl = new formControl('', [Validators.required]);
-  msj: string;
- selectedValue: string;
-  constructor(private service: AdminServiceService ,public fb: FormBuilder)
+  Users: Array<any> = [];
+  msj: string = '';
+  constructor(private service: AdminServiceService ,public fb: FormBuilder){}
+
+  Actualizar($ev, id: any)
   {
+    this.service.UDActivoUsers(id, $ev.target.checked )
+        .subscribe( data => {
+        this.msj = data;
+        this.getUsuarios();
+        });
   }
 
-
-  saveData(){
-
-
-    this.email.push({email: this.formUsuarios.controls['Email'].value, UsuarioAlta: 'INNTEC'});
-    let persona = {
-        Clave: this.formUsuarios.controls['Clave'].value,
-        Nombre: this.formUsuarios.controls['Nombre'].value,
-        ApellidoPaterno: this.formUsuarios.controls['ApellidoPaterno'].value,
-        ApellidoMaterno: this.formUsuarios.controls['ApellidoMaterno'].value,
-        Usuario: this.formUsuarios.controls['Usuario'].value,
-        DepartamentoId: this.formUsuarios.controls['DepartamentoId'].value,
-        Email: this.email
-
-    };
-    console.log(persona);
-    // this.formUsuarios.controls['Email'] = this.email;
-    // alert(JSON.stringify(this.formUsuarios.value))
-    this.service.AddUsers(persona)
-    .subscribe( data => {
-      this.msj = data;
-    });
-
-  }
-
-  getDepartamentos()
+  getUsuarios()
   {
-    this.service.getDepas()
+    this.service.getPersonas()
     .subscribe(
       e=>{
-        this.ListDepas = e;
+        this.Users = e;
       })
   }
 
   ngOnInit() {
-    this.getDepartamentos();
-        this.formUsuarios = this.fb.group({
-          DepartamentoId : [ '', [Validators.required]],
-          Clave: ['', [Validators.required]],
-          Nombre: ['', [Validators.required]],
-          ApellidoPaterno: ['', [Validators.required]],
-          ApellidoMaterno: ['', [Validators.required]],
-          Email: '',
-          Usuario: 'Damsa'
-
-          });
+    this.getUsuarios();
   }
 
 }

@@ -23,6 +23,8 @@ export class AdminServiceService {
   private UrlAddGrupo = ApiConection.ServiceUrl+ApiConection.addGrupo;
   private UrlGetDepas = ApiConection.ServiceUrl+ApiConection.getDepartamentos;
   private UrlAddUser = ApiConection.ServiceUrl+ApiConection.addUser;
+  private UrlUdActivo = ApiConection.ServiceUrl+ApiConection.udActivoUser;
+  private UrlGetByDepa = ApiConection.ServiceUrl+ApiConection.getUsuariosByDepa;
 
   // Error.
   private handleError(error: any) {
@@ -58,6 +60,12 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  GetUsuariosByDepa(id :any): Observable<any>{
+    return this.http.get(this.UrlGetByDepa + '?id='+ id)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
   addGrupos(data: any): Observable<any>{
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
@@ -81,4 +89,11 @@ export class AdminServiceService {
             .map(result => result.json())
             .catch(this.handleError);
   }
+
+  UDActivoUsers(id :any, v: any): Observable<any>{
+    return this.http.get(this.UrlUdActivo + '?id='+ id + '&v=' + v)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
 }
