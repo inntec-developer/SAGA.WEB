@@ -29,8 +29,8 @@ export class ApiConection {
   public static GetRequisicionById = "Requisiciones/getById?Id=";
   public static GetRequisicionByFolio = "Requisiciones/getByFolio?folio=";
   public static GetRequisicionesAll = "Requisiciones/getRequisiciones";
-  public static UpdateRequisicion = "Requisicion/updateRequisiciones";
-  
+  public static UpdateRequisicion = "Requisiciones/updateRequisiciones";
+
 
   /* Candidatos */
   public static filtropaises = 'Candidatos/get';
