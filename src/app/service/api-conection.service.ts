@@ -19,6 +19,7 @@ export class ApiConection {
   public static GetPrioridades = 'Catalogos/getPrioridades';
   public static GetEstatusRequi = 'Catalogos/getEstatus?tipoMov=';
   public static GetGrupos = 'Catalogos/getGrupos';
+  public static GetRoles = 'Catalogos/getRoles';
 
   /*Reclutamiento*/
   public static Damfo290GetById = 'Damfo290/getById?id=';
@@ -81,7 +82,8 @@ export class ApiConection {
   public static getDtosPersonal = '/admin/get';
   public static getUsuariosByDepa = '/admin/getUsuarioByDepa';
   public static addRol = '/admin/agregarRol';
-  public static addGrupo = '/admin/agregarGrupo';
+  public static addGrupo = '/admin/addGrupo';
   public static addUser = '/admin/addUsuario';
   public static udActivoUser = '/admin/udActivo';
+  public static addUserGroup = '/admin/addUserGroup';
 }

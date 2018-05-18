@@ -9,6 +9,68 @@
 </div>
 
 <form [formGroup]="formRoles" (ngSubmit)="saveData()" novalidate >
+  <div class="panel panel-dark panel-flat">
+
+     <div class="panel-body">
+       <p class="text-center pv">ROLES</p>
+       <!-- START panel-->
+       <div class="panel panel-default">
+           <div class="table-responsive">
+               <table class="table table-bordered table-hover">
+                   <thead>
+                       <tr>
+                           <th class="text-center">Rol</th>
+                           <th class="text-center">Create</th>
+                           <th class="text-center">Read</th>
+                           <th class="text-center">Update</th>
+                           <th class="text-center">Delete</th>
+                           <th class="text-center">Special</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let r of Roles">
+                           <td class="text-center">{{r.rol}}</td>
+                           <td class="text-center">
+                             <div class="form-check">
+                                <mat-checkbox class="checkbox" [checked]="r.create"></mat-checkbox>
+                                  <!-- <input type="checkbox" [checked]="r.create" /> -->
+                                  <span></span>
+                             </div>
+                           </td>
+                           <td class="text-center ">
+                              <div class="form-check">
+                                  <mat-checkbox class="checkbox" [checked]="r.read" ></mat-checkbox>
+                                  <span></span>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <div class="form-check">
+                                  <mat-checkbox class="checkbox" [checked]="r.update"></mat-checkbox>
+                                  <span></span>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <div class="form-check">
+                                  <mat-checkbox class="checkbox" [checked]="r.delete"></mat-checkbox>
+                                  <span></span>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <div class="checkbox checkbox-info">
+                                  <mat-checkbox class="checkbox" [checked]="r.especial"></mat-checkbox>
+                                  <span></span>
+                              </div>
+                           </td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+</div>
+</div>
+
+</div>
+
+
     <div class="panel">
       <div class="panel-body">
         <section>

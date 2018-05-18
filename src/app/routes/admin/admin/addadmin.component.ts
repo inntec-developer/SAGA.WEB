@@ -16,9 +16,10 @@ export class AddadminComponent implements OnInit {
     ListaPG: Array<any> = [];
     ListDepas: Array<any> = [];
     listGrupos:  Array<any> = [];
+    IdGrupo: any = null;
 
     public value: any[];
-    public nomgrupo: string;
+
 
     constructor( private service: AdminServiceService ) {}
 
@@ -50,13 +51,33 @@ export class AddadminComponent implements OnInit {
 
     selected($event)
     {
-      this.nomgrupo = $event.target.value;
+      this.IdGrupo = $event.target.value;
     }
 
     ngOnInit() {
       this.addPersonas();
       this.GetGrupos();
       this.getDepartamentos();
+    }
+
+    addUsuarioGrupo()
+    {
+
+      let lug = [];
+
+      for(let ug of this.ListaPG)
+      {
+        lug.push({UsuarioId: ug.id, GrupoId: this.IdGrupo});
+      }
+
+      console.log(lug)
+      this.service.addUserGroup( lug )
+      .subscribe( data => {
+        console.log(data);
+      });
+      lug = [];
+      this.resetBasket();
+
     }
 
     addPersonas()

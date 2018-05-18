@@ -13,7 +13,7 @@ export class AddRolesComponent implements OnInit {
 
   formRoles: FormGroup;
   msj: string;
-
+  Roles: Array<any> = [];
   constructor(private service: AdminServiceService
               ,public fb: FormBuilder )
   {
@@ -36,7 +36,7 @@ export class AddRolesComponent implements OnInit {
 
   }
   saveData(){
-  
+
     this.service.AddRoles(this.formRoles.value)
     .subscribe( data => {
       this.msj = data;
@@ -45,7 +45,20 @@ export class AddRolesComponent implements OnInit {
 
   }
 
+  getRoles()
+  {
+    this.service.getRoles()
+    .subscribe(
+      e=>{
+        this.Roles = e;
+        console.log(this.Roles)
+      })
 
-  ngOnInit() {}
+  }
+
+
+  ngOnInit() {
+    this.getRoles();
+  }
 
 }

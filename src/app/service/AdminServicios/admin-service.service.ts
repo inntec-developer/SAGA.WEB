@@ -21,12 +21,13 @@ export class AdminServiceService {
   private UrlTiposUsuarios = ApiConection.ServiceUrl+ApiConection.getTiposUsuarios;
   private UrlAddRol = ApiConection.ServiceUrl+ApiConection.addRol;
   private UrlAddGrupo = ApiConection.ServiceUrl+ApiConection.addGrupo;
+  private UrlAddUserGroup = ApiConection.ServiceUrl+ApiConection.addUserGroup;
   private UrlGetDepas = ApiConection.ServiceUrl+ApiConection.getDepartamentos;
   private UrlAddUser = ApiConection.ServiceUrl+ApiConection.addUser;
   private UrlUdActivo = ApiConection.ServiceUrl+ApiConection.udActivoUser;
   private UrlGetByDepa = ApiConection.ServiceUrl+ApiConection.getUsuariosByDepa;
   private UrlGetGrupos = ApiConection.ServiceUrl+ApiConection.GetGrupos;
-
+  private UrlGetRoles = ApiConection.ServiceUrl+ApiConection.GetRoles;
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -68,6 +69,14 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  getRoles(): Observable<any>
+  {
+     return this.http.get(this.UrlGetRoles)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
+
   GetUsuariosByDepa(id :any): Observable<any>{
     return this.http.get(this.UrlGetByDepa + '?id='+ id)
             .map(result => result.json())
@@ -78,6 +87,14 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlAddGrupo, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  addUserGroup(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddUserGroup, JSON.stringify(data), options)
             .map(result => result.json())
             .catch(this.handleError);
   }

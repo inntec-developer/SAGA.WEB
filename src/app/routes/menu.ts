@@ -18,11 +18,11 @@ const Administracion = {
             link: '/admin/roles'
           },
           {
-            text: 'Registrar Personal',
+            text: 'Activar Usuario',
             link: '/admin/agregar'
           },
           {
-            text: 'Asignar Permisos',
+            text: 'Usuarios-Grupo',
             link: '/admin/grupo'
           }
         ]

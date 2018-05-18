@@ -9,81 +9,70 @@
       <small> Administraci&oacute;n de Roles.</small>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-6">
       <div class = "panel panel-default panel-body">
         <p><span><select class="form-control" (change)="filtrar($event)">
-          <option value="">Filtrar por Departamento</option> <!-- not selected / blank option -->
-          <option *ngFor="let d of ListDepas" [value]="d.id">{{d.nombre}}</option>
-        </select>
-</span></p>
-
+                <option value="">Filtrar por Departamento</option> 
+                <option *ngFor="let d of ListDepas" [value]="d.id">{{d.nombre}}</option>
+                </select>
+        </span></p>
       </div>
     </div>
-
-  </div>
+  </div> -->
   <div class="row">
-        <div class="col-md-6">
-
-            <div class="panel panel-dark panel-flat">
-              <div class="panel-heading text-center">USUARIOS</div>
+    <div class="col-md-6">
+        <div class="panel panel-dark panel-flat">
+        <div class="panel-heading text-center">USUARIOS</div>
+          <div class="panel-body">
+            <div *ngFor="let p of ListaPersonas" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
               <div class="panel-body">
-                <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
-                  <div class="panel-body">
-                    <div class="media">
-                      <img class="pull-left media-object img-circle" src="assets/img/user/01.jpg" />
-                      <div class="media-body">
-                        <div class="pull-right badge baed-info tituloPuesto">{{p.departamento}}</div>
-                            <h4 class="media-heading">{{p.nombre + ' ' + p.apellidoPaterno }}</h4>
-                            <p>Clave: {{p.clave}}</p>
-                            <p>Álias: {{p.usuario}}</p>
-                            <p *ngFor="let e of p.email">{{e.email}} </p>
-                            <p>Tipo de Usuario: {{p.tipoUsuario}}</p>
-                      </div>
-                    </div>
-                 </div>
+                <div class="media">
+                  <img class="pull-left media-object img-circle" src="assets/img/user/01.jpg" />
+                  <div class="media-body">
+                    <div class="pull-right badge baed-info tituloPuesto">{{p.departamento}}</div>
+                    <h4 class="media-heading">{{p.nombre + ' ' + p.apellidoPaterno }}</h4>
+                    <p>Clave: {{p.clave}}</p>
+                    <p>Álias: {{p.usuario}}</p>
+                    <p *ngFor="let e of p.email">{{e.email}} </p>
+                    <p>Tipo de Usuario: {{p.tipoUsuario}}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-md-6">
-          <div>
-            <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-dark panel-flat">
-              <div class="panel-heading">
-                 <select class="form-control width-mio" (change)="selected($event)" >
-                    <option>Seleccionar Grupo</option>
-                    <option *ngFor="let user of listGrupos" [value]="user.id">
-                        {{user.grupo}}
-                    </option>
-                  </select>
-
-                  <div class="pull-right margin-mio">
-                      <button class="btn btn-sm btn-oval btn-success"><em class="fa fa-check"></em></button>
-                      <button class="btn btn-default btn-sm btn-oval" (click)="resetBasket()"><em class="fa fa-trash-o"></em></button>
-                  </div>
-              </div>
-              <div class="panel-body">
-                  <p>Drag people here..</p>
-                  <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default">
-                      <div class="panel-body">
-                          <a class="pull-left" href="">
-                              <img class="media img-responsive img-circle thumb32" src="assets/img/user/01.jpg" alt="" />
-                          </a>
-                          <div class="media-body">
-                            <div class="media-heading margintextthumb">
-                              <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
-                                <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                                <p>Tipo de Usuario: {{pg.tipoUsuario}}</p>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+      </div>
+    <div class="col-md-6">
+      <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-dark panel-flat">
+        <div class="panel-heading">
+           <select class="form-control width-mio" (change)="selected($event)" >
+              <option>Seleccionar Grupo</option>
+              <option *ngFor="let user of listGrupos" [value]="user.id">{{user.nombre}}</option>
+           </select>
+          <div class="pull-right margin-mio">
+            <button class="btn btn-sm btn-oval btn-success" (click)="addUsuarioGrupo()"><em class="fa fa-check"></em></button>
+            <button class="btn btn-default btn-sm btn-oval" (click)="resetBasket()"><em class="fa fa-trash-o"></em></button>
           </div>
         </div>
+        <div class="panel-body">
+          <p>Drag people here..</p>
+          <div *ngFor="let pg of ListaPG" class="panel panel-default">
+            <div class="panel-body">
+              <a class="pull-left" href=""><img class="media img-responsive img-circle thumb32" src="assets/img/user/01.jpg" alt="" /></a>
+              <div class="media-body">
+                <div class="media-heading margintextthumb">
+                  <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
+                  <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
+                  <p>Tipo de Usuario: {{pg.tipoUsuario}}</p>
+                </div>
+              </div>
+           </div>
+         </div>
+        </div>
       </div>
-</div>
+    </div>
+  </div>
 
 <br>
 <br>

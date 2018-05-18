@@ -14,7 +14,7 @@ export class AddGrupoComponent implements OnInit {
 
   formGrupos: FormGroup;
   msj: string;
-
+  Grupos: Array<any> = [];
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
     this.iniciarForm();
@@ -24,11 +24,22 @@ export class AddGrupoComponent implements OnInit {
   iniciarForm()
   {
       this.formGrupos = this.fb.group({
-      Grupo: ['', [Validators.required]],
+      Nombre: ['', [Validators.required]],
       Descripcion: "",
       Activo: 1
 
     });
+
+  }
+
+  getGrupos()
+  {
+    this.service.getGrupos()
+    .subscribe(
+      e=>{
+        this.Grupos = e;
+        console.log(this.Grupos)
+      })
 
   }
 
@@ -38,10 +49,12 @@ export class AddGrupoComponent implements OnInit {
     .subscribe( data => {
      this.msj = data;
      this.iniciarForm();
+     this.getGrupos();
     });
   }
 
   ngOnInit() {
+    this.getGrupos();
 
   }
 

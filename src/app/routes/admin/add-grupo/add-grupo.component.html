@@ -10,13 +10,50 @@
 
 
 <form [formGroup]="formGrupos" (ngSubmit)="saveData()" novalidate >
+  <div class="panel panel-dark panel-flat">
+
+     <div class="panel-body">
+       <p class="text-center pv">GRUPOS</p>
+       <!-- START panel-->
+       <div class="panel panel-default">
+           <div class="table-responsive">
+               <table class="table table-bordered table-hover">
+                   <thead>
+                       <tr >
+                           <th class="text-center">Nombre</th>
+                           <th class="text-center">Descripción</th>
+                           <th class="text-center">Usuario Alta</th>
+                           <th class="text-center">Activo</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let g of Grupos">
+                           <td class="text-center">{{g.nombre}}</td>
+                           <td class="text-center">{{g.descripcion}}</td>
+                           <td class="text-center">{{g.usuarioAlta}}</td>
+                           <td class="text-center">
+                             <mat-checkbox class="checkbox" formControlName="Activo" [checked]="g.activo"></mat-checkbox>
+
+                                  <!-- <input class="checkbox" type="checkbox" [checked]="g.activo" [disabled]="true" /> -->
+                                  <span></span>
+
+                           </td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+</div>
+</div>
+
+</div>
+
     <div class="panel">
       <div class="panel-body">
         <section>
             <mat-form-field>
-              <input matInput formControlName="Grupo" placeholder="Nombre">
+              <input matInput formControlName="Nombre" placeholder="Nombre">
             </mat-form-field>
-            <p><span *ngIf="formGrupos.controls['Grupo'].touched && !formGrupos.controls['Grupo'].valid">Nombre es requerido</span></p>
+            <p><span *ngIf="formGrupos.controls['Nombre'].touched && !formGrupos.controls['Nombre'].valid">Nombre es requerido</span></p>
             <mat-form-field>
               <textarea matInput formControlName="Descripcion" placeholder="Descripción" maxlength="80" rows="1"></textarea>
             </mat-form-field>
@@ -28,9 +65,9 @@
             <mat-checkbox class="checkbox" formControlName="Activo"></mat-checkbox>
           </section>
 
-        <section>
+        <!-- <section>
           <app-crop-img></app-crop-img>
-        </section>
+        </section> -->
 
         <section>
           <div class="col-md-6" >
