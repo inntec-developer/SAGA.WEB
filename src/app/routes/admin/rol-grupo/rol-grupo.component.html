@@ -1,0 +1,81 @@
+<div class="content-heading">
+    <ul class="breadcrumb pull-right">
+        <li>
+            <a href="/home">Inicio</a>
+        </li>
+        <li class="active">Administrador</li>
+    </ul>
+    <small> Administraci&oacute;n de Roles.</small>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+      <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">GRUPOS</div>
+        <div class="panel-body">
+          <div *ngFor="let g of Grupos; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="g" (onDragSuccess)="popGrupo(g, i)" [dropZones]="['demo1']">
+            <div class="panel-body">
+              <div class="media">
+                <img class="pull-left media-object img-circle" src="assets/img/user/01.jpg" />
+                <div class="media-body">
+                  <div class="pull-right badge baed-info colorbadge">{{g.usuarioAlta}}</div>
+                  <h4 class="media-heading">{{g.nombre}}</h4>
+                  <p>{{g.descripcion}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div dnd-droppable (onDropSuccess)="addToRol($event)" [dropZones]="['demo1']" class="panel panel-dark panel-flat">
+        <div class="panel-heading">
+           <select #slcRol class="form-control widthSelect" (change)="selected($event, i)" >
+              <option>Seleccionar Rol</option>
+              <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}} Permisos:
+                <label *ngIf="r.create"> C</label>
+                <label *ngIf="r.read"> R</label>
+                <label *ngIf="r.update"> U</label>
+                <label *ngIf="r.delete"> D</label>
+                <label *ngIf="r.especial"> S</label>
+
+
+
+                <!-- <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> R
+                <mat-checkbox [checked]="r.update" [disabled]="true"></mat-checkbox> U
+                <mat-checkbox [checked]="r.delete" [disabled]="true"></mat-checkbox> D
+                <mat-checkbox [checked]="r.especial" [disabled]="true"></mat-checkbox> S -->
+
+              </option>
+           </select>
+          <div class="pull-right marginButtons">
+            <button class="btn btn-sm btn-oval btn-success" (click)="saveData(slcRol.value)"><em class="fa fa-check"></em></button>
+            <button class="btn btn-default btn-sm btn-oval" (click)="resetBasket()"><em class="fa fa-trash-o"></em></button>
+          </div>
+        </div>
+        <div  class="panel-body">
+          <!-- <div>
+          <section *ngFor="let p of permisoRol" class="checkbox">
+          <mat-checkbox [checked]="p.create" [disabled]="true"></mat-checkbox> C
+          <mat-checkbox [checked]="p.read" [disabled]="true"></mat-checkbox> R
+          <mat-checkbox [checked]="p.update" [disabled]="true"></mat-checkbox> U
+          <mat-checkbox [checked]="p.delete" [disabled]="true"></mat-checkbox> D
+        </section>
+      </div> -->
+        <p>Drag grupo here..</p>
+          <div *ngFor="let rg of ListaRG" class="panel panel-default">
+            <div class="panel-body">
+              <div class="media-body">
+                <div class="media-body">
+                  <div class="pull-right badge baed-info colorbadge">{{rg.usuarioAlta}}</div>
+                  <h4 class="media-heading">{{rg.nombre}}</h4>
+                  <p>{{rg.descripcion}}</p>
+                </div>
+              </div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+</div>

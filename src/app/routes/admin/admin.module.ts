@@ -29,6 +29,7 @@ import { DtPersonasComponent } from './add-persona/dt-personas/dt-personas.compo
 import { AddGrupoComponent } from './add-grupo/add-grupo.component';
 import { AddRolesComponent } from './add-roles/add-roles.component';
 import { CropImgComponent } from './crop-img/crop-img.component';
+import { RolGrupoComponent } from './rol-grupo/rol-grupo.component';
 
 
 
@@ -36,7 +37,8 @@ const routes: Routes = [
     { path: 'roles', component: AddRolesComponent },
     { path: 'agregar', component: AddPersonaComponent },
     { path: 'grupo', component: AddadminComponent },
-    { path: 'grupoAdd', component: AddGrupoComponent }
+    { path: 'grupoAdd', component: AddGrupoComponent },
+    { path: 'rol', component: RolGrupoComponent }
 
 ];
 
@@ -70,7 +72,8 @@ const routes: Routes = [
       DtPersonasComponent,
       AddGrupoComponent,
       AddRolesComponent,
-      CropImgComponent
+      CropImgComponent,
+      RolGrupoComponent
     ],
     exports: [
         RouterModule

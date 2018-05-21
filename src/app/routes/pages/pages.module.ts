@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { HttpModule } from '@angular/http';
 import { SharedModule } from '../../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -25,7 +25,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        HttpModule
     ],
     declarations: [
         LoginComponent,

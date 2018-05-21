@@ -24,6 +24,10 @@ const Administracion = {
           {
             text: 'Usuarios-Grupo',
             link: '/admin/grupo'
+          },
+          {
+            text: 'Grupo-Rol',
+            link: '/admin/rol'
           }
         ]
 };

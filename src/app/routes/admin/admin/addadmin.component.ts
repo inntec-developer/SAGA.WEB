@@ -33,8 +33,11 @@ export class AddadminComponent implements OnInit {
         this.addPersonas();
     }
 
-    popPerson(p: any, i: any) {
+    popPerson(p:any, i: any) {
+      console.log(i)
+
       this.ListaPersonas.splice(i, 1)
+
     }
 
     filtrar($event)
@@ -86,6 +89,7 @@ export class AddadminComponent implements OnInit {
       .subscribe(
         e=>{
           this.ListaPersonas = e;
+          console.log(this.ListaPersonas)
         })
     }
 

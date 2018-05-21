@@ -13,7 +13,7 @@
     <div class="col-md-6">
       <div class = "panel panel-default panel-body">
         <p><span><select class="form-control" (change)="filtrar($event)">
-                <option value="">Filtrar por Departamento</option> 
+                <option value="">Filtrar por Departamento</option>
                 <option *ngFor="let d of ListDepas" [value]="d.id">{{d.nombre}}</option>
                 </select>
         </span></p>
@@ -25,7 +25,7 @@
         <div class="panel panel-dark panel-flat">
         <div class="panel-heading text-center">USUARIOS</div>
           <div class="panel-body">
-            <div *ngFor="let p of ListaPersonas" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
+            <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
               <div class="panel-body">
                 <div class="media">
                   <img class="pull-left media-object img-circle" src="assets/img/user/01.jpg" />
@@ -36,6 +36,8 @@
                     <p>Álias: {{p.usuario}}</p>
                     <p *ngFor="let e of p.email">{{e.email}} </p>
                     <p>Tipo de Usuario: {{p.tipoUsuario}}</p>
+                    <p>Grupo:</p>
+                    <p *ngFor="let e of p.grupos">{{e.nombre}} </p>
                   </div>
                 </div>
               </div>

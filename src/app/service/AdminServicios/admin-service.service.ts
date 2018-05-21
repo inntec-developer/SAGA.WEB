@@ -28,6 +28,8 @@ export class AdminServiceService {
   private UrlGetByDepa = ApiConection.ServiceUrl+ApiConection.getUsuariosByDepa;
   private UrlGetGrupos = ApiConection.ServiceUrl+ApiConection.GetGrupos;
   private UrlGetRoles = ApiConection.ServiceUrl+ApiConection.GetRoles;
+  private UrlAddPrivilegio = ApiConection.ServiceUrl+ApiConection.addPrivilegio;
+
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -111,6 +113,14 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlAddUser, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  AddPrivilegios(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddPrivilegio, JSON.stringify(data), options)
             .map(result => result.json())
             .catch(this.handleError);
   }
