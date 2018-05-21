@@ -28,16 +28,15 @@ export class DialogdamfoComponent implements OnInit, OnChanges {
   }
 
   toaster: any;
-    toasterConfig: any;
-    toasterconfig: ToasterConfig = new ToasterConfig({
-      positionClass: 'toast-bottom-right',
-      limit: 7,tapToDismiss: false,
-      showCloseButton: true,
-      mouseoverTimerStop: true,
-    });
+  toasterConfig: any;
+  toasterconfig: ToasterConfig = new ToasterConfig({
+    positionClass: 'toast-bottom-right',
+    limit: 7,tapToDismiss: false,
+    showCloseButton: true,
+    mouseoverTimerStop: true,
+  });
 
   popToast(type, title, body ) {
-
     var toast : Toast = {
       type: type,
       title: title,

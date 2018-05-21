@@ -74,8 +74,9 @@
       <mat-cell *matCellDef="let element">
         <h5>
           <small class="label"
-            [class.label-success]="element.estatus.id  === 3"
-            [class.label-primary]="element.estatus.id  === 1"> {{element?.estatus?.descripcion}}
+            [class.label-warning]="element.estatus.id  === 4"
+            [class.label-primary]="element.estatus.id  === 5"
+            [class.label-success]="element.estatus.id  === 6"> {{element?.estatus?.descripcion}}
           </small>
         </h5>
       </mat-cell>
@@ -97,15 +98,15 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showRequi(element.id)" type="button"  matTooltip="Ver Requisición">
+          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showRequi(element.id, element.folio)" type="button"  matTooltip="Ver Requisición">
             <em class="fa fa-eye"></em>
           </button>
-          <button class="mb-sm btn-sm btn btn-primary btn-outline" (click)="openDialog(element.id)" type="button"  matTooltip="Editar Requisición">
+          <button class="mb-sm btn-sm btn btn-primary btn-outline" (click)="editRequi(element.id, element.folio)" type="button"  matTooltip="Editar Requisición">
             <em class="icon-pencil"></em>
           </button>
-          <!-- <button class="mb-sm btn-sm btn btn-danger btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Eliminar Requisición">
+          <button class="mb-sm btn-sm btn btn-danger btn-outline" type="button"  matTooltip="Eliminar Requisición">
             <em class="icon-trash"></em>
-          </button> -->
+          </button>
       </mat-cell>
 
     </ng-container>

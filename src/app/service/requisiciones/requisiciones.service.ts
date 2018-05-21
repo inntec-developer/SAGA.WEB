@@ -1,8 +1,3 @@
-import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/http';
-import { Injectable } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -11,21 +6,31 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
 
+import { Headers, Http, HttpModule, RequestOptions, Response } from '@angular/http';
+
 import { ApiConection } from '../api-conection.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import {UpdateRequisicion} from '../../models/vtas/Requisicion'
+
+//API Conection
+
+
+//MODELS
+
 
 @Injectable()
 export class RequisicionesService {
-
-
-
-
   private urlGetViewDamfos = ApiConection.ServiceUrl + ApiConection.GetViewDamfos;
   private urlAddress = ApiConection.ServiceUrl + ApiConection.AddressCliente;
   private urlCreateRequi = ApiConection.ServiceUrl + ApiConection.CreateRequi;
   private urlGetRequisicionById = ApiConection.ServiceUrl + ApiConection.GetRequisicionById;
   private urlGetRequisicionByFolio = ApiConection.ServiceUrl + ApiConection.GetRequisicionByFolio;
   private urlGetDamfoById = ApiConection.ServiceUrl + ApiConection.Damfo290GetById;
-  private utlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
+  private urlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
+  private urlUpdateRequisicion = ApiConection.ServiceUrl + ApiConection.UpdateRequisicion;
 
   constructor(private http: Http) { }
   //Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -67,10 +72,20 @@ export class RequisicionesService {
   }
   //Recupera la información de las requisiciones que se an generado.
   getRequisiciones() : Observable<any>{
-    return this.http.get(this.utlGetRequisicionesAll)
+    return this.http.get(this.urlGetRequisicionesAll)
       .map(result => result.json())
       .catch(this.handleError);
   }
+
+  updateRequisicion(requi : any) : Observable<any>{
+    let headers = new Headers({'Content-Type' : 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.urlUpdateRequisicion, JSON.stringify(requi), options )
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+
   //Muestra un error en consola y regresa el mismo al Frond-End en caso de que se genere el mismo.
   public handleError(error: any ){
     console.log('Error Internar Server', error);

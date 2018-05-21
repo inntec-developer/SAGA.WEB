@@ -1,23 +1,8 @@
-<!-- <ng-select
-  class="ng-touched"
-  (data)="value"
-  [allowClear]="true"
-  [multiple]="true"
-  [items]="items"
-  [disabled]="disabled"
-  (data)="refreshValue($event)"
-  (selected)="selected($event)"
-  (removed)="removed($event)"
-  placeholder="Grupos / Usuarios" required>
-</ng-select>
-<br/> -->
-
-
-<!-- Agregar la información necesaria para la Requisicion -->
-<form [formGroup]="formRequi">
+<form [formGroup]="formRequi" (ngSubmit)="Save()">
   <mat-card>
     <div class="row">
       <div class="col-md-12">
+        {{disabled}}
         <mat-form-field>
           <input matInput formControlName="folio" placeholder="No. FOLIO: ">
         </mat-form-field>
@@ -36,16 +21,21 @@
     <div class="row">
       <div class="col-md-3">
         <mat-form-field>
-          <input matInput [matDatepicker]="solicitud" placeholder="Fecha Solicitud"
-          formControlName="fch_Solicitud" required>
+          <input matInput
+          [matDatepicker]="solicitud"
+          placeholder="Fecha Solicitud"
+          formControlName="fch_Solicitud"
+          required>
           <mat-datepicker-toggle matSuffix [for]="solicitud"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #solicitud></mat-datepicker>
+          <mat-datepicker touchUi="true" [disabled]="true" #solicitud></mat-datepicker>
         </mat-form-field>
       </div>
       <div class="col-md-3">
           <mat-form-field>
-            <mat-select placeholder="Prioridad" formControlName="prioridad" required>
-              <mat-option *ngFor="let x of Prioridades" value="x.id">
+            <mat-select placeholder="Prioridad"
+            formControlName="prioridad"
+            required>
+              <mat-option *ngFor="let x of Prioridades" [value]="x.id">
                 {{x.descripcion}}
               </mat-option>
             </mat-select>
@@ -53,16 +43,21 @@
       </div>
       <div class="col-md-3">
         <mat-form-field>
-          <input matInput [matDatepicker]="cumplimiento" placeholder="Fecha Cumplimiento"
-          formControlName="fch_Cumplimiento" required>
+          <input matInput
+          [matDatepicker]="cumplimiento"
+          placeholder="Fecha Cumplimiento"
+          formControlName="fch_Cumplimiento"
+          required>
           <mat-datepicker-toggle matSuffix [for]="cumplimiento"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #cumplimiento></mat-datepicker>
+          <mat-datepicker touchUi="true" [disabled]="true" #cumplimiento></mat-datepicker>
         </mat-form-field>
       </div>
       <div class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="Estatus" formControlName="estatus" required>
-            <mat-option *ngFor="let x of Estatus" value="x.id">
+          <mat-select placeholder="Estatus"
+          formControlName="estatus"
+          required>
+            <mat-option *ngFor="let x of Estatus" [value]="x.id">
               {{x.descripcion}}
             </mat-option>
           </mat-select>

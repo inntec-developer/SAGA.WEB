@@ -43,9 +43,12 @@ export class DtRequisicionComponent implements OnInit {
     });
   }
 
-  showRequi(id){
-    //mandamos la información por medio de la URL sin que esta se muestre en la liga.
-    this._Router.navigate(['/ventas/visualizarRequisicion/', id], {skipLocationChange:true});
+  showRequi(id, folio){
+    this._Router.navigate(['/ventas/visualizarRequisicion/', id, folio], {skipLocationChange:true});
+  }
+
+  editRequi(id, folio){
+    this._Router.navigate(['/ventas/edicionRequisicion/', id, folio], {skipLocationChange:true});
   }
 
   //*******************************-- GRID-- *********************************************//

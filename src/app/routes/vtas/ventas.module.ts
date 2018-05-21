@@ -54,7 +54,10 @@ import { ActividadesComponent } from './requisiciones/components/actividades/act
 import { ObservacionesComponent } from './requisiciones/components/observaciones/observaciones.component';
 import { ProcesosComponent } from './requisiciones/components/procesos/procesos.component';
 import { ViewRequisicionComponent } from './requisiciones/components/view-requisicion/view-requisicion.component';
-import { GruposUsuariosComponent } from './requisiciones/components/grupos-usuarios/grupos-usuarios.component';
+import { ViewInforRequiComponent } from './requisiciones/components/view-info-requi/view-info-requi.component';
+import { UpdateRequisicionComponent } from './requisiciones/components/update-requisicion/update-requisicion.component';
+import { ViewCuerpoRequiComponent } from './requisiciones/components/view-cuerpo-requi/view-cuerpo-requi.component';
+import { UpdateInfoRequiComponent } from './requisiciones/components/update-info-requi/update-info-requi.component';
 
 
 const routes: Routes = [
@@ -63,7 +66,8 @@ const routes: Routes = [
     { path: 'crearRequisicion', component: DtCrearRequisicionComponent },
     { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent },
     { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent },
-    { path: 'visualizarRequisicion/:IdRequi', component: ViewRequisicionComponent },
+    { path: 'visualizarRequisicion/:IdRequi/:Folio', component: ViewRequisicionComponent },
+    { path: 'edicionRequisicion/:IdRequi/:Folio', component: UpdateRequisicionComponent },
 ];
 
 @NgModule({
@@ -114,7 +118,10 @@ const routes: Routes = [
         ObservacionesComponent,
         ProcesosComponent,
         ViewRequisicionComponent,
-        GruposUsuariosComponent,
+        ViewInforRequiComponent,
+        UpdateRequisicionComponent,
+        ViewCuerpoRequiComponent,
+        UpdateInfoRequiComponent,
     ],
     entryComponents: [DialogdamfoComponent],
     exports: [

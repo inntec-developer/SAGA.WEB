@@ -1,45 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import { ActivatedRoute, CanDeactivate, Router  } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import {MatTableDataSource, PageEvent, MAT_DIALOG_DATA} from '@angular/material';
-import { GruposUsuariosComponent } from '../grupos-usuarios/grupos-usuarios.component'
-
-//Services
-import { RequisicionesService, CatalogosService } from '../../../../../service/index';
+import { ActivatedRoute, Router  } from '@angular/router';
+import { ViewInforRequiComponent } from '../view-info-requi/view-info-requi.component';
+import { ViewCuerpoRequiComponent } from '../view-cuerpo-requi/view-cuerpo-requi.component';
 
 @Component({
   selector: 'app-view-requisicion',
   templateUrl: './view-requisicion.component.html',
-  styleUrls: ['./view-requisicion.component.scss'],
-  providers: [RequisicionesService]
+  styleUrls: ['./view-requisicion.component.scss']
 })
 export class ViewRequisicionComponent implements OnInit {
 
   public requiId : string;
-  public requisicion: any[];
+  public folio: number;
+
   constructor(
-    private serviceRequisiciones: RequisicionesService,
     private _Router: Router,
     private _Route: ActivatedRoute,
-    private spinner: NgxSpinnerService,
-
-  ) { }
-
-  ngOnInit() {
-    this.spinner.show();
+  ) {
     this._Route.params.subscribe( params => {
       if(params['IdRequi'] != null){
-        this.requiId = params['IdRequi']
-        this.serviceRequisiciones.getNewRequi(this.requiId)
-          .subscribe(data => {
-                this.requisicion = data;
-                this.spinner.hide();
-          });
+        this.requiId = params['IdRequi'];
+        this.folio = params['Folio'];
       }else {
-        this.spinner.hide();
         console.log("Error al cargar la información.");
       }
     });
+  }
+  ngOnInit(){}
+
+  editRequi(){
+    this._Router.navigate(['/ventas/edicionRequisicion', this.requiId, this.folio], {skipLocationChange:true});
   }
 }
