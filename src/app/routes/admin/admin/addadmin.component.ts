@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './admin.list';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-addadmin',
@@ -12,16 +12,22 @@ import { AdminServiceService } from '../../../service/AdminServicios/admin-servi
 
 export class AddadminComponent implements OnInit {
 
+    formAdmin: FormGroup;
     ListaPersonas: Array<any> = [];
     ListaPG: Array<any> = [];
     ListDepas: Array<any> = [];
     listGrupos:  Array<any> = [];
     IdGrupo: any = null;
-
+    alert: string = "Drag users here...";
     public value: any[];
 
 
-    constructor( private service: AdminServiceService ) {}
+    constructor( private service: AdminServiceService, public fb: FormBuilder )
+    {
+      this.formAdmin = this.fb.group({
+        slcGrupo: ['', [Validators.required]]
+      })
+    }
 
     addToGroups($event)
     {
@@ -34,19 +40,15 @@ export class AddadminComponent implements OnInit {
     }
 
     popPerson(p:any, i: any) {
-      console.log(i)
-
       this.ListaPersonas.splice(i, 1)
-
     }
 
     filtrar($event)
     {
-      console.log($event.target.value)
+      this.ListaPersonas = [];
       this.service.GetUsuariosByDepa($event.target.value)
       .subscribe(
         e=>{
-          this.ListaPersonas = [];
           this.ListaPersonas = e;
         })
 
@@ -67,39 +69,46 @@ export class AddadminComponent implements OnInit {
     {
 
       let lug = [];
-
-      for(let ug of this.ListaPG)
+      if(this.ListaPG.length > 0)
       {
-        lug.push({UsuarioId: ug.id, GrupoId: this.IdGrupo});
-      }
+        for(let ug of this.ListaPG)
+        {
+          lug.push({UsuarioId: ug.id, GrupoId: this.IdGrupo});
+        }
 
-      console.log(lug)
-      this.service.addUserGroup( lug )
-      .subscribe( data => {
-        console.log(data);
-      });
-      lug = [];
-      this.resetBasket();
+        console.log(lug)
+        this.service.addUserGroup( lug )
+        .subscribe( data => {
+        });
+      
+        this.addPersonas();
+        this.GetGrupos();
+        this.ListaPG = [];
+      }
+      else
+      {
+        this.alert = "Debe agregar al menos un usuario";
+      }
 
     }
 
     addPersonas()
     {
+      this.ListaPersonas = [];
       this.service.getPersonas()
       .subscribe(
         e=>{
           this.ListaPersonas = e;
-          console.log(this.ListaPersonas)
         })
     }
 
     GetGrupos()
     {
+      this.listGrupos = [];
       this.service.getGrupos()
       .subscribe(
         e=>{
           this.listGrupos = e;
-          console.log(e)
         })
     }
 

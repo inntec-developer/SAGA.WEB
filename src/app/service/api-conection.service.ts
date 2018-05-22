@@ -87,4 +87,5 @@ export class ApiConection {
   public static udActivoUser = '/admin/udActivo';
   public static addUserGroup = '/admin/addUserGroup';
   public static addPrivilegio = '/admin/agregarPrivilegio';
+  public static getGruposRoles = '/admin/getGruposRoles';
 }

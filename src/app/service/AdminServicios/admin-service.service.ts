@@ -27,6 +27,7 @@ export class AdminServiceService {
   private UrlUdActivo = ApiConection.ServiceUrl+ApiConection.udActivoUser;
   private UrlGetByDepa = ApiConection.ServiceUrl+ApiConection.getUsuariosByDepa;
   private UrlGetGrupos = ApiConection.ServiceUrl+ApiConection.GetGrupos;
+  private UrlGetGruposRoles = ApiConection.ServiceUrl+ApiConection.getGruposRoles
   private UrlGetRoles = ApiConection.ServiceUrl+ApiConection.GetRoles;
   private UrlAddPrivilegio = ApiConection.ServiceUrl+ApiConection.addPrivilegio;
 
@@ -67,6 +68,13 @@ export class AdminServiceService {
   getGrupos(): Observable<any>
   {
      return this.http.get(this.UrlGetGrupos)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
+  getGruposRoles(): Observable<any>
+  {
+     return this.http.get(this.UrlGetGruposRoles)
          .map(result => result.json())
          .catch(this.handleError);
   }
@@ -118,6 +126,8 @@ export class AdminServiceService {
   }
 
   AddPrivilegios(data: any): Observable<any>{
+    debugger;
+    console.log(data)
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlAddPrivilegio, JSON.stringify(data), options)

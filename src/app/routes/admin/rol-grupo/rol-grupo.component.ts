@@ -1,5 +1,7 @@
+import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-rol-grupo',
@@ -9,13 +11,20 @@ import { AdminServiceService } from '../../../service/AdminServicios/admin-servi
 })
 export class RolGrupoComponent implements OnInit {
 
+  formRol: FormGroup;
   Grupos: Array<any> = [];
   Roles: Array<any> = [];
   ListaRG: Array<any> = [];
   permisoRol: Array<any> = [];
   msj: string = "";
+  alert: string = "Drag group here...";
+  constructor(private service: AdminServiceService, public fb: FormBuilder) 
+  {
+    this.formRol = this.fb.group({
+      slcRol: ['', [Validators.required]]
+    })
 
-  constructor(private service: AdminServiceService) { }
+  }
 
   addToRol($event)
   {
@@ -37,19 +46,35 @@ export class RolGrupoComponent implements OnInit {
   }
 
   saveData(RolId: any){
-    console.log(RolId)
-    let lrg = [];
+
+    if(this.ListaRG.length > 0)
+    {
+      let lrg = [];
 
       for(let rg of this.ListaRG)
       {
-        lrg.push({EntidadId: rg.id, RolId: RolId, Tipo:2});
+        let element = {
+          EntidadId: rg.id,
+          RolId: RolId,         
+          Tipo: 2
+        }
+        lrg.push(element);
       }
 
-      console.log(lrg)
-    // this.service.AddPrivilegios(data)
-    // .subscribe( data => {
-    //   this.msj = data;
-    // });
+    
+     
+      this.service.AddPrivilegios(lrg)
+      .subscribe( data => {
+        this.msj = data;
+        console.log(this.msj);
+      });
+      
+      this.ListaRG = [];
+    }
+    else
+    {
+      this.alert = "Debe agregar al menos un grupo";
+    }
   }
 
   selected($event, rol: any)
@@ -62,10 +87,12 @@ export class RolGrupoComponent implements OnInit {
   }
   getGrupos()
   {
-    this.service.getGrupos()
+    this.Grupos = [];
+    this.service.getGruposRoles()
     .subscribe(
       e=>{
         this.Grupos = e;
+        console.log(this.Grupos)
       })
 
   }
