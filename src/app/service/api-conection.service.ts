@@ -1,6 +1,8 @@
 export class ApiConection {
   /*Servicio de purbeas locales*/
   public static ServiceUrl = 'http://localhost:33333/api/';
+  /*Servicio de purbeas locales Publicado IIS*/
+  //public static ServiceUrl = 'http://192.168.8.130:3333/api/';
   //public static ServiceUrlTemporal = 'http://localhost:54462/api/';
   /*Coneccion en servidor de purebas sistemas (SandBoxSAGA)*/
   //public static ServiceUrl = 'http://192.168.8.146:33333/api/';

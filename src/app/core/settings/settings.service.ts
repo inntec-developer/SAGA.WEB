@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+
 declare var $: any;
 
 @Injectable()
 export class SettingsService {
-
+    debugger;
     public user: any;
     public app: any;
     public layout: any;
@@ -13,9 +14,9 @@ export class SettingsService {
         // User Settings
         // -----------------------------------
         this.user = {
-            name: 'John',
-            job: 'ng-developer',
-            picture: 'assets/img/user/02.jpg'
+            name: 'INNTECT',
+            job: 'PROGRAMADOR',
+            picture: ''
         };
 
         // App Settings

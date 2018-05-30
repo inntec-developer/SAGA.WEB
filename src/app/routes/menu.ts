@@ -1,7 +1,7 @@
 const Home = {
     text: 'Inicio',
     link: '/home',
-    icon: 'icon-home'
+    icon: 'icon-home',
 };
 
 const Administracion = {

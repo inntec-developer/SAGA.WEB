@@ -1,14 +1,14 @@
 import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
-//Servicios
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatTableDataSource, PageEvent} from '@angular/material';
 
 import { NgxSpinnerService } from 'ngx-spinner';
-//Models
+import { SettingsService } from '../../../../../core/settings/settings.service';
 import { UpdateRequisicion } from '../../../../../models/vtas/Requisicion'
+import { disableDebugTools } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-update-info-requi',
@@ -29,6 +29,7 @@ export class UpdateInfoRequiComponent implements OnInit {
 
 
     constructor(
+      private settings : SettingsService,
       public fb: FormBuilder,
       public serviceRequisicion: RequisicionesService,
       public serviceCatalogos: CatalogosService,
@@ -37,6 +38,7 @@ export class UpdateInfoRequiComponent implements OnInit {
         this.formRequi = new FormGroup({
           folio: new FormControl('',[Validators.required]),
           fch_Solicitud: new FormControl('',[Validators.required]),
+          fch_Limite: new FormControl('',[Validators.required]),
           prioridad: new FormControl('',[Validators.required]),
           fch_Cumplimiento: new FormControl('',[Validators.required]),
           confidencial: new FormControl(),
@@ -73,10 +75,11 @@ export class UpdateInfoRequiComponent implements OnInit {
       this.formRequi = this.fb.group({
         folio : [{value: '', disabled: true}],
         fch_Solicitud: [{value: '', disabled:true}],
+        fch_Limite: [{value: '', disabled:true}],
         prioridad: [{value:''}, Validators.required ],
         fch_Cumplimiento: [{value: ''}, Validators.required],
         confidencial: [false],
-        estatus: [{value:''}, Validators.required ]
+        estatus: [{value:'',  disabled:true}]
       });
     }
 
@@ -94,6 +97,7 @@ export class UpdateInfoRequiComponent implements OnInit {
           this.formRequi.patchValue({
             folio: DataRequisicion.folio,
             fch_Solicitud: DataRequisicion.fch_Creacion,
+            fch_Limite: DataRequisicion.fch_Limite,
             prioridad: DataRequisicion.prioridad.id,
             estatus: DataRequisicion.estatus.id,
             fch_Cumplimiento: DataRequisicion.fch_Cumplimiento,
@@ -124,19 +128,19 @@ export class UpdateInfoRequiComponent implements OnInit {
           prioridadId : this.formRequi.get('prioridad').value,
           fch_Cumplimiento : this.formRequi.get('fch_Cumplimiento').value,
           estatusId : this.formRequi.get('estatus').value,
-          confidencial : this.formRequi.get('confidencial').value
+          confidencial : this.formRequi.get('confidencial').value,
+          usuario : this.settings.user.name
       }
       this.requiUpdate = update;
       this.serviceRequisicion.updateRequisicion(this.requiUpdate)
         .subscribe(data => {
           this.return = data;
           if(this.return){
-            this.popToast('success', 'Requisicion','Actualizacion de información Folio: ' + data.folio);
+            this.popToast('success', 'Requisicion','Actualizacion de información Folio: ' + data);
           }
           else{
               this.popToast('error', 'Oops!!','Algo salio mal intente de nuevo' );
           }
         });
     }
-
 }

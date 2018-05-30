@@ -1,12 +1,11 @@
-import { LayoutComponent } from '../layout/layout.component';
-
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { RecoverComponent } from './pages/recover/recover.component';
-import { LockComponent } from './pages/lock/lock.component';
-import { MaintenanceComponent } from './pages/maintenance/maintenance.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { Error500Component } from './pages/error500/error500.component';
+import { LayoutComponent } from '../layout/layout.component';
+import { LockComponent } from './pages/lock/lock.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MaintenanceComponent } from './pages/maintenance/maintenance.component';
+import { RecoverComponent } from './pages/recover/recover.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes = [
 
@@ -14,11 +13,12 @@ export const routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full'},
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
             { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule' },
             { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule'},
-            { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
+            { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+            { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule'},
         ]
     },
 
@@ -32,5 +32,4 @@ export const routes = [
 
     // Not found
     { path: '**', redirectTo: '404' }
-
 ];

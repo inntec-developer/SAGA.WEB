@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { ActivatedRoute, CanDeactivate, Router, } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-//Components
-import {UpdateRequisicionComponent}  from '../update-requisicion/update-requisicion.component';
-import { UpdateInfoRequiComponent } from '../update-info-requi/update-info-requi.component';
-//Servicios
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
-//Models
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+
 import { CreateRequisicion } from '../../../../../models/vtas/Requisicion';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SettingsService } from '../../../../../core/settings/settings.service';
+import { UpdateInfoRequiComponent } from '../update-info-requi/update-info-requi.component';
+import {UpdateRequisicionComponent}  from '../update-requisicion/update-requisicion.component';
+
+//Components
+
+
+//Servicios
+
+//Models
+
 
 @Component({
   selector: 'app-requisicion-nueva',
@@ -27,11 +34,12 @@ export class RequisicionNuevaComponent implements OnInit {
   public damfoId: string;
   public direccionId: string;
   public requisicionId: string;
-  public requisicion: any[];
+  public folio: any[];
   public createRequi: boolean;
   public dataRequisicion : any[];
 
   constructor(
+    private setings : SettingsService,
     private serviceCatalogo: CatalogosService,
     private serviceRequisiciones: RequisicionesService,
     private _Router: Router,
@@ -60,9 +68,11 @@ export class RequisicionNuevaComponent implements OnInit {
     let datas: CreateRequisicion = new CreateRequisicion();
     datas.IdDamfo = this.damfoId;
     datas.IdAddress = this.direccionId;
+    datas.Usuario = this.setings.user.name;
     this.serviceRequisiciones.createNewRequi(datas)
-        .subscribe(data => {
-          this.requisicionId = data;
-        })
+      .subscribe(data => {
+        this.requisicionId = data.id;
+        this.folio = data.folio;
+      })
   }
 }

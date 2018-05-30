@@ -1,10 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
+import { PerfilesComponent } from './perfiles/perfiles.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent},
+    { path: 'perfiles', component: PerfilesComponent },
+    { path: 'perfiles/:user', component: PerfilesComponent }
 ];
 
 @NgModule({
@@ -12,10 +13,10 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        HomeComponent
+        PerfilesComponent
     ],
     exports: [
         RouterModule
     ]
 })
-export class HomeModule { }
+export class PerfilesModule { }

@@ -1,8 +1,9 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import {MatTableDataSource, PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
+
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster/angular2-toaster';
 //Servicios
 import { RequisicionesService } from '../../../../../service/index';
 
@@ -24,22 +25,21 @@ export class DtRequisicionComponent implements OnInit {
 
   ) { }
   //VARIABLES GLOBALES
-  requisicion: any[];
+  requisicion: any;
   arrayRequisicion: any[];
-  public dataSource: MatTableDataSource<any[]>;
+  public dataSource = new MatTableDataSource(<any>[]);
 
   ngOnInit() {
     /** spinner starts on init */
     this.spinner.show();
     this.service.getRequisiciones().subscribe(data => {
-      this.dataSource =  new MatTableDataSource(data);
       this.requisicion = data;
-      this.arrayRequisicion = data;
+      this.dataSource =  new MatTableDataSource(this.requisicion);
+      this.arrayRequisicion = this.requisicion;
       this.pageCount = Math.round(this.requisicion.length / this.rows);
       this.TotalRecords = this.requisicion.length;
       this.paginador();
       this.spinner.hide();
-      console.log(this.requisicion);
     });
   }
 
@@ -55,25 +55,27 @@ export class DtRequisicionComponent implements OnInit {
   // Paginador.
   length = 0;
   pageSize = 10;
-  pageSizeOptions = [10, 30, 50]
+  pageSizeOptions = [1,5,10, 30, 50]
+
+  pageEvent: PageEvent;
 
   rows: number = 10;
   first: number = 0;
   page: number = 1;
   pageCount: number = 0;
   TotalRecords: number = 0;
+  
+
   paginate(event?: PageEvent){
-      if(event.length > event.pageSize )
-      {
-        this.first = event.pageIndex;
-        this.rows = event.pageSize;
-        this.page = event.pageIndex;
-        this.pageCount = event.length;
-      }
-      else{
-        this.rows = event.length;
-      }
-      this.paginador();
+    if(event.length > event.pageSize ){
+      this.first = event.pageIndex;
+      this.rows = event.pageSize;
+      this.page = event.pageIndex;
+      this.pageCount = event.length;
+    }else{
+      this.rows = event.length;
+    }
+    this.paginador();
   }
 
   paginador(){

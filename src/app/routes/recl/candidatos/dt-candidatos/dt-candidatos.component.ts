@@ -226,7 +226,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   // Parametros para paginador candidatos. ***
   length = 0;
   pageSize = 10;
-  pageSizeOptions = [10, 20, 30, 50];
+  pageSizeOptions = [2, 20, 30, 50];
 
   pageEvent: PageEvent;
 

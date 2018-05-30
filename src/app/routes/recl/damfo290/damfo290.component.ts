@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { SettingsService } from '../../../core/settings/settings.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { CustomValidators } from 'ng2-validation';
+import { SettingsService } from '../../../core/settings/settings.service';
+import { settings } from 'cluster';
 
 @Component({
     selector: 'app-damfo',
@@ -11,10 +12,16 @@ import { CustomValidators } from 'ng2-validation';
 })
 
 export class Damfo290Component implements OnInit {
-
+  public URL: string;
   constructor(
+    private settings : SettingsService
   ) { }
 
   ngOnInit(){
+    
+  }
+
+  goToDamfo(){
+    window.location.href = 'http://localhost:44433/Home/' + this.settings.user.name;
   }
 }

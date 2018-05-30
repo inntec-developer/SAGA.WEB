@@ -1,7 +1,9 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { SettingsService } from '../../../core/settings/settings.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+﻿import { ActivatedRoute, CanDeactivate, Router, } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { CustomValidators } from 'ng2-validation';
+import { SettingsService } from '../../../core/settings/settings.service';
 
 @Component({
     selector: 'app-prospecto',
@@ -10,7 +12,10 @@ import { CustomValidators } from 'ng2-validation';
 })
 
 export class ProspectoComponent implements OnInit {
-    constructor() { };
-    ngOnInit() {
+    constructor(
+        private _Route: ActivatedRoute,
+        private settings : SettingsService
+    ) { };
+    ngOnInit() { 
     }
-}
+}   

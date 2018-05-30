@@ -1,6 +1,7 @@
 export class CreateRequisicion{
   IdDamfo: string;
   IdAddress: string;
+  Usuario: string;
 }
 
 export class UpdateRequisicion{
@@ -10,4 +11,5 @@ export class UpdateRequisicion{
   estatusId: number;
   prioridadId: number;
   confidencial: boolean;
+  usuario: string;
 }

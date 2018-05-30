@@ -1,13 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, CanDeactivate, Router, } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import {MatTableDataSource, PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-//Services
-import { RequisicionesService, CatalogosService } from '../../../../../service/index';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { CatalogosService, RequisicionesService } from '../../../../../service/index';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
 
-//Components
 import { DialogdamfoComponent } from '../dialogdamfo/dialogdamfo.component'
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-viewdamfo',
@@ -61,7 +58,13 @@ export class ViewdamfoComponent implements OnInit {
         this.damfoId = params['IdDamfo'];
         this.serviceRequisiciones.getDamfoById(this.damfoId)
             .subscribe(data => {
+              if(data.TipoContratoId == null)
+              {
+                data.TipoContratoId = 0;
+              }
               this.damfo290 = data;
+              
+              console.log(this.damfo290);
               this.spinner.hide();
             });
       }else{

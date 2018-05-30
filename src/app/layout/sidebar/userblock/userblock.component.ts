@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SettingsService } from '../../../core/settings/settings.service';
 import { UserblockService } from './userblock.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { UserblockService } from './userblock.service';
 })
 export class UserblockComponent implements OnInit {
     user: any;
-    constructor(public userblockService: UserblockService) {
+    constructor(
+        public userblockService: UserblockService,
+        private settings : SettingsService) {
 
         this.user = {
             picture: 'assets/img/user/01.jpg'
