@@ -1,7 +1,9 @@
+import { style } from '@angular/animations';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-rol-grupo',
@@ -14,10 +16,10 @@ export class RolGrupoComponent implements OnInit {
   formRol: FormGroup;
   Grupos: Array<any> = [];
   Roles: Array<any> = [];
-  ListaRG: Array<any> = [];
+  ListaRG: any = [];
   permisoRol: Array<any> = [];
   msj: string = "";
-  alert: string = "Drag group here...";
+  alert = "";
   constructor(private service: AdminServiceService, public fb: FormBuilder) 
   {
     this.formRol = this.fb.group({
@@ -26,10 +28,17 @@ export class RolGrupoComponent implements OnInit {
 
   }
 
+  onSelect(item: any) 
+  {
+    item.selected ? item.selected = false : item.selected = true; //para poner el backgroun cuando seleccione
+   
+    item.selected ? this.ListaRG.push(item) : this.ListaRG.splice(this.ListaRG.findIndex(x => x.id === item.id), 1); //agrega y quita el row seleccionado
+  }
+
   addToRol($event)
   {
-    console.log($event.dragData)
-    this.ListaRG.push($event.dragData);
+    console.log($event)
+    // this.ListaRG.push($event);
   }
 
   resetBasket() {
@@ -63,11 +72,11 @@ export class RolGrupoComponent implements OnInit {
 
     
      
-      this.service.AddPrivilegios(lrg)
-      .subscribe( data => {
-        this.msj = data;
-        console.log(this.msj);
-      });
+      // this.service.AddPrivilegios(lrg)
+      // .subscribe( data => {
+      //   this.msj = data;
+      //   console.log(this.msj);
+      // });
       
       this.ListaRG = [];
     }
@@ -77,11 +86,10 @@ export class RolGrupoComponent implements OnInit {
     }
   }
 
+  
   selected($event, rol: any)
   {
     var id = $event.target.value;
-    console.log(id)
-
     this.permisoRol = this.Roles.filter(item => item.id == id);
 
   }
@@ -92,7 +100,7 @@ export class RolGrupoComponent implements OnInit {
     .subscribe(
       e=>{
         this.Grupos = e;
-        console.log(this.Grupos)
+
       })
 
   }
@@ -111,6 +119,8 @@ export class RolGrupoComponent implements OnInit {
   ngOnInit() {
     this.getGrupos();
     this.getRoles();
+ 
+    
   }
 
 }

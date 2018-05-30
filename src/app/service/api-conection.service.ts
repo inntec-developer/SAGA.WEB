@@ -88,4 +88,9 @@ export class ApiConection {
   public static addUserGroup = '/admin/addUserGroup';
   public static addPrivilegio = '/admin/agregarPrivilegio';
   public static getGruposRoles = '/admin/getGruposRoles';
+  public static updateUsuario = '/admin/updateUsuario';
+  public static updateGrupo = '/admin/updateGrupo';
+  public static updateRoles = '/admin/updateRoles';
+  public static deleteGrupo = '/admin/deleteGrupo';
+  public static deleteRoles = '/admin/deleteRoles';
 }

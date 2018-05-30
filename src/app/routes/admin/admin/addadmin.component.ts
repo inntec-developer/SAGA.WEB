@@ -24,9 +24,7 @@ export class AddadminComponent implements OnInit {
 
     constructor( private service: AdminServiceService, public fb: FormBuilder )
     {
-      this.formAdmin = this.fb.group({
-        slcGrupo: ['', [Validators.required]]
-      })
+      
     }
 
     addToGroups($event)
@@ -36,7 +34,9 @@ export class AddadminComponent implements OnInit {
 
     resetBasket() {
         this.ListaPG = [];
-        this.addPersonas();
+        this.listGrupos = [];
+        this.ngOnInit();
+
     }
 
     popPerson(p:any, i: any) {
@@ -59,11 +59,7 @@ export class AddadminComponent implements OnInit {
       this.IdGrupo = $event.target.value;
     }
 
-    ngOnInit() {
-      this.addPersonas();
-      this.GetGrupos();
-      this.getDepartamentos();
-    }
+    
 
     addUsuarioGrupo()
     {
@@ -75,15 +71,11 @@ export class AddadminComponent implements OnInit {
         {
           lug.push({UsuarioId: ug.id, GrupoId: this.IdGrupo});
         }
-
-        console.log(lug)
         this.service.addUserGroup( lug )
         .subscribe( data => {
         });
-      
-        this.addPersonas();
-        this.GetGrupos();
         this.ListaPG = [];
+        this.ngOnInit();
       }
       else
       {
@@ -119,6 +111,17 @@ export class AddadminComponent implements OnInit {
         e=>{
           this.ListDepas = e;
         })
+    }
+
+    ngOnInit() {
+      this.formAdmin = this.fb.group({
+        slcGrupo: ['', [Validators.required]]
+      })
+
+      this.addPersonas();
+      this.GetGrupos();
+      // this.getDepartamentos();
+
     }
 
 }

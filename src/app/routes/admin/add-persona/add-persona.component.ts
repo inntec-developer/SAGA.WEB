@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-add-persona',
@@ -14,7 +15,49 @@ export class AddPersonaComponent implements OnInit {
 
   Users: Array<any> = [];
   msj: string = '';
-  constructor(private service: AdminServiceService ,public fb: FormBuilder){}
+  ListDepas: Array<any> = [];
+  ListTipos: Array<any> = [];
+  editing = {};
+  bandera = false;
+    
+  constructor(private service: AdminServiceService ,public fb: FormBuilder, public dialog: MatDialog){}
+  
+
+  updateValue(event, cell, rowIndex) 
+  {
+    var aux;
+    if (cell === "tipoUsuarioId") 
+    {
+      aux = this.ListTipos.find(nt => nt.id == event.target.value);
+      this.Users[rowIndex]['tipoUsuario'] = aux.tipo;
+      this.editing[rowIndex + '-' + 'tipoUsuario'] = false;
+    }
+    else if (cell === "departamentoId") 
+    {
+      aux = this.ListDepas.find(nd => nd.id == event.target.value);
+      this.Users[rowIndex]['departamento'] = aux.nombre;
+      this.editing[rowIndex + '-' + 'departamento'] = false;
+    }
+
+    this.editing[rowIndex + '-' + cell] = false;
+    this.Users[rowIndex][cell] = event.target.value;
+
+    this.Users = [...this.Users];
+    console.log(this.Users)
+  }
+
+  updateUser($even, rowIndex) 
+  {
+    let u = this.Users[rowIndex];
+    console.log(u)
+
+    this.service.UpdateUsuario(u)
+      .subscribe(data => {
+        this.msj = data;
+        console.log(this.msj)
+        this.ngOnInit();
+      });
+  }
 
   Actualizar($ev, id: any)
   {
@@ -31,11 +74,40 @@ export class AddPersonaComponent implements OnInit {
     .subscribe(
       e=>{
         this.Users = e;
+        console.log(this.Users)
       })
   }
 
-  ngOnInit() {
+  setFoto($event, rowIndex)
+  {
+    this.bandera = true;
+  }
+
+  getDepartamentos()
+  {
+    this.service.getDepas()
+      .subscribe(
+        e => {
+          this.ListDepas = e;
+        })
+  }
+
+  getTipos() 
+  {
+    this.service.getTipos()
+      .subscribe(
+        e => {
+          this.ListTipos = e;
+        })
+  }
+
+  ngOnInit() 
+  {
     this.getUsuarios();
+    this.getDepartamentos();
+    this.getTipos();
   }
 
 }
+
+

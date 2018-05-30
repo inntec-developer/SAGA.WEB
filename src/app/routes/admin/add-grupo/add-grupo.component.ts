@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
 
 
 @Component({
@@ -12,9 +12,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class AddGrupoComponent implements OnInit {
 
+  @ViewChild(UploadImgsComponent) public uploadImgs: UploadImgsComponent;
+
   formGrupos: FormGroup;
   msj: string;
   Grupos: Array<any> = [];
+  editing = {};
+  bandera=false;
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
     this.iniciarForm();
@@ -32,13 +36,25 @@ export class AddGrupoComponent implements OnInit {
 
   }
 
+  updateValue($event, cell, rowIndex)
+  {
+    if(cell === 'activo')
+    {
+      this.Grupos[rowIndex][cell] = $event.checked;
+    }
+    else
+    {
+      this.editing[rowIndex + '-' + cell] = false;
+      this.Grupos[rowIndex][cell] = $event.target.value;
+    }
+    this.Grupos = [...this.Grupos];
+  }
   getGrupos()
   {
     this.service.getGrupos()
     .subscribe(
       e=>{
         this.Grupos = e;
-        console.log(this.Grupos)
       })
 
   }
@@ -53,6 +69,38 @@ export class AddGrupoComponent implements OnInit {
     });
   }
 
+  updateGrupo($event,rowIndex)
+  {
+    let gu = this.Grupos[rowIndex]
+    console.log(gu)
+    this.service.UpdateGrupo(gu)
+      .subscribe( data => {
+      this.msj = data;
+      console.log(this.msj)
+      this.iniciarForm();
+      this.getGrupos();
+    });
+  
+  }
+
+  DeleteGrupo( $even, rowIndex: any ) 
+  {
+    let g = this.Grupos[rowIndex]
+    console.log(g)
+    this.service.DeleteGrupo(g)
+      .subscribe( data => {
+      this.msj = data;
+      console.log(this.msj)
+      this.iniciarForm();
+      this.getGrupos();
+    });
+
+    // this.Grupos.splice(rowIndex, 1);
+    // this.Grupos = [...this.Grupos];
+    
+ alert("los datos se borraron")
+
+}
   ngOnInit() {
     this.getGrupos();
 
