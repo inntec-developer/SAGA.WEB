@@ -5,7 +5,7 @@ import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CommonModule } from '@angular/common';
 import { DndModule } from 'ng2-dnd';
-import { MatSelectModule, MatIconModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatSelectModule, MatIconModule, MatInputModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
 import {SelectModule} from 'ng2-select';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,8 +16,11 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import {MatDatepickerModule} from '@angular/material/datepicker';;
 import { NativeDateAdapter, DateAdapter } from '@angular/material';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
-import { PaginationModule } from "ng2-bootstrap/pagination"; // from ng2-bootstrap
+// import { PaginationModule } from "ng2-bootstrap/pagination"; // from ng2-bootstrap
 import {MatCheckboxModule} from '@angular/material/checkbox'
+import { AgGridModule } from 'ag-grid-angular/main';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable'
+import {MatDialogModule} from '@angular/material/dialog';
 
 //Servicios
 
@@ -25,11 +28,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 //Componentes
 import { AddadminComponent } from './admin/addadmin.component';
 import { AddPersonaComponent } from './add-persona/add-persona.component';
-import { DtPersonasComponent } from './add-persona/dt-personas/dt-personas.component';
 import { AddGrupoComponent } from './add-grupo/add-grupo.component';
 import { AddRolesComponent } from './add-roles/add-roles.component';
-import { CropImgComponent } from './crop-img/crop-img.component';
 import { RolGrupoComponent } from './rol-grupo/rol-grupo.component';
+import { UploadImgsComponent } from './upload-imgs/upload-imgs.component';
 
 
 
@@ -62,18 +64,22 @@ const routes: Routes = [
         FileUploadModule,
         ImageCropperModule,
         Ng2TableModule,
-        PaginationModule.forRoot(),
-        MatCheckboxModule
+        //PaginationModule.forRoot(),
+        MatCheckboxModule,
+        AgGridModule,
+        NgxDatatableModule, 
+        MatDialogModule, 
+        MatTooltipModule
+        
       ],
     declarations:
     [
       AddadminComponent,
       AddPersonaComponent,
-      DtPersonasComponent,
       AddGrupoComponent,
       AddRolesComponent,
-      CropImgComponent,
-      RolGrupoComponent
+      RolGrupoComponent,
+      UploadImgsComponent
     ],
     exports: [
         RouterModule

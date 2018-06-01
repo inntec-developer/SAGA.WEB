@@ -30,7 +30,11 @@ export class AdminServiceService {
   private UrlGetGruposRoles = ApiConection.ServiceUrl+ApiConection.getGruposRoles
   private UrlGetRoles = ApiConection.ServiceUrl+ApiConection.GetRoles;
   private UrlAddPrivilegio = ApiConection.ServiceUrl+ApiConection.addPrivilegio;
-
+  private UrlUpdateUsuario = ApiConection.ServiceUrl+ApiConection.updateUsuario;
+  private UrlUpdateGrupo = ApiConection.ServiceUrl+ApiConection.updateGrupo;
+  private UrlUpdateRoles = ApiConection.ServiceUrl+ApiConection.updateRoles;
+  private UrlDeleteGrupo = ApiConection.ServiceUrl+ApiConection.deleteGrupo;
+  private UrlDeleteRoles = ApiConection.ServiceUrl+ApiConection.deleteRoles;
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -43,6 +47,8 @@ export class AdminServiceService {
   constructor(private http: Http) {
 
   }
+
+  
 
   getPersonas(): Observable<any>
   {
@@ -126,8 +132,6 @@ export class AdminServiceService {
   }
 
   AddPrivilegios(data: any): Observable<any>{
-    debugger;
-    console.log(data)
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlAddPrivilegio, JSON.stringify(data), options)
@@ -140,5 +144,53 @@ export class AdminServiceService {
             .map(result => result.json())
             .catch(this.handleError);
   }
+
+  UpdateUsuario(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlUpdateUsuario, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+
+  UpdateGrupo(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlUpdateGrupo, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+  UpdateRoles(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlUpdateRoles, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+  DeleteGrupo(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlDeleteGrupo, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+  DeleteRoles(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlDeleteRoles, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+
 
 }

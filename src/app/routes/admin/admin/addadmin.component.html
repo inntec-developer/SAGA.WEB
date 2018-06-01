@@ -23,7 +23,7 @@
   </div> -->
   <div class="row">
     <div class="col-md-6">
-        <div class="panel panel-dark panel-flat">
+        <div class="panel panel-default">
         <div class="panel-heading text-center">USUARIOS</div>
           <div class="panel-body">
             <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
@@ -44,27 +44,31 @@
         </div>
       </div>
     <div class="col-md-6">
-      <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-dark panel-flat">
+      <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-default">
         <div class="panel-heading">Grupos:
            <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event)" >
               <option *ngFor="let user of listGrupos" [value]="user.id">{{user.nombre}}</option>
            </select>
           <span class="text-danger" *ngIf="formAdmin.controls['slcGrupo'].hasError('required')">Debe seleccionar un Grupo</span>
           <div class="pull-right margin-mio">
-            <button [disabled]="formAdmin.invalid" class="btn btn-sm btn-oval btn-success" (click)="addUsuarioGrupo()"><em class="fa fa-check"></em></button>
-            <button class="btn btn-default btn-sm btn-oval" (click)="resetBasket()"><em class="fa fa-trash-o"></em></button>
+            <button [disabled]="formAdmin.invalid" class="mb-sm btn btn-sm btn-success btn-outline" matTooltip="Guardar Cambios" (click)="addUsuarioGrupo()">
+                <em class="fa fa-check"></em>
+            </button>
+            <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Vaciar Lista" (click)="resetBasket()">
+                <em class="fa fa-trash-o"></em>
+            </button>
           </div>
         </div>
         <div class="panel-body">
           <p>{{alert}}</p>
-          <div *ngFor="let pg of ListaPG" class="panel panel-default">
+          <div *ngFor="let pg of ListaPG" class="panel panel-default mat-elevation-z8">
               <a class="pull-left" href=""><img class="media img-responsive img-circle thumb32" src="assets/img/user/01.jpg" alt="" /></a>
               <div class="media-body">
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
                   <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
                   <p>Tipo de Usuario: {{pg.tipoUsuario}}</p>
-                  <p>Grupo: <span *ngFor="let e of p.grupos">{{e.nombre}},  </span></p>
+                  <p>Grupo: <span *ngFor="let e of pg.grupos">{{e.nombre}},  </span></p>
                 </div>
               </div>
          </div>

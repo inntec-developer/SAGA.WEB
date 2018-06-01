@@ -7,7 +7,110 @@
     </ul>
     <small> Administraci&oacute;n de Roles.</small>
 </div>
+
 <form [formGroup]="formRol" novalidate >
+<div class="row">
+  <div class="col-md-6">
+    <div class="mat-elevation-z8">
+        <p class="text-center pv">GRUPOS</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Usuario Alta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr matTooltip="click to select" *ngFor="let g of Grupos; let i = index" (click)="onSelect(g, i)" [class.selected]="g.selected">
+            <td><img class="media img-responsive img-circle thumb32" src="assets/img/user/01.jpg" alt="" /></td>
+            <td>{{g.nombre}}</td>
+            <td>{{g.descripcion}}</td>
+            <td>{{g.usuarioAlta}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default mat-elevation-z8">
+        <div class="panel-heading">
+            <select #slcRol class="form-control widthSelect" (change)="selected($event, i)" formControlName="slcRol" >
+               <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}} Permisos:
+                 <label *ngIf="r.create"> <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> C</label>
+                 <label *ngIf="r.read"> R</label>
+                 <label *ngIf="r.update"> U</label>
+                 <label *ngIf="r.delete"> D</label>
+                 <label *ngIf="r.especial"> S</label>
+               </option>
+            </select>
+            <span class="text-danger" *ngIf="formRol.controls['slcRol'].hasError('required')">Debe seleccionar un Rol</span>
+           <div class="pull-right marginButtons">
+             <button [disabled]="formRol.invalid" class="mb-sm btn btn-sm btn-success btn-outline" matTooltip="Guardar Cambios" (click)="saveData(slcRol.value)"><em class="fa fa-check"></em></button>
+           </div>
+         </div>
+        <div class="panel-body">
+          <ul>
+            <li *ngFor='let sel of ListaRG'>
+                <img class="media img-responsive img-circle thumb32" src="assets/img/user/01.jpg" alt="" />
+                <div>{{sel.nombre}}</div>
+            </li>
+            <li *ngIf="!ListaRG.length">No se ha seleccionado grupo</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+</form>
+      <!-- <div dnd-droppable (onDropSuccess)="addToRol($event)" [dropZones]="['demo1']" class="panel panel-dark panel-flat">
+        <div class="panel-heading">Roles:
+           <select #slcRol class="form-control widthSelect" (change)="selected($event, i)" formControlName="slcRol" >
+              <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}} Permisos:
+                <label *ngIf="r.create"> <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> C</label>
+                <label *ngIf="r.read"> R</label>
+                <label *ngIf="r.update"> U</label>
+                <label *ngIf="r.delete"> D</label>
+                <label *ngIf="r.especial"> S</label>
+              </option>
+           </select>
+           <span class="text-danger" *ngIf="formRol.controls['slcRol'].hasError('required')">Debe seleccionar un Rol</span>
+          <div class="pull-right marginButtons">
+            <button [disabled]="formRol.invalid" class="btn btn-sm btn-oval btn-success" (click)="saveData(slcRol.value)"><em class="fa fa-check"></em></button>
+            <button class="btn btn-default btn-sm btn-oval" (click)="resetBasket()"><em class="fa fa-trash-o"></em></button>
+          </div>
+        </div>
+        <div  class="panel-body">
+          <p>{{alert}}</p>
+          <div *ngFor="let rg of ListaRG" class="panel panel-default">
+            <div class="media-body">
+              <a class="pull-left" href=""><img class="media img-responsive img-circle thumb32" src="assets/img/user/01.jpg" alt="" /></a>
+              <div class="pull-right badge baed-info colorbadge">{{rg.usuarioAlta}}</div>
+                <h4 class="media-heading">{{rg.nombre}}</h4>
+                <p>{{rg.descripcion}}</p>
+              </div>
+         </div>
+        </div>
+      </div> -->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="formRol" novalidate >
 <div class="row">
   <div class="col-md-6">
       <div class="panel panel-dark panel-flat">
@@ -38,14 +141,6 @@
                 <label *ngIf="r.update"> U</label>
                 <label *ngIf="r.delete"> D</label>
                 <label *ngIf="r.especial"> S</label>
-
-
-
-                <!-- <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> R
-                <mat-checkbox [checked]="r.update" [disabled]="true"></mat-checkbox> U
-                <mat-checkbox [checked]="r.delete" [disabled]="true"></mat-checkbox> D
-                <mat-checkbox [checked]="r.especial" [disabled]="true"></mat-checkbox> S -->
-
               </option>
            </select>
            <span class="text-danger" *ngIf="formRol.controls['slcRol'].hasError('required')">Debe seleccionar un Rol</span>
@@ -68,4 +163,4 @@
       </div>
     </div>
 </div>
-</form>
+</form> -->

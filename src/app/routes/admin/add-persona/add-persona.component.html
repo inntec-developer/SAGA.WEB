@@ -5,70 +5,114 @@
         </li>
         <li class="active">Administrador</li>
     </ul>
-
+    <small>Modificar Usuario</small>
+</div>
+<div *ngIf="bandera">
+    <div class="row">
+        <app-upload-imgs
+            [maxFileSize]="1*1024*1024"
+            [maxFile]="1"
+            [multiple]="false"
+            [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
+            [errorMessageMaxSize]="'File size great than 1MB'"
+            [errorMessageWrongType]="'Not allow file format'"
+            [errorMessageLimit]="'Maximum files'"
+            (onItemChanged)="uploadFieldChanged($event)"
+        ></app-upload-imgs>
+    </div>  
 </div>
 <div class="row">
-   <div>
-      <!-- START panel-->
-      <div class="panel panel-dark panel-flat">
-
-         <div class="panel-body">
-           <p class="text-center pv">USUARIOS</p>
-           <!-- START panel-->
-           <div class="panel panel-default">
-               <div class="table-responsive">
-                   <table class="table table-bordered table-hover" id="table-ext-1">
-                       <thead>
-                           <tr>
-                               <th>Foto</th>
-                               <th>Clave</th>
-                               <th>Alias</th>
-                               <th>Nombre</th>
-                               <th>Apellido</th>
-                               <th>Email</th>
-                               <th>Departamento</th>
-                               <th>Tipo Usuario</th>
-                               <th checkAll>Activar
-                                   <!-- <div class="checkbox c-checkbox">
-                                       <label>
-                                           <input type="checkbox" />
-                                           <span class="fa fa-check"></span>
-                                       </label>
-                                   </div> -->
-                               </th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           <tr *ngFor="let p of Users">
-                               <td>
-                                   <div class="media">
-                                       <img class="img-responsive img-circle" src="assets/img/user/01.jpg" alt="Image" />
-                                   </div>
-                               </td>
-                               <td>{{p.clave}}</td>
-                               <td>{{p.usuario}}</td>
-                               <td>{{p.nombre}}</td>
-                               <td>{{p.apellidoPaterno + ' ' + p.apellidoMaterno}}</td>
-                               <td>
-                                 <tr *ngFor="let e of p.email">{{e.email}}</tr>
-                               </td>
-                               <td>{{p.departamento}}</td>
-                               <td>{{p.tipoUsuario}}</td>
-                               <!-- <td class="text-center">
-                                     <div class="radial-bar radial-bar-80 radial-bar-xs" data-label="80%"></div>
-                               </td> -->
-
-                                 <td class="text-center">
-                                    <label class="switch">
-                                      <input type="checkbox" [checked]="p.activo" (change)="Actualizar($event, p.id)" />
-                                      <span></span>
-                                    </label>
-
-                               </td>
-                           </tr>
-                       </tbody>
-                   </table>
-               </div>
+    <div class="panel panel-default panel-flat mat-elevation-z8">
+        <div class="panel-body">
+        <p class="text-center pv">USUARIOS</p>
+            <div class="table-responsive">
+               <table class="table table-bordered table-hover" id="table-ext-1">
+                 <thead>
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">Clave</th>
+                        <th class="text-center">Alias</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Apellido Paterno</th>
+                        <th class="text-center">Apellido Materno</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Departamento</th>
+                        <th class="text-center">Tipo Usuario</th>
+                        <th class="text-center">Activar</th>
+                        <th class="text-center"></th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr *ngFor="let p of Users; let rowIndex = index">
+                        <td class="text-center">
+                          <div class="media">
+                            <a matTooltip="Double click to edit" (dblclick)="bandera = true"><img class="img-responsive img-circle" src="assets/img/user/01.jpg" alt="Image" /></a>
+                          </div>
+                        </td>
+                        <td class="text-center">
+                          <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-clave'] = true" *ngIf="!editing[rowIndex + '-clave']">
+                             {{p.clave}}
+                          </span>
+                          <input autofocus (blur)="updateValue($event, 'clave', rowIndex)" *ngIf="editing[rowIndex + '-clave']" type="text" [value]=p.clave />
+                        </td>
+                        <td class="text-center">
+                           <span title="Double click to edit" (dblclick)="editing[rowIndex + '-usuario'] = true" *ngIf="!editing[rowIndex + '-usuario']">
+                                {{p.usuario}}
+                           </span>
+                           <input autofocus (blur)="updateValue($event, 'usuario', rowIndex)" *ngIf="editing[rowIndex + '-usuario']" type="text" [value]=p.usuario />
+                        </td>
+                        <td class="text-center">
+                            <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-nombre'] = true" *ngIf="!editing[rowIndex + '-nombre']">
+                                {{p.nombre}}
+                            </span>
+                            <input autofocus (blur)="updateValue($event, 'nombre', rowIndex)" *ngIf="editing[rowIndex + '-nombre']" type="text" [value]=p.nombre />
+                        </td>
+                        <td class="text-center">
+                            <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-apellidoPaterno'] = true" *ngIf="!editing[rowIndex + '-apellidoPaterno']">
+                                {{p.apellidoPaterno}}
+                            </span>
+                            <input autofocus (blur)="updateValue($event, 'apellidoPaterno', rowIndex)" *ngIf="editing[rowIndex + '-apellidoPaterno']" type="text" [value]=p.apellidoPaterno />
+                        </td>
+                        <td class="text-center">
+                            <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-apellidoMaterno'] = true" *ngIf="!editing[rowIndex + '-apellidoMaterno']">
+                                {{p.apellidoMaterno}}
+                            </span>
+                            <input autofocus (blur)="updateValue($event, 'apellidoMaterno', rowIndex)" *ngIf="editing[rowIndex + '-apellidoMaterno']" type="text" [value]=p.apellidoMaterno />
+                        </td>
+                        <td>
+                            <tr *ngFor="let e of p.email" class="text-center">{{e.email}}</tr>
+                        </td>
+                        <td class="text-center"> 
+                            <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-departamento'] = true" *ngIf="!editing[rowIndex + '-departamento']">
+                                {{p.departamento}}
+                            </span>
+                            <select (change)="updateValue($event, 'departamentoId', rowIndex)" *ngIf="editing[rowIndex + '-departamento']">
+                                <option [value]=0>Seleccionar Departamento</option>
+                                <option *ngFor="let d of ListDepas" [value]='d.id'>{{d.nombre}}</option>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-tipoUsuario'] = true" *ngIf="!editing[rowIndex + '-tipoUsuario']">
+                                {{p.tipoUsuario}}
+                            </span>
+                            <select (change)="updateValue($event, 'tipoUsuarioId', rowIndex)" *ngIf="editing[rowIndex + '-tipoUsuario']" >
+                                <option [value]=0>Seleccionar Tipo Usuario</option>
+                                <option *ngFor="let t of ListTipos" [value]='t.id'>{{t.tipo}}</option>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="p.activo" (change)="Actualizar($event, p.id)" />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <button [disabled]="false" class="mb-sm btn btn-sm btn-success btn-outline" (click)="updateUser($event, rowIndex)" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>   
 
                <div class="panel-footer">
                    <div class="row">
@@ -79,70 +123,9 @@
                        </div>
                        <div class="col-lg-8"></div>
                        <div class="col-lg-2">
-                           <!-- <div class="input-group pull-right">
-                               <span class="input-group-btn">
-                             <button class="btn btn-sm btn-default">Apply</button>
-                          </span>
-                          <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default">Apply</button>
-                     </span>
-                           </div> -->
+                        
                        </div>
                    </div>
                </div>
                <p><span class="text-center pv">{{msj}}</span></p>
-           </div>
-           <!-- END panel-->
-
-                  <!-- <mat-form-field>
-                    <input matInput formControlName="Clave" placeholder="Número de Empleado">
-                  </mat-form-field>
-                  <p><span *ngIf="formUsuarios.controls['Clave'].touched && !formUsuarios.controls['Clave'].valid">Número de empleado es requerido</span></p>
-
-                  <mat-form-field>
-                    <input matInput formControlName="Nombre" placeholder="Nombre">
-                  </mat-form-field>
-                  <p><span *ngIf="formUsuarios.controls['Nombre'].touched && !formUsuarios.controls['Nombre'].valid">Nombre es requerido</span></p>
-
-                  <mat-form-field>
-                    <input matInput formControlName="ApellidoPaterno" placeholder="Apellido Paterno">
-                  </mat-form-field>
-                  <p><span *ngIf="formUsuarios.controls['ApellidoPaterno'].touched && !formUsuarios.controls['ApellidoPaterno'].valid">Apellido Paterno es requerido</span></p>
-
-                  <mat-form-field>
-                    <input matInput formControlName="ApellidoMaterno" placeholder="Apellido Materno">
-                  </mat-form-field>
-                  <p><span *ngIf="formUsuarios.controls['ApellidoMaterno'].touched && !formUsuarios.controls['ApellidoMaterno'].valid">Apellido Materno es requerido</span></p>
-
-                  <mat-form-field>
-                    <input matInput formControlName="Email" placeholder="Correo Electrónico">
-                  </mat-form-field>
-
-
-
-                  <mat-form-field>
-                    <mat-select matInput formControlName="DepartamentoId" placeholder="Seleccionar Departamento" required>
-                      <mat-option *ngFor="let d of ListDepas" [value]="d.id">
-                          {{ d.nombre }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="formUsuarios.controls['DepartamentoId'].hasError('required')">Debe selecciona un departamento</mat-error>
-
-                  </mat-form-field>
-
-         </div>
-         <div class="panel panel-footer">
-           <div class="row">
-             <div class="pull-right">
-               <span><button class="btn btn-lg btn-primary" (click)="saveData()">Registrar </button></span>
-                <span ><button class="btn btn-lg btn-success">Limpiar datos</button></span>
-            </div>
-           </div>
-        </div> -->
-      </div>
-      </div>
-
-    <!-- <app-crop-img></app-crop-img> -->
-
-   </div>
- </div>
+        

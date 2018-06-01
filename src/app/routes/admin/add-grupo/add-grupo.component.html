@@ -9,74 +9,103 @@
 </div>
 
 
-<form [formGroup]="formGrupos" (ngSubmit)="saveData()" novalidate >
-  <div class="panel panel-dark panel-flat">
+<form [formGroup]="formGrupos" novalidate >
+  <div *ngIf="bandera">
+    <div class="row">
+        
+                <app-upload-imgs
+                  [maxFileSize]="1*1024*1024"
+                  [maxFile]="1"
+                  [multiple]="false"
+                  [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
+                  [errorMessageMaxSize]="'File size great than 1MB'"
+                  [errorMessageWrongType]="'Not allow file format'"
+                  [errorMessageLimit]="'Maximum files'"
+                  (onItemChanged)="uploadFieldChanged($event)"
+                ></app-upload-imgs>
+               </div>  
 
+    </div>
+  <div class="row">
+    <div class="panel mat-elevation-z8">
      <div class="panel-body">
        <p class="text-center pv">GRUPOS</p>
-       <!-- START panel-->
-       <div class="panel panel-default">
            <div class="table-responsive">
                <table class="table table-bordered table-hover">
                    <thead>
                        <tr >
+                          <th class="text-center"></th>
                            <th class="text-center">Nombre</th>
                            <th class="text-center">Descripción</th>
                            <th class="text-center">Usuario Alta</th>
                            <th class="text-center">Activo</th>
+                           <th class="text-center"></th>
                        </tr>
                    </thead>
                    <tbody>
-                       <tr *ngFor="let g of Grupos">
-                           <td class="text-center">{{g.nombre}}</td>
-                           <td class="text-center">{{g.descripcion}}</td>
-                           <td class="text-center">{{g.usuarioAlta}}</td>
+                       <tr *ngFor="let g of Grupos; let rowIndex = index; let value = index">
+                          <td class="text-center">
+                              <div class="media">
+                                <a matTooltip="Double click to edit" (dblclick)="bandera = true"><img class="img-responsive img-circle" src="assets/img/user/01.jpg" alt="Image" /></a>
+                              </div>
+                          </td>
                            <td class="text-center">
-                             <mat-checkbox class="checkbox" formControlName="Activo" [checked]="g.activo"></mat-checkbox>
-
-                                  <!-- <input class="checkbox" type="checkbox" [checked]="g.activo" [disabled]="true" /> -->
-                                  <span></span>
-
+                              <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-nombre'] = true" *ngIf="!editing[rowIndex + '-nombre']">
+                                  {{g.nombre}}
+                              </span>
+                              <input autofocus (blur)="updateValue($event, 'nombre', rowIndex)" *ngIf="editing[rowIndex + '-nombre']" type="text" [value]=g.nombre />
+                           </td>
+                           <td class="text-center">
+                              <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-descripcion'] = true" *ngIf="!editing[rowIndex + '-descripcion']">
+                                  {{g.descripcion}}
+                              </span>
+                              <textarea autofocus (blur)="updateValue($event, 'descripcion', rowIndex)" *ngIf="editing[rowIndex + '-descripcion']" [value]=g.descripcion maxlength="80" rows="1"></textarea>
+                           </td>
+                           <td class="text-center">
+                              {{g.usuarioAlta}}
+                           </td>
+                           <td class="text-center">
+                             <mat-checkbox class="checkbox" (change)="updateValue($event, 'activo', rowIndex)" [checked]="g.activo"></mat-checkbox>
+                           </td>
+                           <td class="text-center">
+                              <button [disabled]="false" class="mb-sm btn btn-sm btn-success btn-outline" (click)="updateGrupo($event, rowIndex)" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
+                              <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Eliminar Usuario" (click)="DeleteUser($event,rowIndex)"><em class="fa fa-trash-o"></em></button>
                            </td>
                        </tr>
                    </tbody>
                </table>
            </div>
 </div>
-</div>
-
-</div>
-
-    <div class="panel">
-      <div class="panel-body">
-        <section>
-            <mat-form-field>
-              <input matInput formControlName="Nombre" placeholder="Nombre">
-            </mat-form-field>
-            <p><span *ngIf="formGrupos.controls['Nombre'].touched && !formGrupos.controls['Nombre'].valid">Nombre es requerido</span></p>
-            <mat-form-field>
-              <textarea matInput formControlName="Descripcion" placeholder="Descripción" maxlength="80" rows="1"></textarea>
-            </mat-form-field>
-
-          </section>
-
-          <input matInput placeholder="Grupo Activo">
-          <section>
-            <mat-checkbox class="checkbox" formControlName="Activo"></mat-checkbox>
-          </section>
-
-        <!-- <section>
-          <app-crop-img></app-crop-img>
-        </section> -->
-
-        <section>
-          <div class="col-md-6" >
-            <input matInput placeholder="{{msj}}">
-          </div>
-            <button [disabled]="formGrupos.invalid" class="btn btn-primary example-label pull-right">Guardar</button>
-        </section>
-      </div>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="panel panel-body">
+        <p class="text-center pv">AGREGAR GRUPO</p>
+      <section>
+        <mat-form-field>
+          <input matInput formControlName="Nombre" placeholder="Nombre">
+        </mat-form-field>
+        <p>
+          <span *ngIf="formGrupos.controls['Nombre'].touched && !formGrupos.controls['Nombre'].valid">Nombre es requerido</span>
+        </p>
+        <mat-form-field>
+          <textarea matInput formControlName="Descripcion" placeholder="Descripción" maxlength="80" rows="1"></textarea>
+        </mat-form-field>  
+      </section>
+    
+      <input matInput placeholder="Grupo Activo">
+       <section>
+         <mat-checkbox class="checkbox" formControlName="Activo"></mat-checkbox>
+       </section>
+       <section>
+        <div class="col-md-6">
+          <input matInput placeholder="{{msj}}">
+        </div>
+        <button [disabled]="formGrupos.invalid" (click)="saveData()" class="btn btn-primary example-label pull-right">Guardar</button>
+       </section>
+    </div>
+  </div>
 </form>
 
 <!-- <div class="row">

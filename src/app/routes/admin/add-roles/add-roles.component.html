@@ -8,109 +8,109 @@
     <small>Crear Roles</small>
 </div>
 
-<form [formGroup]="formRoles" (ngSubmit)="saveData()" novalidate >
-  <div class="panel panel-dark panel-flat">
+<form [formGroup]="formRoles" novalidate>
+    <div class="row">
+        <div class="panel panel-default panel-flat mat-elevation-z8">
+            <div class="panel-body">
+                <p class="text-center pv">ROLES</p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Rol</th>
+                                <th class="text-center">Create</th>
+                                <th class="text-center">Read</th>
+                                <th class="text-center">Update</th>
+                                <th class="text-center">Delete</th>
+                                <th class="text-center">Special</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let r of Roles; let rowIndex = index">
+                                <td class="text-center">
+                                    <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-rol'] = true" *ngIf="!editing[rowIndex + '-rol']">
+                                        {{r.rol}}
+                                    </span>
+                                    <input autofocus (blur)="updateValue($event, 'rol', rowIndex)" *ngIf="editing[rowIndex + '-rol']" type="text" [value]=r.rol
+                                    />
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <mat-checkbox (change)="updateValue($event, 'create', rowIndex)" class="checkbox" [checked]="r.create"></mat-checkbox>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <mat-checkbox (change)="updateValue($event, 'read', rowIndex)" class="checkbox" [checked]="r.read"></mat-checkbox>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <mat-checkbox (change)="updateValue($event, 'update', rowIndex)" class="checkbox" [checked]="r.update"></mat-checkbox>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <mat-checkbox (change)="updateValue($event, 'delete', rowIndex)" class="checkbox" [checked]="r.delete"></mat-checkbox>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox">
+                                        <mat-checkbox (change)="updateValue($event, 'especial', rowIndex)" class="checkbox" [checked]="r.especial"></mat-checkbox>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <button [disabled]="false" (click)="updateRol($event, rowIndex)" class="mb-sm btn btn-sm btn-success btn-outline" matTooltip="Guardar Cambios">
+                                        <em class="fa fa-check"></em>
+                                    </button>
+                                    <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Eliminar Rol" (click)="DeleteRoles($event,rowIndex)">
+                                        <em class="fa fa-trash-o"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-     <div class="panel-body">
-       <p class="text-center pv">ROLES</p>
-       <!-- START panel-->
-       <div class="panel panel-default">
-           <div class="table-responsive">
-               <table class="table table-bordered table-hover">
-                   <thead>
-                       <tr>
-                           <th class="text-center">Rol</th>
-                           <th class="text-center">Create</th>
-                           <th class="text-center">Read</th>
-                           <th class="text-center">Update</th>
-                           <th class="text-center">Delete</th>
-                           <th class="text-center">Special</th>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       <tr *ngFor="let r of Roles">
-                           <td class="text-center">{{r.rol}}</td>
-                           <td class="text-center">
-                             <div class="form-check">
-                                <mat-checkbox class="checkbox" [checked]="r.create"></mat-checkbox>
-                                  <!-- <input type="checkbox" [checked]="r.create" /> -->
-                                  <span></span>
-                             </div>
-                           </td>
-                           <td class="text-center ">
-                              <div class="form-check">
-                                  <mat-checkbox class="checkbox" [checked]="r.read" ></mat-checkbox>
-                                  <span></span>
-                              </div>
-                           </td>
-                           <td class="text-center">
-                              <div class="form-check">
-                                  <mat-checkbox class="checkbox" [checked]="r.update"></mat-checkbox>
-                                  <span></span>
-                              </div>
-                           </td>
-                           <td class="text-center">
-                              <div class="form-check">
-                                  <mat-checkbox class="checkbox" [checked]="r.delete"></mat-checkbox>
-                                  <span></span>
-                              </div>
-                           </td>
-                           <td class="text-center">
-                              <div class="checkbox checkbox-info">
-                                  <mat-checkbox class="checkbox" [checked]="r.especial"></mat-checkbox>
-                                  <span></span>
-                              </div>
-                           </td>
-                       </tr>
-                   </tbody>
-               </table>
-           </div>
-</div>
-</div>
-
-</div>
-
-
-    <div class="panel">
-      <div class="panel-body">
-        <section>
-            <mat-form-field>
-              <input matInput formControlName="Rol" placeholder="Nombre">
-            </mat-form-field>
-
-            <!-- validar nombre rol -->
-            <p><span *ngIf="formRoles.controls['Rol'].touched && !formRoles.controls['Rol'].valid">Nombre es requerido</span></p>
-
-            <!-- <mat-form-field>
-              <textarea matInput formControlName="Descripcion" placeholder="Descripción" maxlength="80" rows="1"></textarea>
-            </mat-form-field> -->
-        </section>
-
-        <input matInput placeholder="Permisos">
-
-        <section class="checkbox">
-            <mat-checkbox formControlName="Create">Crear</mat-checkbox>
-            <mat-checkbox formControlName="Read">Leer</mat-checkbox>
-            <mat-checkbox formControlName="Update">Modificar</mat-checkbox>
-            <mat-checkbox formControlName="Delete">Borrar</mat-checkbox>
-            <mat-checkbox formControlName="Especial">Especial</mat-checkbox>
-        </section>
-
-
-
-        <section>
-          <div class="col-md-6" >
-            <input matInput placeholder="{{msj}}">
-          </div>
-          <div class="col-lg-2 pull-right" >
-            <button [disabled]="formRoles.invalid" class="btn btn-primary example-label">Guardar</button>
-          </div>
-          <div class="col-lg-2 pull-right">
-            <mat-checkbox class="checkbox" formControlName="Activo">Rol Activo</mat-checkbox>
-          </div>
-
-
-        </section>
-      </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="panel panel-default panel-body">
+            <p class="text-center pv">AGREGAR ROL</p>
+            <section>
+                <mat-form-field>
+                    <input matInput formControlName="Rol" placeholder="Nombre">
+                </mat-form-field>
+                <!-- validar nombre rol -->
+                <p>
+                    <span *ngIf="formRoles.controls['Rol'].touched && !formRoles.controls['Rol'].valid">Nombre es requerido</span>
+                </p>
+            </section>
+    
+            <input matInput placeholder="Permisos">
+    
+            <section class="checkbox">
+                <mat-checkbox formControlName="Create">Crear</mat-checkbox>
+                <mat-checkbox formControlName="Read">Leer</mat-checkbox>
+                <mat-checkbox formControlName="Update">Modificar</mat-checkbox>
+                <mat-checkbox formControlName="Delete">Borrar</mat-checkbox>
+                <mat-checkbox formControlName="Especial">Especial</mat-checkbox>
+            </section>
+            <section>
+                <div class="col-md-6">
+                    <input matInput placeholder="{{msj}}">
+                </div>
+                <div class="col-lg-2 pull-right">
+                    <button [disabled]="formRoles.invalid" (click)="saveData()" class="btn btn-primary example-label">Guardar</button>
+                </div>
+                <div class="col-lg-2 pull-right">
+                    <mat-checkbox class="checkbox" formControlName="Activo">Rol Activo</mat-checkbox>
+                </div>
+            </section>
+        </div>
     </div>
 </form>
