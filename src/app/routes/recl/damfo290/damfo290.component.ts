@@ -18,10 +18,10 @@ export class Damfo290Component implements OnInit {
   ) { }
 
   ngOnInit(){
-    
+    this.goToDamfo();
   }
 
   goToDamfo(){
-    window.location.href = 'http://localhost:44433/Home/' + this.settings.user.name;
+    window.location.href = 'http://192.168.8.130:444/Home/' + this.settings.user.name;
   }
 }

@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, AfterContentChecked} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import { ActivatedRoute, CanDeactivate, Router  } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import {MatTableDataSource, PageEvent, MAT_DIALOG_DATA} from '@angular/material';
+import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
+import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
+import { CatalogosService, RequisicionesService } from '../../../../../service/index';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatTableDataSource, PageEvent} from '@angular/material';
 
-//Servicios
-import { RequisicionesService, CatalogosService } from '../../../../../service/index';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-view-info-requi',
@@ -32,6 +31,7 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
         this.formRequi = new FormGroup({
           folio: new FormControl(),
           fch_Solicitud: new FormControl(),
+          fch_Limite: new FormControl('',[Validators.required]),
           prioridad: new FormControl(),
           fch_Cumplimiento: new FormControl(),
           confidencial: new FormControl(),
@@ -45,6 +45,7 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
       this.formRequi = this.fb.group({
         folio : [{value: '', disabled: true}],
         fch_Solicitud: [{value: '', disabled:true}],
+        fch_Limite: [{value: '', disabled:true}],
         prioridad: [{value:'', disabled:true}, Validators.required ],
         fch_Cumplimiento: [{value: '', disabled: true}, Validators.required],
         confidencial: [{value:false, disabled:true}],
@@ -66,6 +67,7 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
           this.formRequi.patchValue({
             folio: DataRequisicion.folio,
             fch_Solicitud: DataRequisicion.fch_Creacion,
+            fch_Limite: DataRequisicion.fch_Limite,
             prioridad: DataRequisicion.prioridad.id,
             estatus: DataRequisicion.estatus.id,
             fch_Cumplimiento: DataRequisicion.fch_Cumplimiento,

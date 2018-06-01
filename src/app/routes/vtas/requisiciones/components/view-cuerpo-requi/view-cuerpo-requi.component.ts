@@ -1,10 +1,11 @@
-import { Component, OnInit,Input,AfterContentChecked } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import { ActivatedRoute, CanDeactivate, Router  } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import {MatTableDataSource, PageEvent, MAT_DIALOG_DATA} from '@angular/material';
+import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
+import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 //Services
-import { RequisicionesService, CatalogosService } from '../../../../../service/index';
+import { CatalogosService, RequisicionesService } from '../../../../../service/index';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatTableDataSource, PageEvent} from '@angular/material';
+
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-view-cuerpo-requi',
@@ -93,8 +94,15 @@ export class ViewCuerpoRequiComponent implements OnInit, AfterContentChecked {
         });
         this.formContrato.patchValue({
           tipoContrato: data.contratoInicial.tipoContrato,
-          diasPrueba: data.tiempoContrato.tiempo
         });
+        if(data.contratoInicial.periodoPruena){
+          this.formContrato.patchValue({
+            diasPrueba: data.tiempoContrato.tiempo
+          });
+  
+        }
+        
+        
         this.formPerfil.patchValue({
           vBtra: data.vBtra,
           edadMinima: data.edadMinima,
