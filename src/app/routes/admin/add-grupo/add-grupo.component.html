@@ -5,24 +5,23 @@
         </li>
         <li class="active">Administrador</li>
     </ul>
-    <small>Crear Grupos</small>
+    <small>Administrar Grupos</small>
 </div>
 
 
 <form [formGroup]="formGrupos" novalidate >
   <div *ngIf="bandera">
     <div class="row">
-        {{bandera}}
-                <app-upload-imgs #uploadImg
-                  [maxFileSize]="1*1024*1024"
-                  [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
-                  [url]="'https://localhost:4200/assets'"
-                  [errorMessageMaxSize]="'File size great than 1MB'"
-                  [errorMessageWrongType]="'Not allow file format'"
-                ></app-upload-imgs>
-               </div>  
-
+      <app-upload-imgs #uploadImg
+        [maxFileSize]="1*1024*1024"
+        [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
+        [url]="url"
+        [errorMessageMaxSize]="'File size great than 1MB'"
+        [errorMessageWrongType]="'Not allow file format'"
+        (onItemChanged)="updateFoto()"
+      ></app-upload-imgs>
     </div>
+  </div>
   <div class="row">
     <div class="panel mat-elevation-z8">
      <div class="panel-body">
@@ -43,7 +42,7 @@
                        <tr *ngFor="let g of Grupos; let rowIndex = index; let value = index">
                           <td class="text-center">
                               <div class="media">
-                                <a matTooltip="Double click to edit" (dblclick)="bandera = true"><img class="img-responsive img-circle" src="assets/img/user/01.jpg" alt="Image" /></a>
+                                <a matTooltip="Double click to edit" (dblclick)="bandera = true; rowAux=rowIndex; CrearURL(g.id)"><img class="img-responsive img-circle" src={{g.foto}} alt="Image" /></a>
                               </div>
                           </td>
                            <td class="text-center">
@@ -66,7 +65,7 @@
                            </td>
                            <td class="text-center">
                               <button [disabled]="false" class="mb-sm btn btn-sm btn-success btn-outline" (click)="updateGrupo($event, rowIndex)" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
-                              <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Eliminar Usuario" (click)="DeleteUser($event,rowIndex)"><em class="fa fa-trash-o"></em></button>
+                              <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Eliminar Usuario" (click)="DeleteGrupo($event,rowIndex)"><em class="fa fa-trash-o"></em></button>
                            </td>
                        </tr>
                    </tbody>

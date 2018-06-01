@@ -1,10 +1,7 @@
 import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
-import { Component, OnInit, OnDestroy, Inject, ViewChild, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
 
 @Component({
   selector: 'app-add-grupo',
@@ -21,6 +18,9 @@ export class AddGrupoComponent implements OnInit {
   Grupos: Array<any> = [];
   editing = {};
   bandera: boolean = false;
+  url: string = 'https://localhost:4200/assets/';
+  fotoURL: string = 'assets/img/user/01.jpg';
+  rowAux: any;
 
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
@@ -30,6 +30,11 @@ export class AddGrupoComponent implements OnInit {
 
   }
  
+  CrearURL(idG: any)
+  {
+    this.url = this.url + 'id:' + idG;
+    console.log(this.url)
+  }
   iniciarForm()
   {
       this.formGrupos = this.fb.group({
@@ -39,11 +44,7 @@ export class AddGrupoComponent implements OnInit {
       uploadImg: ''
  
     });
-    if(this.someInput)
-    {
-      this.bandera = this.someInput.isUpload();
-    }
-
+    
   }
 
   updateValue($event, cell, rowIndex)
@@ -79,18 +80,28 @@ export class AddGrupoComponent implements OnInit {
     });
   }
 
+  updateFoto()
+  {
+     console.log('entro')
+    this.Grupos[this.rowAux]['foto'] = this.fotoURL;
+   
+    console.log(this.url)
+    this.bandera = false;
+
+  }
+
   updateGrupo($event,rowIndex)
   {
-    let gu = this.Grupos[rowIndex]
-    console.log(gu)
     
-    // this.service.UpdateGrupo(gu)
-    //   .subscribe( data => {
-    //   this.msj = data;
-    //   console.log(this.msj)
-    //   this.iniciarForm();
-    //   this.getGrupos();
-    // });
+    let gu = this.Grupos[rowIndex]
+  
+    this.service.UpdateGrupo(gu)
+      .subscribe( data => {
+      this.msj = data;
+      console.log(this.msj)
+      this.iniciarForm();
+      this.getGrupos();
+    });
   
   }
 
@@ -103,11 +114,11 @@ export class AddGrupoComponent implements OnInit {
       this.msj = data;
       console.log(this.msj)
       this.iniciarForm();
-      this.getGrupos();
+      this.Grupos.splice(rowIndex, 1);
+      this.Grupos = [...this.Grupos];
     });
 
-    // this.Grupos.splice(rowIndex, 1);
-    // this.Grupos = [...this.Grupos];
+    // 
     
  alert("los datos se borraron")
 

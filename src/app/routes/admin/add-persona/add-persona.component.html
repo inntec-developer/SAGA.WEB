@@ -5,19 +5,16 @@
         </li>
         <li class="active">Administrador</li>
     </ul>
-    <small>Modificar Usuario</small>
+    <small>Administrar Usuario</small>
 </div>
 <div *ngIf="bandera">
     <div class="row">
-        <app-upload-imgs
+        <app-upload-imgs #uploadImg
             [maxFileSize]="1*1024*1024"
-            [maxFile]="1"
-            [multiple]="false"
             [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
             [errorMessageMaxSize]="'File size great than 1MB'"
-            [errorMessageWrongType]="'Not allow file format'"
-            [errorMessageLimit]="'Maximum files'"
-            (onItemChanged)="uploadFieldChanged($event)"
+            [url]="url"
+            (onItemChanged)="updateFoto()"
         ></app-upload-imgs>
     </div>  
 </div>
@@ -26,7 +23,7 @@
         <div class="panel-body">
         <p class="text-center pv">USUARIOS</p>
             <div class="table-responsive">
-               <table class="table table-bordered table-hover" id="table-ext-1">
+               <table class="table table-bordered table-hover">
                  <thead>
                     <tr>
                         <th class="text-center"></th>
@@ -46,7 +43,7 @@
                     <tr *ngFor="let p of Users; let rowIndex = index">
                         <td class="text-center">
                           <div class="media">
-                            <a matTooltip="Double click to edit" (dblclick)="bandera = true"><img class="img-responsive img-circle" src="assets/img/user/01.jpg" alt="Image" /></a>
+                            <a matTooltip="Double click to edit" (dblclick)="bandera = true; rowAux = rowIndex; CrearURL(p.id)"><img class="img-responsive img-circle" src="{{p.foto}}" alt="Image" /></a>
                           </div>
                         </td>
                         <td class="text-center">

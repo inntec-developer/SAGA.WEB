@@ -19,9 +19,25 @@ export class AddPersonaComponent implements OnInit {
   ListTipos: Array<any> = [];
   editing = {};
   bandera = false;
-    
+  rowAux: any;
+  url: string = 'https://localhost:4200/assets/';
+
   constructor(private service: AdminServiceService ,public fb: FormBuilder, public dialog: MatDialog){}
   
+  CrearURL(idP: any)
+  {
+    this.url = this.url + 'id:' + idP;
+    console.log(this.url)
+  }
+
+  updateFoto()
+  {
+     console.log('entro')
+    this.Users[this.rowAux]['foto'] = 'assets/img/user/01.jpg';
+   this.bandera = false;
+    console.log(this.url)
+
+  }
 
   updateValue(event, cell, rowIndex) 
   {

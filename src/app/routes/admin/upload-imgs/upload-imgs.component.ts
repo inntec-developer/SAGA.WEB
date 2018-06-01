@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Inject, EventEmitter, Output, ElementRef, Renderer, ViewChild, OnChanges } from '@angular/core';
 import { FileUploader, FileItem, FileLikeObject } from 'ng2-file-upload';
 import { HttpClient, HttpEvent,HttpParams,HttpRequest } from '@angular/common/http';
-import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/ht
 export class UploadImgsComponent implements OnInit {
 
   @ViewChild('fileInput') public fileInput: ElementRef;
-
+  @Output('onItemChanged') public onItemChanged = new EventEmitter();
   @Input() public url: string = null; // Url api process upload
   @Input() public accept: Array<string> = [];
   @Input() public maxFileSize: number = 10 * 1024 * 1024; // 10MB
@@ -25,7 +25,7 @@ export class UploadImgsComponent implements OnInit {
   @Input() public errorMessageWrongType: string = 'El archivo no es una imagen';
 
   selectedFile : File = null;
-  bandera = false;
+  bandera = true;
   // public uploader: FileUploader = new FileUploader({ url: URL });
 
   constructor(private http: HttpClient, private el: ElementRef, private renderer: Renderer) { }
@@ -45,15 +45,16 @@ export class UploadImgsComponent implements OnInit {
     };
 
     myReader.readAsDataURL(file);
-    
+   
+    this.url = this.url + '.' + file.type.split('/')[1];
    this.selectedFile = image;
+   
   }
 
   UploadImg()
   {
-    this.bandera = false;
-    
     console.log(this.url)
+    this.onItemChanged.emit(this.setImage());
     let fd = new FormData();
     fd.append('image', this.selectedFile );
     return this.http.post( this.url, fd )
@@ -69,12 +70,12 @@ export class UploadImgsComponent implements OnInit {
 
 
     /**
-   * hide - show inputFile
-   * @returns {boolean}
+   * set image
+   * @returns {string}
    */
-  public isUpload() : boolean
+  public setImage() : string
   {
-    return this.bandera;
+    return this.url;
   }
  
 

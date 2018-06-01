@@ -35,7 +35,7 @@ export class AddRolesComponent implements OnInit {
       Especial:0,
       Activo: 1
     });
-    this.getRoles();
+   
 
 
   }
@@ -61,6 +61,7 @@ export class AddRolesComponent implements OnInit {
     .subscribe( data => {
       this.msj = data;
       this.iniciarForm();
+      this.getRoles();
     });
 
   }
@@ -89,11 +90,12 @@ export class AddRolesComponent implements OnInit {
       this.msj = data;
       console.log(this.msj)
       this.iniciarForm();
-      this.getRoles();
+      // this.getRoles();
+        this.Roles.splice(rowIndex, 1);
+    this.Roles = [...this.Roles];
     });
  
-    // this.Roles.splice(idx, 1);
-    // this.Roles = [...this.Roles];
+  
     
  alert("los datos se borraron")
  }
