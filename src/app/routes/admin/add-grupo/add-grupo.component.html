@@ -12,16 +12,13 @@
 <form [formGroup]="formGrupos" novalidate >
   <div *ngIf="bandera">
     <div class="row">
-        
-                <app-upload-imgs
+        {{bandera}}
+                <app-upload-imgs #uploadImg
                   [maxFileSize]="1*1024*1024"
-                  [maxFile]="1"
-                  [multiple]="false"
                   [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
+                  [url]="'https://localhost:4200/assets'"
                   [errorMessageMaxSize]="'File size great than 1MB'"
                   [errorMessageWrongType]="'Not allow file format'"
-                  [errorMessageLimit]="'Maximum files'"
-                  (onItemChanged)="uploadFieldChanged($event)"
                 ></app-upload-imgs>
                </div>  
 

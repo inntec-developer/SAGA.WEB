@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from './admin.list';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

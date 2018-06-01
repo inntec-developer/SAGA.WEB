@@ -1,8 +1,10 @@
 import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
-import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, Input, ElementRef } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
 
 @Component({
   selector: 'app-add-grupo',
@@ -12,27 +14,35 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class AddGrupoComponent implements OnInit {
 
-  @ViewChild(UploadImgsComponent) public uploadImgs: UploadImgsComponent;
+  @ViewChild('uploadImg') someInput: UploadImgsComponent;
 
   formGrupos: FormGroup;
   msj: string;
   Grupos: Array<any> = [];
   editing = {};
-  bandera=false;
+  bandera: boolean = false;
+
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
     this.iniciarForm();
     this.msj = '';
-  }
+  
 
+  }
+ 
   iniciarForm()
   {
       this.formGrupos = this.fb.group({
       Nombre: ['', [Validators.required]],
       Descripcion: "",
-      Activo: 1
-
+      Activo: 1, 
+      uploadImg: ''
+ 
     });
+    if(this.someInput)
+    {
+      this.bandera = this.someInput.isUpload();
+    }
 
   }
 
@@ -73,13 +83,14 @@ export class AddGrupoComponent implements OnInit {
   {
     let gu = this.Grupos[rowIndex]
     console.log(gu)
-    this.service.UpdateGrupo(gu)
-      .subscribe( data => {
-      this.msj = data;
-      console.log(this.msj)
-      this.iniciarForm();
-      this.getGrupos();
-    });
+    
+    // this.service.UpdateGrupo(gu)
+    //   .subscribe( data => {
+    //   this.msj = data;
+    //   console.log(this.msj)
+    //   this.iniciarForm();
+    //   this.getGrupos();
+    // });
   
   }
 
@@ -101,9 +112,12 @@ export class AddGrupoComponent implements OnInit {
  alert("los datos se borraron")
 
 }
+
   ngOnInit() {
     this.getGrupos();
-
+    
+    
   }
-
+ 
+  
 }

@@ -1,20 +1,19 @@
 <div class="panel">
   <div class="panel-body">
-    <div class="row text-center" *ngFor="let item of uploader.queue">
-      <div class="result" *ngIf="data1">
-        <img class="center-block img-responsive" [src]="data1.src" [width]="200" [height]="200">
-      </div>   
-      <br/>
- 
-      <button type="button" class="btn btn-info btn-xs center" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-        <span class="fa icon-cloud-upload mr"></span> Upload
-      </button>
-      <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
-        <span class="icon-trash mr"></span> Remove
-      </button>
+    <div class="row text-center">
+      <div class="result" *ngIf="selectedFile">
+        <img class="center-block img-responsive" [src]="selectedFile.src" [width]="200" [height]="200">  
+        <br/>
+        <button type="button" class="btn btn-info btn-xs center" (click)="UploadImg()">
+          <span class="fa icon-cloud-upload mr"></span> Upload
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" (click)="removeItem()">
+          <span class="icon-trash mr"></span> Remove
+        </button>
+      </div>
     </div>
     <div class="row">
-      <input type="file" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)" #fileInput [accept]="accept.toString()"/>
+      <input type="file" #fileInput (change)="fileChangeListener($event)" [accept]="accept.toString()"/>
     </div>
   </div>
 </div>
