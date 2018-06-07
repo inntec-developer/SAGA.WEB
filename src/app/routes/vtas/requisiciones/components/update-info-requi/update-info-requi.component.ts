@@ -3,7 +3,9 @@ import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatTableDataSource, PageEvent} from '@angular/material';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MatTableDataSource, PageEvent} from '@angular/material';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SettingsService } from '../../../../../core/settings/settings.service';
@@ -14,7 +16,12 @@ import { disableDebugTools } from '@angular/platform-browser';
   selector: 'app-update-info-requi',
   templateUrl: './update-info-requi.component.html',
   styleUrls: ['./update-info-requi.component.scss'],
-  providers: [RequisicionesService, CatalogosService]
+  providers:[RequisicionesService,
+              CatalogosService,
+              {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+              {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+              {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+            ]
 })
 export class UpdateInfoRequiComponent implements OnInit {
   @Input() Folios: string;
