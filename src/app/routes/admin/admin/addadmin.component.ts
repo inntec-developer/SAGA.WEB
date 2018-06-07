@@ -31,6 +31,11 @@ export class AddadminComponent implements OnInit {
       this.ListaPG.push($event.dragData);
     }
 
+    addToUsers($event)
+    {
+      this.ListaPersonas.push($event.dragData);
+    }
+
     resetBasket() {
         this.ListaPG = [];
         this.listGrupos = [];
@@ -40,6 +45,12 @@ export class AddadminComponent implements OnInit {
 
     popPerson(p:any, i: any) {
       this.ListaPersonas.splice(i, 1)
+    }
+    UndoUser( u: any, index: any)
+    {
+      console.log(u)
+      console.log(index)
+      this.ListaPG.splice(index, 1);
     }
 
     filtrar($event)
@@ -67,6 +78,7 @@ export class AddadminComponent implements OnInit {
         {
           lug.push({UsuarioId: ug.id, GrupoId: this.IdGrupo});
         }
+        console.log(lug)
         this.service.addUserGroup( lug )
         .subscribe( data => {
           this.ListaPG = [];
