@@ -15,7 +15,7 @@
       <app-upload-imgs #uploadImg
         [maxFileSize]="1*1024*1024"
         [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
-        [url]="url"
+        [name]="name"
         [errorMessageMaxSize]="'File size great than 1MB'"
         [errorMessageWrongType]="'Not allow file format'"
         (onItemChanged)="updateFoto()"
@@ -42,7 +42,7 @@
                        <tr *ngFor="let g of Grupos; let rowIndex = index; let value = index">
                           <td class="text-center">
                               <div class="media">
-                                <a matTooltip="Double click to edit" (dblclick)="bandera = true; rowAux=rowIndex; CrearURL(g.id)"><img class="img-responsive img-circle" src={{g.foto}} alt="Image" /></a>
+                                <a matTooltip="Double click to edit" (dblclick)="bandera = true; rowAux=rowIndex; CrearURL(g.id);"><img class="img-responsive img-circle" src={{g.foto}} alt="Image" /></a>
                               </div>
                           </td>
                            <td class="text-center">
@@ -71,7 +71,7 @@
                    </tbody>
                </table>
            </div>
-</div>
+        </div>
     </div>
   </div>
 

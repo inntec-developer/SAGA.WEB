@@ -1,8 +1,8 @@
 <div class="panel">
   <div class="panel-body">
     <div class="row text-center">
-      <div class="result" *ngIf="selectedFile">
-        <img class="center-block img-responsive" [src]="selectedFile.src" [width]="200" [height]="200">  
+      <div class="result" *ngIf="fileInput.value !==''">
+        <img class="center-block img-responsive" [src]="image.src" [width]="200" [height]="200">  
         <br/>
         <button type="button" class="btn btn-info btn-xs center" (click)="UploadImg()">
           <span class="fa icon-cloud-upload mr"></span> Upload

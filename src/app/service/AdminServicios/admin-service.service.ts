@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -44,10 +45,26 @@ export class AdminServiceService {
          return Observable.throw(error || 'backend server error');
      }
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private httpClient: HttpClient) {
 
   }
 
+  UploadImg( file: File, name: any)
+  {
+
+//  let headers = new Headers({ 
+//   'Access-Control-Allow-Origin':'*', 
+//   'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+//   'Access-Control-Allow-Headers' : 'Origin, Content-Type, X-Auth-Token'
+// });
+    // let options = new RequestOptions({headers: headers});
+ 
+    const endpoint = 'http://localhost:33333/api/admin/UploadImage'
+    let fd = new FormData();
+    fd.append('image', file, name );
+    return this.http.post( endpoint, fd )
+    .subscribe(res => {console.log(res);});
+  }
   
 
   getPersonas(): Observable<any>

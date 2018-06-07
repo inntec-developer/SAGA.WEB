@@ -1,3 +1,4 @@
+import { RequestOptions } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -34,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
         this.valForm = fb.group({
             'email': [null, Validators.compose([Validators.required, CustomValidators.email])],
-            'accountagreed': [null, Validators.required],
+            // 'accountagreed': [null, Validators.required],
             'passwordGroup': this.passwordForm,
             'Clave': ['',  [Validators.required]],
             'Nombre': ['',  [Validators.required]],
@@ -48,10 +49,10 @@ export class RegisterComponent implements OnInit {
 
     submitForm($ev, value: any)
     {
+       
         $ev.preventDefault();
-
         for (let c in this.valForm.controls) {
-            this.valForm.controls[c].markAsTouched();
+           this.valForm.controls[c].markAsTouched();
         }
         for (let c in this.passwordForm.controls) {
             this.passwordForm.controls[c].markAsTouched();
@@ -59,7 +60,7 @@ export class RegisterComponent implements OnInit {
 
         if (this.valForm.valid)
         {
-           this.user = ((this.valForm.controls['Usuario'].value == "") ? "DAMSA." + this.valForm.controls['Nombre'].value : this.valForm.controls['Usuario'].value);
+           this.user = ((this.valForm.controls['Usuario'].value == null || this.valForm.controls['Usuario'].value == '') ? "DAMSA." + this.valForm.controls['Nombre'].value : this.valForm.controls['Usuario'].value);
 
            this.email.push({email: this.valForm.controls['email'].value, UsuarioAlta: 'INNTEC'});
            let persona = {
@@ -70,12 +71,15 @@ export class RegisterComponent implements OnInit {
                 Usuario: this.user,
                 DepartamentoId: this.valForm.controls['DepartamentoId'].value,
                 Email: this.email,
-                Password: this.passwordForm.controls['password'].value
+                Password: this.passwordForm.controls['password'].value,
+                Foto: "http://localhost:4200/assets/img/user/01.jpg"
               };
-
+              console.log(persona)
+             
            this.service.AddUsers(persona)
                .subscribe( data => {
                this.msj = data;
+               this.ngOnInit()
                });
         }
     }
@@ -90,7 +94,19 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.getDepartamentos();
+   
+       this.valForm.controls['Clave'].reset();
+       this.valForm.controls['Nombre'].reset();
+       this.valForm.controls['ApellidoPaterno'].reset();
+       this.valForm.controls['email'].reset();
+       this.valForm.controls['Usuario'].reset();
+       this.valForm.controls['ApellidoMaterno'].reset();
+       this.valForm.controls['DepartamentoId'].reset();
+
+       this.passwordForm.controls['password'].reset();
+       this.passwordForm.controls['confirmPassword'].reset();
+
+       this.getDepartamentos();
     }
 
 }

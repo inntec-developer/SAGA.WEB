@@ -95,4 +95,5 @@ export class ApiConection {
   public static updateRoles = '/admin/updateRoles';
   public static deleteGrupo = '/admin/deleteGrupo';
   public static deleteRoles = '/admin/deleteRoles';
+  
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-const swal = require('sweetalert');
+import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
 
 @Component({
   selector: 'app-add-persona',
@@ -11,32 +11,32 @@ const swal = require('sweetalert');
   providers:[ AdminServiceService ]
 
 })
-export class AddPersonaComponent implements OnInit {
+export class AddPersonaComponent implements OnInit, AfterViewInit {
 
   Users: Array<any> = [];
-  msj: string = '';
   ListDepas: Array<any> = [];
   ListTipos: Array<any> = [];
   editing = {};
   bandera = false;
   rowAux: any;
-  url: string = 'https://localhost:4200/assets/';
+  name: string;
+
+  @ViewChild('uploadImg') someInput: UploadImgsComponent;
 
   constructor(private service: AdminServiceService ,public fb: FormBuilder, public dialog: MatDialog){}
   
   CrearURL(idP: any)
   {
-    this.url = this.url + 'id:' + idP;
-    console.log(this.url)
+    this.name = idP;
+    console.log(this.name)
   }
 
   updateFoto()
   {
-     console.log('entro')
-    this.Users[this.rowAux]['foto'] = 'assets/img/user/01.jpg';
-   this.bandera = false;
-    console.log(this.url)
-
+    this.Users[this.rowAux]['foto'] = 'http://localhost:33333/utilerias/' + this.someInput.name;
+    this.Users = [...this.Users];
+    console.log(this.Users)
+    this.bandera = false;
   }
 
   updateValue(event, cell, rowIndex) 
@@ -46,31 +46,31 @@ export class AddPersonaComponent implements OnInit {
     {
       aux = this.ListTipos.find(nt => nt.id == event.target.value);
       this.Users[rowIndex]['tipoUsuario'] = aux.tipo;
+      this.Users[rowIndex]['tipoUsuarioId'] = event.target.value;
       this.editing[rowIndex + '-' + 'tipoUsuario'] = false;
     }
     else if (cell === "departamentoId") 
     {
       aux = this.ListDepas.find(nd => nd.id == event.target.value);
       this.Users[rowIndex]['departamento'] = aux.nombre;
+      this.Users[rowIndex]['departamentoId'] = event.target.value;
       this.editing[rowIndex + '-' + 'departamento'] = false;
+    }
+    else if(event.target.value !== '')
+    {
+      this.Users[rowIndex][cell] = event.target.value;
     }
 
     this.editing[rowIndex + '-' + cell] = false;
-    this.Users[rowIndex][cell] = event.target.value;
-
     this.Users = [...this.Users];
-    console.log(this.Users)
   }
 
   updateUser($even, rowIndex) 
   {
     let u = this.Users[rowIndex];
-    console.log(u)
-
     this.service.UpdateUsuario(u)
       .subscribe(data => {
-        this.msj = data;
-        console.log(this.msj)
+        console.log(data)
         this.ngOnInit();
       });
   }
@@ -79,8 +79,8 @@ export class AddPersonaComponent implements OnInit {
   {
     this.service.UDActivoUsers(id, $ev.target.checked )
         .subscribe( data => {
-        this.msj = data;
-        this.getUsuarios();
+          console.log(data)
+          this.getUsuarios();
         });
   }
 
@@ -90,15 +90,9 @@ export class AddPersonaComponent implements OnInit {
     .subscribe(
       e=>{
         this.Users = e;
-        console.log(this.Users)
       })
   }
-
-  setFoto($event, rowIndex)
-  {
-    this.bandera = true;
-  }
-
+  
   getDepartamentos()
   {
     this.service.getDepas()
@@ -122,6 +116,13 @@ export class AddPersonaComponent implements OnInit {
     this.getUsuarios();
     this.getDepartamentos();
     this.getTipos();
+  }
+  ngAfterViewInit()
+  {
+    if(this.someInput)
+    {
+      this.updateFoto();
+    }
   }
 
 }

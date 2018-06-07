@@ -2,7 +2,10 @@
 
 @import '../../../shared/styles/app/variables';
 
-
+table {
+  background-color: transparent;
+  box-shadow: 0 0 0 #000;
+}
 tr td {
   cursor: pointer
 }
@@ -12,17 +15,10 @@ tr.selected td {
   color: white;
 }
 
-// .panel-body {
-//   overflow-x: scroll;
-//   height: 800px;
-// }
-
-// .colorbadge
-// {
-//   background-color: #23b7e5 !important;
-// }
-
-
+tr.empty-row {
+  text-align: center;
+  margin-top: 20px;
+}
 .widthSelect
 {
   width: 50%;

@@ -58,11 +58,8 @@ export class AddadminComponent implements OnInit {
       this.IdGrupo = $event.target.value;
     }
 
-    
-
     addUsuarioGrupo()
     {
-
       let lug = [];
       if(this.ListaPG.length > 0)
       {
@@ -72,9 +69,10 @@ export class AddadminComponent implements OnInit {
         }
         this.service.addUserGroup( lug )
         .subscribe( data => {
+          this.ListaPG = [];
+          this.ngOnInit();
         });
-        this.ListaPG = [];
-        this.ngOnInit();
+        
       }
       else
       {
@@ -115,7 +113,7 @@ export class AddadminComponent implements OnInit {
     ngOnInit() {
       this.formAdmin = this.fb.group({
         slcGrupo: ['', [Validators.required]]
-      })
+      });
 
       this.addPersonas();
       this.GetGrupos();

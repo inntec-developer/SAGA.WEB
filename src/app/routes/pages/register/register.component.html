@@ -45,7 +45,8 @@
                       <input class="form-control" type="text" placeholder="Ingresar Apellido Materno" autocomplete="off" formControlName="ApellidoMaterno" />
                       <p><span class="text-danger" *ngIf="valForm.controls['ApellidoMaterno'].touched && !valForm.controls['ApellidoMaterno'].valid">Apellido materno es un campo requerido</span></p>
                       <label class="text-muted">Alias</label>
-                      <input class="form-control" type="text" placeholder="DAMSA.{{valForm.controls['Nombre'].value}}" autocomplete="off" formControlName="Usuario" value="DAMSA.{{valForm.controls['Nombre'].value}}"/>
+                      <input class="form-control" type="text" placeholder="DAMSA.{{valForm.controls['Nombre'].value}}" autocomplete="off" formControlName="Usuario"/>
+                      <!-- <p><span class="text-danger" *ngIf="valForm.controls['Usuario'].touched">Si no selecciona usuario se le asignará uno</span></p>                       -->
                       <label class="text-muted">Departamentos</label>
                       <select class="form-control" formControlName="DepartamentoId" >
                         <option value="">Seleccionar departamento</option> <!-- not selected / blank option -->

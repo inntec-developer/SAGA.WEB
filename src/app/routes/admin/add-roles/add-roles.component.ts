@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import { create } from 'domain';
+
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-add-roles',
@@ -16,6 +17,13 @@ export class AddRolesComponent implements OnInit {
   msj: string;
   Roles: Array<any> = [];
   editing = {};
+  columns = [
+    { title: 'ROL' },
+    { title: 'CREAR' },
+    { title: 'LEER' },
+    { title: 'ACTUALIZAR' },
+    { title: 'BORRAR' },
+    { title: 'ESPECIAL' }]
 
   constructor(private service: AdminServiceService
               ,public fb: FormBuilder )
@@ -23,6 +31,12 @@ export class AddRolesComponent implements OnInit {
     this.iniciarForm();
     this.msj = '';
   }
+
+
+  sweetalertDemo1() {
+    swal('Here\'s a message');
+}
+
 
   iniciarForm()
   {
@@ -35,37 +49,30 @@ export class AddRolesComponent implements OnInit {
       Especial:0,
       Activo: 1
     });
-   
-
-
   }
   updateValue($event, cell, rowIndex)
   {
-    if(cell === 'rol')
-    {
-      
-    this.editing[rowIndex + '-' + cell] = false;
-    this.Roles[rowIndex][cell] = $event.target.value;
-    }
-    else
+
+    if(cell.toLowerCase() !== 'rol')
     {
       this.Roles[rowIndex][cell] = $event.checked;
-
     }
+    else if( cell.toLowerCase() === 'rol' && $event.target.value !== '' )
+    {
+      this.Roles[rowIndex][cell.toLowerCase()] = $event.target.value;
+    }
+    
+    this.editing[rowIndex + '-' + cell] = false;
     this.Roles = [...this.Roles];
   }
-
   saveData(){
-
     this.service.AddRoles(this.formRoles.value)
     .subscribe( data => {
       this.msj = data;
       this.iniciarForm();
       this.getRoles();
     });
-
   }
-
   updateRol($event,rowIndex)
   {
     let rol = this.Roles[rowIndex]

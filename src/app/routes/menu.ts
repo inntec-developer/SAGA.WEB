@@ -5,31 +5,31 @@ const Home = {
 };
 
 const Administracion = {
-    text: 'Administracion',
+    text: 'Administrar',
     link: '/admin',
     icon: 'icon-people',
-        submenu:[
-          {
-            text: 'Agregar Grupos',
-            link: '/admin/grupoAdd'
-          },
-          {
-            text: 'Agregar Roles',
-            link: '/admin/roles'
-          },
-          {
-            text: 'Activar Usuario',
+    submenu:[
+        {
+            text: 'Usuarios',
             link: '/admin/agregar'
-          },
-          {
+        },
+        {
+            text: 'Grupos',
+            link: '/admin/grupoAdd'
+        },
+        {
+            text: 'Roles',
+            link: '/admin/roles'
+        },
+        {
             text: 'Usuarios-Grupo',
             link: '/admin/grupo'
-          },
-          {
-            text: 'Grupo-Rol',
+        },
+        {
+            text: 'Grupos-Rol',
             link: '/admin/rol'
-          }
-        ]
+        }
+    ]
 };
 
 const Reclutamiento = {

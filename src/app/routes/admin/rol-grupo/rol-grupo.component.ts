@@ -38,24 +38,21 @@ export class RolGrupoComponent implements OnInit {
   addToRol($event)
   {
     console.log($event)
-    // this.ListaRG.push($event);
   }
 
-  resetBasket() {
-      this.ListaRG = [];
-      this.getGrupos();
+  resetBasket() 
+  {
+    this.ListaRG = [];
+    this.getGrupos();
   }
 
-  popGrupo(p:any, i: any) {
-    console.log(i)
-
+  popGrupo(p:any, i: any) 
+  {
     this.Grupos.splice(i, 1)
-
-
   }
 
-  saveData(RolId: any){
-
+  saveData(RolId: any)
+  {
     if(this.ListaRG.length > 0)
     {
       let lrg = [];
@@ -70,13 +67,12 @@ export class RolGrupoComponent implements OnInit {
         lrg.push(element);
       }
 
-    
-     
-      // this.service.AddPrivilegios(lrg)
-      // .subscribe( data => {
-      //   this.msj = data;
-      //   console.log(this.msj);
-      // });
+      this.service.AddPrivilegios(lrg)
+      .subscribe( data => {
+        this.msj = data;
+        console.log(this.msj);
+        this.ngOnInit();
+      });
       
       this.ListaRG = [];
     }
@@ -86,13 +82,13 @@ export class RolGrupoComponent implements OnInit {
     }
   }
 
-  
   selected($event, rol: any)
   {
     var id = $event.target.value;
     this.permisoRol = this.Roles.filter(item => item.id == id);
 
   }
+
   getGrupos()
   {
     this.Grupos = [];
@@ -100,9 +96,8 @@ export class RolGrupoComponent implements OnInit {
     .subscribe(
       e=>{
         this.Grupos = e;
-
+        console.log(this.Grupos)
       })
-
   }
 
   getRoles()
@@ -111,16 +106,12 @@ export class RolGrupoComponent implements OnInit {
     .subscribe(
       e=>{
         this.Roles = e;
-        console.log(this.Roles)
       })
-
   }
 
   ngOnInit() {
     this.getGrupos();
     this.getRoles();
- 
-    
   }
 
 }
