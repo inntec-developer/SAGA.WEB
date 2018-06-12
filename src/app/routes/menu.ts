@@ -10,6 +10,10 @@ const Administracion = {
     icon: 'icon-people',
     submenu:[
         {
+            text: 'Registro Usuario', 
+            link: '/register'
+        },
+        {
             text: 'Usuarios',
             link: '/admin/agregar'
         },

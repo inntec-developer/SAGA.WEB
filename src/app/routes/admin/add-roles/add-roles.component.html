@@ -10,9 +10,27 @@
 
 <form [formGroup]="formRoles" novalidate>
     <div class="row">
+            <tree-root #tree [nodes]="nodes" [focused]="true" [options]="customTemplateStringOptions" (onEvent)="onEvent($event)">
+                    <ng-template #treeNodeTemplate let-node>
+                        <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
+                        <span class="pull-right">{{ childrenCount(node) }}</span>
+                        <button class="btn btn-default btn-xs" (click)="go($event)"><em class="fa fa-exclamation text-muted"></em></button>
+                    </ng-template>
+                    <ng-template #loadingTemplate>Loading, please hold....</ng-template>
+                </tree-root>
+           
+          <br/>
+          <br/>
+
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
             <!-- <p><a class="btn btn-primary" href="#" (click)="sweetalertDemo1()">Try me!</a>
             </p> -->
         <div class="panel panel-default panel-flat mat-elevation-z8">
+             
             <div class="panel-body">
                 <p class="text-center pv">ROLES</p>
                     <table class="table table-responsive table-bordered table-hover">

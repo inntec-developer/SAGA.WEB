@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+
 @Component({
   selector: 'app-addadmin',
   templateUrl: './addadmin.component.html',

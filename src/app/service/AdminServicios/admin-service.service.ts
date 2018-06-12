@@ -36,6 +36,7 @@ export class AdminServiceService {
   private UrlUpdateRoles = ApiConection.ServiceUrl+ApiConection.updateRoles;
   private UrlDeleteGrupo = ApiConection.ServiceUrl+ApiConection.deleteGrupo;
   private UrlDeleteRoles = ApiConection.ServiceUrl+ApiConection.deleteRoles;
+  private UrlGetTreeRoles = ApiConection.ServiceUrl+ApiConection.getTreeRoles;
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -109,6 +110,12 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  GetTreeRoles(): Observable<any>
+  {
+     return this.http.get(this.UrlGetTreeRoles)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
 
   GetUsuariosByDepa(id :any): Observable<any>{
     return this.http.get(this.UrlGetByDepa + '?id='+ id)
