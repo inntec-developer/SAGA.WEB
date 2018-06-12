@@ -25,9 +25,9 @@
     <div class="col-md-6">
         <div class="panel panel-default">
         <div class="panel-heading text-center">USUARIOS</div>
-          <div class="panel-body">
-            <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)" [dropZones]="['demo1']">
-                
+          <div dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPersonas" class="panel-body">
+              <!-- <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
+            <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i">
                   <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.foto}}" />
                   <div class="media-body">
                     <div class="media-heading margintextthumb">
@@ -46,7 +46,8 @@
         </div>
       </div>
     <div class="col-md-6">
-      <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-default">
+        <!-- <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-default"> -->
+      <div class="panel panel-default">
         <div class="panel-heading">Grupos:
            <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event)" >
               <option *ngFor="let user of listGrupos" [value]="user.id">{{user.nombre}}</option>
@@ -61,9 +62,9 @@
             </button>
           </div>
         </div>
-        <div class="panel-body">
+        <div dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" class="panel-body">
           <p>{{alert}}</p>
-          <div *ngFor="let pg of ListaPG" class="panel panel-default mat-elevation-z8">
+          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i"  >
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">

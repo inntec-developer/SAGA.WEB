@@ -21,6 +21,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 import { AgGridModule } from 'ag-grid-angular/main';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable'
 import {MatDialogModule} from '@angular/material/dialog';
+import { TreeModule } from 'angular-tree-component';
+
 
 //Servicios
 
@@ -69,7 +71,8 @@ const routes: Routes = [
         AgGridModule,
         NgxDatatableModule, 
         MatDialogModule, 
-        MatTooltipModule
+        MatTooltipModule,
+        TreeModule
         
       ],
     declarations:
