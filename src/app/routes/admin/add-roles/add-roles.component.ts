@@ -136,8 +136,8 @@ export class AddRolesComponent implements OnInit {
           .setActiveAndVisible();
   }
 
-  go($event) {
-      $event.stopPropagation();
+  go(node: any) {
+  console.log(node)
       alert('this method is on the app component');
   }
  
