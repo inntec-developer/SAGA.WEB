@@ -102,56 +102,6 @@ export class AddRolesComponent implements OnInit {
     this.iniciarForm();
     this.msj = '';
 
-    setTimeout(() => {
-      this.nodes = [
-          {
-
-              expanded: true,
-              name: 'root expanded',
-              subTitle: 'the root',
-              children: [
-                  {
-                      name: 'child1',
-                      subTitle: 'a good child',
-                      hasChildren: false
-                  }, {
-
-                      name: 'child2',
-                      subTitle: 'a bad child',
-                      hasChildren: false
-                  }
-              ]
-          },
-          {
-              name: 'root2',
-              subTitle: 'the second root',
-              children: [
-                  {
-                      name: 'child2.1',
-                      subTitle: 'new and improved',
-                      hasChildren: false
-                  }, {
-
-                      name: 'child2.2',
-                      subTitle: 'new and improved2',
-                      children: [
-                          {
-                              uuid: 1001,
-                              name: 'subsub',
-                              subTitle: 'subsub',
-                              hasChildren: false
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-
-              name: 'asyncroot',
-              hasChildren: true
-          }
-      ];
-  }, 1);
   }
 
    getChildren(node: any) {

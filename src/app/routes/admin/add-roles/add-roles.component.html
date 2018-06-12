@@ -9,40 +9,50 @@
 </div>
 
 <form [formGroup]="formRoles" novalidate>
-    <div class="row">
-            <tree-root #tree [nodes]="nodes" [focused]="true" [options]="customTemplateStringOptions" (onEvent)="onEvent($event)">
-                    <ng-template #treeNodeTemplate let-node>
-                        <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
-                        <span class="pull-right">{{ childrenCount(node) }}</span>
-                        <button class="btn btn-default btn-xs" (click)="go($event)"><em class="fa fa-exclamation text-muted"></em></button>
-                    </ng-template>
-                    <ng-template #loadingTemplate>Loading, please hold....</ng-template>
-                </tree-root>
-           
-          <br/>
-          <br/>
+        <div class="row">
+                <div class="panel panel-default panel-body">
+                    <p class="text-center pv">AGREGAR ROL</p>
+                    <section>
+                        <mat-form-field>
+                            <input matInput formControlName="Rol" placeholder="Nombre">
+                        </mat-form-field>
+                        <!-- validar nombre rol -->
+                        <p>
+                            <span *ngIf="formRoles.controls['Rol'].touched && !formRoles.controls['Rol'].valid">Nombre es requerido</span>
+                        </p>
+                    </section>
+            
+                    <!-- <input matInput placeholder="Permisos">
+            
+                    <section class="checkbox">
+                        <mat-checkbox formControlName="Create">Crear</mat-checkbox>
+                        <mat-checkbox formControlName="Read">Leer</mat-checkbox>
+                        <mat-checkbox formControlName="Update">Modificar</mat-checkbox>
+                        <mat-checkbox formControlName="Delete">Borrar</mat-checkbox>
+                        <mat-checkbox formControlName="Especial">Especial</mat-checkbox>
+                    </section> -->
+                   
+                </div>
+            </div>
 
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-            <!-- <p><a class="btn btn-primary" href="#" (click)="sweetalertDemo1()">Try me!</a>
-            </p> -->
+    <div class="row">
+    
         <div class="panel panel-default panel-flat mat-elevation-z8">
-             
-            <div class="panel-body">
+            <tree-root #tree [nodes]="nodes" [focused]="true" [options]="customTemplateStringOptions" (onEvent)="onEvent($event)">
+                <ng-template #treeNodeTemplate let-node>
+                    <mat-checkbox class="checkbox" (changed)="go($event);">{{node.data.nombre}}</mat-checkbox>
+                    <span class="pull-right">{{ childrenCount(node) }}</span>
+                </ng-template>
+                <ng-template #loadingTemplate>Loading, please hold....</ng-template>
+            </tree-root>
+
+          
+            <!-- <div class="panel-body">
                 <p class="text-center pv">ROLES</p>
                     <table class="table table-responsive table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th *ngFor=" let t of columns" class="text-center">{{t.title}}</th>
-                                <!-- <th class="text-center">CREAR</th>
-                                <th class="text-center">LEER</th>
-                                <th class="text-center">ACTUALIZAR</th>
-                                <th class="text-center">BORRAR</th>
-                                <th class="text-center">ESPECIAL</th>
-                                <th class="text-center"></th> -->
+                        
                             </tr>
                         </thead>
                         <tbody>
@@ -85,44 +95,21 @@
                         </tbody>
                     </table>
             </div>
-
-        </div>
+-->
+        
     </div>
     <br/>
     <br/>
-    <div class="row">
-        <div class="panel panel-default panel-body">
-            <p class="text-center pv">AGREGAR ROL</p>
-            <section>
-                <mat-form-field>
-                    <input matInput formControlName="Rol" placeholder="Nombre">
-                </mat-form-field>
-                <!-- validar nombre rol -->
-                <p>
-                    <span *ngIf="formRoles.controls['Rol'].touched && !formRoles.controls['Rol'].valid">Nombre es requerido</span>
-                </p>
-            </section>
-    
-            <input matInput placeholder="Permisos">
-    
-            <section class="checkbox">
-                <mat-checkbox formControlName="Create">Crear</mat-checkbox>
-                <mat-checkbox formControlName="Read">Leer</mat-checkbox>
-                <mat-checkbox formControlName="Update">Modificar</mat-checkbox>
-                <mat-checkbox formControlName="Delete">Borrar</mat-checkbox>
-                <mat-checkbox formControlName="Especial">Especial</mat-checkbox>
-            </section>
-            <section>
-                <div class="col-md-6">
-                    <input matInput placeholder="{{msj}}">
-                </div>
-                <div class="col-lg-2 pull-right">
-                    <button [disabled]="formRoles.invalid" (click)="saveData()" class="btn btn-primary example-label">Guardar</button>
-                </div>
-                <div class="col-lg-2 pull-right">
-                    <mat-checkbox class="checkbox" formControlName="Activo">Rol Activo</mat-checkbox>
-                </div>
-            </section>
+    <!-- <div class="row">
+                 
+   
+            <div class="col-md-6 pull-right">
+                <button [disabled]="formRoles.invalid" class="btn btn-primary example-label">Guardar</button>
+            </div>
+            <div class="col-md-4 pull-right">
+                <mat-checkbox class="checkbox" formControlName="Activo">Rol Activo</mat-checkbox>
+            </div>
         </div>
+      -->
     </div>
 </form>
