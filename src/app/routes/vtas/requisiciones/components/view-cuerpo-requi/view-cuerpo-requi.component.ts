@@ -72,11 +72,11 @@ export class ViewCuerpoRequiComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked(){
     if(this.Requisicion != null && this.checked == false ){
       this.checked=true;
-      this.GetInfromation();
+      this.GetDataRequi();
     }
   }
 
-  GetInfromation(){
+  GetDataRequi(){
     this.spinner.show();
     this.requiId = this.Requisicion;
     this.serviceRequisiciones.getNewRequi(this.requiId)
@@ -95,14 +95,12 @@ export class ViewCuerpoRequiComponent implements OnInit, AfterContentChecked {
         this.formContrato.patchValue({
           tipoContrato: data.contratoInicial.tipoContrato,
         });
-        if(data.contratoInicial.periodoPruena){
+        if(data.contratoInicial.periodoPrueba){
           this.formContrato.patchValue({
             diasPrueba: data.tiempoContrato.tiempo
           });
   
         }
-        
-        
         this.formPerfil.patchValue({
           vBtra: data.vBtra,
           edadMinima: data.edadMinima,

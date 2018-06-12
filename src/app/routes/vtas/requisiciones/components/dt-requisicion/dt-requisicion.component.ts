@@ -3,6 +3,8 @@ import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-t
 import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
 
+//Component
+import { DialogDeleteRequiComponent } from '../dialog-delete-requi/dialog-delete-requi.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 //Servicios
 import { RequisicionesService } from '../../../../../service/index';
@@ -24,7 +26,28 @@ export class DtRequisicionComponent implements OnInit {
     private toasterService: ToasterService
 
   ) { }
-  //VARIABLES GLOBALES
+  
+  //Configuracion de mensaje.
+  toaster: any;
+  toasterConfig: any;
+  toasterconfig: ToasterConfig = new ToasterConfig({
+    positionClass: 'toast-bottom-right',
+    limit: 7,tapToDismiss: false,
+    showCloseButton: true,
+    mouseoverTimerStop: true,
+  });
+  //creacion de mensaje
+  popToast(type, title, body){
+    var toast: Toast = {
+      type: type,
+      title: title,
+      timeout: 5000,
+      body: body
+    }
+    this.toasterService.pop(toast);
+  }
+
+  //Variables Globales
   requisicion: any;
   arrayRequisicion: any[];
   public dataSource = new MatTableDataSource(<any>[]);
@@ -32,6 +55,10 @@ export class DtRequisicionComponent implements OnInit {
   ngOnInit() {
     /** spinner starts on init */
     this.spinner.show();
+    this.getDateRequisiciones();
+  }
+
+  getDateRequisiciones(){
     this.service.getRequisiciones().subscribe(data => {
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
@@ -49,6 +76,17 @@ export class DtRequisicionComponent implements OnInit {
 
   editRequi(id, folio){
     this._Router.navigate(['/ventas/edicionRequisicion/', id, folio], {skipLocationChange:true});
+  }
+
+  openDialogDelete(element){
+    let dialogDlt = this.dialog.open(DialogDeleteRequiComponent,{
+      width: '25%',
+      height: 'auto',
+      data: element
+    });
+    dialogDlt.afterClosed().subscribe(result => {
+      this.getDateRequisiciones();
+    });
   }
 
   //*******************************-- GRID-- *********************************************//

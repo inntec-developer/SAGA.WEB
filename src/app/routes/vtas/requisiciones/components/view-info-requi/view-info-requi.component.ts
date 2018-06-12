@@ -2,7 +2,8 @@ import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatTableDataSource, PageEvent} from '@angular/material';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -10,7 +11,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
   selector: 'app-view-info-requi',
   templateUrl: './view-info-requi.component.html',
   styleUrls: ['./view-info-requi.component.scss'],
-  providers: [RequisicionesService, CatalogosService]
+  providers:[ RequisicionesService,
+              CatalogosService,
+              {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+              {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+              {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+            ]
 })
 export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
   @Input() Folios: string;

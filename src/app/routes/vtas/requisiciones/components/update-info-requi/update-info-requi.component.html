@@ -22,7 +22,7 @@
       <div class="col-md-2">
         <mat-form-field>
           <input matInput [matDatepicker]="solicitud" placeholder="Fecha Solicitud"
-          formControlName="fch_Solicitud" lang="es-mx">
+          formControlName="fch_Solicitud">
           <mat-datepicker-toggle matSuffix [for]="solicitud"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #solicitud></mat-datepicker>
         </mat-form-field>
@@ -30,7 +30,7 @@
       <div class="col-md-2">
         <mat-form-field>
           <input matInput [matDatepicker]="limite" placeholder="Fecha Limite"
-          formControlName="fch_Limite" lang="es-mx">
+          formControlName="fch_Limite">
           <mat-datepicker-toggle matSuffix [for]="limite"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #limite></mat-datepicker>
         </mat-form-field>
@@ -46,8 +46,8 @@
       </div>
       <div class="col-md-2">
         <mat-form-field>
-          <input matInput [matDatepicker]="cumplimiento" [min]="limite" placeholder="Fecha Cumplimiento"
-          formControlName="fch_Cumplimiento" lang="es-mx" required>
+          <input matInput [matDatepicker]="cumplimiento" placeholder="Fecha Cumplimiento"
+          formControlName="fch_Cumplimiento" required>
           <mat-datepicker-toggle matSuffix [for]="cumplimiento"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #cumplimiento></mat-datepicker>
         </mat-form-field>

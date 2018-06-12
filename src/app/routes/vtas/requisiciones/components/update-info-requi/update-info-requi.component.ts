@@ -2,10 +2,10 @@ import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import { MatTableDataSource, PageEvent} from '@angular/material';
+import { MatTableDataSource, PageEvent } from '@angular/material';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SettingsService } from '../../../../../core/settings/settings.service';
@@ -18,7 +18,7 @@ import { disableDebugTools } from '@angular/platform-browser';
   styleUrls: ['./update-info-requi.component.scss'],
   providers:[RequisicionesService,
               CatalogosService,
-              {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+              {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
               {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
               {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
             ]
@@ -141,6 +141,7 @@ export class UpdateInfoRequiComponent implements OnInit {
       this.requiUpdate = update;
       this.serviceRequisicion.updateRequisicion(this.requiUpdate)
         .subscribe(data => {
+          console.log(data);
           this.return = data;
           if(this.return){
             this.popToast('success', 'Requisicion','Actualizacion de información Folio: ' + data);

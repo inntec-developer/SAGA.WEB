@@ -8,12 +8,11 @@ import 'rxjs/add/observable/throw';
 
 import { Headers, Http, HttpModule, RequestOptions, Response } from '@angular/http';
 
-import { ApiConection } from '../api-conection.service';
+import { ApiConection } from './../api-conection.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {UpdateRequisicion} from '../../models/vtas/Requisicion'
 
 //API Conection
 
@@ -31,6 +30,8 @@ export class RequisicionesService {
   private urlGetDamfoById = ApiConection.ServiceUrl + ApiConection.Damfo290GetById;
   private urlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
   private urlUpdateRequisicion = ApiConection.ServiceUrl + ApiConection.UpdateRequisicion;
+  private urlDeleteRequisicion = ApiConection.ServiceUrl + ApiConection.DeleteRequisicion;
+
 
   constructor(private http: Http) { }
   //Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -85,6 +86,13 @@ export class RequisicionesService {
             .catch(this.handleError);
   }
 
+  deleteRequisicion(requi: any) : Observable<any>{
+    let header = new Headers({'content-Type' : 'application/json'});
+    let options = new RequestOptions({headers : header});
+    return this.http.post(this.urlDeleteRequisicion, JSON.stringify(requi), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
 
   //Muestra un error en consola y regresa el mismo al Frond-End en caso de que se genere el mismo.
   public handleError(error: any ){

@@ -1,12 +1,13 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import {MatTableDataSource, PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
+
+//Components
+import { DialogdamfoComponent } from '../dialogdamfo/dialogdamfo.component'
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster/angular2-toaster';
 //Servicios
 import { RequisicionesService } from '../../../../../service/index';
-//Components
-import { DialogdamfoComponent} from '../dialogdamfo/dialogdamfo.component'
 
 @Component({
   selector: 'app-dt-damfo',
@@ -24,15 +25,15 @@ export class DtDamfoComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private toasterService: ToasterService
   ) {}
-   //Mensaje
-   toaster: any;
-     toasterConfig: any;
-     toasterconfig: ToasterConfig = new ToasterConfig({
-       positionClass: 'toast-bottom-right',
-       limit: 7,tapToDismiss: false,
-       showCloseButton: true,
-       mouseoverTimerStop: true,
-     });
+  //Configuracion de mensaje.
+  toaster: any;
+  toasterConfig: any;
+  toasterconfig: ToasterConfig = new ToasterConfig({
+    positionClass: 'toast-bottom-right',
+    limit: 7,tapToDismiss: false,
+    showCloseButton: true,
+    mouseoverTimerStop: true,
+  });
   //Crear el mensaje
    popToast(type, title, body ) {
 

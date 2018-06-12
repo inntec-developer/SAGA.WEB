@@ -1,11 +1,11 @@
-import { Component, OnInit , Inject, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
-import { FormGroup, FormControl, ReactiveFormsModule, NgForm, Validator } from '@angular/forms'
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster/angular2-toaster';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validator } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material'
+
 //Services
 import { RequisicionesService } from '../../../../../service/index';
-
 
 @Component({
   selector: 'app-dialogdamfo',
@@ -16,7 +16,7 @@ import { RequisicionesService } from '../../../../../service/index';
 export class DialogdamfoComponent implements OnInit, OnChanges {
   IdDamfo: string;
   formDireccion :  FormGroup;
-  @Input() IdDireccion: string;
+  IdDireccion: string;
   constructor(
     public dialogRef: MatDialogRef<DialogdamfoComponent>,
     private _Router: Router,

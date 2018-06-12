@@ -34,6 +34,7 @@ export class ApiConection {
   public static GetRequisicionByFolio = "Requisiciones/getByFolio?folio=";
   public static GetRequisicionesAll = "Requisiciones/getRequisiciones";
   public static UpdateRequisicion = "Requisiciones/updateRequisiciones";
+  public static DeleteRequisicion = "Requisiciones/deleteRequisiciones";
 
 
   /* Candidatos */
