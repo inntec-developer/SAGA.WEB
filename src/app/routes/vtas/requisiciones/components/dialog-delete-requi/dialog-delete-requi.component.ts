@@ -1,11 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { BodyOutputType, Toast, ToasterConfig } from 'angular2-toaster/angular2-toaster';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { Toast, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 
 import { RequisicionesService } from './../../../../../service/requisiciones/requisiciones.service';
 import { SettingsService } from './../../../../../core/settings/settings.service';
 import { ToasterService } from 'angular2-toaster';
+import { _createDefaultCookieXSRFStrategy } from '@angular/http/src/http_module';
 
 @Component({
   selector: 'app-dialog-delete-requi',
@@ -28,6 +29,7 @@ export class DialogDeleteRequiComponent implements OnInit {
    infoDeleteRequi: any;
    return: any;
    folio: number;
+   success : boolean;
   
    
 
@@ -58,20 +60,17 @@ export class DialogDeleteRequiComponent implements OnInit {
       Id: this.data.id,
       UsuarioMod: this.setings.user.name
     }
-    console.log(this.infoDeleteRequi);
   }
 
   deleteRequisicion(){
     this.service.deleteRequisicion(this.infoDeleteRequi)
     .subscribe(data => {
-      console.log(data);
-      debugger;
       if(data == 200){
-        this.popToast('success', 'Requisicion','Se elimino correctamente la requisición ' + this.folio);
+        this.popToast('success', 'Requisicion','Se elimino successamente la requisición ' + this.folio);
         this.dialogDelete.close();
       }
       else{
-        this.popToast('danger', 'Requisicion','No se puedo eliminar la requisición ' + this.folio);
+        this.popToast('danger', 'Requisición','Oops!! No se puedo eliminar la requisición ' + this.folio);
       }
     });
   }

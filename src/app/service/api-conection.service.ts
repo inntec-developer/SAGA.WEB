@@ -35,6 +35,7 @@ export class ApiConection {
   public static GetRequisicionesAll = "Requisiciones/getRequisiciones";
   public static UpdateRequisicion = "Requisiciones/updateRequisiciones";
   public static DeleteRequisicion = "Requisiciones/deleteRequisiciones";
+  public static CancelRequisicion = 'Requisiciones/cancelREquisiciones';
 
 
   /* Candidatos */

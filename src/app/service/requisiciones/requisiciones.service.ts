@@ -31,6 +31,7 @@ export class RequisicionesService {
   private urlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
   private urlUpdateRequisicion = ApiConection.ServiceUrl + ApiConection.UpdateRequisicion;
   private urlDeleteRequisicion = ApiConection.ServiceUrl + ApiConection.DeleteRequisicion;
+  private urlCancelRequisicion = ApiConection.ServiceUrl + ApiConection.CancelRequisicion;
 
 
   constructor(private http: Http) { }
@@ -90,6 +91,14 @@ export class RequisicionesService {
     let header = new Headers({'content-Type' : 'application/json'});
     let options = new RequestOptions({headers : header});
     return this.http.post(this.urlDeleteRequisicion, JSON.stringify(requi), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  cancelRequisicion(requi: any) : Observable<any>{
+    let header = new Headers({'content-Type' : 'application/json'});
+    let options = new RequestOptions({headers : header});
+    return this.http.post(this.urlCancelRequisicion, JSON.stringify(requi), options)
             .map(result => result.json())
             .catch(this.handleError);
   }

@@ -41,6 +41,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { ActividadesComponent } from './requisiciones/components/actividades/actividades.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogCancelRequiComponent } from './requisiciones/components/dialog-cancel-requi/dialog-cancel-requi.component';
 import { DialogDeleteRequiComponent } from './requisiciones/components/dialog-delete-requi/dialog-delete-requi.component';
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
 import { DireccionautoComponent } from './requisiciones/components/direccionauto/direccionauto.component';
@@ -149,8 +150,9 @@ const routes: Routes = [
         ViewCuerpoRequiComponent,
         UpdateInfoRequiComponent,
         DialogDeleteRequiComponent,
+        DialogCancelRequiComponent,
     ],
-    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent],
+    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent],
     exports: [
         RouterModule
     ]
