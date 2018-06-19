@@ -1,0 +1,18 @@
+<div class="content-heading">
+    <ul class="breadcrumb pull-right visible-lg visible-md">
+      <li class="active">Inicio</li>
+    </ul>
+    SAGA
+    <small> Inicio</small>
+</div>
+
+
+<div class="row">
+  <app-asignar-requisicion [placeHolder]='placeHolderAsignar' [disabledSelect]='disabledAsignar'></app-asignar-requisicion>
+</div>
+
+<app-button-save (click)="btnSaveFunction()"></app-button-save>
+<app-button-edit></app-button-edit>
+<app-button-delete></app-button-delete>
+<app-button-cancel></app-button-cancel>
+<app-button-view></app-button-view>

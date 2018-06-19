@@ -6,11 +6,9 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
 
-import { Headers, Http, HttpModule, RequestOptions, Response } from '@angular/http';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import { ApiConection } from './../api-conection.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
