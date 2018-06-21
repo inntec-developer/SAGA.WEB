@@ -1,6 +1,7 @@
+import { RollsStructComponent } from './../rolls-struct/rolls-struct.component';
 import { style } from '@angular/animations';
 import { element } from 'protractor';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -11,15 +12,20 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
   styleUrls: ['./rol-grupo.component.scss'],
   providers:[ AdminServiceService ]
 })
-export class RolGrupoComponent implements OnInit {
+export class RolGrupoComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('Struct') someInput: RollsStructComponent;
 
   formRol: FormGroup;
   Grupos: Array<any> = [];
   Roles: Array<any> = [];
   ListaRG: any = [];
+  StructList: Array<any> = [];
+  filteredData: Array<any> = [];
   permisoRol: Array<any> = [];
   msj: string = "";
   alert = "";
+  flag = false;
   constructor(private service: AdminServiceService, public fb: FormBuilder) 
   {
     this.formRol = this.fb.group({
@@ -28,6 +34,12 @@ export class RolGrupoComponent implements OnInit {
 
   }
 
+  setData()
+  {
+    this.StructList = this.someInput.StructList;
+    this.someInput.setStruct(this.filteredData)
+  }
+  
   onSelect(item: any) 
   {
     item.selected ? item.selected = false : item.selected = true; //para poner el backgroun cuando seleccione
@@ -62,12 +74,11 @@ export class RolGrupoComponent implements OnInit {
         let element = {
           EntidadId: rg.id,
           RolId: RolId,         
-          Tipo: 2
         }
         lrg.push(element);
       }
 
-      this.service.AddPrivilegios(lrg)
+      this.service.AddGroupRol(lrg)
       .subscribe( data => {
         this.msj = data;
         console.log(this.msj);
@@ -84,9 +95,13 @@ export class RolGrupoComponent implements OnInit {
 
   selected($event, rol: any)
   {
+    this.flag = true;
     var id = $event.target.value;
     this.permisoRol = this.Roles.filter(item => item.id == id);
-
+    this.filteredData = this.StructList.filter(item => item.rolId == id)
+    
+     this.someInput.setStruct(this.filteredData)
+    
   }
 
   getGrupos()
@@ -96,7 +111,6 @@ export class RolGrupoComponent implements OnInit {
     .subscribe(
       e=>{
         this.Grupos = e;
-        console.log(this.Grupos)
       })
   }
 
@@ -112,6 +126,17 @@ export class RolGrupoComponent implements OnInit {
   ngOnInit() {
     this.getGrupos();
     this.getRoles();
+    this.setData();
+    this.someInput.setStruct(this.filteredData)
+    
+  }
+
+  ngAfterViewInit()
+  {
+    if(this.someInput)
+    {
+      this.setData();
+    }
   }
 
 }

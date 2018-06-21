@@ -9,49 +9,40 @@
 </div>
 
 <form [formGroup]="formRoles" novalidate>
-        <div class="row">
-                <div class="panel panel-default panel-body">
-                    <p class="text-center pv">AGREGAR ROL</p>
-                    <section>
-                        <mat-form-field>
-                            <input matInput formControlName="Rol" placeholder="Nombre">
-                        </mat-form-field>
-                        <!-- validar nombre rol -->
-                        <p>
-                            <span *ngIf="formRoles.controls['Rol'].touched && !formRoles.controls['Rol'].valid">Nombre es requerido</span>
-                        </p>
-                    </section>
-            
-                    <!-- <input matInput placeholder="Permisos">
-            
-                    <section class="checkbox">
-                        <mat-checkbox formControlName="Create">Crear</mat-checkbox>
-                        <mat-checkbox formControlName="Read">Leer</mat-checkbox>
-                        <mat-checkbox formControlName="Update">Modificar</mat-checkbox>
-                        <mat-checkbox formControlName="Delete">Borrar</mat-checkbox>
-                        <mat-checkbox formControlName="Especial">Especial</mat-checkbox>
-                    </section> -->
-                   
-                </div>
-            </div>
-
     <div class="row">
-    
+        <div class="panel panel-default panel-body">
+            <p class="text-center pv">AGREGAR ROL</p>
+            <section>
+                <mat-form-field>
+                    <input matInput formControlName="Rol" placeholder="Nombre">
+                </mat-form-field>
+                        <!-- validar nombre rol -->
+                <p><span *ngIf="formRoles.controls['Rol'].touched && !formRoles.controls['Rol'].valid">Nombre es requerido</span></p>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <button [disabled]="formRoles.invalid" class="mb-sm btn btn-sm btn-success btn-outline pull-right" (click)="saveData()" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
+        </div>
+        <br/>
+        <br/>
         <div class="panel panel-default panel-flat mat-elevation-z8">
-            <tree-root #tree [nodes]="nodes" [focused]="true" [options]="customTemplateStringOptions" (onEvent)="onEvent($event)">
-                <ng-template #treeNodeTemplate let-node>
-                    <mat-checkbox class="checkbox" (change)="go(node);">{{node.data.nombre}}</mat-checkbox>
+             <tree-root #tree [nodes]="nodes" [focused]="true" [options]="customTemplateStringOptions" (onEvent)="onEvent($event)">
+                <ng-template #treeNodeTemplate let-node let-index= "index">
+                    <mat-checkbox class="checkbox" [value]="node.data" [checked] = "node.data.checked" (change)="descendantsAllSelected(node, $event.checked, tree);">{{node.data.nombre}}</mat-checkbox>
                     <span class="pull-right">{{ childrenCount(node) }}</span>
-                    <section *ngIf="node.data.tipoEstructuraId == 8" class="checkbox">
-                            <mat-checkbox formControlName="Create">Crear</mat-checkbox>
-                            <mat-checkbox formControlName="Read">Leer</mat-checkbox>
-                            <mat-checkbox formControlName="Update">Modificar</mat-checkbox>
-                            <mat-checkbox formControlName="Delete">Borrar</mat-checkbox>
-                            <mat-checkbox formControlName="Especial">Especial</mat-checkbox>
+                    <div *ngIf="node.data.checked">
+                        <section class="checkbox">
+                            <mat-checkbox id="{{ 'C-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Create')">Crear</mat-checkbox>
+                            <mat-checkbox id="{{ 'R-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Read')" [checked]="node.data.checked">Leer</mat-checkbox>
+                            <mat-checkbox id="{{ 'U-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Update')">Modificar</mat-checkbox>
+                            <mat-checkbox id="{{ 'D-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Delete')">Borrar</mat-checkbox>
+                            <mat-checkbox id="{{ 'E-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Especial')">Especial</mat-checkbox>
                         </section>
+                    </div>
                 </ng-template>
-                <ng-template  #loadingTemplate> </ng-template>
-            </tree-root>
+            </tree-root> 
 
           
             <!-- <div class="panel-body">

@@ -26,6 +26,10 @@ const Administracion = {
             link: '/admin/roles'
         },
         {
+            text: 'Roles-Privilegios',
+            link: '/admin/privilegios'
+        },
+        {
             text: 'Usuarios-Grupo',
             link: '/admin/grupo'
         },

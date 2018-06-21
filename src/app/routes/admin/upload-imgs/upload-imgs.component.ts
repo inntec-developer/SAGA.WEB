@@ -73,7 +73,6 @@ export class UploadImgsComponent implements OnInit {
    */
   public setImage() : string
   {
-    console.log('sss' + this.name)
     return this.name;
   }
  

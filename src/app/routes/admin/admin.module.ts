@@ -34,6 +34,7 @@ import { AddGrupoComponent } from './add-grupo/add-grupo.component';
 import { AddRolesComponent } from './add-roles/add-roles.component';
 import { RolGrupoComponent } from './rol-grupo/rol-grupo.component';
 import { UploadImgsComponent } from './upload-imgs/upload-imgs.component';
+import { RollsStructComponent } from './rolls-struct/rolls-struct.component';
 
 
 
@@ -42,7 +43,8 @@ const routes: Routes = [
     { path: 'agregar', component: AddPersonaComponent },
     { path: 'grupo', component: AddadminComponent },
     { path: 'grupoAdd', component: AddGrupoComponent },
-    { path: 'rol', component: RolGrupoComponent }
+    { path: 'rol', component: RolGrupoComponent },
+    { path: 'privilegios', component: RollsStructComponent }
 
 ];
 
@@ -82,7 +84,8 @@ const routes: Routes = [
       AddGrupoComponent,
       AddRolesComponent,
       RolGrupoComponent,
-      UploadImgsComponent
+      UploadImgsComponent,
+      RollsStructComponent
     ],
     exports: [
         RouterModule

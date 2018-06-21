@@ -41,12 +41,12 @@
     <div class="panel panel-default mat-elevation-z8">
         <div class="panel-heading">
             <select #slcRol class="form-control widthSelect" (change)="selected($event, i)" formControlName="slcRol" >
-               <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}} Permisos:
-                 <label *ngIf="r.create"> <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> C</label>
+               <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}}
+                 <!-- <label *ngIf="r.create"> <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> C</label>
                  <label *ngIf="r.read"> R</label>
                  <label *ngIf="r.update"> U</label>
                  <label *ngIf="r.delete"> D</label>
-                 <label *ngIf="r.especial"> S</label>
+                 <label *ngIf="r.especial"> S</label> -->
                </option>
             </select>
             <span class="text-danger" *ngIf="formRol.controls['slcRol'].hasError('required')">Debe seleccionar un Rol</span>
@@ -65,4 +65,10 @@
     </div>
   </div>
 </div>
+<br/>
+<div class="row">
+  <app-rolls-struct #Struct (onItemChanged)="setData()" [StructList]="filteredData"></app-rolls-struct>
+</div>
+
+
 </form>

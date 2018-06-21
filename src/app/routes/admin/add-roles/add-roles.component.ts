@@ -1,52 +1,19 @@
+import { state } from '@angular/animations';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import { TreeNode, TREE_ACTIONS, KEYS, IActionMapping } from 'angular-tree-component';
+import { TreeNode, TREE_ACTIONS, KEYS, IActionMapping, TreeModule, TreeComponent } from 'angular-tree-component';
+import { query } from '@angular/core/src/animation/dsl';
 
-const actionMapping: IActionMapping = {
-  mouse: {
-      contextMenu: (tree, node, $event) => {
-          $event.preventDefault();
-          alert(`context menu for ${node.data.name}`);
-      },
-      dblClick: TREE_ACTIONS.TOGGLE_EXPANDED,
-      click: (tree, node, $event) => {
-          $event.shiftKey
-              ? TREE_ACTIONS.TOGGLE_SELECTED_MULTI(tree, node, $event)
-              : TREE_ACTIONS.TOGGLE_SELECTED(tree, node, $event);
-      }
-  },
-  keys: {
-      [KEYS.ENTER]: (tree, node, $event) => alert(`This is ${node.data.name}`)
-  }
-};
-
-
-const mocos = [
-  {
-    id: 1,
-    name: 'root1',
-    checked: false,
-    children: [
-      { id: 2, name: 'child1'},
-      { id: 3, name: 'child2' }
-    ]
-  },
-  {
-    id: 4,
-    name: 'root2',
-    children: [
-      { id: 5, name: 'child2.1' },
-      {
-        id: 6,
-        name: 'child2.2',
-        children: [
-          { id: 7, name: 'subsub' }
-        ]
-      }
-    ]
-  }
-];
+export class estructura
+{
+  id = 0
+  idPadre = 0
+  nombre = ""
+  estructuraId = 0
+  children: Array<estructura> = [];
+  checked = false
+}
 
 @Component({
   selector: 'app-add-roles',
@@ -60,41 +27,16 @@ export class AddRolesComponent implements OnInit {
 
   formRoles: FormGroup;
   msj: string;
-  nodes = [];
-  editing = {};
-  columns = [
-    { title: 'ROL' },
-    { title: 'CREAR' },
-    { title: 'LEER' },
-    { title: 'ACTUALIZAR' },
-    { title: 'BORRAR' },
-    { title: 'ESPECIAL' }];
+  nodes: Array<estructura> = [];
+  privilegios = [];
 
-    asyncChildren = [
-        {
-            name: 'child2.1',
-            subTitle: 'new and improved'
-        }, {
-            name: 'child2.2',
-            subTitle: 'new and improved2'
-        }
-    ];
-
-  
-    customTemplateStringOptions = {
-      // displayField: 'subTitle',
-      isExpandedField: 'expanded',
-      idField: 'uuid',
-      getChildren: this.getChildren.bind(this),
-      actionMapping,
-      allowDrag: true
+  customTemplateStringOptions = {
+    displayField: 'nombre',
+    isExpandedField: 'expanded',
+    idField: 'uuid',
+    getChildren: this.getChildren.bind(this),
+    allowDrag: true, 
   };
-
-  onEvent(msg) {
-      console.log(msg);
-  }
-
-
 
   constructor(private service: AdminServiceService
               ,public fb: FormBuilder )
@@ -104,22 +46,14 @@ export class AddRolesComponent implements OnInit {
 
   }
 
-   getChildren(node: any) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(this.asyncChildren.map((c) => {
-                return Object.assign({}, c, {
-                    hasChildren: node.level < 5
-                });
-            })), 1000);
-        });
-    }
-
-    addNode(tree) {
-      this.nodes[0].children.push({
-
-          name: 'a new child'
+  getChildren(node: any) {
+      return new Promise((resolve, reject) => {
+            // setTimeout(() => resolve(this.nodes.map((c) => {
+            //     return Object.assign({}, c, {
+            //         checked: false
+            //     });
+            // })), 1000);
       });
-      tree.treeModel.update();
   }
 
   childrenCount(node: TreeNode): string {
@@ -130,88 +64,160 @@ export class AddRolesComponent implements OnInit {
       tree.treeModel.filterNodes(text, true);
   }
 
-  activateSubSub(tree) {
-      // tree.treeModel.getNodeBy((node) => node.data.name === 'subsub')
-      tree.treeModel.getNodeById(1001)
-          .setActiveAndVisible();
-  }
-
-  go(node: any) {
-  console.log(node)
-      alert('this method is on the app component');
-  }
- 
   iniciarForm()
   {
     this.formRoles = this.fb.group({
-      Rol: ['', [Validators.required]],
-      Create:0,
-      Read:1,
-      Update:0,
-      Delete:0,
-      Especial:0,
-      Activo: 1
+      Rol: ['', [Validators.required]]
     });
 
   }
 
-
-  updateValue($event, cell, rowIndex)
+  descendantsChecked($event, node, title)
   {
+      let eid = node.data.estructuraId;
+      node.data[title.toLowerCase()] = $event.checked;
 
-    if(cell.toLowerCase() !== 'rol')
-    {
-      this.nodes[rowIndex][cell] = $event.checked;
-    }
-    else if( cell.toLowerCase() === 'rol' && $event.target.value !== '' )
-    {
-      this.nodes[rowIndex][cell.toLowerCase()] = $event.target.value;
-    }
-    
-    this.editing[rowIndex + '-' + cell] = false;
-    this.nodes = [...this.nodes];
+      // this.nodes[ind][title.toLowerCase()] = $event.checked;
+   
+    //   let ind = this.nodes.forEach(function(item, index)
+    // {
+    //   console.log(eid)
+    //     if(item.estructuraId === eid)
+    //     {
+    //       console.log("entro")
+          
+        
+    //       console.log(item)
+    //       return index;
+    //     }
+      
+       
+
+    // } );
+      console.log(this.nodes)
+      
+   
+
+    //
   }
-  saveData(){
-    this.service.AddRoles(this.formRoles.value)
+   /** Whether all the descendants of the node are selected */
+  descendantsAllSelected(node, value, tree)  
+  {
+     node.data.checked = value;
+     node.data.read = value;
+     tree.treeModel.getNodeById(node.data.uuid)
+        .setActiveAndVisible();
+     if(node.children.length > 0)
+     {
+       node.children.forEach(element => {
+         this.descendantsAllSelected(element, value, tree)
+       });
+     }
+  }
+ 
+  // updateValue($event, cell, rowIndex)
+  // {
+
+  //   if(cell.toLowerCase() !== 'rol')
+  //   {
+  //     this.nodes[rowIndex][cell] = $event.checked;
+  //   }
+  //   else if( cell.toLowerCase() === 'rol' && $event.target.value !== '' )
+  //   {
+  //     this.nodes[rowIndex][cell.toLowerCase()] = $event.target.value;
+  //   }
+    
+  //   this.editing[rowIndex + '-' + cell] = false;
+  //   this.nodes = [...this.nodes];
+  // }
+
+  CrearEstructura(node)
+  {
+    if(this.privilegios.length > 0 )
+    {
+      this.privilegios.push({
+        estructuraId: node.estructuraId,
+        Create: node.create,
+        Read: node.read,
+        Update: node.update,
+        Delete: node.delete,
+        Especial: node.especial});
+    }
+    else
+    {
+      this.privilegios = [{
+        estructuraId: node.estructuraId,
+        Create: node.create,
+        Read: node.read,
+        Update: node.update,
+        Delete: node.delete,
+        Especial: node.especial}];
+     }
+     if(node.children.length > 0)
+     {
+       node.children.forEach(element => {
+         this.CrearEstructura(element)
+       });
+     }
+  }
+
+  saveData()
+  {
+    let nom = this.formRoles.value.Rol;
+       
+    for( let item of this.nodes)
+    {
+      if(item.checked)
+      {
+        this.CrearEstructura(item)
+      }
+    }
+  
+    let obj = this.privilegios.map(function(item) 
+    {
+      item.Nombre = nom;
+      return item;
+    });
+
+    console.log(this.privilegios)
+
+    // console.log(this.privilegios)
+
+    this.service.AddRoles(obj)
     .subscribe( data => {
       this.msj = data;
-      this.iniciarForm();
-      this.GetTreeRoles();
-    });
-  }
-  updateRol($event,rowIndex)
-  {
-    let rol = this.nodes[rowIndex]
-    console.log(rol)
-    this.service.UpdateRoles(rol)
-      .subscribe( data => {
-      this.msj = data;
       console.log(this.msj)
-      this.iniciarForm();
-      this.GetTreeRoles();
-    });
-  
+     });
   }
 
-
-  DeleteRoles( $even, rowIndex: any )
-  {
-    let g = this.nodes[rowIndex]
-    console.log(g)
-    this.service.DeleteRoles(g)
-      .subscribe( data => {
-      this.msj = data;
-      console.log(this.msj)
-      this.iniciarForm();
-      // this.getRoles();
-        this.nodes.splice(rowIndex, 1);
-    this.nodes = [...this.nodes];
-    });
- 
+  // updateRol($event,rowIndex)
+  // {
+  //   let rol = this.nodes[rowIndex]
+  //   console.log(rol)
+  //   this.service.UpdateRoles(rol)
+  //     .subscribe( data => {
+  //     this.msj = data;
+  //     console.log(this.msj)
+  //     this.iniciarForm();
+  //     this.GetTreeRoles();
+  //   });
   
-    
- alert("los datos se borraron")
- }
+  // }
+  // DeleteRoles( $even, rowIndex: any )
+  // {
+  //   let g = this.nodes[rowIndex]
+  //   console.log(g)
+  //   this.service.DeleteRoles(g)
+  //     .subscribe( data => {
+  //     this.msj = data;
+  //     console.log(this.msj)
+  //     this.iniciarForm();
+  //     // this.getRoles();
+  //       this.nodes.splice(rowIndex, 1);
+  //   this.nodes = [...this.nodes];
+  //   });
+//  alert("los datos se borraron")
+//  }
 
   GetTreeRoles()
   {
@@ -219,9 +225,9 @@ export class AddRolesComponent implements OnInit {
     .subscribe(
       e=>{
         this.nodes = e;
+      
         console.log(this.nodes)
       })
-
   }
 
 

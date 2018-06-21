@@ -25,28 +25,26 @@
     <div class="col-md-6">
         <div class="panel panel-default">
         <div class="panel-heading text-center">USUARIOS</div>
-          <div dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPersonas" class="panel-body">
-              <!-- <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
-            <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i">
-                  <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.foto}}" />
+          <div  class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades">
+              <!--  <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
+            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i">
+                 <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.foto}}" /> 
                   <div class="media-body">
                     <div class="media-heading margintextthumb">
                     <div class="pull-right badge baed-info tituloPuesto">{{p.departamento}}</div>
-                    <h4>{{p.nombre + ' ' + p.apellidoPaterno }}</h4>
-                    <p>Clave: {{p.clave}}</p>
-                    <p>Álias: {{p.usuario}}</p>
+                    <h4>{{p.nombre + ' ' + p.apellidoPaterno + ' ' + p.apellidoMaterno }}</h4>
+                    <p>Clave:{{ p.clave }}</p>
+                    <p>Álias: {{ p.usuario }}</p>
                     <p *ngFor="let e of p.email">{{e.email}} </p>
-                    <p>Tipo de Usuario: {{p.tipoUsuario}}</p>
                     <p>Grupo: <span *ngFor="let e of p.grupos">{{e.nombre}},</span></p>
                   </div>
                   </div>
-  
             </div>
           </div>
         </div>
       </div>
     <div class="col-md-6">
-        <!-- <div dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" class="panel panel-default"> -->
+     
       <div class="panel panel-default">
         <div class="panel-heading">Grupos:
            <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event)" >
@@ -62,15 +60,15 @@
             </button>
           </div>
         </div>
-        <div dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" class="panel-body">
-          <p>{{alert}}</p>
-          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i"  >
+        <!--  -->
+        <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
+          <p [hidden]="ListaPG.length > 0">{{alert}}</p>
+          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" >
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
                   <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                  <p>Tipo de Usuario: {{pg.tipoUsuario}}</p>
                   <p>Grupo: <span *ngFor="let e of pg.grupos">{{e.nombre}},  </span></p>
                 </div>
               </div>

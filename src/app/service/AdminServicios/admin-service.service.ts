@@ -19,10 +19,12 @@ export class AdminServiceService {
 
   // Url de servicios.
   private Url = ApiConection.ServiceUrl+ApiConection.getDtosPersonal;
+  private UrlGetEntidadesUG = ApiConection.ServiceUrl+ApiConection.getEntidadesUG;
   private UrlTiposUsuarios = ApiConection.ServiceUrl+ApiConection.getTiposUsuarios;
   private UrlAddRol = ApiConection.ServiceUrl+ApiConection.addRol;
   private UrlAddGrupo = ApiConection.ServiceUrl+ApiConection.addGrupo;
   private UrlAddUserGroup = ApiConection.ServiceUrl+ApiConection.addUserGroup;
+  private UrlAddGroupRol = ApiConection.ServiceUrl+ApiConection.addGroupRol;
   private UrlGetDepas = ApiConection.ServiceUrl+ApiConection.getDepartamentos;
   private UrlAddUser = ApiConection.ServiceUrl+ApiConection.addUser;
   private UrlUdActivo = ApiConection.ServiceUrl+ApiConection.udActivoUser;
@@ -30,13 +32,13 @@ export class AdminServiceService {
   private UrlGetGrupos = ApiConection.ServiceUrl+ApiConection.GetGrupos;
   private UrlGetGruposRoles = ApiConection.ServiceUrl+ApiConection.getGruposRoles
   private UrlGetRoles = ApiConection.ServiceUrl+ApiConection.GetRoles;
-  private UrlAddPrivilegio = ApiConection.ServiceUrl+ApiConection.addPrivilegio;
   private UrlUpdateUsuario = ApiConection.ServiceUrl+ApiConection.updateUsuario;
   private UrlUpdateGrupo = ApiConection.ServiceUrl+ApiConection.updateGrupo;
   private UrlUpdateRoles = ApiConection.ServiceUrl+ApiConection.updateRoles;
   private UrlDeleteGrupo = ApiConection.ServiceUrl+ApiConection.deleteGrupo;
   private UrlDeleteRoles = ApiConection.ServiceUrl+ApiConection.deleteRoles;
   private UrlGetTreeRoles = ApiConection.ServiceUrl+ApiConection.getTreeRoles;
+  private UrlGetEstructuraRoles = ApiConection.ServiceUrl+ApiConection.getEstructuraRoles;
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -75,6 +77,12 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  GetEntidadesUG(): Observable<any>
+  {
+     return this.http.get(this.UrlGetEntidadesUG)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
   getDepas(): Observable<any>
   {
      return this.http.get(this.UrlGetDepas)
@@ -117,6 +125,13 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  GetEstructuraRoles(): Observable<any>
+  {
+     return this.http.get(this.UrlGetEstructuraRoles)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
   GetUsuariosByDepa(id :any): Observable<any>{
     return this.http.get(this.UrlGetByDepa + '?id='+ id)
             .map(result => result.json())
@@ -138,6 +153,14 @@ export class AdminServiceService {
             .map(result => result.json())
             .catch(this.handleError);
   }
+  
+  AddGroupRol(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddGroupRol, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
 
   AddRoles(data: any): Observable<any>{
     let headers = new Headers({'Content-Type': 'application/json'});
@@ -151,14 +174,6 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlAddUser, JSON.stringify(data), options)
-            .map(result => result.json())
-            .catch(this.handleError);
-  }
-
-  AddPrivilegios(data: any): Observable<any>{
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this.http.post(this.UrlAddPrivilegio, JSON.stringify(data), options)
             .map(result => result.json())
             .catch(this.handleError);
   }

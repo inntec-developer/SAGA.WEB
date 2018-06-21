@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-lg-2">
+    <div class="input-group">
+      <input (input)="Search($event)" class="input-sm form-control" type="text" placeholder="Search" />
+    </div> 
+  </div>
+</div>
+<br/>
+
+<div class="row">
+  <div class="panel panel-default panel-flat mat-elevation-z8">
+    <div class="panel-body">
+      <p class="text-center pv">ROLES - PRIVILEGIOS</p>
+        <table class="table table-responsive table-bordered table-hover" (change)="UpdateFoto()">
+          <thead><tr><td *ngFor="let c of columns" class="text-center">{{c.title}}</td></tr></thead>
+            <tbody>
+              <tr *ngFor="let r of filteredData; let rowIndex = index">
+                <td class="text-center">
+                    {{r['rol']}}
+                  <!-- <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-' + 'rol'] = true" *ngIf="!editing[rowIndex + '-' + 'rol']">
+                    {{r['rol']}}
+                  </span>
+                  <input autofocus (blur)="updateValue($event, rol, rowIndex)" *ngIf="editing[rowIndex + '-' + 'rol']" type="text" [value] = "r['rol']" />  -->
+                </td>
+                <td class="text-center">
+                    {{r['nombre']}}
+                    <!-- <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-' + 'nombre' ] = true" *ngIf="!editing[rowIndex + '-' + 'nombre']">
+                      {{r['nombre']}}
+                    </span>
+                    <input autofocus (blur)="updateValue($event, 'nombre', rowIndex)" *ngIf="editing[rowIndex + '-' + 'nombre']" type="text" [value] = "r['nombre']" />  -->
+                </td>
+                <td class="center">
+                  <mat-checkbox (change)="updateValue($event, 'create', rowIndex)" class="checkbox" [checked]="r.create"></mat-checkbox><span></span>
+                </td>
+                <td>
+                  <mat-checkbox (change)="updateValue($event, 'read', rowIndex)" class=" center-block checkbox" [checked]="r.read"></mat-checkbox>
+                  <span></span>
+                </td>
+                <td class="center">
+                  <mat-checkbox (change)="updateValue($event, 'update', rowIndex)" class="checkbox" [checked]="r.update"></mat-checkbox>
+                  <span></span>
+                </td>
+                <td class="center">
+                  <mat-checkbox (change)="updateValue($event, 'delete', rowIndex)" class="checkbox" [checked]="r.delete"></mat-checkbox>
+                  <span></span>
+                </td>
+                <td class="center">
+                  <mat-checkbox (change)="updateValue($event, 'especial', rowIndex)" class="checkbox" [checked]="r.especial"></mat-checkbox>
+                  <span></span>
+                </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
