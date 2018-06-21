@@ -1,7 +1,8 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router  } from '@angular/router';
-import { ViewInforRequiComponent } from '../view-info-requi/view-info-requi.component';
+
 import { ViewCuerpoRequiComponent } from '../view-cuerpo-requi/view-cuerpo-requi.component';
+import { ViewInforRequiComponent } from '../view-info-requi/view-info-requi.component';
 
 @Component({
   selector: 'app-view-requisicion',
@@ -18,7 +19,7 @@ export class ViewRequisicionComponent implements OnInit {
     private _Route: ActivatedRoute,
   ) {
     this._Route.params.subscribe( params => {
-      if(params['IdRequi'] != null){
+      if(params['IdRequi'] != null  && params['Folio'] != null){
         this.requiId = params['IdRequi'];
         this.folio = params['Folio'];
       }else {

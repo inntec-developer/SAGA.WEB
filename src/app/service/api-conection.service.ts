@@ -13,6 +13,9 @@ export class ApiConection {
 
   // Agregar lsa conecciones necesarias en las cuales se hara referencia.
 
+  /*Componentes */
+  public static GetUserGroup = 'AsignacionRequi/getUserGroup';
+
   /*Catalogos*/
   public static GetDocumentosDamsa = 'Catalogos/getDocDamsa';
   public static GetPrestacionesLey = 'Catalogos/getPrestacionesLey';
@@ -35,6 +38,8 @@ export class ApiConection {
   public static GetRequisicionesAll = "Requisiciones/getRequisiciones";
   public static UpdateRequisicion = "Requisiciones/updateRequisiciones";
   public static DeleteRequisicion = "Requisiciones/deleteRequisiciones";
+  public static CancelRequisicion = 'Requisiciones/cancelREquisiciones';
+  public static GetUserGroups = 'Requisiciones/getUserGroups'
 
 
   /* Candidatos */

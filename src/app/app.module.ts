@@ -38,7 +38,8 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

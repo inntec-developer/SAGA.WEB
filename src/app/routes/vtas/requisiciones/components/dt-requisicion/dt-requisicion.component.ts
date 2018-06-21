@@ -3,11 +3,13 @@ import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-t
 import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
 
+import { DialogCancelRequiComponent } from './../dialog-cancel-requi/dialog-cancel-requi.component';
 //Component
 import { DialogDeleteRequiComponent } from '../dialog-delete-requi/dialog-delete-requi.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 //Servicios
 import { RequisicionesService } from '../../../../../service/index';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-dt-requisicion',
@@ -84,9 +86,22 @@ export class DtRequisicionComponent implements OnInit {
       height: 'auto',
       data: element
     });
+    var window : Window
     dialogDlt.afterClosed().subscribe(result => {
       this.getDateRequisiciones();
     });
+  }
+
+  openDialogCancel(element){
+    let dialogCnc = this.dialog.open(DialogCancelRequiComponent, {
+      width: '25%',
+      height: 'auto',
+      data: element
+    });
+    var window : Window
+    dialogCnc.afterClosed().subscribe(result => {
+        this.getDateRequisiciones();
+    })
   }
 
   //*******************************-- GRID-- *********************************************//
