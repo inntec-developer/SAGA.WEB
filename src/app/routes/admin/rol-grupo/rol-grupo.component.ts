@@ -78,6 +78,7 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
         lrg.push(element);
       }
 
+      console.log(lrg)
       this.service.AddGroupRol(lrg)
       .subscribe( data => {
         this.msj = data;

@@ -27,6 +27,7 @@ export class AdminServiceService {
   private UrlAddGroupRol = ApiConection.ServiceUrl+ApiConection.addGroupRol;
   private UrlGetDepas = ApiConection.ServiceUrl+ApiConection.getDepartamentos;
   private UrlAddUser = ApiConection.ServiceUrl+ApiConection.addUser;
+  private UrlGetSession = ApiConection.ServiceUrl+ApiConection.getSession;
   private UrlUdActivo = ApiConection.ServiceUrl+ApiConection.udActivoUser;
   private UrlGetByDepa = ApiConection.ServiceUrl+ApiConection.getUsuariosByDepa;
   private UrlGetGrupos = ApiConection.ServiceUrl+ApiConection.GetGrupos;
@@ -39,6 +40,7 @@ export class AdminServiceService {
   private UrlDeleteRoles = ApiConection.ServiceUrl+ApiConection.deleteRoles;
   private UrlGetTreeRoles = ApiConection.ServiceUrl+ApiConection.getTreeRoles;
   private UrlGetEstructuraRoles = ApiConection.ServiceUrl+ApiConection.getEstructuraRoles;
+  private UrlGetPrivilegios = ApiConection.ServiceUrl+ApiConection.getPrivilegios;
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -118,6 +120,12 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  GetSession(mail :any, pass: any): Observable<any>{
+    return this.http.get(this.UrlGetSession + '?p='+ pass + '&e=' + mail)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
   GetTreeRoles(): Observable<any>
   {
      return this.http.get(this.UrlGetTreeRoles)
@@ -128,6 +136,13 @@ export class AdminServiceService {
   GetEstructuraRoles(): Observable<any>
   {
      return this.http.get(this.UrlGetEstructuraRoles)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
+  GetPrivilegios( id: any): Observable<any>
+  {
+     return this.http.get(this.UrlGetPrivilegios + '?idUser='+ id)
          .map(result => result.json())
          .catch(this.handleError);
   }

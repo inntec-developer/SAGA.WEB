@@ -1,3 +1,8 @@
+// import { pruebaMenu } from './admin/pruebaMenu';
+import { SettingsService } from './../core/settings/settings.service';
+import { settings } from 'cluster';
+
+// const PruebaMelina = pruebaMenu.prototype.setVar();
 const Home = {
     text: 'Inicio',
     link: '/home',
