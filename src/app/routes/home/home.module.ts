@@ -1,14 +1,10 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, ViewChild } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AsignarRequisicionComponent } from './../../components/asignar-requisicion/asignar-requisicion.component';
-import { ButtonCancelComponent } from './../../components/buttons/button-cancel/button-cancel.component';
-import { ButtonDeleteComponent } from './../../components/buttons/button-delete/button-delete.component';
-import { ButtonEditComponent } from './../../components/buttons/button-edit/button-edit.component';
-import { ButtonSaveComponent } from './../../components/buttons/button-save/button-save.component';
-import { ButtonViewComponent } from './../../components/buttons/button-view/button-view.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ComponentsModule } from './../../components/components.module';
+import { CustomFormsModule } from 'ng2-validation';
 import { HomeComponent } from './home/home.component';
 import { NgxSelectModule } from 'ngx-select-ex'
 
@@ -20,20 +16,16 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         NgxSelectModule,
         FormsModule,
-        CommonModule
-        
+        ReactiveFormsModule,
+        CustomFormsModule,
+        CommonModule,
+        ComponentsModule
     ],
     declarations: [
-        HomeComponent, 
-        AsignarRequisicionComponent,
-        ButtonSaveComponent, 
-        ButtonDeleteComponent, 
-        ButtonCancelComponent, 
-        ButtonEditComponent,
-        ButtonViewComponent
+        HomeComponent
     ],
     exports: [
-        RouterModule
+        RouterModule,
     ]
 })
 export class HomeModule { }

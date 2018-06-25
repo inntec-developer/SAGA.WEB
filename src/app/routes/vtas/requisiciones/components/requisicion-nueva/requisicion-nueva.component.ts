@@ -71,11 +71,8 @@ export class RequisicionNuevaComponent implements OnInit {
     datas.Usuario = this.setings.user.name;
     this.serviceRequisiciones.createNewRequi(datas)
       .subscribe(data => {
-        debugger;
         this.requisicionId = data.id;
         this.folio = data.folio;
-        console.log(this.requisicionId);
-        console.log(this.folio);
       })
   }
 }

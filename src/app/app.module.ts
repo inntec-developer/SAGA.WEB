@@ -20,7 +20,8 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
+        
     ],
     imports: [
         HttpClientModule,
@@ -39,7 +40,9 @@ export function createTranslateLoader(http: HttpClient) {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        BrowserModule
+        BrowserModule,
+        
+        
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

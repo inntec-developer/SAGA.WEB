@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { MenuService } from '../core/menu/menu.service';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
@@ -11,12 +12,11 @@ import { routes } from './routes';
     imports: [
         SharedModule,
         RouterModule.forRoot(routes),
-        PagesModule
+        PagesModule       
     ],
-    declarations: [],
-    exports: [
-        RouterModule
-    ]
+    declarations: [
+    ],
+    exports: [RouterModule]
 })
 
 export class RoutesModule {

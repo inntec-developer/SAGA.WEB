@@ -1,8 +1,8 @@
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
 import { Component, Input, OnInit } from '@angular/core';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import { SettingsService } from '../../../../../core/settings/settings.service';
@@ -27,6 +27,9 @@ export class UpdateInfoRequiComponent implements OnInit {
   public Estatus : any[];
   public requiUpdate : UpdateRequisicion;
   public return: string;
+  public placeHolderSelect : string;
+  public asignados :  any[] = [];
+  public infoRequi : any[];
 
   public formRequi : FormGroup;
 
@@ -73,8 +76,9 @@ export class UpdateInfoRequiComponent implements OnInit {
      }
 
     ngOnInit() {
+      this.placeHolderSelect = 'Asignar a: '
       this.getPrioridades();
-      this.getEsattus(2);
+      this.getEstatus(2);
       this.formRequi = this.fb.group({
         folio : [{value: '', disabled: true}],
         fch_Solicitud: [{value: '', disabled:true}],
@@ -84,18 +88,18 @@ export class UpdateInfoRequiComponent implements OnInit {
         confidencial: [false],
         estatus: [{value:'',  disabled:true}]
       });
+
+      this.getInformacionRequisicio();
     }
 
-    ngAfterContentChecked(){
-      if(this.Folios != null && this.checked == false ){
-        this.checked = true;
-        this.getInitialData();
-      }
+    getAsignacion(event){
     }
 
-    getInitialData(){
+    getInformacionRequisicio(){
       this.serviceRequisicion.getRequiFolio(this.Folios)
         .subscribe(DataRequisicion => {
+          this.infoRequi = DataRequisicion;
+          console.log(this.infoRequi);
           this.RequiId = DataRequisicion.id;
           this.formRequi.patchValue({
             folio: DataRequisicion.folio,
@@ -105,11 +109,14 @@ export class UpdateInfoRequiComponent implements OnInit {
             estatus: DataRequisicion.estatus.id,
             fch_Cumplimiento: DataRequisicion.fch_Cumplimiento,
             confidencial: DataRequisicion.confidencial,
-
         });
       });
+      console.log(this.infoRequi);
     }
 
+
+
+    /*Cargar Formularios*/
     getPrioridades(){
       this.serviceCatalogos.getPrioridades()
         .subscribe(data => {
@@ -117,13 +124,15 @@ export class UpdateInfoRequiComponent implements OnInit {
         })
     }
 
-    getEsattus(tipoMov: number){
+    getEstatus(tipoMov: number){
       this.serviceCatalogos.getEstatusRequi(tipoMov)
         .subscribe(data => {
           this.Estatus = data;
         });
     }
 
+
+    /* Save Requisicion */
     Save(){
       var update = {
           id: this.RequiId,

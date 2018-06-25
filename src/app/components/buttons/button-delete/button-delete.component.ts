@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-button-delete',
+  selector: 'btn-delete',
   templateUrl: './button-delete.component.html',
   styleUrls: ['./button-delete.component.scss']
 })

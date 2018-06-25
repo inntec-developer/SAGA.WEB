@@ -1,16 +1,14 @@
-<br>
-<fieldset>
+<form [formGroup]="AsignacionForm">
   <div class="form-group">
     <ngx-select
+      formControlName="selectControl"
       [disabled]="disabledSelect"
       (data)="value"
       class="select-asig"
-      [(ngModel)]="asignacionCtrl"
       [multiple]="true" 
       [items]="items"
-      (data)="refreshValue($event)" 
-      (selected)="selected($event)" 
-      (removed)="removed($event)"
+      (remove)="valueChange($event)"
+      (select)="valueChange($event)"
       optionValueField="id" optionTextField="nombre" >
         <ng-template ngx-select-option-selected let-option let-text="descripcion">
           <span *ngIf="option.data.tipoEntidadId != 1">{{option.data.nombre}}</span>
@@ -23,4 +21,4 @@
     </ngx-select>
     <label class="form-control-placeholder">{{placeHolder}}</label>
   </div>
-</fieldset>
+</form>

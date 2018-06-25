@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-button-cancel',
+  selector: 'btn-cancel',
   templateUrl: './button-cancel.component.html',
   styleUrls: ['./button-cancel.component.scss']
 })

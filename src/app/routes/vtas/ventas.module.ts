@@ -1,5 +1,4 @@
-﻿import { ColorPickerModule, ColorPickerService } from 'ngx-color-picker';
-import {
+﻿import {
          MAT_DATE_LOCALE,
          MatAutocompleteModule,
          MatButtonModule,
@@ -40,7 +39,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { ActividadesComponent } from './requisiciones/components/actividades/actividades.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ColorPickerService } from 'ngx-color-picker';
+import { ComponentsModule } from './../../components/components.module';
 import { DialogCancelRequiComponent } from './requisiciones/components/dialog-cancel-requi/dialog-cancel-requi.component';
 import { DialogDeleteRequiComponent } from './requisiciones/components/dialog-delete-requi/dialog-delete-requi.component';
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
@@ -80,8 +80,6 @@ import { ViewInforRequiComponent } from './requisiciones/components/view-info-re
 import { ViewRequisicionComponent } from './requisiciones/components/view-requisicion/view-requisicion.component';
 import { ViewdamfoComponent } from './requisiciones/components/viewdamfo/viewdamfo.component';
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
-import { map } from 'rxjs/operators/map';
-import { startWith } from 'rxjs/operators/startWith';
 
 const routes: Routes = [
     { path: 'prospecto', component: ProspectoComponent },
@@ -110,7 +108,7 @@ const routes: Routes = [
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, MatOptionModule, NgxSpinnerModule, ToasterModule,
-        SelectModule
+        SelectModule, ComponentsModule
     ],
     providers: [ColorPickerService,
          { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },

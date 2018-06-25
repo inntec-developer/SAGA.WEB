@@ -100,18 +100,12 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showRequi(element.id, element.folio)" type="button"  matTooltip="Ver Requisición">
-            <em class="fa fa-eye"></em>
-          </button>
-          <button *ngIf="element.estatus.id != 8" class="mb-sm btn-sm btn btn-primary btn-outline" (click)="editRequi(element.id, element.folio)" type="button"  matTooltip="Editar Requisición">
-            <em class="icon-pencil"></em>
-          </button>
-          <button  class="mb-sm btn-sm btn btn-danger btn-outline" (click)="openDialogDelete(element)" type="button"  matTooltip="Eliminar Requisición">
-            <em class="icon-trash"></em>
-          </button>
-          <button *ngIf="element.estatus.id != 8" class="mb-sm btn-sm btn btn-green btn-outline" (click)="openDialogCancel(element)" type="button"  matTooltip="Cancelar Requisición" >
-            <em class="icon-ban"></em>
-          </button>
+          <btn-view (click)="showRequi(element.id, element.folio)" matTooltip="Ver Requisición"></btn-view>
+          <btn-edit *ngIf="element.estatus.id != 8" (click)="editRequi(element.id, element.folio)" matTooltip="Editar Requisición"></btn-edit>
+          <btn-cancel *ngIf="element.estatus.id != 8" (click)="openDialogCancel(element)" matTooltip="Cancelar Requisición" ></btn-cancel>
+          <btn-refresh *ngIf="element.estatus.id == 8"  matTooltip="Re-activar Requisición" ></btn-refresh>
+          <btn-delete (click)="openDialogDelete(element)" matTooltip="Eliminar Requisición"></btn-delete>
+          
       </mat-cell>
 
     </ng-container>

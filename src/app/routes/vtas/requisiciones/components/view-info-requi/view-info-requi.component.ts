@@ -1,9 +1,9 @@
 import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
-import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -26,6 +26,8 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
   public Estatus : any[];
   public msj: string;
 
+  @Output() EstatusId : EventEmitter<number> = new EventEmitter();;
+
   public formRequi : FormGroup;
 
 
@@ -47,7 +49,7 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
 
     ngOnInit() {
       this.getPrioridades();
-      this.getEsattus(2);
+      this.getEstatus(2);
       this.formRequi = this.fb.group({
         folio : [{value: '', disabled: true}],
         fch_Solicitud: [{value: '', disabled:true}],
@@ -78,8 +80,8 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
             estatus: DataRequisicion.estatus.id,
             fch_Cumplimiento: DataRequisicion.fch_Cumplimiento,
             confidencial: DataRequisicion.confidencial,
-
         });
+        this.EstatusId.emit(this.formRequi.get('estatus').value);
       });
     }
 
@@ -90,7 +92,7 @@ export class ViewInforRequiComponent implements OnInit, AfterContentChecked {
         })
     }
 
-    getEsattus(tipoMov: number){
+    getEstatus(tipoMov: number){
       this.serviceCatalogos.getEstatusRequi(tipoMov)
         .subscribe(data => {
           this.Estatus = data;

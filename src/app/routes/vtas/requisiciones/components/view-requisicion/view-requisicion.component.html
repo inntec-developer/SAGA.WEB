@@ -11,22 +11,11 @@
 <!-- Botones superiores Izquierdos -->
 <div class="row">
   <div class="col-md-12 text-right">
-    <button
-            class="mb-md btn-md btn btn-success btn-outline"
-            type="button"
-            matTooltip="Editar Requisición"
-            (click)="editRequi()">
-      <em class="icon-pencil"></em>
-    </button>
-    <button class="mb-md btn-md btn btn-warning btn-outline"
-            type="button"
-            matTooltip="Regresar"
-            [routerLink]="['/ventas/requisicion']">
-      <em class="icon-action-undo"></em>
-    </button>
+    <btn-edit matTooltip="Editar Requisición" (click)="editRequi()" *ngIf="estatusId != 8"></btn-edit>
+    <btn-return matTooltip="Regresar" [routerLink]="['/ventas/requisicion']"></btn-return>
   </div>
 </div>
 <br/>
-<app-view-info-requi [Folios]= "folio"></app-view-info-requi>
+<app-view-info-requi [Folios]= "folio" (EstatusId)="getEstatusRequi($event)"  ></app-view-info-requi>
 <br/>
 <app-view-cuerpo-requi [Requisicion]="requiId"></app-view-cuerpo-requi>

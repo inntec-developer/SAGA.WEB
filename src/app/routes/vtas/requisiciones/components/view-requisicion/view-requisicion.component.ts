@@ -13,6 +13,7 @@ export class ViewRequisicionComponent implements OnInit {
 
   public requiId : string;
   public folio: number;
+  public estatusId: number;
 
   constructor(
     private _Router: Router,
@@ -31,5 +32,9 @@ export class ViewRequisicionComponent implements OnInit {
 
   editRequi(){
     this._Router.navigate(['/ventas/edicionRequisicion', this.requiId, this.folio], {skipLocationChange:true});
+  }
+
+  getEstatusRequi(event){
+    this.estatusId = event;
   }
 }

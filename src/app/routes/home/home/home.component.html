@@ -8,11 +8,14 @@
 
 
 <div class="row">
-  <app-asignar-requisicion [placeHolder]='placeHolderAsignar' [disabledSelect]='disabledAsignar'></app-asignar-requisicion>
+  <app-asignar-requisicion [placeHolder]='placeHolderAsignar' [disabledSelect]='disabledAsignar' [Asignados]='asignados' (Asignacion)='getAsgiancion($event)' required></app-asignar-requisicion>
 </div>
 
-<app-button-save (click)="btnSaveFunction()"></app-button-save>
-<app-button-edit></app-button-edit>
-<app-button-delete></app-button-delete>
-<app-button-cancel></app-button-cancel>
-<app-button-view></app-button-view>
+<btn-save (click)="btnSaveFunction()"></btn-save>
+<btn-edit></btn-edit>
+<btn-delete></btn-delete>
+<btn-cancel></btn-cancel>
+<btn-view></btn-view>
+<btn-return></btn-return>
+<btn-refresh></btn-refresh>
+<btn-design></btn-design>

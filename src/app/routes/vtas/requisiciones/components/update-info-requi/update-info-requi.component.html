@@ -62,14 +62,15 @@
         </mat-form-field>
       </div>
     </div>
+    
+    <div class=row>
+      <br>
+      <app-asignar-requisicion [placeHolder]='placeHolderSelect' [Asignados]='infoRequi.asignados' (Asignacion)='getAsignacion($event)'></app-asignar-requisicion>
+    </div>
     <div class="row">
       <div class="col-md-12 text-right">
-        <button class="mb-md btn-md btn btn-success btn-outline"
-                type="submit"
-                matTooltip="Actualizar"
-                [disabled]="!formRequi.valid">
-          <em class="fa fa-save"></em>
-        </button>
+        <btn-save matTooltip="Actualizar" *ngIf="formRequi.valid">
+      </btn-save>
       </div>
     </div>
   </mat-card>

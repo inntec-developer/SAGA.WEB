@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ButtonSaveComponent } from '../buttons/button-save/button-save.component';
 import { ComponentsService } from './../../service/Components/components.service';
 
 @Component({
@@ -11,35 +10,52 @@ import { ComponentsService } from './../../service/Components/components.service
   providers: [ComponentsService]
 })
 export class AsignarRequisicionComponent implements OnInit {
+  //Formulario
+  public AsignacionForm : FormGroup;
   //Variables de entrada
   @Input() disabledSelect: boolean;
   @Input() placeHolder: string;
+  @Input() Asignados: any[];
   //Variables de Salida
+  
   @Output()
-  Asignacacion : EventEmitter<any[]> = new EventEmitter();
+  Asignacion : EventEmitter<any[]> = new EventEmitter();
 
-
-  public items: any[] = []
+   public items: any[] = []
   
   public asignacionCtrl : any[];
   public allowClear : boolean = true;
- 
   constructor(
     private serviceComponents : ComponentsService
   ) { 
+    //Inicializar el formulario con el nombre del control
+    this.AsignacionForm = new FormGroup({
+      selectControl: new FormControl('',[Validators.required])
+    });
   }
 
   ngOnInit() {
    this.serviceComponents.getUserGroup()
     .subscribe(data =>{
       this.items = data;
-      console.log(this.items);
     });
-    
+    // this.Asignados = ["83569bac-0d68-e811-80e1-9e274155325e", "17e98c73-2668-e811-80e1-9e274155325e", "72bcc66f-3668-e811-80e1-9e274155325e"];
+    //Muestra los valores almacenados en base de datos, si es que ya tiene información.
+    this.AsignacionForm.patchValue({
+      selectControl: this.Asignados
+    });
   }
 
-  valueChange(asignacion){
-    this.Asignacacion.emit(asignacion);
-    console.log(asignacion);
+  AfterViewChecked(){
+    debugger;
+    this.AsignacionForm.patchValue({
+      selectControl: this.Asignados
+    });
   }
+
+  valueChange(obj){ 
+    this.Asignacion.emit(this.AsignacionForm.get('selectControl').value);
+  }
+
+  
 }

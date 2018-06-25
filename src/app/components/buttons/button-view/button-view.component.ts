@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-button-view',
+  selector: 'btn-view',
   templateUrl: './button-view.component.html',
   styleUrls: ['./button-view.component.scss']
 })
