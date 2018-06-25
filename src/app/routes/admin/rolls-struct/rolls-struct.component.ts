@@ -15,10 +15,10 @@ export class RollsStructComponent implements OnInit {
     
       {title: 'ROL'},
       {title: 'NOMBRE ESTRUCTURA'},
-      {title: "CREATE"},
-      {title: "READ"},
-      {title: "DELETE"},
-      {title: "UPDATE"},
+      {title: "CREAR"},
+      {title: "LEER"},
+      {title: "BORRAR"},
+      {title: "MODIFICAR"},
       {title: "ESPECIAL"}
   ]
   filteredData: Array<any> = [];

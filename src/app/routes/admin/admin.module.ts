@@ -1,3 +1,5 @@
+import { RegistroComponent } from './registro/registro.component';
+import { PagesModule } from './../pages/pages.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -38,13 +40,15 @@ import { RollsStructComponent } from './rolls-struct/rolls-struct.component';
 
 
 
+
 const routes: Routes = [
     { path: 'roles', component: AddRolesComponent },
     { path: 'agregar', component: AddPersonaComponent },
     { path: 'grupo', component: AddadminComponent },
     { path: 'grupoAdd', component: AddGrupoComponent },
     { path: 'rol', component: RolGrupoComponent },
-    { path: 'privilegios', component: RollsStructComponent }
+    { path: 'privilegios', component: RollsStructComponent },
+    { path: 'registro', component: RegistroComponent}
 
 ];
 
@@ -74,7 +78,8 @@ const routes: Routes = [
         NgxDatatableModule, 
         MatDialogModule, 
         MatTooltipModule,
-        TreeModule
+        TreeModule,
+        PagesModule
         
       ],
     declarations:
@@ -85,7 +90,8 @@ const routes: Routes = [
       AddRolesComponent,
       RolGrupoComponent,
       UploadImgsComponent,
-      RollsStructComponent
+      RollsStructComponent,
+      RegistroComponent
     ],
     exports: [
         RouterModule
