@@ -1,5 +1,5 @@
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterContentChecked } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -7,6 +7,7 @@ import { Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-
 
 import { SettingsService } from '../../../../../core/settings/settings.service';
 import { UpdateRequisicion } from '../../../../../models/vtas/Requisicion'
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-update-info-requi',
@@ -19,7 +20,7 @@ import { UpdateRequisicion } from '../../../../../models/vtas/Requisicion'
               {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
             ]
 })
-export class UpdateInfoRequiComponent implements OnInit {
+export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
   @Input() Folios: string;
   public RequiId :string;
   public checked : boolean = false;
@@ -28,7 +29,8 @@ export class UpdateInfoRequiComponent implements OnInit {
   public requiUpdate : UpdateRequisicion;
   public return: string;
   public placeHolderSelect : string;
-  public asignados :  any[] = [];
+  public asignados : any[];
+  public asignadosRequi :  any[] = [];
   public infoRequi : any[];
 
   public formRequi : FormGroup;
@@ -88,30 +90,38 @@ export class UpdateInfoRequiComponent implements OnInit {
         confidencial: [false],
         estatus: [{value:'',  disabled:true}]
       });
+    }
 
-      this.getInformacionRequisicio();
+    ngAfterContentChecked() {
+      if(!this.checked){
+        this.getInformacionRequisicio()
+        this.checked = true;
+      }
+      
     }
 
     getAsignacion(event){
+      this.asignadosRequi = event;
     }
 
     getInformacionRequisicio(){
       this.serviceRequisicion.getRequiFolio(this.Folios)
-        .subscribe(DataRequisicion => {
-          this.infoRequi = DataRequisicion;
-          console.log(this.infoRequi);
-          this.RequiId = DataRequisicion.id;
+        .subscribe(data => {
+          this.asignadosRequi = data.asignados;
+          this.infoRequi = data;
+          this.RequiId = data.id;
+          console.log('Informacion de requisicion: ', this.infoRequi);
           this.formRequi.patchValue({
-            folio: DataRequisicion.folio,
-            fch_Solicitud: DataRequisicion.fch_Creacion,
-            fch_Limite: DataRequisicion.fch_Limite,
-            prioridad: DataRequisicion.prioridad.id,
-            estatus: DataRequisicion.estatus.id,
-            fch_Cumplimiento: DataRequisicion.fch_Cumplimiento,
-            confidencial: DataRequisicion.confidencial,
+            folio: data.folio,
+            fch_Solicitud: data.fch_Creacion,
+            fch_Limite: data.fch_Limite,
+            prioridad: data.prioridad.id,
+            estatus: data.estatus.id,
+            fch_Cumplimiento: data.fch_Cumplimiento,
+            confidencial: data.confidencial,
         });
       });
-      console.log(this.infoRequi);
+      
     }
 
 
@@ -134,6 +144,24 @@ export class UpdateInfoRequiComponent implements OnInit {
 
     /* Save Requisicion */
     Save(){
+      debugger;
+      let asg = [];
+      if(this.asignadosRequi.length > 0){
+        
+        for(let a of this.asignadosRequi){
+          asg.push({
+            RequisicionId: this.RequiId,
+            GrpUsrId : a,
+            CRUD : '',
+            UsuarioAlta : this.settings.user.name,
+            fch_Creacion : new Date(),
+            UsuarioMod : this.settings.user.name,
+            fch_Modificacion : new Date()
+          });
+        };
+      }
+
+      
       var update = {
           id: this.RequiId,
           folio :  this.formRequi.get('folio').value,
@@ -141,19 +169,21 @@ export class UpdateInfoRequiComponent implements OnInit {
           fch_Cumplimiento : this.formRequi.get('fch_Cumplimiento').value,
           estatusId : this.formRequi.get('estatus').value,
           confidencial : this.formRequi.get('confidencial').value,
-          usuario : this.settings.user.name
+          usuario : this.settings.user.name,
+          asignacionRequi: asg
       }
       this.requiUpdate = update;
-      this.serviceRequisicion.updateRequisicion(this.requiUpdate)
-        .subscribe(data => {
-          console.log(data);
-          this.return = data;
-          if(this.return){
-            this.popToast('success', 'Requisicion','Actualizacion de información Folio: ' + data);
-          }
-          else{
-              this.popToast('error', 'Oops!!','Algo salio mal intente de nuevo' );
-          }
-        });
+      console.log(this.requiUpdate);
+      // this.serviceRequisicion.updateRequisicion(this.requiUpdate)
+      //   .subscribe(data => {
+      //     console.log(data);
+      //     this.return = data;
+      //     if(this.return){
+      //       this.popToast('success', 'Requisicion','Actualizacion de información Folio: ' + data);
+      //     }
+      //     else{
+      //         this.popToast('error', 'Oops!!','Algo salio mal intente de nuevo' );
+      //     }
+      //   });
     }
 }

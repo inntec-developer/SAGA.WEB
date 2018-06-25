@@ -45,14 +45,7 @@ export class AsignarRequisicionComponent implements OnInit {
       selectControl: this.Asignados
     });
   }
-
-  AfterViewChecked(){
-    debugger;
-    this.AsignacionForm.patchValue({
-      selectControl: this.Asignados
-    });
-  }
-
+  
   valueChange(obj){ 
     this.Asignacion.emit(this.AsignacionForm.get('selectControl').value);
   }
