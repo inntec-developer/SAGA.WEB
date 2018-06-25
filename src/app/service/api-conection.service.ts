@@ -92,6 +92,7 @@ export class ApiConection {
   public static addRol = '/admin/agregarRol';
   public static addGrupo = '/admin/addGrupo';
   public static addUser = '/admin/addUsuario';
+  public static getSession = '/admin/setUsers';
   public static udActivoUser = '/admin/udActivo';
   public static addUserGroup = '/admin/addUserGroup';
   public static addGroupRol = '/admin/addGroupRol';
@@ -104,5 +105,6 @@ export class ApiConection {
   public static getTreeRoles = '/admin/getEstructura';
   public static getEntidadesUG = '/admin/getEntidades';
   public static getEstructuraRoles = '/admin/getEstructuraRoles';
+  public static getPrivilegios = '/admin/getPrivilegios';
   
 }

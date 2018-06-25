@@ -66,8 +66,8 @@
   </div>
 </div>
 <br/>
-<div class="row">
-  <app-rolls-struct #Struct (onItemChanged)="setData()" [StructList]="filteredData"></app-rolls-struct>
+<div class="row" >
+  <app-rolls-struct #Struct [hidden]="!flag" (onItemChanged)="setData()" [StructList]="filteredData"></app-rolls-struct>
 </div>
 
 

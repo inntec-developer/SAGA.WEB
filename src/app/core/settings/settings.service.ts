@@ -16,7 +16,8 @@ export class SettingsService {
         this.user = {
             name: 'INNTECT',
             job: 'PROGRAMADOR',
-            picture: ''
+            picture: '',
+            privilegios: Array<any>()
         };
 
         // App Settings
@@ -54,6 +55,7 @@ export class SettingsService {
         return name ? this.app[name] : this.app;
     }
     getUserSetting(name) {
+        console.log(name)
         return name ? this.user[name] : this.user;
     }
     getLayoutSetting(name) {
