@@ -13,7 +13,6 @@ export class AsignarRequisicionComponent implements OnInit {
   //Formulario
   public AsignacionForm : FormGroup;
   //Variables de entrada
-  @Input() disabledSelect: boolean;
   @Input() placeHolder: string;
   @Input() Asignados: any[];
   //Variables de Salida
@@ -30,7 +29,7 @@ export class AsignarRequisicionComponent implements OnInit {
   ) { 
     //Inicializar el formulario con el nombre del control
     this.AsignacionForm = new FormGroup({
-      selectControl: new FormControl('',[Validators.required])
+      selectControl: new FormControl({value: '', disabled:false})
     });
   }
 
