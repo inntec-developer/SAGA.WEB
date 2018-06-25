@@ -31,15 +31,15 @@
              <tree-root #tree [nodes]="nodes" [focused]="true" [options]="customTemplateStringOptions" (onEvent)="onEvent($event)">
                 <ng-template #treeNodeTemplate let-node let-index= "index">
                     <mat-checkbox class="checkbox" [value]="node.data" [checked] = "node.data.checked" (change)="descendantsAllSelected(node, $event.checked, tree);">{{node.data.nombre}}</mat-checkbox>
-                    <span class="pull-right">{{ childrenCount(node) }}</span>
-                    <div *ngIf="node.data.checked">
+                    <span class="pull-right-mio badge baed-info">{{ childrenCount(node) }}</span>
+                    <div *ngIf="node.data.checked&&node.data.tipoEstructuraId>2">
                         <section class="checkbox">
                             <mat-checkbox id="{{ 'C-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Create')">Crear</mat-checkbox>
                             <mat-checkbox id="{{ 'R-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Read')" [checked]="node.data.checked">Leer</mat-checkbox>
                             <mat-checkbox id="{{ 'U-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Update')">Modificar</mat-checkbox>
                             <mat-checkbox id="{{ 'D-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Delete')">Borrar</mat-checkbox>
                             <mat-checkbox id="{{ 'E-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Especial')">Especial</mat-checkbox>
-                        </section>
+                        </section><hr>
                     </div>
                 </ng-template>
             </tree-root> 
@@ -95,6 +95,10 @@
             </div>
 -->
         
+    </div>
+    <br/>
+    <div class="row">
+            <button [disabled]="formRoles.invalid" class="mb-sm btn btn-sm btn-success btn-outline pull-right" (click)="saveData()" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
     </div>
     <br/>
     <br/>

@@ -29,6 +29,7 @@ export class AddRolesComponent implements OnInit {
   msj: string;
   nodes: Array<estructura> = [];
   privilegios = [];
+  indeterminate = false;
 
   customTemplateStringOptions = {
     displayField: 'nombre',
@@ -57,7 +58,7 @@ export class AddRolesComponent implements OnInit {
   }
 
   childrenCount(node: TreeNode): string {
-      return node && node.children ? `(${node.children.length})` : '';
+      return node && node.children ? `${node.children.length}` : '';
   }
 
   filterNodes(text, tree) {
@@ -105,8 +106,10 @@ export class AddRolesComponent implements OnInit {
   {
      node.data.checked = value;
      node.data.read = value;
+
      tree.treeModel.getNodeById(node.data.uuid)
-        .setActiveAndVisible();
+        .setActiveAndVisible(value);
+
      if(node.children.length > 0)
      {
        node.children.forEach(element => {
@@ -133,7 +136,7 @@ export class AddRolesComponent implements OnInit {
 
   CrearEstructura(node)
   {
-    if(this.privilegios.length > 0 )
+    if(this.privilegios.length > 0 && node.checked)
     {
       this.privilegios.push({
         estructuraId: node.estructuraId,
@@ -143,7 +146,7 @@ export class AddRolesComponent implements OnInit {
         Delete: node.delete,
         Especial: node.especial});
     }
-    else
+    else if(node.checked)
     {
       this.privilegios = [{
         estructuraId: node.estructuraId,
@@ -164,9 +167,12 @@ export class AddRolesComponent implements OnInit {
   saveData()
   {
     let nom = this.formRoles.value.Rol;
-       
+    console.log(this.nodes)
+
     for( let item of this.nodes)
     {
+      console.log(item.nombre)
+      console.log(item.checked)
       if(item.checked)
       {
         this.CrearEstructura(item)
@@ -181,12 +187,11 @@ export class AddRolesComponent implements OnInit {
 
     console.log(this.privilegios)
 
-    // console.log(this.privilegios)
-
     this.service.AddRoles(obj)
     .subscribe( data => {
       this.msj = data;
       console.log(this.msj)
+      this.ngOnInit();
      });
   }
 
@@ -233,6 +238,7 @@ export class AddRolesComponent implements OnInit {
 
   ngOnInit() {
     this.GetTreeRoles();
+    this.iniciarForm();
   }
 
 }

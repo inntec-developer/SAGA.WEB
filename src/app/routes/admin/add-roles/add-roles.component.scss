@@ -1,5 +1,12 @@
 @import '~angular-tree-component/dist/angular-tree-component.css';
 
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
 .node-content-wrapper, .tree-children {
     position: relative;
   }
@@ -42,7 +49,7 @@
   }
 
   .tree {
-    width: 300px;
+    width: 400px;
   }
   
   .node-content-wrapper {
@@ -56,9 +63,15 @@
     position: relative;
   }
   
+  .pull-right-mio {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    background-color: #23b7e5 !important;
+  }
   .pull-right {
     position: absolute;
     right: 10px;
   }
-.root1Class { color: blue }
-.root2Class { color: red }
+// .root1Class { color: blue }
+// .root2Class { color: red }

@@ -22,6 +22,17 @@ export class AddadminComponent implements OnInit {
     constructor( private service: AdminServiceService, public fb: FormBuilder )
     {}
 
+    addToGroups($event, index)
+    {
+        // this.ListaPG.push($event.dragData);
+      let g = $event;
+       console.log(g)
+       if(this.IdGrupo === g.id )
+       {
+         this.ListaPG.splice(index, 1)
+       }
+     }
+ 
     resetBasket() {
         this.ListaPG = [];
         this.listGrupos = [];
@@ -32,6 +43,11 @@ export class AddadminComponent implements OnInit {
     selected($event)
     {
       this.IdGrupo = $event.target.value; //dropdown grupos
+      console.log(this.ListaPG.findIndex(x => x.id === this.IdGrupo))
+      if(this.ListaPG.findIndex(x => x.id === this.IdGrupo) != -1)
+      {
+        this.ListaPG.splice(this.ListaPG.findIndex(x => x.id === this.IdGrupo), 1)
+      }
     }
 
 
@@ -42,9 +58,11 @@ export class AddadminComponent implements OnInit {
       {
         for(let ug of this.ListaPG)
         {
-          lug.push({EntidadId: ug.id, GrupoId: this.IdGrupo});
+          if( ug.id != this.IdGrupo )
+          {
+            lug.push({EntidadId: ug.id, GrupoId: this.IdGrupo});
+          }
         }
-        console.log(lug)
         this.service.addUserGroup( lug )
         .subscribe( data => {
           this.ListaPG = [];

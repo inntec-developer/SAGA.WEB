@@ -26,8 +26,9 @@
         <div class="panel panel-default">
         <div class="panel-heading text-center">USUARIOS</div>
           <div  class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades">
+              <!--  -->
               <!--  <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
-            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i">
+            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i" dnd-draggable [dragData]="p">
                  <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.foto}}" /> 
                   <div class="media-body">
                     <div class="media-heading margintextthumb">
@@ -44,7 +45,6 @@
         </div>
       </div>
     <div class="col-md-6">
-     
       <div class="panel panel-default">
         <div class="panel-heading">Grupos:
            <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event)" >
@@ -60,10 +60,10 @@
             </button>
           </div>
         </div>
-        <!--  -->
-        <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
+        <!-- dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" -->
+        <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG"  >
           <p [hidden]="ListaPG.length > 0">{{alert}}</p>
-          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" >
+          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event, i)" >
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">
