@@ -1,5 +1,6 @@
-import { Component, OnInit,} from '@angular/core';
-import { ActivatedRoute  } from '@angular/router';
+import { Component, OnInit, } from '@angular/core';
+
+import { ActivatedRoute } from '@angular/router';
 import { UpdateInfoRequiComponent } from '../update-info-requi/update-info-requi.component'
 import { ViewCuerpoRequiComponent } from '../view-cuerpo-requi/view-cuerpo-requi.component';
 
@@ -12,6 +13,9 @@ export class UpdateRequisicionComponent implements OnInit {
   public requiId : string;
   public folio: number;
   constructor( private _Router: ActivatedRoute) {
+    
+  }
+  ngOnInit(){
     this._Router.params.subscribe(params => {
       if(params['IdRequi'] != null){
         this.requiId = params['IdRequi'];
@@ -21,6 +25,5 @@ export class UpdateRequisicionComponent implements OnInit {
         console.log("Error al Cargarla Información");
       }
     });
-  }
-  ngOnInit(){ }
+   }
 }

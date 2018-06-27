@@ -1,21 +1,13 @@
 import { ActivatedRoute, CanDeactivate, Router, } from '@angular/router';
 import { CatalogosService, RequisicionesService } from '../../../../../service/index';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import { CreateRequisicion } from '../../../../../models/vtas/Requisicion';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SettingsService } from '../../../../../core/settings/settings.service';
-import { UpdateInfoRequiComponent } from '../update-info-requi/update-info-requi.component';
-import {UpdateRequisicionComponent}  from '../update-requisicion/update-requisicion.component';
-
-//Components
-
-
-//Servicios
-
-//Models
-
+import { UpdateInfoRequiComponent } from './../update-info-requi/update-info-requi.component';
+import { UpdateRequisicionComponent } from './../update-requisicion/update-requisicion.component';
 
 @Component({
   selector: 'app-requisicion-nueva',
@@ -24,12 +16,7 @@ import {UpdateRequisicionComponent}  from '../update-requisicion/update-requisic
   providers:[CatalogosService, RequisicionesService]
 })
 export class RequisicionNuevaComponent implements OnInit {
-
-  public formCliente : FormGroup;
-  public formRecl : FormGroup;
-  public formContrato : FormGroup;
-  public formPerfil : FormGroup;
-  public formSueldo : FormGroup;
+  @ViewChild('updateRequi') updateRequi : UpdateInfoRequiComponent;
 
   public damfoId: string;
   public direccionId: string;
@@ -39,40 +26,32 @@ export class RequisicionNuevaComponent implements OnInit {
   public dataRequisicion : any[];
 
   constructor(
-    private setings : SettingsService,
-    private serviceCatalogo: CatalogosService,
-    private serviceRequisiciones: RequisicionesService,
-    private _Router: Router,
-    private _Route: ActivatedRoute,
-    private spinner: NgxSpinnerService,
-    private fb : FormBuilder
-  ) { }
-
-  ngOnInit() {
+    private setings : SettingsService,  private serviceCatalogo: CatalogosService, private serviceRequisiciones: RequisicionesService, private _Router: Router,
+    private _Route: ActivatedRoute, private spinner: NgxSpinnerService, private fb : FormBuilder)
+  { 
+    //Recupera la informacion que se manda en los parametros.
     this.spinner.show();
-      this._Route.params.subscribe(params => {
-        if(params['IdDamfo'] != null && params['IdDireccion'] != null){
-          this.damfoId = params['IdDamfo'];
-          this.direccionId = params['IdDireccion']
-          this.createRequi = true;
-        }else{
-          this.createRequi = false;
-        }
-        if(this.createRequi){
-          this.createRequisicion();
-        }
-      });
+    this._Route.params.subscribe(params => {
+      if(params['IdDamfo'] != null && params['IdDireccion'] != null){
+        this.damfoId = params['IdDamfo'];
+        this.direccionId = params['IdDireccion']
+        this.createRequi = true;
+      }else{
+        this.createRequi = false;
+      }
+      if(this.createRequi){
+        //Manda la informacion para la creacion de la Requisicion.
+        let datas: CreateRequisicion = new CreateRequisicion();
+        datas.IdDamfo = this.damfoId;
+        datas.IdAddress = this.direccionId;
+        datas.Usuario = this.setings.user.name;
+        this.serviceRequisiciones.createNewRequi(datas).subscribe(data => {
+          this.requisicionId = data.id;
+          this.folio = data.folio;
+          this.updateRequi.getInformacionRequisicio(this.folio);
+        });
+      }
+    });
   }
-
-  createRequisicion(){
-    let datas: CreateRequisicion = new CreateRequisicion();
-    datas.IdDamfo = this.damfoId;
-    datas.IdAddress = this.direccionId;
-    datas.Usuario = this.setings.user.name;
-    this.serviceRequisiciones.createNewRequi(datas)
-      .subscribe(data => {
-        this.requisicionId = data.id;
-        this.folio = data.folio;
-      })
-  }
+  ngOnInit() {  }
 }
