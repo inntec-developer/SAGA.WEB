@@ -10,9 +10,12 @@ import { ButtonRefreshComponent } from './buttons/button-refresh/button-refresh.
 import { ButtonReturnComponent } from './buttons/button-return/button-return.component';
 import { ButtonSaveComponent } from './buttons/button-save/button-save.component';
 import { ButtonViewComponent } from './buttons/button-view/button-view.component';
+import { ButtonCheckComponent } from './buttons/button-check/button-check.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material';
 import { NgModule } from '@angular/core';
+import { ButtonClosedComponent } from './buttons/button-closed/button-closed.component';
+
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
   optionValueField: 'id',
@@ -36,7 +39,9 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonCancelComponent,
     ButtonReturnComponent,
     ButtonRefreshComponent,
-    ButtonDesignComponent
+    ButtonDesignComponent,
+    ButtonCheckComponent,
+    ButtonClosedComponent
 
   ],
   exports:[
@@ -48,7 +53,9 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonCancelComponent,
     ButtonReturnComponent,
     ButtonRefreshComponent,
-    ButtonDesignComponent
+    ButtonDesignComponent,
+    ButtonCheckComponent,
+    ButtonClosedComponent
 
   ]
 })

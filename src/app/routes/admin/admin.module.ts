@@ -1,5 +1,4 @@
-import { RegistroComponent } from './registro/registro.component';
-import { PagesModule } from './../pages/pages.module';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -24,6 +23,8 @@ import { AgGridModule } from 'ag-grid-angular/main';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable'
 import {MatDialogModule} from '@angular/material/dialog';
 import { TreeModule } from 'angular-tree-component';
+import {ModalModule} from 'ngx-bootstrap';
+import {PopoverModule} from 'ngx-popover';
 
 
 //Servicios
@@ -37,6 +38,10 @@ import { AddRolesComponent } from './add-roles/add-roles.component';
 import { RolGrupoComponent } from './rol-grupo/rol-grupo.component';
 import { UploadImgsComponent } from './upload-imgs/upload-imgs.component';
 import { RollsStructComponent } from './rolls-struct/rolls-struct.component';
+import { RegistroComponent } from './registro/registro.component';
+import { PagesModule } from './../pages/pages.module';
+import {ComponentsModule} from './../../components/components.module';
+import { PopupModalComponent } from './popup-modal/popup-modal.component';
 
 
 
@@ -48,7 +53,8 @@ const routes: Routes = [
     { path: 'grupoAdd', component: AddGrupoComponent },
     { path: 'rol', component: RolGrupoComponent },
     { path: 'privilegios', component: RollsStructComponent },
-    { path: 'registro', component: RegistroComponent}
+    { path: 'registro', component: RegistroComponent},
+    { path: 'popupModal', component: PopupModalComponent}
 
 ];
 
@@ -79,7 +85,10 @@ const routes: Routes = [
         MatDialogModule, 
         MatTooltipModule,
         TreeModule,
-        PagesModule
+        PagesModule,
+        ComponentsModule,
+        ModalModule.forRoot(),
+        PopoverModule
         
       ],
     declarations:
@@ -91,10 +100,12 @@ const routes: Routes = [
       RolGrupoComponent,
       UploadImgsComponent,
       RollsStructComponent,
-      RegistroComponent
+      RegistroComponent,
+      PopupModalComponent
     ],
     exports: [
-        RouterModule
+        RouterModule,
+        AddPersonaComponent
     ]
 })
 

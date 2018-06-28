@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewChecked, ViewChild, AfterViewInit } from '@
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+
 @Component({
   selector: 'app-add-grupo',
   templateUrl: './add-grupo.component.html',
@@ -19,11 +20,14 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
   bandera: boolean = false;
   name: string;
   rowAux: any;
+  UsuariosList: Array<any> = [];
 
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
     this.iniciarForm();
   }
+
+
 
   CrearURL(idG: any)
   {
@@ -59,8 +63,20 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
     .subscribe(
       e=>{
         this.Grupos = e;
+        console.log(this.Grupos)
       });
   }
+  GetUsuarios(GrupoId : any)
+  {
+    console.log(GrupoId)
+    this.service.GetUsuarioByGrupo(GrupoId)
+    .subscribe(
+      e=>{
+        this.UsuariosList = e;
+        console.log(this.UsuariosList)
+      });
+  }
+
   saveData()
   {
     let grupo = {

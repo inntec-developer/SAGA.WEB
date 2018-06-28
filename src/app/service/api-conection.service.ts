@@ -106,5 +106,6 @@ export class ApiConection {
   public static getEntidadesUG = '/admin/getEntidades';
   public static getEstructuraRoles = '/admin/getEstructuraRoles';
   public static getPrivilegios = '/admin/getPrivilegios';
-  
+  public static modificarPrivilegios = '/admin/modificarPrivilegios'
+  public static getUsuariosByGrupo = '/admin/getUsuarioByGrupo';
 }

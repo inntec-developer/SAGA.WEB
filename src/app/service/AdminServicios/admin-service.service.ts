@@ -1,3 +1,4 @@
+import { ApiConection } from './../api-conection.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -11,8 +12,6 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
-
-import { ApiConection } from '../api-conection.service';
 
 @Injectable()
 export class AdminServiceService {
@@ -41,6 +40,9 @@ export class AdminServiceService {
   private UrlGetTreeRoles = ApiConection.ServiceUrl+ApiConection.getTreeRoles;
   private UrlGetEstructuraRoles = ApiConection.ServiceUrl+ApiConection.getEstructuraRoles;
   private UrlGetPrivilegios = ApiConection.ServiceUrl+ApiConection.getPrivilegios;
+  private UrlUpdatePrivilegios = ApiConection.ServiceUrl+ApiConection.modificarPrivilegios;
+  private UrlGetUsuarioByGrupo = ApiConection.ServiceUrl+ApiConection.getUsuariosByGrupo;
+
   // Error.
   private handleError(error: any) {
          console.log('sever error:', error);
@@ -126,6 +128,12 @@ export class AdminServiceService {
             .catch(this.handleError);
   }
 
+  GetUsuarioByGrupo(GrupoId: string): Observable<any>{
+    return this.http.get(this.UrlGetUsuarioByGrupo + '?id='+ GrupoId)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+  
   GetTreeRoles(): Observable<any>
   {
      return this.http.get(this.UrlGetTreeRoles)
@@ -223,6 +231,16 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlUpdateRoles, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+
+  UpdatePrivilegios(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlUpdatePrivilegios, JSON.stringify(data), options)
             .map(result => result.json())
             .catch(this.handleError);
 
