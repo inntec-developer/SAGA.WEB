@@ -16,7 +16,6 @@ export class LogInGuardGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    
       if (!this.authService.isAuthenticated()){
         this.router.navigate(['/login'])
         return false;
@@ -29,9 +28,9 @@ export class LogInGuardGuard implements CanActivate, CanActivateChild {
   canActivateChild(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) : boolean
   {
+    
     var privilegios = this.settings.user.privilegios;
     console.log('entro')
-    return privilegios.some( item => item.estructuraId == 4);
-  
+    return true;
   }
 }

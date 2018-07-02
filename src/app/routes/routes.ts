@@ -1,5 +1,6 @@
+import { CanActivate, CanActivateChild } from '@angular/router';
+import { AuthRolesGuard } from './../auth-guard/auth-roles.guard';
 import { LogInGuardGuard } from './../auth-guard/log-in-guard.guard';
-import { RouterModule, CanActivate } from '@angular/router';
 
 import { Error404Component } from './pages/error404/error404.component';
 import { Error500Component } from './pages/error500/error500.component';
@@ -14,16 +15,19 @@ export const routes = [
 
     {
         path: '',
-        component: LayoutComponent, 
+        component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full'},
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
-            { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule' },
+            { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule', canActivateChild: [LogInGuardGuard] },
             { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule'},
-            { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [LogInGuardGuard]},
+            { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate:[AuthRolesGuard]},
             { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule'},
         ]
     },
+
+
+
 
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },

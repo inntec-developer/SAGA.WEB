@@ -21,6 +21,7 @@ export class AuthService {
     .map(user => {
         if (user) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
+          this.settings.user.name = 'DAMSA.NINIGUEZ'
           this.settings.user.privilegios = user;      
         }
         return user;

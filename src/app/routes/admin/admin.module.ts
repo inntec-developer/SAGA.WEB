@@ -43,7 +43,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { PagesModule } from './../pages/pages.module';
 import {ComponentsModule} from './../../components/components.module';
 import { AuthService } from './../../service/auth/auth.service';
-import { LogInGuardGuard } from './../../auth-guard/log-in-guard.guard';
+import { AuthRolesGuard } from './../../auth-guard/auth-roles.guard';
 
 const routes: Routes = [
     { path: 'roles', component: AddRolesComponent },
@@ -51,7 +51,7 @@ const routes: Routes = [
     { path: 'grupo', component: AddadminComponent },
     { path: 'grupoAdd', component: AddGrupoComponent },
     { path: 'rol', component: RolGrupoComponent },
-    { path: 'privilegios', component: RollsStructComponent, canActivateChild: [LogInGuardGuard] },
+    { path: 'privilegios', component: RollsStructComponent, canActivate: [AuthRolesGuard] },
     { path: 'registro', component: RegistroComponent}
 
 ];
@@ -104,7 +104,7 @@ const routes: Routes = [
         RouterModule,
         AddPersonaComponent
     ], 
-    providers: [LogInGuardGuard,AuthService]
+    providers: [AuthRolesGuard,AuthService]
 })
 
 export class AdminModule {

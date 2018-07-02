@@ -1,3 +1,5 @@
+import { AuthRolesGuard } from './../auth-guard/auth-roles.guard';
+import { CanActivate } from '@angular/router';
 
 const Home = {
     text: 'Inicio',
@@ -9,6 +11,7 @@ const Administracion = {
     text: 'Administrar',
     link: '/admin',
     icon: 'icon-people',
+    canActivate: [AuthRolesGuard],
     submenu:[
         {
             text: 'Registro Usuario', 

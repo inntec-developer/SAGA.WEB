@@ -9,6 +9,7 @@ import { TranslatorService } from '../core/translator/translator.service';
 import { menu } from './menu';
 import { routes } from './routes';
 import { LogInGuardGuard } from './../auth-guard/log-in-guard.guard';
+import { AuthRolesGuard } from './../auth-guard/auth-roles.guard';
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import { LogInGuardGuard } from './../auth-guard/log-in-guard.guard';
     declarations: [
     ],
     exports: [RouterModule],
-    providers: [LogInGuardGuard, AuthService]
+    providers: [LogInGuardGuard, AuthRolesGuard, AuthService]
 })
 
 export class RoutesModule {
