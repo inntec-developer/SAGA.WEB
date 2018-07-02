@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
 import { NgModule } from '@angular/core';
@@ -44,7 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
         
         
     ],
-    providers: [HttpClientModule],
+    providers: [HttpClientModule, CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
