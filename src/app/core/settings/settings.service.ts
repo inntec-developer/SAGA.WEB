@@ -14,7 +14,7 @@ export class SettingsService {
         // User Settings
         // -----------------------------------
         this.user = {
-            name: 'INNTECT',
+            name: 'DAMSA.NINIGUEZ',
             job: 'PROGRAMADOR',
             picture: '',
             privilegios: Array<any>()
