@@ -5,7 +5,7 @@
   <div class="panel panel-default panel-flat mat-elevation-z8">
     <div class="panel-body">
        
-     
+      <p chkPrivilegiosMenu>Heroes</p>
       <div class="row">
           
           <div class="col-md-2 pull-left">
@@ -55,8 +55,8 @@
                   <mat-checkbox #especial (change)="r['especial'] = especial.checked" class="checkbox" [checked]="r.especial"></mat-checkbox>
                   <span></span>
                 </td>
-                <td class="center-block">
-                  <btn-check matTooltip="Guardar Cambios" (click)="GuardarCambios(r)"></btn-check>
+                <td class="center-block" >
+                  <btn-check [hidden]="ocultar" matTooltip="Guardar Cambios" (click)="GuardarCambios(r)"></btn-check>
                 </td>
             </tr>
           </tbody>

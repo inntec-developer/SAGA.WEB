@@ -18,6 +18,7 @@ export class MenuService {
         icon?: string,
         alert?: string,
         submenu?: Array<any>
+        
     }>) {
         items.forEach((item) => {
             this.menuItems.push(item);

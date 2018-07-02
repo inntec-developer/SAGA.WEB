@@ -1,3 +1,6 @@
+import { LogInGuardGuard } from './../auth-guard/log-in-guard.guard';
+import { RouterModule, CanActivate } from '@angular/router';
+
 import { Error404Component } from './pages/error404/error404.component';
 import { Error500Component } from './pages/error500/error500.component';
 import { LayoutComponent } from '../layout/layout.component';
@@ -11,13 +14,13 @@ export const routes = [
 
     {
         path: '',
-        component: LayoutComponent,
+        component: LayoutComponent, 
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full'},
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
             { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule' },
             { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule'},
-            { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+            { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [LogInGuardGuard]},
             { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule'},
         ]
     },

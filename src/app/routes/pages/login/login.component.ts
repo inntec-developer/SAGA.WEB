@@ -1,23 +1,31 @@
-﻿import { AddPersonaComponent } from './../../admin/add-persona/add-persona.component';
-import {Router} from "@angular/router";
+﻿import { AuthService } from './../../../service/auth/auth.service';
+import {Router, ActivatedRoute} from "@angular/router";
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    providers:[ AdminServiceService ]
+    providers:[ AdminServiceService, AuthService ]
 })
 export class LoginComponent implements OnInit {
 
     valForm: FormGroup;
     IdUser;
-    constructor(private service: AdminServiceService, public settings: SettingsService, fb: FormBuilder, private router: Router) {
+    loading = false;
+    returnUrl: string;
+
+    constructor(
+        private service: AdminServiceService, 
+        public settings: SettingsService, 
+        fb: FormBuilder, 
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private authenticationService: AuthService) {
 
         this.valForm = fb.group({
             'email': [null, Validators.compose([Validators.required, CustomValidators.email])],
@@ -32,22 +40,22 @@ export class LoginComponent implements OnInit {
         }
         if (this.valForm.valid) 
         {
-            this.GetSession(value.email, value.password)
+            this.login(value.email, value.password)
+            console.log("mocos")
+            console.log(this.settings.user)
             this.router.navigate(['/home']);
         }
     }
 
-    GetSession(e, p)
+    GetSession(email, p)
     {
-        this.service.GetSession(e, p)
+        this.service.GetSession(email, p)
         .subscribe(
             e=>{
-              if( e != 0)
-              {
-                console.log(e.idUser)
-                this.IdUser = e.idUser;
+              console.log(e)
+                this.IdUser = e;
                 this.GetPrivilegios();
-              }
+              
             }
         )
     }
@@ -62,8 +70,28 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    ngOnInit() {
+    login(email: string, password: string) {
+        this.loading = true;
+        this.authenticationService.login(email, password)
+            .subscribe(
+                data => {
+                    console.log(data)
+                    console.log(this.settings.user)
+                    this.settings.user.privilegios = data;
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    console.log(error)
+                    this.loading = false;
+                    this.router.navigate(['/']);
+                });
+    }
 
+
+    ngOnInit() {
+       // this.authenticationService.logout();
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
 }

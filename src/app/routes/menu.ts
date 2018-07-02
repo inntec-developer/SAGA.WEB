@@ -1,5 +1,3 @@
-import { SettingsService } from './../core/settings/settings.service';
-import { settings } from 'cluster';
 
 const Home = {
     text: 'Inicio',

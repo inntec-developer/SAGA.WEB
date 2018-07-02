@@ -1,4 +1,5 @@
 
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -41,10 +42,8 @@ import { RollsStructComponent } from './rolls-struct/rolls-struct.component';
 import { RegistroComponent } from './registro/registro.component';
 import { PagesModule } from './../pages/pages.module';
 import {ComponentsModule} from './../../components/components.module';
-import { PopupModalComponent } from './popup-modal/popup-modal.component';
-
-
-
+import { AuthService } from './../../service/auth/auth.service';
+import { LogInGuardGuard } from './../../auth-guard/log-in-guard.guard';
 
 const routes: Routes = [
     { path: 'roles', component: AddRolesComponent },
@@ -52,9 +51,8 @@ const routes: Routes = [
     { path: 'grupo', component: AddadminComponent },
     { path: 'grupoAdd', component: AddGrupoComponent },
     { path: 'rol', component: RolGrupoComponent },
-    { path: 'privilegios', component: RollsStructComponent },
-    { path: 'registro', component: RegistroComponent},
-    { path: 'popupModal', component: PopupModalComponent}
+    { path: 'privilegios', component: RollsStructComponent, canActivateChild: [LogInGuardGuard] },
+    { path: 'registro', component: RegistroComponent}
 
 ];
 
@@ -100,13 +98,13 @@ const routes: Routes = [
       RolGrupoComponent,
       UploadImgsComponent,
       RollsStructComponent,
-      RegistroComponent,
-      PopupModalComponent
+      RegistroComponent
     ],
     exports: [
         RouterModule,
         AddPersonaComponent
-    ]
+    ], 
+    providers: [LogInGuardGuard,AuthService]
 })
 
 export class AdminModule {

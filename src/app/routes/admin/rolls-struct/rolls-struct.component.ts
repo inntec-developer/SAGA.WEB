@@ -13,7 +13,7 @@ import {BrowserModule} from '@angular/platform-browser'
 export class RollsStructComponent implements OnInit {
 
   @Input() public StructList: Array<any> = null; // Url api process upload
-  @Input() public disabled = false;
+  @Input() public ocultar = false;
   
   @Output('onItemChanged') public onItemChanged = new EventEmitter();
   columns = [
