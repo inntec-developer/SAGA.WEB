@@ -1,12 +1,15 @@
-import { estructura } from './../../routes/admin/add-roles/add-roles.component';
+import { forEach } from '@angular/router/src/utils/collection';
+import { element } from 'protractor';
+import { SettingsService } from './../settings/settings.service';
+
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MenuService {
 
     menuItems: Array<any>;
-
-    constructor() {
+    submenu: Array<any>;
+    constructor(private settings: SettingsService) {
         this.menuItems = [];
     }
 
@@ -31,37 +34,43 @@ export class MenuService {
         return this.menuItems;
     }
 
-    setEstructuraMenu(modules: Array<any>)
+    setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
+        var modules = this.settings.user.privilegios.filter(function(row){
+            return row.tipoEstructuraId === 2
+        });
+
+        modules.forEach(element => { 
+            element.children = this.settings.user.privilegios.filter(function(c){
+                return c.idPadre === element.estructuraId
+            })
+        });
+
+        console.log(modules)
+       
+        let sub: Array<any> = [];
         modules.forEach(element => {
             if( element.estructuraId === 4)
             {
+                if(element.children.length > 0)
+                {
+                    element.children.forEach(c =>{ 
+                        sub.push({
+                            text: element.children.nombre,
+                            link: '/admin/registro'})
+                    })
+                }
                 this.menuItems.push({
-                    text: 'Reclutamiento',
-                    link: '/reclutamiento',
-                    icon: 'icon-people',
-                    estructura: 4,
-                        submenu: [
-                            {
-                                text: 'DAMFO 290',
-                                link: '/reclutamiento/290',
-                                estructura: 0
-                            },
-                            {
-                              text: 'Candidatos',
-                              link: '/reclutamiento/candidatos', 
-                              estructura: 0
-                            },
-                            {
-                              text: 'Vacantes',
-                              link: '/reclutamiento/vacantes', 
-                              estructura: 0
-                            }
-                        ]
-                });
-            } 
+                        text: element.nombre,
+                        link: '/admin',
+                        icon: 'icon-people',
+
+                        
+                        submenu: sub
+                    });
+            }       
         });
-        console.log(modules)
+
         return this.menuItems;
 
     }

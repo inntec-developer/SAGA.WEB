@@ -5,41 +5,41 @@ const Home = {
     icon: 'icon-home',
 };
 
-const Administracion = {
-    text: 'Administrar',
-    link: '/admin',
-    icon: 'icon-people',
-    submenu:[
-        {
-            text: 'Registro Usuario', 
-            link: '/admin/registro'
-        },
-        {
-            text: 'Usuarios',
-            link: '/admin/agregar'
-        },
-        {
-            text: 'Grupos',
-            link: '/admin/grupoAdd'
-        },
-        {
-            text: 'Roles',
-            link: '/admin/roles'
-        },
-        {
-            text: 'Roles-Privilegios',
-            link: '/admin/privilegios'
-        },
-        {
-            text: 'Usuarios-Grupo',
-            link: '/admin/grupo'
-        },
-        {
-            text: 'Grupos-Rol',
-            link: '/admin/rol'
-        }
-    ]
-};
+// const Administracion = {
+//     text: 'Administrar',
+//     link: '/admin',
+//     icon: 'icon-people',
+//     submenu:[
+//         {
+//             text: 'Registro Usuario', 
+//             link: '/admin/registro'
+//         },
+//         {
+//             text: 'Usuarios',
+//             link: '/admin/agregar'
+//         },
+//         {
+//             text: 'Grupos',
+//             link: '/admin/grupoAdd'
+//         },
+//         {
+//             text: 'Roles',
+//             link: '/admin/roles'
+//         },
+//         {
+//             text: 'Roles-Privilegios',
+//             link: '/admin/privilegios'
+//         },
+//         {
+//             text: 'Usuarios-Grupo',
+//             link: '/admin/grupo'
+//         },
+//         {
+//             text: 'Grupos-Rol',
+//             link: '/admin/rol'
+//         }
+//     ]
+// };
 
 const Reclutamiento = {
     text: 'Reclutamiento',
@@ -93,6 +93,6 @@ export const menu = [
     headingMain,
     Home,
     Reclutamiento,
-    Ventas,
-    Administracion
+    Ventas
+   // Administracion
 ];

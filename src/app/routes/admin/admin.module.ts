@@ -51,7 +51,7 @@ const routes: Routes = [
     { path: 'grupo', component: AddadminComponent },
     { path: 'grupoAdd', component: AddGrupoComponent },
     { path: 'rol', component: RolGrupoComponent },
-    { path: 'privilegios', component: RollsStructComponent, canActivate: [AuthRolesGuard] },
+    { path: 'privilegios', component: RollsStructComponent},
     { path: 'registro', component: RegistroComponent}
 
 ];
