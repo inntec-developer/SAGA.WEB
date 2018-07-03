@@ -30,7 +30,7 @@ export class LogInGuardGuard implements CanActivate, CanActivateChild {
   {
     
     var privilegios = this.settings.user.privilegios;
-    console.log('entro')
-    return true;
+    console.log('entro child login')
+    return false;
   }
 }

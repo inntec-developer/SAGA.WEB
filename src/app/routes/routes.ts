@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { CanActivate, CanActivateChild } from '@angular/router';
 import { AuthRolesGuard } from './../auth-guard/auth-roles.guard';
 import { LogInGuardGuard } from './../auth-guard/log-in-guard.guard';
@@ -13,18 +14,18 @@ import { RegisterComponent } from './pages/register/register.component';
 
 export const routes = [
 
-    {
+        {
         path: '',
-        component: LayoutComponent,
+        component: LayoutComponent, canActivate:[LogInGuardGuard],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full'},
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
-            { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule', canActivateChild: [LogInGuardGuard] },
-            { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule'},
-            { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate:[AuthRolesGuard]},
-            { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule'},
-        ]
-    },
+            { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule', canActivate:[AuthRolesGuard] },
+            { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule', canActivate:[AuthRolesGuard]},
+            { path: 'admin', component: LayoutComponent, loadChildren: './admin/admin.module#AdminModule', canActivate:[AuthRolesGuard]},
+            { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule', canActivate:[AuthRolesGuard]}
+            
+        ]},
 
 
 

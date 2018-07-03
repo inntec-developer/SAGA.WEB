@@ -22,7 +22,6 @@ export class AuthService {
         if (user) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           this.settings.user.name = 'DAMSA.NINIGUEZ'
-          this.settings.user.privilegios = user;      
         }
         return user;
       }); 
@@ -36,7 +35,6 @@ export class AuthService {
 
 public isAuthenticated() : boolean
 {
-  console.log(this.settings.user.name)
   if( this.settings.user.name != '')
   {
     return true;
@@ -45,6 +43,19 @@ public isAuthenticated() : boolean
   {
     return false;
   }
+}
+
+public getModules() 
+{
+  if( this.isAuthenticated() )
+  {
+   return this.settings.user.privilegios.filter(x => x.tipoEstructuraId == 2);
+  }
+  else
+  {
+    return null;
+  }
+  
 }
 
 }

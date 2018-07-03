@@ -17,7 +17,8 @@ export class MenuService {
         target?: string,   // anchor target="_blank|_self|_parent|_top|framename"
         icon?: string,
         alert?: string,
-        submenu?: Array<any>
+        submenu?: Array<any>,
+        estructura?: number
         
     }>) {
         items.forEach((item) => {

@@ -75,9 +75,9 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(email, password)
             .subscribe(
                 data => {
-                    console.log(data)
-                    console.log(this.settings.user)
-                    this.settings.user.privilegios = data;
+                   
+                    this.IdUser = data[0].id;
+                    this.settings.user.privilegios = this.GetPrivilegios();
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {

@@ -11,7 +11,7 @@
             </li>
             <!-- END user info-->
 
-            <li *ngFor='let item of menuItems' [ngClass]="{'nav-heading': item.heading}" [routerLinkActive]="['active']">
+            <li *ngFor='let item of menuItems; ' [ngClass]="{'nav-heading': item.heading}" [routerLinkActive]="['active']">
                 <!-- menu heading -->
                 <span *ngIf="item.heading">{{(item.translate | translate) || item.text}}</span>
                 <!-- external links -->
@@ -28,7 +28,7 @@
                     <span>{{(item.translate | translate) || item.text}}</span>
                 </a>
                 <!-- has submenu -->
-                <a *ngIf="!item.heading && item.submenu" title="{{item.text}}"
+                <a *ngIf="!item.heading && item.submenu && item.estructura != 0" title="{{item.text}}"
                     (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
                         <span class="pull-right" *ngIf="item.alert" [ngClass]="item.label || 'label label-success'">{{item.alert}}</span>
                         <em class="{{item.icon}}" *ngIf="item.icon"></em>
