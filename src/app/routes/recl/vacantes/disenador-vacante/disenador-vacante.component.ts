@@ -31,8 +31,8 @@ public Proceso : any[];
 public Copetencia : any[];
 public Ubicacion : any[];
 public ListaCampo :Array<any> = [];
-//let ListaCampo : any[];
 public ListaCon : Array<any> = [];
+public Clasifica : any[];
 
 public Requi : string;
 public Mensaje :string;
@@ -75,80 +75,80 @@ toasterconfig: ToasterConfig = new ToasterConfig({
       this.General = data;
     });
 
-    this.service.getContrato(this.Requi)
-    .subscribe( data => {
-      this.Contrato = data;
-    });
-
-    this.service.getPuestoReclutar(this.Requi)
-    .subscribe( data => {
-      this.PuestoReclutar = data;
-    });
-
-    this.service.getHorario(this.Requi)
-    .subscribe( data => {
-      this.Horario = data;
-    });
-
-    this.service.getsueldo(this.Requi)
-    .subscribe( data => {
-      this.sueldo = data;
-    });
-
-    this.service.getOtros(this.Requi)
-    .subscribe( data => {
-      this.Otros = data;
-    });
-
-    this.service.getActividad(this.Requi)
-    .subscribe( data => {
-      this.Actividad = data;
-    });
-
-    this.service.getBeneficio(this.Requi)
-    .subscribe( data => {
-      this.Beneficio = data;
-    });
-
-    this.service.getDireccion(this.Requi)
-    .subscribe( data => {
-      this.Direccion = data;
-    });
-
-    this.service.getTelefono(this.Requi)
-    .subscribe( data => {
-      this.Telefono = data;
-    });
-
-    this.service.getContacto(this.Requi)
-    .subscribe( data => {
-      this.Contacto = data;
-    });
-
-    this.service.getPsicometria(this.Requi)
-    .subscribe( data => {
-      this.Psicometria = data;
-    });
-
-    this.service.getDocumento(this.Requi)
-    .subscribe( data => {
-      this.Documento = data;
-    });
-
-    this.service.getProceso(this.Requi)
-    .subscribe( data => {
-      this.Proceso = data;
-    });
-
-    this.service.getCopetencia(this.Requi)
-    .subscribe( data => {
-      this.Copetencia = data;
-    });
-
-    this.service.getUbicacion(this.Requi)
-    .subscribe( data => {
-      this.Ubicacion = data;
-    });
+    // this.service.getContrato(this.Requi)
+    // .subscribe( data => {
+    //   this.Contrato = data;
+    // });
+    //
+    // this.service.getPuestoReclutar(this.Requi)
+    // .subscribe( data => {
+    //   this.PuestoReclutar = data;
+    // });
+    //
+    // this.service.getHorario(this.Requi)
+    // .subscribe( data => {
+    //   this.Horario = data;
+    // });
+    //
+    // this.service.getsueldo(this.Requi)
+    // .subscribe( data => {
+    //   this.sueldo = data;
+    // });
+    //
+    // this.service.getOtros(this.Requi)
+    // .subscribe( data => {
+    //   this.Otros = data;
+    // });
+    //
+    // this.service.getActividad(this.Requi)
+    // .subscribe( data => {
+    //   this.Actividad = data;
+    // });
+    //
+    // this.service.getBeneficio(this.Requi)
+    // .subscribe( data => {
+    //   this.Beneficio = data;
+    // });
+    //
+    // this.service.getDireccion(this.Requi)
+    // .subscribe( data => {
+    //   this.Direccion = data;
+    // });
+    //
+    // this.service.getTelefono(this.Requi)
+    // .subscribe( data => {
+    //   this.Telefono = data;
+    // });
+    //
+    // this.service.getContacto(this.Requi)
+    // .subscribe( data => {
+    //   this.Contacto = data;
+    // });
+    //
+    // this.service.getPsicometria(this.Requi)
+    // .subscribe( data => {
+    //   this.Psicometria = data;
+    // });
+    //
+    // this.service.getDocumento(this.Requi)
+    // .subscribe( data => {
+    //   this.Documento = data;
+    // });
+    //
+    // this.service.getProceso(this.Requi)
+    // .subscribe( data => {
+    //   this.Proceso = data;
+    // });
+    //
+    // this.service.getCopetencia(this.Requi)
+    // .subscribe( data => {
+    //   this.Copetencia = data;
+    // });
+    //
+    // this.service.getUbicacion(this.Requi)
+    // .subscribe( data => {
+    //   this.Ubicacion = data;
+    // });
 
     this.service.getCampos()
     .subscribe( data => {
@@ -158,6 +158,10 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     //  this.Publicar()
     });
 
+    this.service.getClasificaciones()
+    .subscribe( data => {
+      this.Clasifica = data;
+    });
   }
 
   Publicar(){
@@ -194,22 +198,22 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     // let algo = (<HTMLInputElement>e2).checked;
     let e = document.getElementById('Detalle_' + id);
     let bol = e['checked'];
-    this.Config.SetDetalle(this.Requi,id,bol)
-    .subscribe( data => {
-      console.log(data.Mensaje)
-      this.pop(data.mensaje,data.bandera,bol,titulo,'Detalle');
-    });
+    // this.Config.SetDetalle(this.Requi,id,bol)
+    // .subscribe( data => {
+    //   console.log(data.Mensaje)
+       this.pop('',true,bol,titulo,'Detalle');
+    // });
   }
 
 
   SetResumen(id,titulo){
     let e = document.getElementById('Resumen_' + id);
     this.bol = e['checked'];
-    this.Config.SetResumen(this.Requi,id,this.bol)
-    .subscribe( data => {
-      this.Mensaje = data;
-      this.pop(data.mensaje,data.bandera,this.bol,titulo,'Resumen');
-    });
+    // this.Config.SetResumen(this.Requi,id,this.bol)
+    // .subscribe( data => {
+    //   this.Mensaje = data;
+       this.pop('',true,this.bol,titulo,'Resumen');
+    // });
   }
 
   popGenerico(mensaje:string,bandera:boolean,titulo:string) {

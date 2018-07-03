@@ -33,6 +33,7 @@ private UrlProceso = ApiConection.ServiceUrl+ApiConection.getProceso;
 private UrlCopetencia = ApiConection.ServiceUrl+ApiConection.getCopetencia;
 private UrlUbicacion = ApiConection.ServiceUrl+ApiConection.getUbicacion;
 private UrlgetCampos = ApiConection.ServiceUrl+ApiConection.getCampos;
+private UrlgetClasificaciones = ApiConection.ServiceUrl+ApiConection.getClasificaciones;
 
 
 // Error.
@@ -149,6 +150,10 @@ getCampos(): Observable<any> {
        .catch(this.handleError);
 }
 
-
+getClasificaciones(): Observable<any> {
+   return this.http.get(this.UrlgetClasificaciones)
+       .map(result => result.json())
+       .catch(this.handleError);
+}
 
 }
