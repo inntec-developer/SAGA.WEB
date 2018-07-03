@@ -94,5 +94,4 @@ export const menu = [
     Home,
     Reclutamiento,
     Ventas
-   // Administracion
 ];

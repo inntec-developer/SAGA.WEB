@@ -42,37 +42,34 @@ export class MenuService {
             return row.tipoEstructuraId === 2
         });
 
-        console.log(modules)
-
         modules.forEach(element => { 
-            element.children = this.settings.user.privilegios.filter(function(c){
+            element.children = privilegios.filter(function(c){
                 return c.idPadre === element.estructuraId
             })
         });
 
-       
+        console.log(modules)
        
         let sub: Array<any> = [];
         modules.forEach(element => {
-            if( element.estructuraId === 4)
-            {
-                if(element.children.length > 0)
+           
+            if(element.children.length > 0)
                 {
                     element.children.forEach(c =>{ 
                         sub.push({
-                            text: element.children.nombre,
-                            link: '/admin/registro'})
+                            text: c.nombre,
+                            link: c.accion
+                        })
                     })
+
+                    console.log(sub)
                 }
                 this.menuItems.push({
                         text: element.nombre,
-                        link: '/admin',
-                        icon: 'icon-people',
-
-                        
+                        link: element.accion,
+                        icon: element.icono,
                         submenu: sub
-                    });
-            }       
+                    });   
         });
 
         return this.menuItems;

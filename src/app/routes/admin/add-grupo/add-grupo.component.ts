@@ -85,6 +85,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
       Activo: this.formGrupos.controls['Activo'].value,
       Foto: "http://localhost:4200/assets/img/user/01.jpg"
     }
+    console.log(grupo)
     this.service.addGrupos(grupo)
     .subscribe( data => {
       console.log(data)

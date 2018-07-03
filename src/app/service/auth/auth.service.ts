@@ -44,17 +44,5 @@ public isAuthenticated() : boolean
   }
 }
 
-public getModules() 
-{
-  if( this.isAuthenticated() )
-  {
-   return this.settings.user.privilegios.filter(x => x.tipoEstructuraId == 2);
-  }
-  else
-  {
-    return null;
-  }
-  
-}
 
 }
