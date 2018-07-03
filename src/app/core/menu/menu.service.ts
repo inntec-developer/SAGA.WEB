@@ -1,3 +1,4 @@
+import { estructura } from './../../routes/admin/add-roles/add-roles.component';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -28,6 +29,47 @@ export class MenuService {
 
     getMenu() {
         return this.menuItems;
+    }
+
+    setEstructuraMenu(modules: Array<any>)
+    {
+        modules.forEach(element => {
+            if( element.estructuraId === 4)
+            {
+                this.menuItems.push({
+                    text: 'Reclutamiento',
+                    link: '/reclutamiento',
+                    icon: 'icon-people',
+                    estructura: 4,
+                        submenu: [
+                            {
+                                text: 'DAMFO 290',
+                                link: '/reclutamiento/290',
+                                estructura: 0
+                            },
+                            {
+                              text: 'Candidatos',
+                              link: '/reclutamiento/candidatos', 
+                              estructura: 0
+                            },
+                            {
+                              text: 'Vacantes',
+                              link: '/reclutamiento/vacantes', 
+                              estructura: 0
+                            }
+                        ]
+                });
+            } 
+        });
+        console.log(modules)
+        return this.menuItems;
+
+    }
+
+    setEstructuraSubMenu(e: number)
+    {
+        return this.menuItems.forEach( x => x.submenu.estructura = e)
+
     }
 
 }

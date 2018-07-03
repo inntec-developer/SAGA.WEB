@@ -1,3 +1,5 @@
+import { AuthService } from './../../service/auth/auth.service';
+
 import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 declare var $: any;
@@ -17,9 +19,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
     sbclickEvent = 'click.sidebar-toggle';
     $doc: any = null;
 
-    constructor(public menu: MenuService, public settings: SettingsService, public injector: Injector) {
+
+    constructor(public menu: MenuService, public settings: SettingsService, public authservice: AuthService, public injector: Injector) {
+
+        let modules = authservice.getModules();
 
         this.menuItems = menu.getMenu();
+        this.menuItems = menu.setEstructuraMenu(modules);
 
     }
 

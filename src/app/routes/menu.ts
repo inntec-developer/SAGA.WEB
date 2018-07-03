@@ -41,45 +41,44 @@ const Administracion = {
     ]
 };
 
-const Reclutamiento = {
-    text: 'Reclutamiento',
-    link: '/reclutamiento',
-    icon: 'icon-people',
-    estructura: 4,
-        submenu: [
-            {
-                text: 'DAMFO 290',
-                link: '/reclutamiento/290',
-                estructura: 0
-            },
-            {
-              text: 'Candidatos',
-              link: '/reclutamiento/candidatos', 
-              estructura: 0
-            },
-            {
-              text: 'Vacantes',
-              link: '/reclutamiento/vacantes', 
-              estructura: 0
-            }
-        ]
-};
+// const Reclutamiento = {
+//     text: 'Reclutamiento',
+//     link: '/reclutamiento',
+//     icon: 'icon-people',
+//     estructura: 4,
+//         submenu: [
+//             {
+//                 text: 'DAMFO 290',
+//                 link: '/reclutamiento/290',
+//                 estructura: 0
+//             },
+//             {
+//               text: 'Candidatos',
+//               link: '/reclutamiento/candidatos', 
+//               estructura: 0
+//             },
+//             {
+//               text: 'Vacantes',
+//               link: '/reclutamiento/vacantes', 
+//               estructura: 0
+//             }
+//         ]
+// };
 
 const Ventas = {
     text: 'Ventas',
     link: '/ventas',
     icon: 'icon-share',
-    estructura: 0,
     submenu: [
         {
             text: 'Prospectos',
             link: '/ventas/prospecto',
-            estructura: 0
+
         },
         {
             text: 'Requisiciones',
             link: '/ventas/requisicion',
-            estructura: 0
+
         }
 
     ]
@@ -93,7 +92,7 @@ const headingMain = {
 export const menu = [
     headingMain,
     Home,
-    Reclutamiento,
+    // Reclutamiento,
     Ventas,
     Administracion
 ];
