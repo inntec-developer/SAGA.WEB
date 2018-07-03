@@ -1,12 +1,11 @@
-
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiConection } from './../api-conection.service';
-import { SettingsService } from '../../core/settings/settings.service';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { ApiConection } from './../api-conection.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { SettingsService } from '../../core/settings/settings.service';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +34,7 @@ export class AuthService {
 
 public isAuthenticated() : boolean
 {
-  if( this.settings.user.name != '')
+  if( localStorage.getItem('usuario') != null)
   {
     return true;
   }

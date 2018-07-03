@@ -1,14 +1,20 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, DoCheck, HostBinding, OnInit } from '@angular/core';
+
+import { AdminServiceService } from './service/AdminServicios/admin-service.service';
+import { LoginComponent } from './routes/pages/login/login.component';
+import { SettingsService } from './core/settings/settings.service';
+
 declare var $: any;
 
-import { SettingsService } from './core/settings/settings.service';
+
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    providers:[ LoginComponent, AdminServiceService ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements DoCheck, OnInit {
 
     @HostBinding('class.layout-fixed') get isFixed() { return this.settings.layout.isFixed; };
     @HostBinding('class.aside-collapsed') get isCollapsed() { return this.settings.layout.isCollapsed; };
@@ -21,9 +27,17 @@ export class AppComponent implements OnInit {
     @HostBinding('class.aside-toggled') get asideToggled() { return this.settings.layout.asideToggled; };
     @HostBinding('class.aside-collapsed-text') get isCollapsedText() { return this.settings.layout.isCollapsedText; };
 
-    constructor(public settings: SettingsService) { }
+    constructor(public settings: SettingsService, public login : LoginComponent) { }
 
     ngOnInit() {
         $(document).on('click', '[href="#"]', e => e.preventDefault());
+    }
+    ngDoCheck(){
+        console.log('Usuario ', localStorage.getItem('usuario'));
+        console.log('Nombre ', localStorage.getItem('nombre'));
+        console.log('Email ', localStorage.getItem('email'));
+        console.log('Id ', localStorage.getItem('id'));
+        console.log('Privilegios', localStorage.getItem('privilegios'))
+        console.log('Settings ', this.settings.user);
     }
 }

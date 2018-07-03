@@ -1,10 +1,11 @@
-﻿import { AuthService } from './../../../service/auth/auth.service';
-import {Router, ActivatedRoute} from "@angular/router";
+﻿import {ActivatedRoute, Router} from "@angular/router";
 import { Component, OnInit } from '@angular/core';
-import { SettingsService } from '../../../core/settings/settings.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
+import { AuthService } from './../../../service/auth/auth.service';
+import { CustomValidators } from 'ng2-validation';
+import { SettingsService } from '../../../core/settings/settings.service';
 
 @Component({
     selector: 'app-login',
@@ -60,13 +61,12 @@ export class LoginComponent implements OnInit {
         )
     }
 
-    GetPrivilegios()
+    public GetPrivilegios()
     {
       this.service.GetPrivilegios(this.IdUser)
       .subscribe(
         e=>{
-          this.settings.user.privilegios = e;
-          console.log(this.settings)
+            localStorage.setItem('privilegios', JSON.stringify(e));
         })
     }
 
@@ -75,15 +75,16 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(email, password)
             .subscribe(
                 data => {
-                   
+                    localStorage.setItem('usuario',data[0].usuario);
+                    localStorage.setItem('nombre', data[0].nombre);
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('id', data[0].id)
                     this.IdUser = data[0].id;
-                    this.settings.user.privilegios = this.GetPrivilegios();
+                    this.GetPrivilegios();
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    console.log(error)
                     this.loading = false;
-                    this.router.navigate(['/']);
                 });
     }
 

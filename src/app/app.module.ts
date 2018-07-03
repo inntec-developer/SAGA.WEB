@@ -9,11 +9,11 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
+import { LoginComponent } from './routes/pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
@@ -46,7 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
         
         
     ],
-    providers: [HttpClientModule, CookieService],
+    providers: [HttpClientModule, CookieService ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
