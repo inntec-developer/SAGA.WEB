@@ -33,11 +33,5 @@ export class AppComponent implements DoCheck, OnInit {
         $(document).on('click', '[href="#"]', e => e.preventDefault());
     }
     ngDoCheck(){
-        console.log('Usuario ', localStorage.getItem('usuario'));
-        console.log('Nombre ', localStorage.getItem('nombre'));
-        console.log('Email ', localStorage.getItem('email'));
-        console.log('Id ', localStorage.getItem('id'));
-        console.log('Privilegios', localStorage.getItem('privilegios'))
-        console.log('Settings ', this.settings.user);
     }
 }
