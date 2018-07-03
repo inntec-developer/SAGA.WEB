@@ -22,10 +22,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     constructor(public menu: MenuService, public settings: SettingsService, public authservice: AuthService, public injector: Injector) {
 
-        // let modules = authservice.getModules();
-
         this.menuItems = menu.getMenu();
-        // this.menuItems = menu.setEstructuraMenu(modules);
+        this.menuItems = menu.setEstructuraMenu();
 
     }
 
