@@ -36,9 +36,13 @@ export class MenuService {
 
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
-        var modules = this.settings.user.privilegios.filter(function(row){
+        var privilegios = JSON.parse(localStorage.getItem('privilegios'));
+
+        var modules = privilegios.filter(function(row){
             return row.tipoEstructuraId === 2
         });
+
+        console.log(modules)
 
         modules.forEach(element => { 
             element.children = this.settings.user.privilegios.filter(function(c){
@@ -46,7 +50,7 @@ export class MenuService {
             })
         });
 
-        console.log(modules)
+       
        
         let sub: Array<any> = [];
         modules.forEach(element => {

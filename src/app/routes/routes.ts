@@ -20,10 +20,10 @@ export const routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full'},
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
-            { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule', canActivate:[AuthRolesGuard] },
-            { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule', canActivate:[AuthRolesGuard]},
-            { path: 'admin', component: LayoutComponent, loadChildren: './admin/admin.module#AdminModule', canActivate:[AuthRolesGuard]},
-            { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule', canActivate:[AuthRolesGuard]}
+            { path: 'reclutamiento', loadChildren: './recl/reclutamiento.module#ReclutamientoModule'},
+            { path: 'ventas', loadChildren: './vtas/ventas.module#VentaModule'},
+            { path: 'admin', component: LayoutComponent, loadChildren: './admin/admin.module#AdminModule'},
+            { path: 'perfiles', loadChildren: './perfiles/perfiles.module#PerfilesModule'}
             
         ]},
 
