@@ -46,6 +46,9 @@
               <div *ngIf="failLogin" class="alert alert-danger text-center" role="alert">
                   <span> Usuario o contraseña incorrecto</span>
               </div>
+              <div *ngIf="noAccess" class="alert alert-warning text-center" role="alert">
+                <span> Sin acceso al sistema</span>
+            </div>
           </div>
       </div>
       <!-- END panel-->

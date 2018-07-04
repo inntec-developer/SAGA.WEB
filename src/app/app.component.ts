@@ -3,6 +3,7 @@ import { Component, DoCheck, HostBinding, OnInit } from '@angular/core';
 import { AdminServiceService } from './service/AdminServicios/admin-service.service';
 import { LoginComponent } from './routes/pages/login/login.component';
 import { SettingsService } from './core/settings/settings.service';
+import { settings } from 'cluster';
 
 declare var $: any;
 
@@ -33,5 +34,6 @@ export class AppComponent implements DoCheck, OnInit {
         $(document).on('click', '[href="#"]', e => e.preventDefault());
     }
     ngDoCheck(){
+        this.settings.user.name = localStorage.getItem('usuario');
     }
 }
