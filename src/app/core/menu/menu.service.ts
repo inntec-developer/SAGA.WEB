@@ -35,39 +35,44 @@ export class MenuService {
         return this.menuItems;
     }
 
-    otraSub(modules)
+    otraSub(modules, privilegios)
     {
-        var k = {nombre: modules.nombre}
-        
-        console.log(modules)
-        if(modules.children.length > 0){
-            modules.children.forEach( m => {
-                this.otraSub(m)
-            })
-    
+       var  menuList = [];
 
-    }
-    return modules
-    
+       modules.children = privilegios.filter(function(c){
+        return c.idPadre === modules.estructuraId
+        });
+
+        modules.children.forEach(element => {
+            if( element.idPadre == modules.estructuraId)
+            {
+                menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
+            }
+          
+        });
+
+        return menuList
     }
 
     setSubMenu(modules, privilegios)
     {
+               
         modules.children = privilegios.filter(function(c){
             return c.idPadre === modules.estructuraId
         });
 
-        if(modules.children.length > 0)
-        {
-            modules.children.forEach( child => {
+       
+
+    
+            // modules.children.forEach( child => {
                 
-                var nnn =  this.setSubMenu(child, privilegios)
-                console.log(nnn)
-                this.submenu.push(nnn)
-                });
-            this.menuItems.push({text: modules.nombre, submenu: this.submenu} )
-               this.submenu = [];
-        }
+            //     var nnn =  this.setSubMenu(child, privilegios)
+            //     console.log(nnn)
+            //     this.submenu.push(nnn)
+            //     });
+            // this.menuItems.push({text: modules.nombre, submenu: this.submenu} )
+            //    this.submenu = [];
+        
         return { text: modules.nombre, link: modules.accion };
        
     }
@@ -80,16 +85,11 @@ export class MenuService {
         });
 
         
-
-
         modules.forEach(element => {
-          
-                        
-           var mocoss = this.setSubMenu(element, privilegios );
-       this.otraSub(mocoss)
+           this.menuItems.push(this.otraSub(element, privilegios)[0])
         });   
 
-      console.log(this.submenu)
+      console.log(this.menuItems)
       console.log(modules)
         return this.menuItems;
 
