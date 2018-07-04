@@ -41,6 +41,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ActividadesComponent } from './requisiciones/components/actividades/actividades.component';
 import { ColorPickerService } from 'ngx-color-picker';
 import { ComponentsModule } from './../../components/components.module';
+import { DialogActivarRequiComponent } from './requisiciones/components/dialog-activar-requi/dialog-activar-requi.component';
 import { DialogCancelRequiComponent } from './requisiciones/components/dialog-cancel-requi/dialog-cancel-requi.component';
 import { DialogDeleteRequiComponent } from './requisiciones/components/dialog-delete-requi/dialog-delete-requi.component';
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
@@ -149,8 +150,9 @@ const routes: Routes = [
         UpdateInfoRequiComponent,
         DialogDeleteRequiComponent,
         DialogCancelRequiComponent,
+        DialogActivarRequiComponent,
     ],
-    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent],
+    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent],
     exports: [
         RouterModule, ViewCuerpoRequiComponent, ViewInforRequiComponent
     ]
