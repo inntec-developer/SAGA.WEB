@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
     failLogin: any;
+    noAccess: any;
 
     constructor(
         private service: AdminServiceService, 
@@ -73,7 +74,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(email, password)
             .subscribe(
                 data => {
-                    if(data != 404){
+                    if(data != 404 && data != 406){
                         localStorage.setItem('usuario',data[0].usuario);
                         localStorage.setItem('nombre', data[0].nombre);
                         localStorage.setItem('email', email);
@@ -81,8 +82,15 @@ export class LoginComponent implements OnInit {
                         this.IdUser = data[0].id;
                         this.GetPrivilegios();
                         this.router.navigate(['/home']);
-                    }else{
-                        this.failLogin = data;
+                    }
+                    if(data == 404){
+                        this.failLogin = true;
+                        this.noAccess = false;
+                        this.loading = false;
+                    }
+                    if(data == 406){
+                        this.noAccess = true;
+                        this.failLogin = false;
                         this.loading = false;
                     }
                 },
