@@ -6,18 +6,17 @@ import { Toast, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 import { RequisicionesService } from './../../../../../service/requisiciones/requisiciones.service';
 import { SettingsService } from './../../../../../core/settings/settings.service';
 import { ToasterService } from 'angular2-toaster';
-import { providers } from 'ng2-dnd';
 
 @Component({
-  selector: 'app-dialog-cancel-requi',
-  templateUrl: './dialog-cancel-requi.component.html',
-  styleUrls: ['./dialog-cancel-requi.component.scss'],
+  selector: 'app-dialog-activar-requi',
+  templateUrl: './dialog-activar-requi.component.html',
+  styleUrls: ['./dialog-activar-requi.component.scss'],
   providers : [RequisicionesService] 
 })
-export class DialogCancelRequiComponent implements OnInit {
+export class DialogActivarRequiComponent implements OnInit {
 
   constructor(
-    private dialogCancel : MatDialogRef<DialogCancelRequiComponent>,
+    private dialogReActivar : MatDialogRef<DialogActivarRequiComponent>,
     private _Router : Router,
     private _Route: ActivatedRoute,
     private toasterService: ToasterService,
@@ -26,13 +25,10 @@ export class DialogCancelRequiComponent implements OnInit {
     private settings : SettingsService
   ) { }
 
-  //Varibales de control
   requisicion : any[];
-  infoCancelRequi : any;
+  infoReactivarRequi : any;
   return: any;
   folio: number;
-
-
 
   //Configuracion de mensaje
   toaster: any;
@@ -58,18 +54,18 @@ export class DialogCancelRequiComponent implements OnInit {
   ngOnInit() {
     this.requisicion = this.data;
     this.folio = this.data.folio;
-    this.infoCancelRequi = {
+    this.infoReactivarRequi = {
       id : this.data.id,
       UsuarioMod: this.settings.user.name
     }
   }
 
-  cancelRequisicion(){
-    this.service.cancelRequisicion(this.infoCancelRequi)
+  reActivarRequisicion(){
+    this.service.reActivarRequisicion(this.infoReactivarRequi)
     .subscribe(data => {
       if(data == 200){
-        this.popToast('success', 'Requisición', 'Se cacelo correctamente la requisicion.' + this.folio);
-        this.dialogCancel.close();
+        this.popToast('success', 'Requisición', 'Se re-activo correctamente la requisicion.' + this.folio);
+        this.dialogReActivar.close();
       }
       else{
         this.popToast('danger', 'Requisición','Oops!! No se puedo cancelar la requisición ' + this.folio);
@@ -78,7 +74,6 @@ export class DialogCancelRequiComponent implements OnInit {
   }
 
   onCloseDialog(){
-    this.dialogCancel.close();
+    this.dialogReActivar.close();
   }
-
 }

@@ -35,6 +35,5 @@ export class AppComponent implements DoCheck, OnInit {
     }
     ngDoCheck(){
         this.settings.user.name = localStorage.getItem('usuario');
-        console.log(localStorage.getItem('privilegios'));
     }
 }
