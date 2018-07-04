@@ -45,17 +45,16 @@
             <!-- START lock screen-->
             <li>
                 <a title="Cerrar sesión" [routerLink]="'/login'">
-                    
                     <em class="icon-lock"></em>
                 </a>
             </li>
             <!-- END lock screen-->
             <!-- Search icon-->
-            <!-- <li>
+            <li>
                 <a (click)="openNavSearch($event)">
                     <em class="icon-magnifier"></em>
                 </a>
-            </li> -->
+            </li>
             <!-- Fullscreen (only desktops)-->
             <li class="visible-lg">
                 <a #fsbutton (click)="toggleFullScreen($event)">

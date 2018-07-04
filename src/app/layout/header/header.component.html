@@ -51,12 +51,6 @@
                     <em class="icon-magnifier"></em>
                 </a>
             </li> -->
-            <!-- Fullscreen (only desktops)-->
-            <li class="visible-lg">
-                <a #fsbutton (click)="toggleFullScreen($event)">
-                    <em class="fa fa-expand"></em>
-                </a>
-            </li>
             <!-- START Alert menu-->
             <li class="dropdown dropdown-list" dropdown>
                 <a dropdownToggle>
@@ -122,19 +116,25 @@
                 <!-- END Dropdown menu-->
             </li>
             <!-- END Alert menu-->
+            <!-- Fullscreen (only desktops)-->
+            <li class="visible-lg">
+                <a #fsbutton (click)="toggleFullScreen($event)">
+                    <em class="fa fa-expand"></em>
+                </a>
+            </li>
             <!-- START Offsidebar button-->
-            <li>
+            <!-- <li>
                 <a (click)="toggleOffsidebar(); $event.stopPropagation()">
                     <em class="icon-notebook"></em>
                 </a>
-            </li>
+            </li> -->
             <!-- END Offsidebar menu-->
         </ul>
         <!-- END Right Navbar-->
     </div>
     <!-- END Nav wrapper-->
 
-    <app-navsearch [visible]="getNavSearchVisible()" (onclose)="setNavSearchVisible(false)"></app-navsearch>
+    <!-- <app-navsearch [visible]="getNavSearchVisible()" (onclose)="setNavSearchVisible(false)"></app-navsearch> -->
 
 </nav>
 <!-- END Top Navbar-->
