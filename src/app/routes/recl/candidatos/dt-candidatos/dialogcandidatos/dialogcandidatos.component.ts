@@ -18,12 +18,16 @@ import { CandidatosService } from '../../../../../service/index';
 export class DialogcandidatosComponent implements OnInit {
 
   vacantesdtl: any[];
+  folio: any;
+  id: any;
 
   constructor(public dialogRef: MatDialogRef<DialogcandidatosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private service: CandidatosService) {
       this.service.getvacantesdtl(data)
       .subscribe(vacantesdtl => {
         this.vacantesdtl = vacantesdtl;
+        this.id = vacantesdtl[0].id;
+        this.folio = vacantesdtl[0].folio;
         console.log(this.vacantesdtl);
       });
     }

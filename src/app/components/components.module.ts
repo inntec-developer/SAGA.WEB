@@ -44,7 +44,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonClosedComponent
 
   ],
-  exports:[
+  exports: [
     AsignarRequisicionComponent,
     ButtonSaveComponent,
     ButtonEditComponent,

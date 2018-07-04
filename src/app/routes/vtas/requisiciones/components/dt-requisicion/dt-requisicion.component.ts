@@ -28,7 +28,6 @@ export class DtRequisicionComponent implements OnInit {
     private toasterService: ToasterService
 
   ) { }
-  
   //Configuracion de mensaje.
   toaster: any;
   toasterConfig: any;

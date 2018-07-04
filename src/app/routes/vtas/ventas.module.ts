@@ -152,7 +152,7 @@ const routes: Routes = [
     ],
     entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent],
     exports: [
-        RouterModule
+        RouterModule, ViewCuerpoRequiComponent, ViewInforRequiComponent
     ]
 })
 

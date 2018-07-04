@@ -1,20 +1,3 @@
-<div *ngFor="let item of vacantesdtl">
-<mat-accordion>
-  <mat-expansion-panel (opened)="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Información personal
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <p>Alias: {{item.vBtra}}</p>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Información comercial
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
-</mat-accordion>
-</div>
+<app-view-info-requi [Folios]="folio"></app-view-info-requi>
+<br>
+<app-view-cuerpo-requi [Requisicion]="id"></app-view-cuerpo-requi>

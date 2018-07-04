@@ -131,7 +131,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
               this.Reclutador = estatus[0].reclutador;
               this.requisicionId = estatus[0].requisicionId;
               this.StatusId = estatus[0].id;
-              this.tpcontrato = estatus[0].tpContrato
+              this.tpcontrato = estatus[0].tpContrato;
             }
         });
         // Buscamos las postulaciones del candidato. ***
@@ -168,7 +168,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     let dialogRef = this.dialog.open(DialogcandidatosComponent, {
       width: '1200px',
       height: '700px',
-      data:Id
+      data: Id
     });
     dialogRef.afterClosed().subscribe(result => {
     });
@@ -185,20 +185,20 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     // Se manda el objeto con los datos necesarios para su inserción al servicio. ***
     this.service.postApartar(Apartar)
     .subscribe(data => {
-      this.pop(data.mensaje,true,data.estatus,'Apartado',data.reclutador);
+      this.pop(data.mensaje, true, data.estatus, 'Apartado', data.reclutador);
     })
     // Recargamos de nuevo la vacante con el apartado. ***
-    this.openDialog(this.candidatodtl[0].candidatoId)
+    this.openDialog(this.candidatodtl[0].candidatoId);
   }
 
   // Proceso de liberación del candidato. ***
   Liberar(idvct: any){
     this.service.Liberar(this.StatusId)
     .subscribe(data => {
-      this.pop('Hola',false,0,'Liberado',data);
+      this.pop('Hola', false, 0, 'Liberado', data);
     })
     // Recargamos de nuevo la vacante con el borrado. ***
-    this.openDialog(this.candidatodtl[0].candidatoId)
+    this.openDialog(this.candidatodtl[0].candidatoId);
   }
 
   // Mensajes de confirmación o error. ***
