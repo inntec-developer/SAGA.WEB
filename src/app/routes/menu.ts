@@ -73,7 +73,6 @@ const Ventas = {
         {
             text: 'Prospectos',
             link: '/ventas/prospecto',
-
         },
         {
             text: 'Requisiciones',
