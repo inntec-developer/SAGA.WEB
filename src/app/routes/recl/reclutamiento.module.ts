@@ -29,7 +29,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import {PaginatorModule} from 'primeng/paginator';
 
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { Damfo290Component } from './damfo290/damfo290.component';
 import { CandidatosComponent } from './candidatos/candidatos.component';
 import { VacantesComponent } from './vacantes/vacantes.component';
@@ -85,7 +85,7 @@ const routes: Routes = [
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, MatOptionModule, MatDialogModule, PaginatorModule,
-        ToasterModule, VentaModule, ComponentsModule ],
+        ToasterModule, VentaModule, ComponentsModule, NgxSpinnerModule ],
     providers: [ColorPickerService, { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }, ToasterService],
     declarations: [ Damfo290Component, CandidatosComponent, VacantesComponent,
                     BusquedaComponent, PaisComponent, EstadoComponent,
