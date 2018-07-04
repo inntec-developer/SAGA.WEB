@@ -105,6 +105,7 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
     }
 
     public getInformacionRequisicio(folio){
+      debugger;
       if(folio != null){
         this.serviceRequisicion.getRequiFolio(this.Folios)
           .subscribe(data => {
@@ -148,8 +149,8 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
             RequisicionId: this.RequiId,
             GrpUsrId : a,
             CRUD : '',
-            UsuarioAlta : this.settings.user.name,
-            UsuarioMod : this.settings.user.name,
+            UsuarioAlta : localStorage.getItem('usuario'),
+            UsuarioMod : localStorage.getItem('usuario'),
             fch_Modificacion : new Date()
           });
         };

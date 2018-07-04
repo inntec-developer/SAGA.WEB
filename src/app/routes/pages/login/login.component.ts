@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     IdUser;
     loading = false;
     returnUrl: string;
+    failLogin: any;
 
     constructor(
         private service: AdminServiceService, 
@@ -42,9 +43,6 @@ export class LoginComponent implements OnInit {
         if (this.valForm.valid) 
         {
             this.login(value.email, value.password)
-            console.log("mocos")
-            console.log(this.settings.user)
-            this.router.navigate(['/home']);
         }
     }
 
@@ -75,24 +73,28 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(email, password)
             .subscribe(
                 data => {
-                    localStorage.setItem('usuario',data[0].usuario);
-                    localStorage.setItem('nombre', data[0].nombre);
-                    localStorage.setItem('email', email);
-                    localStorage.setItem('id', data[0].id)
-                    this.IdUser = data[0].id;
-                    this.GetPrivilegios();
-                    this.router.navigate([this.returnUrl]);
+                    if(data != 404){
+                        localStorage.setItem('usuario',data[0].usuario);
+                        localStorage.setItem('nombre', data[0].nombre);
+                        localStorage.setItem('email', email);
+                        localStorage.setItem('id', data[0].id)
+                        this.IdUser = data[0].id;
+                        this.GetPrivilegios();
+                        this.router.navigate(['/home']);
+                    }else{
+                        this.failLogin = data;
+                        this.loading = false;
+                    }
                 },
                 error => {
                     this.loading = false;
                 });
     }
 
-
     ngOnInit() {
        // this.authenticationService.logout();
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        localStorage.clear();
     }
-
 }
