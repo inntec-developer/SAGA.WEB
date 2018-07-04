@@ -180,11 +180,9 @@ toasterconfig: ToasterConfig = new ToasterConfig({
                       nombre:item.nombre,
                       id:this.Requi
                    }
-                   console.log(this.ListaCon)
       this.ListaCon.push(config);
    }
 
-   console.log(this.ListaCon)
    this.Config.UpdatePublicar(this.ListaCon)
    .subscribe( data => {
     console.log(data)
