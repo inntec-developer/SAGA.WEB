@@ -5,6 +5,7 @@ import { ActivatedRoute,Router} from '@angular/router/';
 import {Http} from '@angular/http';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {ToasterService,ToasterConfig} from 'angular2-toaster';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-disenador-vacante',
@@ -54,6 +55,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
           ,private router: Router
           ,private Config: ConfiguracionService
           ,toasterService: ToasterService
+          ,private spinner: NgxSpinnerService
         ) {
             this.toasterService = toasterService;
         }
@@ -165,7 +167,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
   }
 
   Publicar(){
-
+    this.spinner.show();
     for (let item of this.ListaCampo) {
       let d = document.getElementById('Detalle_' + item.id);
       let r = document.getElementById('Resumen_' + item.id);
@@ -178,8 +180,10 @@ toasterconfig: ToasterConfig = new ToasterConfig({
                       nombre:item.nombre,
                       id:this.Requi
                    }
+                   console.log(this.ListaCon)
       this.ListaCon.push(config);
    }
+
    console.log(this.ListaCon)
    this.Config.UpdatePublicar(this.ListaCon)
    .subscribe( data => {
@@ -187,6 +191,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     this.popGenerico(data.mensaje,data.bandera,'Publicacion');
    });
    this.ListaCon = [];
+   this.spinner.hide();
   }
 
   Descripcion(){
