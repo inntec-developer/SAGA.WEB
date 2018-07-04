@@ -44,10 +44,12 @@ export class RequisicionNuevaComponent implements OnInit {
         let datas: CreateRequisicion = new CreateRequisicion();
         datas.IdDamfo = this.damfoId;
         datas.IdAddress = this.direccionId;
-        datas.Usuario = this.setings.user.name;
+        datas.Usuario = localStorage.getItem('usuario');
         this.serviceRequisiciones.createNewRequi(datas).subscribe(data => {
+          debugger;
           this.requisicionId = data.id;
           this.folio = data.folio;
+          // this.updateRequi.getInformacionRequisicio(this.folio);
           this.updateRequi.getInformacionRequisicio(this.folio);
         });
       }
