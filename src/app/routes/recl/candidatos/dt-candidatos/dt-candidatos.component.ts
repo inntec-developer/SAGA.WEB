@@ -168,7 +168,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     let dialogRef = this.dialog.open(DialogcandidatosComponent, {
       width: '1200px',
       height: '700px',
-      data: this.vacantes
+      data:Id
     });
     dialogRef.afterClosed().subscribe(result => {
     });

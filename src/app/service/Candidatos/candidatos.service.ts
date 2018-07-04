@@ -34,6 +34,7 @@ private UrlVacantes = ApiConection.ServiceUrl+ApiConection.Vacantes;
 private UrlApartar = ApiConection.ServiceUrl+ApiConection.Apartar;
 private UrlGetEstatus = ApiConection.ServiceUrl+ApiConection.GetEstatus;
 private UrlLiberar = ApiConection.ServiceUrl+ApiConection.Liberar;
+private UrlVacantesDtl = ApiConection.ServiceUrl + ApiConection.VacantesDtl;
 
 // Error.
 private handleError(error: any) {
@@ -126,13 +127,13 @@ getcandidatos(filtrox: any): Observable<any> { // Obtener filtro de candidatos.
 }
 
 getcandidatodtl(Id: any): Observable<any> { // Obtener detalle de candidatos.
-   return this.http.get(this.UrlCandidatoDtl + '?Id='+ Id)
+   return this.http.get(this.UrlCandidatoDtl + '?Id=' + Id)
        .map(result => result.json())
        .catch(this.handleError);
 }
 
 getpostulaciones(Id: any): Observable<any> { // Obtenemos las postulaciones del candidato.
-   return this.http.get(this.UrlPostulaciones + '?IdCandidato='+ Id)
+   return this.http.get(this.UrlPostulaciones + '?IdCandidato=' + Id)
        .map(result => result.json())
        .catch(this.handleError);
 }
@@ -141,6 +142,12 @@ getvacantes(){
   return this.http.get(this.UrlVacantes)
         .map(result => result.json())
         .catch(this.handleError);
+}
+
+getvacantesdtl(Id: any){
+    return this.http.get(this.UrlVacantesDtl + '?IdVacante=' + Id)
+       .map(result => result.json())
+       .catch(this.handleError);
 }
 
 postApartar(candidato: any): Observable<any> { // Apartar el candidato y ligar a la vacante.
