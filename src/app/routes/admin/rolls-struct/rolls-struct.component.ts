@@ -28,6 +28,7 @@ export class RollsStructComponent implements OnInit {
   ]
   filteredData: Array<any> = [];
   editing = {};
+  listRoles: Array<any> = [];
 
   constructor(private service: AdminServiceService) { }
   
@@ -42,6 +43,11 @@ export class RollsStructComponent implements OnInit {
   
   
     console.log(row);
+  }
+
+  BorrarEstructura(row: any)
+  {
+    console.log(row)
   }
   public Search(data: any) {
 
@@ -87,8 +93,49 @@ export class RollsStructComponent implements OnInit {
         })
   }
 
+  selected(value)
+  {
+    let tempArray: Array<any> = [];
+
+    this.StructList.forEach(function (item) {
+
+       if (item.rolId == value) {
+         tempArray.push(item)
+      }
+    });
+
+    this.filteredData = tempArray;
+
+  }
+
+  DeleteRoles(id)
+  {
+    console.log(id)
+    this.service.DeleteRoles(id)
+      .subscribe( data => {
+        this.ngOnInit();
+        alert("los datos se borraron")
+    });
+
+ }
+
+ GetRoles()
+  {
+    this.service.getRoles()
+    .subscribe(
+      e=>{
+        this.listRoles = e;
+        console.log(this.listRoles)
+      })
+  }
   ngOnInit() {
     this.GetEstructura();
+    this.GetRoles();
   }
 
 }
+
+
+/////////////distinct 
+// this.listRoles = this.StructList.reduce((p, c) => 
+// p.findIndex(e => e.rolId === c.rolId)<0 ? [...p,c]: p,[]);

@@ -1,3 +1,4 @@
+import { SelectModule } from 'ng2-select';
 import { forEach } from '@angular/router/src/utils/collection';
 import { element } from 'protractor';
 import { SettingsService } from './../settings/settings.service';
@@ -8,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class MenuService {
 
     menuItems: Array<any>;
-    submenu: Array<any>;
+    submenu: Array<any> = [];
     constructor(private settings: SettingsService) {
         this.menuItems = [];
     }
@@ -34,6 +35,48 @@ export class MenuService {
         return this.menuItems;
     }
 
+    setSubMenu(modules, privilegios)
+    {
+       
+        modules.children = privilegios.filter(function(c){
+            return c.idPadre === modules.estructuraId
+        });
+
+        if(modules.children.length > 0)
+        {
+            modules.children.forEach( child => {
+                    this.submenu.push({
+                        text: child.nombre,
+                        link: child.accion
+                    }); 
+                });
+                console.log(this.menuItems.findIndex(idx => idx.text === modules.nombre))
+            this.menuItems[this.menuItems.findIndex(idx => idx.text === modules.nombre)]['submenu'] = this.submenu;
+        }
+
+        modules.children.forEach(element => { 
+            this.setSubMenu(element, privilegios)
+        });
+
+        // if(modules.children.length > 0)
+        // {
+        //     modules.children.forEach( child => {
+        //             sub.push({
+        //                 text: child.nombre,
+        //                 link: child.accion,
+        //                 icon: child.icono
+        //             })
+        //         });
+
+        //         this.menuItems.push({
+        //                 text: element.nombre,
+        //                 link: element.accion,
+        //                 icon: element.icono,
+        //                 submenu: sub
+        //             });   
+        //     }
+
+    }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
         var privilegios = JSON.parse(localStorage.getItem('privilegios'));
@@ -42,36 +85,38 @@ export class MenuService {
             return row.tipoEstructuraId === 2
         });
 
-        modules.forEach(element => { 
-            element.children = privilegios.filter(function(c){
-                return c.idPadre === element.estructuraId
-            })
-        });
+        
 
-        console.log(modules)
-       
-        let sub: Array<any> = [];
+
         modules.forEach(element => {
-           
-            if(element.children.length > 0)
-                {
-                    element.children.forEach(c =>{ 
-                        sub.push({
-                            text: c.nombre,
-                            link: c.accion
-                        })
-                    })
+            this.menuItems.push({
+                            text: element.nombre,
+                            link: element.accion,
+                            icon: element.icono,
+                            submenu: []
+                        });   
+                
+            this.setSubMenu(element, privilegios)
+            // if(children.length > 0)
+            // {
+            //     children.forEach( child => {
+            //         sub.push({
+            //             text: child.nombre,
+            //             link: child.accion,
+            //             icon: child.icono
+            //         })
+            //     });
 
-                    console.log(sub)
-                }
-                this.menuItems.push({
-                        text: element.nombre,
-                        link: element.accion,
-                        icon: element.icono,
-                        submenu: sub
-                    });   
+            //     this.menuItems.push({
+            //             text: element.nombre,
+            //             link: element.accion,
+            //             icon: element.icono,
+            //             submenu: sub
+            //         });   
+            // }
         });
 
+        console.log(this.menuItems)
         return this.menuItems;
 
     }
@@ -83,3 +128,36 @@ export class MenuService {
     }
 
 }
+
+ // element.children.forEach(c =>{ 
+                    //     c.children = privilegios.filter(function(cc){
+                    //         return cc.idPadre === c.estructuraId
+                    //     });
+                        
+                    //     c.children.forEach(e => {
+                    //         e.children = privilegios.filter(function(ccc){
+                    //             return ccc.idPadre === e.estructuraId;
+                    //         });
+                           
+                    //         e.children.forEach(m => {
+                    //             m.children = privilegios.filter(function(cccc){
+                    //                 return cccc.idPadre == e.estructuraId;
+                    //             });
+                    //             subsubsub.push({
+                    //                 text: m.nombre,
+                    //                link: m.accion
+                    //             })
+
+                    //         subsub.push({
+                    //             text: e.nombre,
+                    //             link: e.accion,
+                    //             submenu: subsubsub
+                    //          })
+                    //     })
+                    //     sub.push({
+                    //         text: c.nombre,
+                    //         link: c.accion, 
+                    //         submenu: subsub
+     
+                    //     })
+                    // })

@@ -256,12 +256,9 @@ export class AdminServiceService {
   }
   DeleteRoles(data: any) : Observable<any>
   {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this.http.post(this.UrlDeleteRoles, JSON.stringify(data), options)
+    return this.http.get(this.UrlDeleteRoles + '?id=' + data)
             .map(result => result.json())
             .catch(this.handleError);
-
   }
 
 

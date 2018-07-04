@@ -3,9 +3,22 @@
 
 <div class="row">
   <div class="panel panel-default panel-flat mat-elevation-z8">
+      <div class="panel-body">
+        <div class="col-md-8">
+          <select class="form-control" (change)="selected($event.target.value); id = $event.target.value; flag=true" >
+              <option  [value]="0">Seleccionar Rol</option>
+              <option *ngFor="let rol of listRoles" [value]="rol.id">{{rol.rol}}</option>
+           </select>
+        </div>
+        <div>
+          <btn-delete (click)="DeleteRoles(id)"></btn-delete>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="panel panel-default panel-flat mat-elevation-z8">
     <div class="panel-body">
-       
-      <p chkPrivilegiosMenu>Heroes</p>
       <div class="row">
           
           <div class="col-md-2 pull-left">
@@ -20,7 +33,7 @@
         <table #tbl class="table table-responsive table-bordered table-hover" (change)="UpdateFoto() ">
           <thead><tr><td *ngFor="let c of columns" class="text-center">{{c.title}}</td></tr></thead>
             <tbody>
-              <tr *ngFor="let r of filteredData; let rowIndex = index" [ngClass]="{'backcolorModulo' : r.tipoEstructuraId === 2 || r.tipoEstructuraId === 3, 'backcolorMovimiento' : r.tipoEstructuraId === 4 || r.tipoEstructuraId === 5, 'backcolorSeccion' : r.tipoEstructuraId === 6 || r.tipoEstructuraId === 7}">
+              <tr *ngFor="let r of filteredData; let rowIndex = index">
                 
                 <td class="text-center">
                     {{r['rol']}}
