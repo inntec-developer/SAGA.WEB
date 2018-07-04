@@ -35,28 +35,40 @@ export class MenuService {
         return this.menuItems;
     }
 
+    otraSub(modules)
+    {
+        var k = {nombre: modules.nombre}
+        
+        console.log(modules)
+        if(modules.children.length > 0){
+            modules.children.forEach( m => {
+                this.otraSub(m)
+            })
+    
+
+    }
+    return modules
+    
+    }
+
     setSubMenu(modules, privilegios)
     {
-       let mocos: Array<any> = [];
-        
         modules.children = privilegios.filter(function(c){
             return c.idPadre === modules.estructuraId
         });
 
         if(modules.children.length > 0)
         {
-             mocos = modules.children.forEach( child => {
-                this.setSubMenu(child, privilegios)
-                   return mocos.push({
-                        text: child.nombre,
-                        link: child.accion
-                        
-                    })
+            modules.children.forEach( child => {
+                
+                var nnn =  this.setSubMenu(child, privilegios)
+                console.log(nnn)
+                this.submenu.push(nnn)
                 });
-
+            this.menuItems.push({text: modules.nombre, submenu: this.submenu} )
+               this.submenu = [];
         }
-        return mocos;
-    
+        return { text: modules.nombre, link: modules.accion };
        
     }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
@@ -71,35 +83,14 @@ export class MenuService {
 
 
         modules.forEach(element => {
-            // this.menuItems.push({
-            //                 text: element.nombre,
-            //                 link: element.accion,
-            //                 icon: element.icono,
-            //                 submenu: []
-            //             });   
-                
-           var mocoss = this.setSubMenu(element, privilegios);
-            console.log(mocoss)
-            // if(children.length > 0)
-            // {
-            //     children.forEach( child => {
-            //         sub.push({
-            //             text: child.nombre,
-            //             link: child.accion,
-            //             icon: child.icono
-            //         })
-            //     });
+          
+                        
+           var mocoss = this.setSubMenu(element, privilegios );
+       this.otraSub(mocoss)
+        });   
 
-            //     this.menuItems.push({
-            //             text: element.nombre,
-            //             link: element.accion,
-            //             icon: element.icono,
-            //             submenu: sub
-            //         });   
-            // }
-        });
-
-        console.log(this.menuItems)
+      console.log(this.submenu)
+      console.log(modules)
         return this.menuItems;
 
     }
