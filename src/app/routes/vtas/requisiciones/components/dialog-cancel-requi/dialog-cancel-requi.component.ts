@@ -72,7 +72,7 @@ export class DialogCancelRequiComponent implements OnInit {
         this.dialogCancel.close();
       }
       else{
-        this.popToast('danger', 'Requisición','Oops!! No se puedo cancelar la requisición ' + this.folio);
+        this.popToast('warning', 'Requisición','Oops!! No se puedo cancelar la requisición ' + this.folio);
       }
     })
   }
