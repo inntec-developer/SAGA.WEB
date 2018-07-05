@@ -45,11 +45,23 @@ export class MenuService {
 
         modules.children.forEach(element => {
             if( element.idPadre == modules.estructuraId)
-            {
-                menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
+            { 
+                var mocos = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) }
+                if(mocos.submenu.length === 0)
+                {
+                    menuList.push({text:mocos.text, link: mocos.link})
+                }
+                else
+                {
+                menuList.push(mocos);
+                }
+                // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
+
             }
           
         });
+
+      
 
         return menuList
     }
@@ -86,7 +98,7 @@ export class MenuService {
 
         
         modules.forEach(element => {
-           this.menuItems.push(this.otraSub(element, privilegios)[0])
+           this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.otraSub(element, privilegios) })
         });   
 
       console.log(this.menuItems)
