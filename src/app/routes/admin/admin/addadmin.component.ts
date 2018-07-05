@@ -48,8 +48,18 @@ export class AddadminComponent implements OnInit {
       {
         this.ListaPG.splice(this.ListaPG.findIndex(x => x.id === this.IdGrupo), 1)
       }
+      this.GetUserByGroup(this.IdGrupo)
     }
 
+    GetUserByGroup( Id )
+    {
+      this.service.GetUsuarioByGrupo(Id)
+      .subscribe(
+        e=>{
+          this.ListaPG = e;
+          console.log(this.ListaPG)
+        })
+    }
 
     addUsuarioGrupo()
     {
@@ -83,8 +93,6 @@ export class AddadminComponent implements OnInit {
       .subscribe(
         e=>{
           this.ListEntidades = e;
-        
-          console.log(this.ListEntidades)
         })
     }
 

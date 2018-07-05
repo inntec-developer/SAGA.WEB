@@ -4,11 +4,9 @@ import { Injectable } from '@angular/core';
 export class MenuService {
     menuItems: Array<any>;
     submenu: Array<any> = [];
-    privilegios: Array<any> = [];
 
     constructor()
     {
-        this.privilegios = [];
         this.menuItems = [];
     }
 
@@ -34,11 +32,11 @@ export class MenuService {
     }
 
     /*recursividad para generar el menu*/
-    setSubMenu(modules)
+    setSubMenu(modules, privilegios)
     {
         var  menuList = [];
 
-        modules.children = this.privilegios.filter(function(c){
+        modules.children = privilegios.filter(function(c){
          return c.idPadre === modules.estructuraId
          });
  
@@ -46,7 +44,7 @@ export class MenuService {
              if(modules.tipoEstructuraId < 4){ //para limitar lo que se puede ver en el menu
                  if( element.idPadre == modules.estructuraId)
                  { 
-                     var submenu = {text: element.nombre, link: element.accion, submenu: this.setSubMenu(element)}
+                     var submenu = {text: element.nombre, link: element.accion, submenu: this.setSubMenu(element, privilegios)}
                      if(submenu.submenu.length === 0)
                      {
                          menuList.push({text:submenu.text, link: submenu.link})
@@ -65,16 +63,16 @@ export class MenuService {
     }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
-        this.privilegios = JSON.parse(localStorage.getItem('privilegios'));
+        var privilegios = JSON.parse(localStorage.getItem('privilegios'));
         
-        if(this.privilegios != [])
+        if(privilegios != [])
         {
-            var modules = this.privilegios.filter(function(row){
+            var modules = privilegios.filter(function(row){
                         return row.tipoEstructuraId === 2
                         });
             
             modules.forEach(element => {
-                    this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.setSubMenu(element) })
+                    this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.setSubMenu(element, privilegios) })
                     });   
 
             return this.menuItems;
