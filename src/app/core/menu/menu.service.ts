@@ -46,17 +46,16 @@ export class MenuService {
         modules.children.forEach(element => {
             if( element.idPadre == modules.estructuraId)
             { 
-                var mocos = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) }
-                if(mocos.submenu.length === 0)
+                var submenu = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios)}
+                if(submenu.submenu.length === 0)
                 {
-                    menuList.push({text:mocos.text, link: mocos.link})
+                    menuList.push({text:submenu.text, link: submenu.link})
                 }
                 else
                 {
-                menuList.push(mocos);
+                menuList.push(submenu);
                 }
                 // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
-
             }
           
         });
@@ -92,6 +91,8 @@ export class MenuService {
     {
         var privilegios = JSON.parse(localStorage.getItem('privilegios'));
 
+        if( privilegios.length > 0)
+        {
         var modules = privilegios.filter(function(row){
             return row.tipoEstructuraId === 2
         });
@@ -103,6 +104,12 @@ export class MenuService {
 
       console.log(this.menuItems)
       console.log(modules)
+    }
+    else
+    {
+        console.log(localStorage.getItem(privilegios))
+        alert("error")
+    }
         return this.menuItems;
 
     }
@@ -146,4 +153,4 @@ export class MenuService {
                     //         submenu: subsub
      
                     //     })
-                    // })
+                    // }).
