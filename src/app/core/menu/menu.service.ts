@@ -35,28 +35,57 @@ export class MenuService {
         return this.menuItems;
     }
 
+    otraSub(modules, privilegios)
+    {
+       var  menuList = [];
+
+       modules.children = privilegios.filter(function(c){
+        return c.idPadre === modules.estructuraId
+        });
+
+        modules.children.forEach(element => {
+            if( element.idPadre == modules.estructuraId)
+            { 
+                var mocos = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) }
+                if(mocos.submenu.length === 0)
+                {
+                    menuList.push({text:mocos.text, link: mocos.link})
+                }
+                else
+                {
+                menuList.push(mocos);
+                }
+                // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
+
+            }
+          
+        });
+
+      
+
+        return menuList
+    }
+
     setSubMenu(modules, privilegios)
     {
-       let mocos: Array<any> = [];
-        
+               
         modules.children = privilegios.filter(function(c){
             return c.idPadre === modules.estructuraId
         });
 
-        if(modules.children.length > 0)
-        {
-             mocos = modules.children.forEach( child => {
-                this.setSubMenu(child, privilegios)
-                   return mocos.push({
-                        text: child.nombre,
-                        link: child.accion
-                        
-                    })
-                });
+       
 
-        }
-        return mocos;
     
+            // modules.children.forEach( child => {
+                
+            //     var nnn =  this.setSubMenu(child, privilegios)
+            //     console.log(nnn)
+            //     this.submenu.push(nnn)
+            //     });
+            // this.menuItems.push({text: modules.nombre, submenu: this.submenu} )
+            //    this.submenu = [];
+        
+        return { text: modules.nombre, link: modules.accion };
        
     }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
@@ -68,38 +97,12 @@ export class MenuService {
         });
 
         
-
-
         modules.forEach(element => {
-            // this.menuItems.push({
-            //                 text: element.nombre,
-            //                 link: element.accion,
-            //                 icon: element.icono,
-            //                 submenu: []
-            //             });   
-                
-           var mocoss = this.setSubMenu(element, privilegios);
-            console.log(mocoss)
-            // if(children.length > 0)
-            // {
-            //     children.forEach( child => {
-            //         sub.push({
-            //             text: child.nombre,
-            //             link: child.accion,
-            //             icon: child.icono
-            //         })
-            //     });
+           this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.otraSub(element, privilegios) })
+        });   
 
-            //     this.menuItems.push({
-            //             text: element.nombre,
-            //             link: element.accion,
-            //             icon: element.icono,
-            //             submenu: sub
-            //         });   
-            // }
-        });
-
-        console.log(this.menuItems)
+      console.log(this.menuItems)
+      console.log(modules)
         return this.menuItems;
 
     }

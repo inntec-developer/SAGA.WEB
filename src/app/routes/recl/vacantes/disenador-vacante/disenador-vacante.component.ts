@@ -187,9 +187,10 @@ toasterconfig: ToasterConfig = new ToasterConfig({
    .subscribe( data => {
     console.log(data)
     this.popGenerico(data.mensaje,data.bandera,'Publicacion');
+    this.spinner.hide();
    });
    this.ListaCon = [];
-   this.spinner.hide();
+
   }
 
   Descripcion(){

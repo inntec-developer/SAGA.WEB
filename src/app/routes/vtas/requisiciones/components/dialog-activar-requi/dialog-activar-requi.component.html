@@ -1,0 +1,68 @@
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div>
+  <h3>Re-Activar Requisicion {{requisicion.folio}}</h3>
+</div>
+<mat-divider></mat-divider>
+<div class="row">
+  <div class="col-sm-12">
+    <small>
+      <strong>Cliente: </strong> <p>{{data.cliente?.nombrecomercial}}</p></small>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Giro: </strong><p>{{data.cliente?.giroEmpresas?.giroEmpresa}}</p></small>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Actividad: </strong><p>{{data.cliente?.actividadEmpresas?.actividadEmpresa}}</p></small>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Puesto: </strong><p>{{data.vBtra}}</p></small>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Sueldo Minimo: </strong><p>{{data.sueldoMinimo | currency: '$'}}</p></small>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Sueldo Maximo: </strong><p>{{data.sueldoMaximo | currency: '$'}}</p></small>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Clase Reclutamiento: </strong><p>{{data.claseReclutamiento?.clasesReclutamiento}}</p></small>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <small>
+      <strong>Tipo Reclutamiento: </strong><p>{{data.tipoReclutamiento?.tipoReclutamiento}}</p></small>
+  </div>
+  <div class="col-md-4 col-sm-4">
+      <small>
+        <strong>Fecha Creacion: </strong><p>{{data.fch_Creacion | date:'dd/MM/yyyy HH:mm'}}</p></small>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <div class=row>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <button type="button" cdkFocusInitial class="btn btn-sm btn-labeled btn-outline btn-danger mb-2" (click)="onCloseDialog()">
+        <span class="btn-label">
+          <i class="fa fa-times"></i>
+        </span> Cancelar
+      </button>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <button type="button" cdkFocusInitial class="btn btn-sm btn-labeled btn-outline btn-success mb-2" (click)="reActivarRequisicion()">
+        <span class="btn-label">
+          <i class="fa fa-check"></i>
+        </span> Aceptar
+      </button>
+    </div>
+  </div>
+</div>
