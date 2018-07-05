@@ -46,7 +46,6 @@ export class RequisicionNuevaComponent implements OnInit {
         datas.IdAddress = this.direccionId;
         datas.Usuario = localStorage.getItem('usuario');
         this.serviceRequisiciones.createNewRequi(datas).subscribe(data => {
-          debugger;
           this.requisicionId = data.id;
           this.folio = data.folio;
           // this.updateRequi.getInformacionRequisicio(this.folio);

@@ -6,6 +6,7 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-mo
 import { Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import { AsignarRequisicionComponent } from './../../../../../components/asignar-requisicion/asignar-requisicion.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { SettingsService } from '../../../../../core/settings/settings.service';
 import { UpdateRequisicion } from '../../../../../models/vtas/Requisicion'
 import { forEach } from '@angular/router/src/utils/collection';
@@ -33,6 +34,7 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
   public placeHolderSelect : string;
   public asignadosRequi :  any[] = [];
   public infoRequi : any[];
+  public loading: boolean;
 
   public formRequi : FormGroup;
 
@@ -43,6 +45,7 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
       public serviceRequisicion: RequisicionesService,
       public serviceCatalogos: CatalogosService,
       private toasterService: ToasterService,
+      private spinner: NgxSpinnerService
     ) {
         this.formRequi = new FormGroup({
           folio: new FormControl('',[Validators.required]),
@@ -105,7 +108,6 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
     }
 
     public getInformacionRequisicio(folio){
-      debugger;
       if(folio != null){
         this.serviceRequisicion.getRequiFolio(this.Folios)
           .subscribe(data => {
@@ -141,6 +143,8 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
     }
     /* Save Requisicion */
     Save(){
+      this.loading = true;
+      this.spinner.show();
       let asg = [];
       if(this.asignadosRequi.length > 0){
 
@@ -168,16 +172,18 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
           asignacionRequi: asg
       }
       this.requiUpdate = update;
-      console.log(this.requiUpdate);
       this.serviceRequisicion.updateRequisicion(this.requiUpdate)
         .subscribe(data => {
-          console.log(data);
           this.return = data;
           if(this.return == 200){
             this.popToast('success', 'Requisicion','La requisición se actualizo correctamente ');
+            this.loading = false;
+            this.spinner.hide();
           }
           else{
               this.popToast('error', 'Oops!!','Algo salio mal intente de nuevo' );
+              this.loading = false;
+              this.spinner.hide();
           }
         });
     }
