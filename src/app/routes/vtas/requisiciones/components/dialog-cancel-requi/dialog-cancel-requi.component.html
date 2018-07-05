@@ -49,6 +49,11 @@
 </div>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
+  <div class="alert alert-warning alert-dismissible fade in">
+    <strong>Advertencia !</strong> 
+    <span> Todos los usuarios o células que se encuentren asignadas a esta requisición serán eliminados de la misma. </span>
+  </div>
+  <br>
   <div class=row>
     <div class="col-md-6 col-sm-6 col-xs-6">
       <button type="button" cdkFocusInitial class="btn btn-sm btn-labeled btn-outline btn-danger mb-2" (click)="onCloseDialog()">
