@@ -90,7 +90,7 @@ const headingMain = {
 
 export const menu = [
     headingMain,
-    Home,
-    Reclutamiento,
-    Ventas
+    Home
+    // Reclutamiento,
+    // Ventas
 ];
