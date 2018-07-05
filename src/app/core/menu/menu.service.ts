@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { SelectModule } from 'ng2-select';
-import { SettingsService } from './../settings/settings.service';
-import { element } from 'protractor';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class MenuService {
     menuItems: Array<any>;
     submenu: Array<any> = [];
-    constructor(private settings: SettingsService) {
+    privilegios: Array<any> = [];
+
+    constructor()
+    {
+        this.privilegios = [];
         this.menuItems = [];
     }
 
@@ -33,82 +33,53 @@ export class MenuService {
         return this.menuItems;
     }
 
-    otraSub(modules, privilegios)
+    /*recursividad para generar el menu*/
+    setSubMenu(modules)
     {
-        ;
-       var  menuList = [];
+        var  menuList = [];
 
-       modules.children = privilegios.filter(function(c){
-        return c.idPadre === modules.estructuraId
-        });
+        modules.children = this.privilegios.filter(function(c){
+         return c.idPadre === modules.estructuraId
+         });
+ 
+         modules.children.forEach(element => {
+             if(modules.tipoEstructuraId < 4){ //para limitar lo que se puede ver en el menu
+                 if( element.idPadre == modules.estructuraId)
+                 { 
+                     var submenu = {text: element.nombre, link: element.accion, submenu: this.setSubMenu(element)}
+                     if(submenu.submenu.length === 0)
+                     {
+                         menuList.push({text:submenu.text, link: submenu.link})
+                     }
+                     else
+                     {
+                     menuList.push(submenu);
+                     }
+                     // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
+                 }
+             }
+         });
 
-        modules.children.forEach(element => {
-            if(modules.tipoEstructuraId < 4){
-                if( element.idPadre == modules.estructuraId)
-                { 
-                    var submenu = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios)}
-                    if(submenu.submenu.length === 0)
-                    {
-                        menuList.push({text:submenu.text, link: submenu.link})
-                    }
-                    else
-                    {
-                    menuList.push(submenu);
-                    }
-                    // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
-                }
-            }
-        });
-
-      
-
-        return menuList
-    }
-
-    setSubMenu(modules, privilegios)
-    {
-               
-        modules.children = privilegios.filter(function(c){
-            return c.idPadre === modules.estructuraId
-        });
-
-       
-
-    
-            // modules.children.forEach( child => {
-                
-            //     var nnn =  this.setSubMenu(child, privilegios)
-            //     console.log(nnn)
-            //     this.submenu.push(nnn)
-            //     });
-            // this.menuItems.push({text: modules.nombre, submenu: this.submenu} )
-            //    this.submenu = [];
-        
-        return { text: modules.nombre, link: modules.accion };
+         return menuList
        
     }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
-        debugger;
-        var privilegios = JSON.parse(localStorage.getItem('privilegios'));
-
-        if( privilegios.length > 0)
-        {
-        var modules = privilegios.filter(function(row){
-            return row.tipoEstructuraId === 2
-        });
-
+        this.privilegios = JSON.parse(localStorage.getItem('privilegios'));
         
-        modules.forEach(element => {
-           this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.otraSub(element, privilegios) })
-        });   
+        if(this.privilegios != [])
+        {
+            var modules = this.privilegios.filter(function(row){
+                        return row.tipoEstructuraId === 2
+                        });
+            
+            modules.forEach(element => {
+                    this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.setSubMenu(element) })
+                    });   
 
-        console.log(this.menuItems)
-        console.log(modules)
-        }
             return this.menuItems;
-
         }
+    }
 
     setEstructuraSubMenu(e: number)
     {
@@ -117,36 +88,3 @@ export class MenuService {
     }
 
 }
-
- // element.children.forEach(c =>{ 
-                    //     c.children = privilegios.filter(function(cc){
-                    //         return cc.idPadre === c.estructuraId
-                    //     });
-                        
-                    //     c.children.forEach(e => {
-                    //         e.children = privilegios.filter(function(ccc){
-                    //             return ccc.idPadre === e.estructuraId;
-                    //         });
-                           
-                    //         e.children.forEach(m => {
-                    //             m.children = privilegios.filter(function(cccc){
-                    //                 return cccc.idPadre == e.estructuraId;
-                    //             });
-                    //             subsubsub.push({
-                    //                 text: m.nombre,
-                    //                link: m.accion
-                    //             })
-
-                    //         subsub.push({
-                    //             text: e.nombre,
-                    //             link: e.accion,
-                    //             submenu: subsubsub
-                    //          })
-                    //     })
-                    //     sub.push({
-                    //         text: c.nombre,
-                    //         link: c.accion, 
-                    //         submenu: subsub
-     
-                    //     })
-                    // }).

@@ -17,22 +17,22 @@ import { UserblockService } from './sidebar/userblock/userblock.service';
         UserblockService
     ],
     declarations: [
-        LayoutComponent,
-        SidebarComponent,
         UserblockComponent,
         HeaderComponent,
         NavsearchComponent,
         OffsidebarComponent,
-        FooterComponent
+        FooterComponent,
+        SidebarComponent,
+        LayoutComponent
     ],
     exports: [
-        LayoutComponent,
-        SidebarComponent,
         UserblockComponent,
         HeaderComponent,
         NavsearchComponent,
         OffsidebarComponent,
-        FooterComponent
+        FooterComponent,
+        SidebarComponent,
+        LayoutComponent
     ]
 })
 export class LayoutModule { }

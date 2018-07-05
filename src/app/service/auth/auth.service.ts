@@ -18,10 +18,6 @@ export class AuthService {
   {
     return this.http.get(this.UrlGetSession + '?p='+ password + '&e=' + email)
     .map(user => {
-        if (user) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.settings.user.name = 'DAMSA.NINIGUEZ'
-        }
         return user;
       }); 
   }

@@ -1,6 +1,6 @@
 import { AuthService } from './../../service/auth/auth.service';
 
-import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 declare var $: any;
 
@@ -22,8 +22,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     constructor(public menu: MenuService, public settings: SettingsService, public authservice: AuthService, public injector: Injector) {
 
-        this.menuItems = menu.setEstructuraMenu();
-
     }
 
     ngOnInit() {
@@ -41,6 +39,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
         // enable sidebar autoclose from extenal clicks
         this.anyClickClose();
+        this.menuItems = this.menu.setEstructuraMenu();
+
+        
 
     }
 

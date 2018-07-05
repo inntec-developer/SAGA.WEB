@@ -47,19 +47,6 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    GetSession(email, p)
-    {
-        this.service.GetSession(email, p)
-        .subscribe(
-            e=>{
-              console.log(e)
-                this.IdUser = e;
-                this.GetPrivilegios();
-              
-            }
-        )
-    }
-
     public GetPrivilegios()
     {
       this.service.GetPrivilegios(this.IdUser)
@@ -75,12 +62,11 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     if(data != 404 && data != 406){
-                        localStorage.setItem('usuario',data[0].usuario);
-                        localStorage.setItem('nombre', data[0].nombre);
+                        localStorage.setItem('usuario',data.usuario);
+                        localStorage.setItem('nombre', data.nombre);
                         localStorage.setItem('email', email);
-                        localStorage.setItem('id', data[0].id)
-                        this.IdUser = data[0].id;
-                        this.GetPrivilegios();
+                        localStorage.setItem('id', data.id)
+                        localStorage.setItem('privilegios', JSON.stringify(data.privilegios));
                         this.router.navigate(['/home']);
                     }
                     if(data == 404){
