@@ -1,13 +1,11 @@
-import { SelectModule } from 'ng2-select';
-import { forEach } from '@angular/router/src/utils/collection';
-import { element } from 'protractor';
-import { SettingsService } from './../settings/settings.service';
-
 import { Injectable } from '@angular/core';
+import { SelectModule } from 'ng2-select';
+import { SettingsService } from './../settings/settings.service';
+import { element } from 'protractor';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class MenuService {
-
     menuItems: Array<any>;
     submenu: Array<any> = [];
     constructor(private settings: SettingsService) {
@@ -37,6 +35,7 @@ export class MenuService {
 
     otraSub(modules, privilegios)
     {
+        ;
        var  menuList = [];
 
        modules.children = privilegios.filter(function(c){
@@ -44,20 +43,21 @@ export class MenuService {
         });
 
         modules.children.forEach(element => {
-            if( element.idPadre == modules.estructuraId)
-            { 
-                var submenu = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios)}
-                if(submenu.submenu.length === 0)
-                {
-                    menuList.push({text:submenu.text, link: submenu.link})
+            if(modules.tipoEstructuraId < 4){
+                if( element.idPadre == modules.estructuraId)
+                { 
+                    var submenu = {text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios)}
+                    if(submenu.submenu.length === 0)
+                    {
+                        menuList.push({text:submenu.text, link: submenu.link})
+                    }
+                    else
+                    {
+                    menuList.push(submenu);
+                    }
+                    // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
                 }
-                else
-                {
-                menuList.push(submenu);
-                }
-                // menuList.push({text: element.nombre, link: element.accion, submenu: this.otraSub(element, privilegios) })
             }
-          
         });
 
       
@@ -89,6 +89,7 @@ export class MenuService {
     }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
+        debugger;
         var privilegios = JSON.parse(localStorage.getItem('privilegios'));
 
         if( privilegios.length > 0)
@@ -102,17 +103,12 @@ export class MenuService {
            this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.otraSub(element, privilegios) })
         });   
 
-      console.log(this.menuItems)
-      console.log(modules)
-    }
-    else
-    {
-        console.log(localStorage.getItem(privilegios))
-        alert("error")
-    }
-        return this.menuItems;
+        console.log(this.menuItems)
+        console.log(modules)
+        }
+            return this.menuItems;
 
-    }
+        }
 
     setEstructuraSubMenu(e: number)
     {

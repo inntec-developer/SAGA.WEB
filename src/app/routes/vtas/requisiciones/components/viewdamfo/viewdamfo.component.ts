@@ -129,7 +129,7 @@ export class ViewdamfoComponent implements OnInit {
         
               }
               this.formPerfil.patchValue({
-                vBtra: data.vBtra,
+                vBtra: data.nombrePerfil,
                 edadMinima: data.edadMinima,
                 edadMaxima: data.edadMaxima,
                 genero: data.genero.genero,
