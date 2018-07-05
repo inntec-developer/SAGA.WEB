@@ -16,7 +16,6 @@ import { SettingsService } from '../../../core/settings/settings.service';
 export class LoginComponent implements OnInit {
 
     valForm: FormGroup;
-    IdUser;
     loading = false;
     returnUrl: string;
     failLogin: any;
@@ -45,15 +44,6 @@ export class LoginComponent implements OnInit {
         {
             this.login(value.email, value.password)
         }
-    }
-
-    public GetPrivilegios()
-    {
-      this.service.GetPrivilegios(this.IdUser)
-      .subscribe(
-        e=>{
-            localStorage.setItem('privilegios', JSON.stringify(e));
-        })
     }
 
     login(email: string, password: string) {
