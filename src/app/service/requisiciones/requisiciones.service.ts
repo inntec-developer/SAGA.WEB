@@ -72,8 +72,8 @@ export class RequisicionesService {
               .catch(this.handleError);
   }
   //Recupera la información de las requisiciones que se an generado.
-  getRequisiciones() : Observable<any>{
-    return this.http.get(this.urlGetRequisicionesAll)
+  getRequisiciones(user : string) : Observable<any>{
+    return this.http.get(this.urlGetRequisicionesAll + user)
       .map(result => result.json())
       .catch(this.handleError);
   }

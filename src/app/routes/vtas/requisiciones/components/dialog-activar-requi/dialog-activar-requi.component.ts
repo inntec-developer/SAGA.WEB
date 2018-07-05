@@ -29,8 +29,9 @@ export class DialogActivarRequiComponent implements OnInit {
   infoReactivarRequi : any;
   return: any;
   folio: number;
+  loading : boolean;
 
-  //Configuracion de mensaje
+  // Configuracion de mensaje
   toaster: any;
   ToasterConfig: any;
   toasterconfig: ToasterConfig =  new ToasterConfig({
@@ -40,7 +41,7 @@ export class DialogActivarRequiComponent implements OnInit {
     showCloseButton: true,
     mouseoverTimerStop: true
   });
-  //Creacion de mensaje
+  // Creacion de mensaje
   popToast(type, title, body){
     var toast : Toast = {
       type:type,
@@ -61,14 +62,15 @@ export class DialogActivarRequiComponent implements OnInit {
   }
 
   reActivarRequisicion(){
+    this.loading = true;
     this.service.reActivarRequisicion(this.infoReactivarRequi)
     .subscribe(data => {
       if(data == 200){
-        this.popToast('success', 'Requisición', 'Se re-activo correctamente la requisicion.' + this.folio);
         this.dialogReActivar.close();
       }
       else{
         this.popToast('danger', 'Requisición','Oops!! No se puedo cancelar la requisición ' + this.folio);
+        this.loading = false;
       }
     })
   }

@@ -26,15 +26,14 @@ export class DialogCancelRequiComponent implements OnInit {
     private settings : SettingsService
   ) { }
 
-  //Varibales de control
+  // Varibales de control
   requisicion : any[];
   infoCancelRequi : any;
   return: any;
   folio: number;
+  loading : boolean;
 
-
-
-  //Configuracion de mensaje
+  // Configuracion de mensaje
   toaster: any;
   ToasterConfig: any;
   toasterconfig: ToasterConfig =  new ToasterConfig({
@@ -44,7 +43,7 @@ export class DialogCancelRequiComponent implements OnInit {
     showCloseButton: true,
     mouseoverTimerStop: true
   });
-  //Creacion de mensaje
+  // Creacion de mensaje
   popToast(type, title, body){
     var toast : Toast = {
       type:type,
@@ -65,14 +64,15 @@ export class DialogCancelRequiComponent implements OnInit {
   }
 
   cancelRequisicion(){
+    this.loading = true;
     this.service.cancelRequisicion(this.infoCancelRequi)
     .subscribe(data => {
       if(data == 200){
-        this.popToast('success', 'Requisición', 'Se cacelo correctamente la requisicion.' + this.folio);
         this.dialogCancel.close();
       }
       else{
         this.popToast('warning', 'Requisición','Oops!! No se puedo cancelar la requisición ' + this.folio);
+        this.loading = false;
       }
     })
   }

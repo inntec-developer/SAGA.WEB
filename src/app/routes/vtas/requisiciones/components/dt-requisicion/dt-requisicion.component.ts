@@ -66,7 +66,7 @@ export class DtRequisicionComponent implements OnInit {
   }
 
   getDateRequisiciones(){
-    this.service.getRequisiciones().subscribe(data => {
+    this.service.getRequisiciones(localStorage.getItem('usuario')).subscribe(data => {
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;

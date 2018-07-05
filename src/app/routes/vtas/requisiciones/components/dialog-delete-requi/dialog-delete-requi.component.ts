@@ -30,6 +30,7 @@ export class DialogDeleteRequiComponent implements OnInit {
    return: any;
    folio: number;
    success : boolean;
+   loading : boolean;
   
    
 
@@ -63,14 +64,15 @@ export class DialogDeleteRequiComponent implements OnInit {
   }
 
   deleteRequisicion(){
+    this.loading = true;
     this.service.deleteRequisicion(this.infoDeleteRequi)
     .subscribe(data => {
       if(data == 200){
-        this.popToast('success', 'Requisicion','Se elimino successamente la requisición ' + this.folio);
         this.dialogDelete.close();
       }
       else{
         this.popToast('danger', 'Requisición','Oops!! No se puedo eliminar la requisición ' + this.folio);
+        this.loading = false;;
       }
     });
   }
@@ -78,5 +80,4 @@ export class DialogDeleteRequiComponent implements OnInit {
   onCloseDialog(){
     this.dialogDelete.close();
   }
-
 }
