@@ -198,7 +198,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       this.timerest = Math.round((hoy.getTime() - fchliberacion.getTime()) / diaEnMils * -24);
     });
     // Recargamos de nuevo la vacante con el apartado. ***
-    this.openDialog(this.candidatodtl[0].candidatoId);
+    this.vercandidato(this.candidatodtl[0].candidatoId);
   }
 
   // Proceso de liberación del candidato. ***
@@ -208,7 +208,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       this.pop('Hola', false, 0, 'Liberado', data);
     })
     // Recargamos de nuevo la vacante con el borrado. ***
-    this.openDialog(this.candidatodtl[0].candidatoId);
+    this.vercandidato(this.candidatodtl[0].candidatoId);
   }
 
   // Mensajes de confirmación o error. ***
