@@ -50,7 +50,7 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </mat-header-cell>
         <mat-cell *matCellDef="let candidatos">
-          <button class="btn btn-warning btn-outline" type="button" (click)="openDialog(candidatos.idCandidato)" matTooltip="Ver detalles">
+          <button class="btn btn-warning btn-outline" type="button" (click)="vercandidato(candidatos.idCandidato)" matTooltip="Ver detalles">
             <em class="fa fa-eye"></em></button>
       </mat-cell>
     </ng-container>
@@ -113,7 +113,7 @@
                           <h3 *ngIf="!Status == 0" class="m-0">Apartado por: {{Reclutador}}</h3>
                           <h3 *ngIf="Status == 0" >{{Reclutador}}</h3>
                           <p *ngIf="!Status == 0" ></p>
-                          <p *ngIf="!Status == 0" >Te restan 10 hrs.</p>
+                          <p *ngIf="!Status == 0" >Te restan {{timerest}} hrs.</p>
                       </div>
                   </div>
             </div>

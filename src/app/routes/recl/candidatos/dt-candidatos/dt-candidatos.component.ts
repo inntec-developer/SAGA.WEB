@@ -44,6 +44,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       positionClass: 'toast-bottom-right',
       showCloseButton: true
   });
+  timerest: number;
 
   // Objeto para el apartado de candidato. ***
   public Apartado: FormGroup;
@@ -114,10 +115,11 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   // Boton de ver de la tabla de candidatos. ***
-  openDialog(id): void {
+  vercandidato(id): void {
    // Buscamos el detalle del candidato seleccionado. ***
     this.service.getcandidatodtl(id)
     .subscribe(data => {
+      debugger;
       this.candidatodtl = data;
 
       // Buscamos el estatus del candidato del apartado o liberado. ***
@@ -141,7 +143,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
               this.NumPostulaciones = postulaciones.length;
         });
         // Buscamos las vacantes de la celula o los asignados al reclutador. ***
-        this.service.getvacantes()
+        this.service.getvacantes(localStorage.getItem('id'))
             .subscribe(vacantes => {
               this.vacantes = vacantes;
               this.arrayvacantes = this.vacantes;
@@ -179,14 +181,22 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     let Apartar: Apartado = new Apartado();
     Apartar.CandidatoId = this.candidatodtl[0].candidatoId;
     Apartar.RequisicionId = idvct;
-    Apartar.Reclutador = 'Inntec';
+    Apartar.Reclutador = localStorage.getItem('nombre');
     Apartar.Estatus = 1;
     Apartar.TpContrato = 2;
     // Se manda el objeto con los datos necesarios para su inserción al servicio. ***
     this.service.postApartar(Apartar)
     .subscribe(data => {
       this.pop(data.mensaje, true, data.estatus, 'Apartado', data.reclutador);
-    })
+      debugger;
+      let diaEnMils = 1000 * 60 * 60 * 24;
+      let fchapartado = new Date(data.fch_Creacion.substr(0, 10));
+      fchapartado.setDate(fchapartado.getDate() + 1);
+      let fchliberacion = new Date();
+      fchliberacion.setDate(fchapartado.getDate() + 2);
+      const hoy = new Date();
+      this.timerest = Math.round((hoy.getTime() - fchliberacion.getTime()) / diaEnMils * -24);
+    });
     // Recargamos de nuevo la vacante con el apartado. ***
     this.openDialog(this.candidatodtl[0].candidatoId);
   }
@@ -282,7 +292,6 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
     // Función de paginador para afectación de los numeros de registros y página.
     paginatev(eventv?: PageEvent) {
-    debugger;
      if (eventv.length > eventv.pageSize){
         this.firstv = eventv.pageIndex;
         this.rowsv = eventv.pageSize;

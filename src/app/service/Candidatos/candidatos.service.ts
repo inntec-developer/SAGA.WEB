@@ -138,8 +138,8 @@ getpostulaciones(Id: any): Observable<any> { // Obtenemos las postulaciones del 
        .catch(this.handleError);
 }
 
-getvacantes(){
-  return this.http.get(this.UrlVacantes)
+    getvacantes(Id: any): Observable<any> { // Obtenemos solo las vacantes del reclutador o de la celula a la que pertenece.
+  return this.http.get(this.UrlVacantes + '?IdUsuario=' + Id)
         .map(result => result.json())
         .catch(this.handleError);
 }
