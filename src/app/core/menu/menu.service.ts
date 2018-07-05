@@ -9,7 +9,6 @@ export class MenuService {
     {
         this.menuItems = [];
     }
-
     addMenu(items: Array<{
         text: string,
         heading?: boolean,
@@ -18,8 +17,7 @@ export class MenuService {
         target?: string,   // anchor target="_blank|_self|_parent|_top|framename"
         icon?: string,
         alert?: string,
-        submenu?: Array<any>,
-        estructura?: number
+        submenu?: Array<any>
         
     }>) {
         items.forEach((item) => {
@@ -34,12 +32,15 @@ export class MenuService {
     /*recursividad para generar el menu*/
     setSubMenu(modules, privilegios)
     {
+        
         var  menuList = [];
 
         modules.children = privilegios.filter(function(c){
          return c.idPadre === modules.estructuraId
          });
- 
+
+        if(modules.children != null)
+        {
          modules.children.forEach(element => {
              if(modules.tipoEstructuraId < 4){ //para limitar lo que se puede ver en el menu
                  if( element.idPadre == modules.estructuraId)
@@ -57,32 +58,35 @@ export class MenuService {
                  }
              }
          });
-
+        }
          return menuList
        
     }
     setEstructuraMenu() //creo el menu dependiendo de los privilegios de usuario
     {
         var privilegios = JSON.parse(localStorage.getItem('privilegios'));
-        
-        if(privilegios != [])
+
+        if(this.menuItems.length > 2)
         {
-            var modules = privilegios.filter(function(row){
-                        return row.tipoEstructuraId === 2
-                        });
-            
-            modules.forEach(element => {
-                    this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.setSubMenu(element, privilegios) })
-                    });   
-
-            return this.menuItems;
+            this.menuItems.splice(2, this.menuItems.length - 2)
         }
+
+        var modules = privilegios.filter(function(row){
+                   return row.tipoEstructuraId === 2
+                    });
+
+        modules.forEach(element => {
+            this.menuItems.push( { text: element.nombre, icon: element.icono, submenu: this.setSubMenu(element, privilegios) })
+        });   
+
+        modules = [];
+        return this.menuItems;
     }
 
-    setEstructuraSubMenu(e: number)
-    {
-        return this.menuItems.forEach( x => x.submenu.estructura = e)
+//   setEstructuraSubMenu(e: number)
+//     {
+//         return this.menuItems.forEach( x => x.submenu.estructura = e)
 
-    }
+//     }
 
 }

@@ -50,17 +50,14 @@ const Reclutamiento = {
             {
                 text: 'DAMFO 290',
                 link: '/reclutamiento/290',
-                estructura: 0
             },
             {
               text: 'Candidatos',
               link: '/reclutamiento/candidatos', 
-              estructura: 0
             },
             {
               text: 'Vacantes',
               link: '/reclutamiento/vacantes', 
-              estructura: 0
             }
         ]
 };

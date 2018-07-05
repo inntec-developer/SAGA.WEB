@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
     constructor(public menu: MenuService, public settings: SettingsService, public authservice: AuthService, public injector: Injector) {
-
+        this.menuItems = this.menu.setEstructuraMenu();
     }
 
     ngOnInit() {
@@ -39,10 +39,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
         // enable sidebar autoclose from extenal clicks
         this.anyClickClose();
-        this.menuItems = this.menu.setEstructuraMenu();
-
-        
-
     }
 
     anyClickClose() {
