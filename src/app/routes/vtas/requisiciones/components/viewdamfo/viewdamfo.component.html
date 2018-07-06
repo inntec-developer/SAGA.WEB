@@ -13,18 +13,8 @@
 <div class="row">
   <!-- <button (click)="print()">Imprimir</button> -->
   <div class="col-md-12 text-right">
-    <button  (click)="openDialog()"
-            class="mb-md btn-md btn btn-success btn-outline"
-            type="button"
-            matTooltip="Generar Requisición">
-      <em class="icon-docs"></em>
-    </button>
-    <button class="mb-md btn-md btn btn-warning btn-outline"
-            type="button"
-            matTooltip="Regresar"
-            [routerLink]="['/ventas/crearRequisicion']">
-      <em class="icon-action-undo"></em>
-    </button>
+    <btn-docs (click)="openDialog()" matTooltip="Generar Requisición"></btn-docs>
+    <btn-return [routerLink]="['/ventas/crearRequisicion']" matTooltip="Regresar"></btn-return>
   </div>
 </div>
 <br/>

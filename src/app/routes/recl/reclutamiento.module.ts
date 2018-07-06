@@ -50,6 +50,8 @@ import { ComponentsModule } from '../../components/components.module';
 import { CpComponent } from './candidatos/busqueda/cp/cp.component';
 import { CustomFormsModule } from 'ng2-validation';
 import { Damfo290Component } from './damfo290/damfo290.component';
+import { DialogAssingRequiComponent } from './vacantes/vacantes/components/dialogs/dialog-assing-requi/dialog-assing-requi.component';
+import { DialogShowRequiComponent } from './vacantes/vacantes/components/dialogs/dialog-show-requi/dialog-show-requi.component';
 import { DialogcandidatosComponent } from './candidatos/dt-candidatos/dialogcandidatos/dialogcandidatos.component';
 import { DisenadorVacanteComponent } from './vacantes/disenador-vacante/disenador-vacante.component';
 import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.component';
@@ -58,7 +60,6 @@ import { DtVacantesReclutadorComponent } from './vacantes/vacantes/components/dt
 import { EdadComponent } from './candidatos/busqueda/edad/edad.component';
 import { EstadoComponent } from './candidatos/busqueda/estado/estado.component';
 import { FileUploadModule } from 'ng2-file-upload';
-import { FormControl } from '@angular/forms';
 import { GeneroComponent } from './candidatos/busqueda/genero/genero.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
@@ -82,8 +83,6 @@ import { VacantesReclutadorComponent } from './vacantes/vacantes/vacantes-reclut
 import { VehpropioComponent } from './candidatos/busqueda/vehpropio/vehpropio.component';
 import { VentaModule } from '../vtas/ventas.module';
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
-import { map } from 'rxjs/operators/map';
-import { startWith } from 'rxjs/operators/startWith';
 
 // Providers
 
@@ -126,9 +125,12 @@ const routes: Routes = [
                     ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent,
                     VehpropioComponent, NivestudiosComponent, IdiomasComponent,
                     PerfilComponent, DtVacantesComponent, DtCandidatosComponent,
-                     DialogcandidatosComponent, DisenadorVacanteComponent, DtVacantesReclutadorComponent, VacantesReclutadorComponent],
+                     DialogcandidatosComponent, DisenadorVacanteComponent, 
+                     DtVacantesReclutadorComponent, VacantesReclutadorComponent,
+                     DialogShowRequiComponent,
+                     DialogAssingRequiComponent],
     entryComponents: [
-       DialogcandidatosComponent],
+       DialogcandidatosComponent, DialogShowRequiComponent, DialogAssingRequiComponent],
     exports: [ RouterModule ]
 })
 

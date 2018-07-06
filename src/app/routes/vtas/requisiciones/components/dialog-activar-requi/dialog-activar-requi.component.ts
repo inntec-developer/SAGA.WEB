@@ -1,10 +1,8 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Toast, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 
 import { RequisicionesService } from './../../../../../service/requisiciones/requisiciones.service';
-import { SettingsService } from './../../../../../core/settings/settings.service';
 import { ToasterService } from 'angular2-toaster';
 
 @Component({
@@ -14,22 +12,26 @@ import { ToasterService } from 'angular2-toaster';
   providers : [RequisicionesService] 
 })
 export class DialogActivarRequiComponent implements OnInit {
-
-  constructor(
-    private dialogReActivar : MatDialogRef<DialogActivarRequiComponent>,
-    private _Router : Router,
-    private _Route: ActivatedRoute,
-    private toasterService: ToasterService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private service : RequisicionesService,
-    private settings : SettingsService
-  ) { }
-
+  textBtnCerrar: string;
+  textBtnAceptar: string;
   requisicion : any[];
   infoReactivarRequi : any;
   return: any;
   folio: number;
   loading : boolean;
+  
+
+  constructor(
+    private dialogReActivar : MatDialogRef<DialogActivarRequiComponent>,
+    private toasterService: ToasterService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private service : RequisicionesService,
+  ) { 
+    this.textBtnCerrar = 'Cerrar';
+    this.textBtnAceptar = 'Aceptar';
+  }
+
+  
 
   // Configuracion de mensaje
   toaster: any;
@@ -57,7 +59,7 @@ export class DialogActivarRequiComponent implements OnInit {
     this.folio = this.data.folio;
     this.infoReactivarRequi = {
       id : this.data.id,
-      UsuarioMod: this.settings.user.name
+      UsuarioMod: localStorage.getItem('usuario')
     }
   }
 

@@ -15,6 +15,14 @@ import { providers } from 'ng2-dnd';
   providers : [RequisicionesService] 
 })
 export class DialogCancelRequiComponent implements OnInit {
+  // Varibales de control
+  requisicion : any[];
+  infoCancelRequi : any;
+  return: any;
+  folio: number;
+  loading : boolean;
+  textBtnCerrar: string;
+  textBtnAceptar: string;
 
   constructor(
     private dialogCancel : MatDialogRef<DialogCancelRequiComponent>,
@@ -24,14 +32,12 @@ export class DialogCancelRequiComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private service : RequisicionesService,
     private settings : SettingsService
-  ) { }
+  ) { 
+    this.textBtnCerrar = 'Cerrar';
+    this.textBtnAceptar = 'Aceptar';
+  }
 
-  // Varibales de control
-  requisicion : any[];
-  infoCancelRequi : any;
-  return: any;
-  folio: number;
-  loading : boolean;
+  
 
   // Configuracion de mensaje
   toaster: any;
