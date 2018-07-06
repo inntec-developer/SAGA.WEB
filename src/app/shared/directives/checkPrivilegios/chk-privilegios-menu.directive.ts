@@ -1,5 +1,6 @@
+import { ButtonDeleteComponent } from './../../../components/buttons/button-delete/button-delete.component';
 import { Directive, HostBinding, HostListener, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import {ButtonDeleteComponent} from '../../../components/buttons/button-delete/button-delete.component';
+
 @Directive({
   selector: '[chkPrivilegiosMenu]'
 })
