@@ -32,7 +32,8 @@ export class DtVacantesReclutadorComponent implements OnInit {
   }
 
   getDateRequisiciones(){
-    this.service.getRequisiciones(localStorage.getItem('usuario')).subscribe(data => {
+    debugger
+    this.service.getRequiReclutador(localStorage.getItem('id')).subscribe(data => {
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;

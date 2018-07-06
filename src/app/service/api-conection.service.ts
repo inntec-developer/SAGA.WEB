@@ -1,22 +1,12 @@
 export class ApiConection {
   /*Servicio de purbeas locales*/
   public static ServiceUrl = 'http://localhost:33333/api/';
-  /*Servicio de purbeas locales Publicado IIS*/
-  //public static ServiceUrl = 'http://192.168.8.130:3333/api/';
-  //public static ServiceUrlTemporal = 'http://localhost:54462/api/';
-  /*Coneccion en servidor de purebas sistemas (SandBoxSAGA)*/
-  //public static ServiceUrl = 'http://192.168.8.146:33333/api/';
-  /*Coneccion en servidor de purebas Usarios (DataBaseSAGA)*/
-  //public static ServiceUrl = 'http://192.168.8.146:33333/api/';
-  /*Coneccion de Pre - Produccion (?)*/
-  //public static ServiceUrl = 'http://192.168.8.246:611/api/';
-
   // Agregar lsa conecciones necesarias en las cuales se hara referencia.
 
-  /*Componentes */
+  /* Componentes */
   public static GetUserGroup = 'AsignacionRequi/getUserGroup';
 
-  /*Catalogos*/
+  /* Catalogos */
   public static GetDocumentosDamsa = 'Catalogos/getDocDamsa';
   public static GetPrestacionesLey = 'Catalogos/getPrestacionesLey';
   public static getTiposUsuarios = 'Catalogos/getTipos';
@@ -26,7 +16,7 @@ export class ApiConection {
   public static GetGrupos = 'Catalogos/getGrupos';
   public static GetRoles = 'Catalogos/getRoles';
 
-  /*Reclutamiento*/
+  /* Reclutamiento */
   public static Damfo290GetById = 'Damfo290/getById?id=';
   public static GetViewDamfos = "Damfo290/getViewDamfos";
 
@@ -41,6 +31,7 @@ export class ApiConection {
   public static CancelRequisicion = 'Requisiciones/cancelREquisiciones';
   public static ReActivarRequisicion = 'Requisiciones/reActivarRequisiciones';
   public static GetUserGroups = 'Requisiciones/getUserGroups'
+  public static GetRequiReclutador = 'Requisiciones/getRequiReclutador?IdUsuario=';
 
 
   /* Candidatos */
@@ -64,7 +55,7 @@ export class ApiConection {
   public static Liberar = 'Candidatos/postliberado';
   public static VacantesDtl = 'Candidatos/getvacantesdtl';
 
-  /*Vacantes*/
+  /* Vacantes */
   public static getRequis = '/dvacante/get';
   public static setDetalle = '/dvacante/setDetalle';
   public static setResumen = '/dvacante/setResumen';
@@ -88,7 +79,7 @@ export class ApiConection {
   public static getCampos = '/dvacante/getCampos';
   public static getClasificaciones = '/dvacante/getClasificaciones';
 
-  /*Admin*/
+  /* Admin */
   public static getDtosPersonal = '/admin/get';
   public static getUsuariosByDepa = '/admin/getUsuarioByDepa';
   public static addRol = '/admin/agregarRol';

@@ -12,10 +12,10 @@ import { ApiConection } from './../api-conection.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-//API Conection
+// API Conection
 
 
-//MODELS
+// MODELS
 
 
 @Injectable()
@@ -27,6 +27,7 @@ export class RequisicionesService {
   private urlGetRequisicionByFolio = ApiConection.ServiceUrl + ApiConection.GetRequisicionByFolio;
   private urlGetDamfoById = ApiConection.ServiceUrl + ApiConection.Damfo290GetById;
   private urlGetRequisicionesAll = ApiConection.ServiceUrl + ApiConection.GetRequisicionesAll;
+  private urlGetRequiReclutador = ApiConection.ServiceUrl + ApiConection.GetRequiReclutador;
   private urlUpdateRequisicion = ApiConection.ServiceUrl + ApiConection.UpdateRequisicion;
   private urlDeleteRequisicion = ApiConection.ServiceUrl + ApiConection.DeleteRequisicion;
   private urlCancelRequisicion = ApiConection.ServiceUrl + ApiConection.CancelRequisicion;
@@ -34,13 +35,13 @@ export class RequisicionesService {
 
 
   constructor(private http: Http) { }
-  //Recupera todos los damfos que esten dados de alta y se encuentren activos
+  // Recupera todos los damfos que esten dados de alta y se encuentren activos
   getDamgo290(): Observable<any>{
     return this.http.get(this.urlGetViewDamfos)
       .map(result => result.json())
       .catch(this.handleError);
   }
-  //REcupera las direcciones del cliente que se seleccione para generar Requisicion
+  // Recupera las direcciones del cliente que se seleccione para generar Requisicion
   getAddress(damfoId: string): Observable<any>{
     return this.http.get(this.urlAddress + damfoId)
       .map(result => result.json())
@@ -65,15 +66,21 @@ export class RequisicionesService {
               .map(result => result.json())
               .catch(this.handleError);
   }
-  //Recupera la información completa del DAMFO-290 que se requiera.
+  // Recupera la información completa del DAMFO-290 que se requiera.
   getDamfoById(damfoId: string){
     return this.http.get(this.urlGetDamfoById + damfoId)
               .map(result => result.json())
               .catch(this.handleError);
   }
-  //Recupera la información de las requisiciones que se an generado.
+  // Recupera la información de las requisiciones que se han generado.
   getRequisiciones(user : string) : Observable<any>{
     return this.http.get(this.urlGetRequisicionesAll + user)
+      .map(result => result.json())
+      .catch(this.handleError);
+  }
+  // Recupera la información de las requisiciones que se han asignado al reclutador.
+  getRequiReclutador(user : string) : Observable<any>{
+    return this.http.get(this.urlGetRequiReclutador + user)
       .map(result => result.json())
       .catch(this.handleError);
   }
@@ -110,7 +117,7 @@ export class RequisicionesService {
             .catch(this.handleError);
   }
 
-  //Muestra un error en consola y regresa el mismo al Frond-End en caso de que se genere el mismo.
+  // Muestra un error en consola y regresa el mismo al Frond-End en caso de que se genere el mismo.
   public handleError(error: any ){
     console.log('Error Internar Server', error);
     if(error instanceof Response){
@@ -118,7 +125,4 @@ export class RequisicionesService {
     }
     return Observable.throw(error || 'Back-End server error');
   }
-
-
-
 }
