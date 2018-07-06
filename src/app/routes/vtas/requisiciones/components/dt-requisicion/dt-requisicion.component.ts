@@ -10,10 +10,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RequisicionesService } from '../../../../../service/index';
 import { element } from 'protractor';
 
-//Component
+// Component
 
 
-//Servicios
+// Servicios
 
 
 
@@ -34,7 +34,7 @@ export class DtRequisicionComponent implements OnInit {
     private toasterService: ToasterService
 
   ) { }
-  //Configuracion de mensaje.
+  // Configuracion de mensaje.
   toaster: any;
   toasterConfig: any;
   toasterconfig: ToasterConfig = new ToasterConfig({
@@ -43,7 +43,7 @@ export class DtRequisicionComponent implements OnInit {
     showCloseButton: true,
     mouseoverTimerStop: true,
   });
-  //creacion de mensaje
+  // Creacion de mensaje
   popToast(type, title, body){
     var toast: Toast = {
       type: type,
@@ -54,7 +54,7 @@ export class DtRequisicionComponent implements OnInit {
     this.toasterService.pop(toast);
   }
 
-  //Variables Globales
+  // Variables Globales
   requisicion: any;
   arrayRequisicion: any[];
   public dataSource = new MatTableDataSource(<any>[]);
@@ -166,11 +166,11 @@ export class DtRequisicionComponent implements OnInit {
     }
     this.dataSource = new MatTableDataSource(this.requisicion);
   }
-  //Termino de Paginador
+  // Termino de Paginador
 
 
-  //Display para mostrar los objetos en el Grid
-  displayedColumns = [
+  // Display para mostrar los objetos en el Grid
+  private _displayedColumns = [
     'folio',
     'cliente',
     'rfc',
@@ -185,6 +185,12 @@ export class DtRequisicionComponent implements OnInit {
     'prioridad',
     'accion'
   ];
+  public get displayedColumns() {
+    return this._displayedColumns;
+  }
+  public set displayedColumns(value) {
+    this._displayedColumns = value;
+  }
   // Filtro dentro del Grid
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

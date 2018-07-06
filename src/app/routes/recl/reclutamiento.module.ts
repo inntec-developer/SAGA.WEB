@@ -54,7 +54,7 @@ import { DialogcandidatosComponent } from './candidatos/dt-candidatos/dialogcand
 import { DisenadorVacanteComponent } from './vacantes/disenador-vacante/disenador-vacante.component';
 import { DtCandidatosComponent } from './candidatos/dt-candidatos/dt-candidatos.component';
 import { DtVacantesComponent } from './candidatos/dt-vacantes/dt-vacantes.component';
-import { DtVacantesReclutadorComponent } from './vacantes/vacantes/dt-vacantes-reclutador/dt-vacantes-reclutador.component';
+import { DtVacantesReclutadorComponent } from './vacantes/vacantes/components/dt-vacantes-reclutador/dt-vacantes-reclutador.component';
 import { EdadComponent } from './candidatos/busqueda/edad/edad.component';
 import { EstadoComponent } from './candidatos/busqueda/estado/estado.component';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -78,6 +78,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TplicenciaComponent } from './candidatos/busqueda/tplicencia/tplicencia.component';
 import { VacantesComponent } from './vacantes/vacantes.component';
+import { VacantesReclutadorComponent } from './vacantes/vacantes/vacantes-reclutador/vacantes-reclutador.component';
 import { VehpropioComponent } from './candidatos/busqueda/vehpropio/vehpropio.component';
 import { VentaModule } from '../vtas/ventas.module';
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
@@ -96,7 +97,7 @@ const routes: Routes = [
     { path: 'vacantes', component: VacantesComponent },
     { path: 'disenador', component: DisenadorVacanteComponent },
     { path: 'configuracionVacante/:Requi', component: DisenadorVacanteComponent },
-    { path: 'vacantes', component: DtVacantesReclutadorComponent }
+    { path: 'vacantesReclutador', component: VacantesReclutadorComponent }
 ];
 
 @NgModule({
@@ -125,7 +126,7 @@ const routes: Routes = [
                     ReubicacionComponent, PcondiscapacidadComponent, TplicenciaComponent,
                     VehpropioComponent, NivestudiosComponent, IdiomasComponent,
                     PerfilComponent, DtVacantesComponent, DtCandidatosComponent,
-                     DialogcandidatosComponent, DisenadorVacanteComponent, DtVacantesReclutadorComponent],
+                     DialogcandidatosComponent, DisenadorVacanteComponent, DtVacantesReclutadorComponent, VacantesReclutadorComponent],
     entryComponents: [
        DialogcandidatosComponent],
     exports: [ RouterModule ]
