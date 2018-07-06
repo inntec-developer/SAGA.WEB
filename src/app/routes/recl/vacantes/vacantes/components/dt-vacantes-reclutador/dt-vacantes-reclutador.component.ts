@@ -84,6 +84,3 @@ export interface Element {
   prioridad: number;
 }
 
-
-
-}
