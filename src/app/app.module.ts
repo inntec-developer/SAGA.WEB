@@ -9,12 +9,11 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
-import { LoginComponent } from './routes/pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { ButtonDeleteComponent } from './components/buttons/button-delete/button-delete.component'
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,6 +42,7 @@ export function createTranslateLoader(http: HttpClient) {
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
+        ButtonDeleteComponent
         
         
     ],

@@ -1,34 +1,35 @@
-import { element } from 'protractor';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Directive, ElementRef, Renderer2, OnInit } from '@angular/core';
-import { SettingsService } from '../../../core/settings/settings.service';
-
+import { Directive, HostBinding, HostListener, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {ButtonDeleteComponent} from '../../../components/buttons/button-delete/button-delete.component';
 @Directive({
   selector: '[chkPrivilegiosMenu]'
 })
-export class ChkPrivilegiosMenuDirective implements OnInit {
+export class ChkPrivilegiosMenuDirective implements AfterViewInit {
+  @ViewChild('delete') btnDelete: ButtonDeleteComponent;
+  @HostBinding('hidden')
+  hideRouterLink:boolean;
 
-  constructor(private el: ElementRef, private renderer : Renderer2, public settings: SettingsService) {
-   
-   }
-   ngOnInit(){
-    
-    let privilegios = this.settings.user.privilegios;
-    privilegios.forEach(element => {
-      if(element.estructuraId === 1)
-      {
-        this.renderer.setStyle(this.el.nativeElement, 'color', 'red');
-        this.renderer.setStyle(this.el.nativeElement, 'font-weight', 'bold');
-        console.log(this.settings.user)
-      }
-      else
-      {
-        this.renderer.setStyle(this.el.nativeElement, 'color', 'yellow');
-        this.renderer.setStyle(this.el.nativeElement, 'font-weight', 'bold');
-      }
+  constructor(private eltRef:ElementRef){}
+  // @HostBinding('disabled')  isHidden: boolean = true;
+  @HostListener('disabled', ['$event']) onclick(btn){
+    let privilegios = JSON.parse(localStorage.getItem('privilegios'))
+    console.log(privilegios)
+    console.log(btn)
+  
+  }
+
+  ngAfterViewInit(){ 
+
+   console.log( this.eltRef.nativeElement);
+  console.log(this.btnDelete)
+   //how to get access to this private variable?
+  //  console.log(this.routerLink.queryParams.component.routeData.data);
+   //place for implementation of service:acl
+  //  if(true) {
+  //      let el : HTMLElement = this.eltRef.nativeElement;
+  //      el.parentNode.removeChild(el);
+  //  }
+}
+
+  
       
-    });
-   
-   }
-
 }

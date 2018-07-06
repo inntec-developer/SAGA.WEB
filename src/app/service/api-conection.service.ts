@@ -101,4 +101,5 @@ export class ApiConection {
   public static getPrivilegios = '/admin/getPrivilegios';
   public static modificarPrivilegios = '/admin/modificarPrivilegios'
   public static getUsuariosByGrupo = '/admin/getUsuarioByGrupo';
+  public static deleteUserGroup = 'admin/deleteUserGroup';
 }

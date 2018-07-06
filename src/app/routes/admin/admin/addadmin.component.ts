@@ -15,7 +15,8 @@ export class AddadminComponent implements OnInit {
     formAdmin: FormGroup;
     ListEntidades: Array<any> = [];
     ListaPG: Array<any> = [];
-    listGrupos:  Array<any> = [];
+    listGrupos: Array<any> = [];
+    ListaBorrar:  Array<any> = [];
     IdGrupo: any = null;
     alert: string = "Drag users here...";
 
@@ -33,20 +34,40 @@ export class AddadminComponent implements OnInit {
        }
      }
  
+    DeleteUsers($event, index)
+    {
+      console.log(this.IdGrupo)
+      console.log(index)
+      var idx = this.ListaPG.findIndex(x => x.entidadId === index);
+
+      if(idx != -1)
+      {
+        this.ListaPG.splice(idx, 1)
+      }
+
+      let dts = { GrupoId: this.IdGrupo, EntidadId: index};
+      console.log(dts)
+      this.service.DeleteUserGroup(dts)
+      .subscribe(
+        e=>{
+       
+          console.log(e)
+        })
+
+
+    }
     resetBasket() {
         this.ListaPG = [];
-        this.listGrupos = [];
-        this.ngOnInit();
-
+        this.GetEntidades();
     }
 
     selected($event)
     {
       this.IdGrupo = $event.target.value; //dropdown grupos
-      console.log(this.ListaPG.findIndex(x => x.id === this.IdGrupo))
-      if(this.ListaPG.findIndex(x => x.id === this.IdGrupo) != -1)
+      var idx = this.ListaPG.findIndex(x => x.id === this.IdGrupo);
+      if(idx != -1)
       {
-        this.ListaPG.splice(this.ListaPG.findIndex(x => x.id === this.IdGrupo), 1)
+        this.ListaPG.splice(idx, 1)
       }
       this.GetUserByGroup(this.IdGrupo)
     }

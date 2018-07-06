@@ -22,7 +22,7 @@
     </div>
   </div> -->
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="panel panel-default">
         <div class="panel-heading text-center">USUARIOS</div>
           <div  class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades">
@@ -44,10 +44,10 @@
           </div>
         </div>
       </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Grupos:
-           <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event)" >
+           <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event); flag = true" >
               <option *ngFor="let user of listGrupos" [value]="user.id">{{user.nombre}}</option>
            </select>
           <span class="text-danger" *ngIf="formAdmin.controls['slcGrupo'].hasError('required')">Debe seleccionar un Grupo</span>
@@ -55,9 +55,13 @@
             <button [disabled]="formAdmin.invalid" class="mb-sm btn btn-sm btn-success btn-outline" matTooltip="Guardar Cambios" (click)="addUsuarioGrupo()">
                 <em class="fa fa-check"></em>
             </button>
-            <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Vaciar Lista" (click)="resetBasket()">
-                <em class="fa fa-trash-o"></em>
-            </button>
+            <span></span>
+            <btn-delete #delete chkPrivilegiosMenu matTooltip="Vaciar Lista" (click)="resetBasket()">
+              <em class="fa fa-trash-o"></em>
+            </btn-delete>
+            <btn-check id='check' chkPrivilegiosMenu matTooltip="Vaciar Lista" (click)="resetBasket()">
+              <em class="fa fa-trash-o"></em>
+            </btn-check>
           </div>
         </div>
      
@@ -65,40 +69,44 @@
         <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG">
           <p [hidden]="ListaPG.length > 0">{{alert}}</p>
           <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event, i)" >
+            <button matTooltip="Borrar Usuario de Grupo" *ngIf="flag" type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers($event, pg.entidadId)"> 
+              <span aria-hidden="true">&times;</span>
+            </button>
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
                   <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                  <p>Grupo: <span *ngFor="let e of pg.grupos">{{e.nombre}},  </span></p>
+                  <p>Grupo: <span *ngFor="let e of pg.grupos">{{e.grupo}},  </span></p>
                 </div>
               </div>
          </div>
         </div>
       </div>
       </div>
-      <!-- drag para eleiminar de grupo -->
+      <!-- drag para eleiminar de grupo
       <div class="col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading">Grupo         
-              <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Vaciar Lista" (click)="resetBasket()">
-                  <em class="fa fa-trash-o"></em>
-              </button>
+          <div class="panel-heading">Grupo: {{grupo}}
+            <button class="mb-sm btn btn-sm btn-danger btn-outline pull-right" matTooltip="Vaciar Lista" (click)="resetBasket()">
+              <em class="fa fa-trash-o"></em>
+            </button>
+          </div>
+          <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaBorrar">
+            <p [hidden]="ListaBorrar.length > 0">{{alert}}</p>
+            <div *ngFor="let lb of ListaBorrar; let i = index" class="panel panel-default mat-elevation-z8 media-heading margintextthumb"
+              dnd-sortable [sortableIndex]="i">
+              <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{lb.foto}}" alt="" />
+              <div class="media-body">
+                <div class="media-heading margintextthumb">
+                  <h4>{{lb.nombre + ' ' + lb.apellidoPaterno }}</h4>
+                  <br/>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG"  >
-            <p [hidden]="ListaPG.length > 0">{{alert}}</p>
-            <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event, i)" >
-                <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
-                <div class="media-body">
-                  <div class="media-heading margintextthumb">
-                    <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
-                    <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                    <p>Grupo: <span *ngFor="let e of pg.grupos">{{e.nombre}},  </span></p>
-                  </div>
-                </div>
-           </div>
         </div>
-    </div>
+      </div> -->
+  </div>
 </form>
 

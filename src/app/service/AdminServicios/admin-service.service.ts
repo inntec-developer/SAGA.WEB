@@ -42,6 +42,7 @@ export class AdminServiceService {
   private UrlGetPrivilegios = ApiConection.ServiceUrl+ApiConection.getPrivilegios;
   private UrlUpdatePrivilegios = ApiConection.ServiceUrl+ApiConection.modificarPrivilegios;
   private UrlGetUsuarioByGrupo = ApiConection.ServiceUrl+ApiConection.getUsuariosByGrupo;
+  private UrlDeleteUserGroup = ApiConection.ServiceUrl+ApiConection.deleteUserGroup;
 
   // Error.
   private handleError(error: any) {
@@ -259,6 +260,16 @@ export class AdminServiceService {
     return this.http.get(this.UrlDeleteRoles + '?id=' + data)
             .map(result => result.json())
             .catch(this.handleError);
+  }
+
+  DeleteUserGroup(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlDeleteUserGroup, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
   }
 
 

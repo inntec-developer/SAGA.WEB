@@ -1,7 +1,7 @@
 
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouterLink } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -44,11 +44,12 @@ import { PagesModule } from './../pages/pages.module';
 import {ComponentsModule} from './../../components/components.module';
 import { AuthService } from './../../service/auth/auth.service';
 import { AuthRolesGuard } from './../../auth-guard/auth-roles.guard';
+import {ChkPrivilegiosMenuDirective } from './../../shared/directives/checkPrivilegios/chk-privilegios-menu.directive';
 
 const routes: Routes = [
     { path: 'roles', component: AddRolesComponent },
     { path: 'agregar', component: AddPersonaComponent },
-    { path: 'grupo', component: AddadminComponent },
+    { path: 'grupo', component: AddadminComponent, data: {'resources':'account', 'privilages':'show'} },
     { path: 'grupoAdd', component: AddGrupoComponent },
     { path: 'rol', component: RolGrupoComponent },
     { path: 'privilegios', component: RollsStructComponent},
@@ -98,7 +99,8 @@ const routes: Routes = [
       RolGrupoComponent,
       UploadImgsComponent,
       RollsStructComponent,
-      RegistroComponent
+      RegistroComponent,
+      ChkPrivilegiosMenuDirective
     ],
     exports: [
         RouterModule,

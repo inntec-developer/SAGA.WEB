@@ -1,28 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, HostListener, ElementRef } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from './../service/auth/auth.service'
 import { SettingsService } from '../core/settings/settings.service';
+
 
 @Injectable()
 export class AuthRolesGuard implements CanActivate {
+
   constructor(
-    private authService: AuthService,
+    private el: ElementRef,
     private router: Router, 
     public settings: SettingsService ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      var privilegios = this.settings.user.privilegios;
-      if( privilegios.some( item => item.estructuraId == 4))
-      {
-        return true;
-      }
-      else
-      {
-        alert("No cuenta con permisos para esta seccion")
-        return false;
-      }
+      return this.onclick(state);
+
+     
   }
+  @HostListener('click', ['$event']) onclick(btn){
+
+    let privilegios = JSON.parse(localStorage.getItem('privilegios'))
+    let part = this.el.nativeElement.querySelector('btn-delete');
+    console.log(privilegios)
+    console.log(btn)
+    console.log(part)
+
+    return true;
+}
 }
