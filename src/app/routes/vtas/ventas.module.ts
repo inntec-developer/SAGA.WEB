@@ -83,11 +83,11 @@ import { ViewdamfoComponent } from './requisiciones/components/viewdamfo/viewdam
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
 
 const routes: Routes = [
-    { path: 'prospecto', component: ProspectoComponent },
+    { path: 'prospecto', component: ProspectoComponent, },
     { path: 'prospecto/:user', component: ProspectoComponent },
-    { path: 'requisicion', component: RequisicionComponent },
-    { path: 'crearRequisicion', component: DtCrearRequisicionComponent },
-    { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent },
+    { path: 'requisicion', component: RequisicionComponent, data:{componente:'Requisiciones'}},
+    { path: 'crearRequisicion', component: DtCrearRequisicionComponent},
+    { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent},
     { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent },
     { path: 'visualizarRequisicion/:IdRequi/:Folio', component: ViewRequisicionComponent },
     { path: 'edicionRequisicion/:IdRequi/:Folio', component: UpdateRequisicionComponent },

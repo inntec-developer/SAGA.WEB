@@ -1,6 +1,7 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Directive } from '@angular/core';
+
 import { style } from '@angular/animations';
-import { Directive, AfterViewInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
 
 @Directive({
   selector: '[chkPrivilegiosButtons]'

@@ -32,7 +32,7 @@ export class RequisicionesService {
   private urlDeleteRequisicion = ApiConection.ServiceUrl + ApiConection.DeleteRequisicion;
   private urlCancelRequisicion = ApiConection.ServiceUrl + ApiConection.CancelRequisicion;
   private urlReActivarRequisicion = ApiConection.ServiceUrl + ApiConection.ReActivarRequisicion;
-
+  private UrlAsignarRequisicion = ApiConection.ServiceUrl + ApiConection.AsignarRequisicion;
 
   constructor(private http: Http) { }
   // Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -113,6 +113,14 @@ export class RequisicionesService {
     let header = new Headers({'content-Type' : 'application/json'});
     let options = new RequestOptions({headers : header});
     return this.http.post(this.urlReActivarRequisicion, JSON.stringify(requi), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  asignarRequisicion(asignar : any) : Observable<any>{
+    let headers = new Headers({'Content-Type' : 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAsignarRequisicion, JSON.stringify(asignar), options )
             .map(result => result.json())
             .catch(this.handleError);
   }

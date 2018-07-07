@@ -168,7 +168,7 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
           fch_Cumplimiento : this.formRequi.get('fch_Cumplimiento').value,
           estatusId : this.formRequi.get('estatus').value,
           confidencial : this.formRequi.get('confidencial').value,
-          usuario : this.settings.user.name,
+          usuario : localStorage.getItem('usuario'),
           asignacionRequi: asg
       }
       this.requiUpdate = update;

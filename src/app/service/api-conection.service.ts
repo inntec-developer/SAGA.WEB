@@ -32,6 +32,7 @@ export class ApiConection {
   public static ReActivarRequisicion = 'Requisiciones/reActivarRequisiciones';
   public static GetUserGroups = 'Requisiciones/getUserGroups'
   public static GetRequiReclutador = 'Requisiciones/getRequiReclutador?IdUsuario=';
+  public static AsignarRequisicion = 'Requisiciones/asignacionRequisiciones'
 
 
   /* Candidatos */

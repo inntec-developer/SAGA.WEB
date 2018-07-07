@@ -96,7 +96,7 @@
       <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <btn-view (click)="openDialogShowRequi(element.id, element.folio)" matTooltip="Ver Requisición"></btn-view>
-          <btn-assign (click)="openDialogAssingRequi()" matTooltip="Asignar"></btn-assign>
+          <btn-assign (click)="openDialogAssingRequi(element)" matTooltip="Asignar"></btn-assign>
           <btn-print matTooltip="Imprimir"></btn-print>
           <!-- <btn-view (click)="showRequi(element.id, element.folio)" matTooltip="Ver Requisición"></btn-view> -->
           <!-- <btn-edit (click)="editRequi(element.id, element.folio)" *ngIf="element.estatus.id != 8" matTooltip="Editar Requisición"></btn-edit>

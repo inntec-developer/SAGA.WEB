@@ -7,6 +7,7 @@ import { DialogShowRequiComponent } from './../dialogs/dialog-show-requi/dialog-
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequisicionesService } from '../../../../../../service';
 import { ToasterService } from 'angular2-toaster';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-dt-vacantes-reclutador',
@@ -56,10 +57,11 @@ export class DtVacantesReclutadorComponent implements OnInit {
       });    
   }
 
-  openDialogAssingRequi(){
+  openDialogAssingRequi(element){
     let dialogAssing = this.dialog.open(DialogAssingRequiComponent, {
       width: '1200px',
-      height: '700px',
+      height: 'auto',
+      data: element
     });   
   }
 
