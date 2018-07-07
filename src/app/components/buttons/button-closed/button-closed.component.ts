@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'btn-closed',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./button-closed.component.scss']
 })
 export class ButtonClosedComponent implements OnInit {
-
+  @Input('text') text : string;
   constructor() { }
 
   ngOnInit() {

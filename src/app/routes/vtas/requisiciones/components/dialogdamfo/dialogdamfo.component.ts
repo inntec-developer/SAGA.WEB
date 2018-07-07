@@ -17,6 +17,8 @@ export class DialogdamfoComponent implements OnInit, OnChanges {
   IdDamfo: string;
   formDireccion :  FormGroup;
   IdDireccion: string;
+  textBtnCancel: string;
+  textBtnAccept: string;
   constructor(
     public dialogRef: MatDialogRef<DialogdamfoComponent>,
     private _Router: Router,
@@ -24,7 +26,8 @@ export class DialogdamfoComponent implements OnInit, OnChanges {
     private toasterService: ToasterService,
     @Inject(MAT_DIALOG_DATA) public data: any, private service: RequisicionesService
   ) {
-
+    this.textBtnCancel = 'Cancelar';
+    this.textBtnAccept = 'Aceptar';
   }
 
   toaster: any;

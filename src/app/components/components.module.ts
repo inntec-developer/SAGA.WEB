@@ -2,20 +2,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { INgxSelectOptions, NgxSelectModule } from 'ngx-select-ex'
 
 import { AsignarRequisicionComponent } from './asignar-requisicion/asignar-requisicion.component';
+import { ButtonAcceptComponent } from './buttons/button-accept/button-accept.component';
+import { ButtonAssignComponent } from './buttons/button-assign/button-assign.component';
 import { ButtonCancelComponent } from './buttons/button-cancel/button-cancel.component';
+import { ButtonCheckComponent } from './buttons/button-check/button-check.component';
+import { ButtonClosedComponent } from './buttons/button-closed/button-closed.component';
 import { ButtonDeleteComponent } from './buttons/button-delete/button-delete.component';
 import { ButtonDesignComponent } from './buttons/button-design/button-design.component';
+import { ButtonDocsComponent } from './buttons/button-docs/button-docs.component';
 import { ButtonEditComponent } from './buttons/button-edit/button-edit.component';
+import { ButtonPrintComponent } from './buttons/button-print/button-print.component';
 import { ButtonRefreshComponent } from './buttons/button-refresh/button-refresh.component';
 import { ButtonReturnComponent } from './buttons/button-return/button-return.component';
 import { ButtonSaveComponent } from './buttons/button-save/button-save.component';
 import { ButtonViewComponent } from './buttons/button-view/button-view.component';
-import { ButtonCheckComponent } from './buttons/button-check/button-check.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { ButtonClosedComponent } from './buttons/button-closed/button-closed.component';
-
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
   optionValueField: 'id',
@@ -41,7 +44,11 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonRefreshComponent,
     ButtonDesignComponent,
     ButtonCheckComponent,
-    ButtonClosedComponent
+    ButtonClosedComponent,
+    ButtonAssignComponent,
+    ButtonPrintComponent,
+    ButtonAcceptComponent,
+    ButtonDocsComponent
 
   ],
   exports: [
@@ -55,7 +62,12 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonRefreshComponent,
     ButtonDesignComponent,
     ButtonCheckComponent,
-    ButtonClosedComponent
+    ButtonClosedComponent,
+    ButtonAssignComponent,
+    ButtonPrintComponent,
+    ButtonAcceptComponent,
+    ButtonDocsComponent
+
 
   ]
 })

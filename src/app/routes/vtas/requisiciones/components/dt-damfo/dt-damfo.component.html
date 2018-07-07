@@ -52,12 +52,8 @@
     <ng-container matColumnDef="accion">
       <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mb-sm btn-sm btn btn-success btn-outline" (click)="openDialog(element)" type="button"  matTooltip="Crear Requisición">
-            <em class="icon-docs"></em>
-          </button>
-          <button class="mb-sm btn-sm btn btn-warning btn-outline" (click)="showDamfo(element.id)" type="button"  matTooltip="Ver DAM-FO-290">
-            <em class="fa fa-eye"></em>
-          </button>
+          <btn-docs (click)="openDialog(element)" matTooltip="Crear Requisición"></btn-docs>
+          <btn-view (click)="showDamfo(element.id)" matTooltip="Ver DAM-FO-290"></btn-view>
       </mat-cell>
 
     </ng-container>

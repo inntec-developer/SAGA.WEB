@@ -2,6 +2,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 
+import { DialogAssingRequiComponent } from './../dialogs/dialog-assing-requi/dialog-assing-requi.component';
+import { DialogShowRequiComponent } from './../dialogs/dialog-show-requi/dialog-show-requi.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequisicionesService } from '../../../../../../service';
 import { ToasterService } from 'angular2-toaster';
@@ -13,6 +15,7 @@ import { ToasterService } from 'angular2-toaster';
   providers: [RequisicionesService]
 })
 export class DtVacantesReclutadorComponent implements OnInit {
+  requi: { folio: any; id: any; };
 
   constructor(
     private service: RequisicionesService,
@@ -32,13 +35,32 @@ export class DtVacantesReclutadorComponent implements OnInit {
   }
 
   getDateRequisiciones(){
-    debugger
     this.service.getRequiReclutador(localStorage.getItem('id')).subscribe(data => {
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;
       this.spinner.hide();
     });
+  }
+
+  // Dialogs
+  openDialogShowRequi(id, folio){
+      this.requi = {
+        folio : folio,
+        id : id
+      }
+      let dialogShow = this.dialog.open(DialogShowRequiComponent, {
+        width: '1200px',
+        height: '700px',
+        data: this.requi
+      });    
+  }
+
+  openDialogAssingRequi(){
+    let dialogAssing = this.dialog.open(DialogAssingRequiComponent, {
+      width: '1200px',
+      height: '700px',
+    });   
   }
 
    // Display para mostrar los objetos en el Grid
@@ -54,7 +76,8 @@ export class DtVacantesReclutadorComponent implements OnInit {
     'fch_Creacion',
     'fch_Cumplimiento',
     'estatus',
-    'prioridad'
+    'prioridad',
+    'accion'
   ];
   public get displayedColumns() {
     return this._displayedColumns;

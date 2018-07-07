@@ -46,14 +46,10 @@
 <div mat-dialog-actions>
   <div class="row">
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <button  cdkFocusInitial class="btn btn-sm btn-labeled btn-outline btn-danger mb-2" (click)="onNoClick()" type="button">
-        <span class="btn-label"><i class="fa fa-times"></i>
-      </span>Cancelar</button>
+      <btn-closed [text]="textBtnCancel" (click)="onNoClick()"></btn-closed>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <button class="btn btn-sm btn-labeled btn-outline btn-success mb-2" type="button" (click)="createRequisicion()">
-      <span class="btn-label"><i class="fa fa-check"></i>
-      </span>Aceptar</button>
+      <btn-accept [text]="textBtnAccept" (click)="createRequisicion()"></btn-accept>
     </div>
   </div>
 </div>
