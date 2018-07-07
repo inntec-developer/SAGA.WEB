@@ -42,7 +42,7 @@ export class MenuService {
         if(modules.children != null)
         {
          modules.children.forEach(element => {
-             if(modules.tipoEstructuraId < 4){ //para limitar lo que se puede ver en el menu
+             if(modules.tipoEstructuraId < 4 && element.read){ //para limitar lo que se puede ver en el menu
                  if( element.idPadre == modules.estructuraId)
                  { 
                      var submenu = {text: element.nombre, link: element.accion, submenu: this.setSubMenu(element, privilegios)}
@@ -66,6 +66,7 @@ export class MenuService {
     {
         var privilegios = JSON.parse(localStorage.getItem('privilegios'));
 
+        console.log(privilegios)
         if(this.menuItems.length > 2)
         {
             this.menuItems.splice(2, this.menuItems.length - 2)

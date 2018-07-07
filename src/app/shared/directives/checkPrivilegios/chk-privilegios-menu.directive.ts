@@ -1,34 +1,60 @@
-import { ButtonDeleteComponent } from './../../../components/buttons/button-delete/button-delete.component';
-import { Directive, HostBinding, HostListener, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { forEach } from '@angular/router/src/utils/collection';
+
+import { Directive, AfterViewInit } from '@angular/core';
+import { Router,ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Directive({
   selector: '[chkPrivilegiosMenu]'
 })
 export class ChkPrivilegiosMenuDirective implements AfterViewInit {
-  @ViewChild('delete') btnDelete: ButtonDeleteComponent;
-  @HostBinding('hidden')
-  hideRouterLink:boolean;
-
-  constructor(private eltRef:ElementRef){}
-  // @HostBinding('disabled')  isHidden: boolean = true;
-  @HostListener('disabled', ['$event']) onclick(btn){
-    let privilegios = JSON.parse(localStorage.getItem('privilegios'))
-    console.log(privilegios)
-    console.log(btn)
   
-  }
+  constructor(private router: Router, private activeRoute: ActivatedRoute ) {
+
+     }
 
   ngAfterViewInit(){ 
+    var btncreate = document.querySelectorAll("#create");
+    var btnupdate = document.querySelectorAll("#update");
+    var btndelete = document.querySelectorAll("#delete");
 
-   console.log( this.eltRef.nativeElement);
-  console.log(this.btnDelete)
-   //how to get access to this private variable?
-  //  console.log(this.routerLink.queryParams.component.routeData.data);
-   //place for implementation of service:acl
-  //  if(true) {
-  //      let el : HTMLElement = this.eltRef.nativeElement;
-  //      el.parentNode.removeChild(el);
-  //  }
+    console.log(btnupdate)
+
+    let privilegios = JSON.parse(localStorage.getItem('privilegios'))
+    let ruta = this.activeRoute.snapshot.routeConfig.data;
+
+    var campos = privilegios.filter(function(row){
+      return row.tipoEstructuraId === 4 && row.nombre == ruta.componente
+       });
+
+    console.log(ruta)
+    console.log(campos)
+
+    campos.forEach(campo =>{
+      if(btncreate != null && !campo.create)
+      {
+        for (var i = 0; i < btncreate.length; i++)
+        {
+          var cre = btncreate[i].querySelector("button");
+          cre.setAttribute('disabled','')
+        }
+      }
+      if(btnupdate != null && !campo.update)
+      {
+        for (var i = 0; i < btnupdate.length; i++) 
+        {
+          var upd = btnupdate[i].querySelector("button");
+          upd.setAttribute('disabled','')
+        }
+      }
+      if(btndelete != null && !campo.delete)
+      {
+        for (var i = 0; i < btndelete.length; i++)
+        {
+          var dlt = btndelete[i].querySelector('button')
+          dlt.setAttribute('disabled','')
+        }
+      }
+    });
 }
 
   

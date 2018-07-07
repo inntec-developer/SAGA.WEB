@@ -75,9 +75,16 @@ export class AddRolesComponent implements OnInit {
 
   descendantsChecked($event, node, title)
   {
+ 
       let eid = node.data.estructuraId;
       node.data[title.toLowerCase()] = $event.checked;
 
+      if(node.data.children.length > 0)
+      {
+        node.children.forEach(element => {
+          this.descendantsChecked($event, element, title)
+        });
+      }
       // this.nodes[ind][title.toLowerCase()] = $event.checked;
    
     //   let ind = this.nodes.forEach(function(item, index)
@@ -105,7 +112,6 @@ export class AddRolesComponent implements OnInit {
   descendantsAllSelected(node, value, tree)  
   {
      node.data.checked = value;
-     node.data.read = value;
 
      tree.treeModel.getNodeById(node.data.uuid)
         .setActiveAndVisible(value);

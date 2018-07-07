@@ -34,6 +34,7 @@ export class RollsStructComponent implements OnInit {
   
   GuardarCambios(row: any)
   {
+    console.log(row)
     this.service.UpdatePrivilegios(row)
       .subscribe(data => {
         console.log(data)

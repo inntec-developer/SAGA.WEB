@@ -104,7 +104,7 @@
                             </label>
                         </td>
                         <td class="text-center">
-                            <button [disabled]="false" class="mb-sm btn btn-sm btn-success btn-outline" (click)="updateUser($event, rowIndex)" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
+                            <btn-check id='update' chkPrivilegiosButtons (click)="updateUser($event, rowIndex)" matTooltip="Guardar Cambios"></btn-check>
                         </td>
                     </tr>
                 </tbody>

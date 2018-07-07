@@ -69,8 +69,8 @@
                              <mat-checkbox class="checkbox" (change)="updateValue($event, 'activo', rowIndex)" [checked]="g.activo"></mat-checkbox>
                            </td>
                            <td class="text-center">
-                              <btn-check (click)="updateGrupo($event, rowIndex)" matTooltip="Guardar Cambios"></btn-check>
-                              <btn-delete matTooltip="Eliminar Usuario" (click)="DeleteGrupo($event,rowIndex)"></btn-delete>
+                              <btn-check id='update' chkPrivilegiosButtons (click)="updateGrupo($event, rowIndex)" matTooltip="Guardar Cambios"></btn-check>
+                              <btn-delete id='delete' chkPrivilegiosButtons matTooltip="Eliminar Usuario" (click)="DeleteGrupo($event,rowIndex)"></btn-delete>
                            </td>
                        </tr>
                    </tbody>

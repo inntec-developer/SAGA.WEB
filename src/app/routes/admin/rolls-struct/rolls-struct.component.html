@@ -6,12 +6,12 @@
       <div class="panel-body">
         <div class="col-md-8">
           <select class="form-control" (change)="selected($event.target.value); id = $event.target.value; flag=true" >
-              <option  [value]="0">Seleccionar Rol</option>
+              <option  [value]="">Seleccionar Rol</option>
               <option *ngFor="let rol of listRoles" [value]="rol.id">{{rol.rol}}</option>
            </select>
         </div>
         <div>
-          <btn-delete (click)="DeleteRoles(id)"></btn-delete>
+          <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)"></btn-delete>
         </div>
       </div>
   </div>
@@ -69,7 +69,7 @@
                   <span></span>
                 </td>
                 <td class="center-block" >
-                  <btn-check [hidden]="ocultar" matTooltip="Guardar Cambios" (click)="GuardarCambios(r)"></btn-check>
+                  <btn-check id='update' chkPrivilegiosButtons matTooltip="Guardar Cambios" (click)="GuardarCambios(r)"></btn-check>
                 </td>
             </tr>
           </tbody>

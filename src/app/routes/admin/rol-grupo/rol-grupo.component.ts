@@ -124,8 +124,18 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
       })
   }
 
+  GetEntidades()
+    {
+      this.Grupos = [];
+      this.service.GetEntidadesUG()
+      .subscribe(
+        e=>{
+          this.Grupos = e;
+        })
+    }
+
   ngOnInit() {
-    this.getGrupos();
+    this.GetEntidades();
     this.getRoles();
     this.setData();
     this.someInput.setStruct(this.filteredData)

@@ -30,6 +30,7 @@ import { VectormapDirective } from './directives/vectormap/vectormap.directive';
 import { NowDirective } from './directives/now/now.directive';
 import { ScrollableDirective } from './directives/scrollable/scrollable.directive';
 import { JqcloudDirective } from './directives/jqcloud/jqcloud.directive';
+import { ChkButtonsDirective } from './directives/chk-privilegios-buttons/chk-buttons.directive';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -66,7 +67,8 @@ import { JqcloudDirective } from './directives/jqcloud/jqcloud.directive';
         VectormapDirective,
         NowDirective,
         ScrollableDirective,
-        JqcloudDirective
+        JqcloudDirective,
+        ChkButtonsDirective
     ],
     exports: [
         CommonModule,
@@ -97,7 +99,8 @@ import { JqcloudDirective } from './directives/jqcloud/jqcloud.directive';
         VectormapDirective,
         NowDirective,
         ScrollableDirective,
-        JqcloudDirective
+        JqcloudDirective,
+        ChkButtonsDirective
     ]
 })
 

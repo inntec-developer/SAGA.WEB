@@ -1,24 +1,17 @@
-
-
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, RouterLink } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { DndModule } from 'ng2-dnd';
 import { MatSelectModule, MatIconModule, MatInputModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
 import {SelectModule} from 'ng2-select';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControl } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ImageCropperModule } from 'ng2-img-cropper';
-import {MatDatepickerModule} from '@angular/material/datepicker';;
-import { NativeDateAdapter, DateAdapter } from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
-// import { PaginationModule } from "ng2-bootstrap/pagination"; // from ng2-bootstrap
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import { AgGridModule } from 'ag-grid-angular/main';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable'
@@ -26,8 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { TreeModule } from 'angular-tree-component';
 import {ModalModule} from 'ngx-bootstrap';
 import {PopoverModule} from 'ngx-popover';
-
-
+import { SharedModule} from './../../shared/shared.module';
 //Servicios
 
 
@@ -42,17 +34,15 @@ import { RollsStructComponent } from './rolls-struct/rolls-struct.component';
 import { RegistroComponent } from './registro/registro.component';
 import { PagesModule } from './../pages/pages.module';
 import {ComponentsModule} from './../../components/components.module';
-import { AuthService } from './../../service/auth/auth.service';
-import { AuthRolesGuard } from './../../auth-guard/auth-roles.guard';
-import {ChkPrivilegiosMenuDirective } from './../../shared/directives/checkPrivilegios/chk-privilegios-menu.directive';
+
 
 const routes: Routes = [
-    { path: 'roles', component: AddRolesComponent },
-    { path: 'agregar', component: AddPersonaComponent },
-    { path: 'grupo', component: AddadminComponent, data: {'resources':'account', 'privilages':'show'} },
-    { path: 'grupoAdd', component: AddGrupoComponent },
-    { path: 'rol', component: RolGrupoComponent },
-    { path: 'privilegios', component: RollsStructComponent},
+    { path: 'roles', component: AddRolesComponent, data: {'componente':'Roles'} },
+    { path: 'agregar', component: AddPersonaComponent, data: {'componente':'Usuarios'} },
+    { path: 'grupo', component: AddadminComponent, data: {'componente':'Usuarios a grupos'} },
+    { path: 'grupoAdd', component: AddGrupoComponent, data: {'componente':'Grupos'} },
+    { path: 'rol', component: RolGrupoComponent, data: {'componente':'Grupos a roles'} },
+    { path: 'privilegios', component: RollsStructComponent, data: {'componente':'Roles a privilegios'}},
     { path: 'registro', component: RegistroComponent}
 
 ];
@@ -87,7 +77,8 @@ const routes: Routes = [
         PagesModule,
         ComponentsModule,
         ModalModule.forRoot(),
-        PopoverModule
+        PopoverModule,
+        SharedModule
         
       ],
     declarations:
@@ -99,14 +90,14 @@ const routes: Routes = [
       RolGrupoComponent,
       UploadImgsComponent,
       RollsStructComponent,
-      RegistroComponent,
-      ChkPrivilegiosMenuDirective
+      RegistroComponent
+
     ],
     exports: [
         RouterModule,
         AddPersonaComponent
     ], 
-    providers: [AuthRolesGuard,AuthService]
+    providers: []
 })
 
 export class AdminModule {

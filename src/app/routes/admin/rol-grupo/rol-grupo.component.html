@@ -19,17 +19,15 @@
             <th class="text-center">Imagen</th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Descripción</th>
-            <th class="text-center">Usuario Alta</th>
             <th class="text-center">Rol</th>
           </tr>
         </thead>
         <tbody>
           <tr class="empty-row" matTooltip="click to select" *ngFor="let g of Grupos; let i = index" (click)="onSelect(g, i)" [class.selected]="g.selected">
             <td><img class="center-block media img-responsive img-circle thumb32" src="{{g.foto}}" alt="" /></td>
-            <td class="text-center">{{g.nombre}}</td>
+            <td class="text-center">{{g.nombre + ' ' + g.apellidoPaterno}}</td>
             <td class="text-center">{{g.descripcion}}</td>
-            <td class="text-center">{{g.usuarioAlta}}</td>
-            <td class="text-center">
+            <td class="center-block">
               <tr class="text-center" *ngFor="let r of g.roles">{{r.rol}}</tr>
             </td>
           </tr>
@@ -41,26 +39,21 @@
     <div class="panel panel-default mat-elevation-z8">
         <div class="panel-heading">
             <select #slcRol class="form-control widthSelect" (change)="selected($event, i)" formControlName="slcRol" >
-               <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}}
-                 <!-- <label *ngIf="r.create"> <mat-checkbox [checked]="r.read" [disabled]="true"></mat-checkbox> C</label>
-                 <label *ngIf="r.read"> R</label>
-                 <label *ngIf="r.update"> U</label>
-                 <label *ngIf="r.delete"> D</label>
-                 <label *ngIf="r.especial"> S</label> -->
-               </option>
+               <option *ngFor="let r of Roles; let i = index" [value]="r.id">{{r.rol}}</option>
             </select>
             <span class="text-danger" *ngIf="formRol.controls['slcRol'].hasError('required')">Debe seleccionar un Rol</span>
            <div class="pull-right marginButtons">
-             <button [disabled]="formRol.invalid" class="mb-sm btn btn-sm btn-success btn-outline" matTooltip="Guardar Cambios" (click)="saveData(slcRol.value)"><em class="fa fa-check"></em></button>
+             <btn-check id='create' chkPrivilegiosButtons [disabled]="formRol.invalid" matTooltip="Guardar Cambios" (click)="saveData(slcRol.value)"></btn-check>
            </div>
          </div>
         <div class="panel-body">
-          <ul>
-            <li *ngFor='let sel of ListaRG'>
-                <div>{{sel.nombre}}</div>
-            </li>
-            <li *ngIf="!ListaRG.length">No se ha seleccionado grupo</li>
-          </ul>
+
+            <div *ngFor='let sel of ListaRG'>
+                <img class="media img-responsive img-circle thumb32" src="{{sel.foto}}" alt="" />
+                {{sel.nombre}}
+                </div>
+            <p *ngIf="!ListaRG.length">No se ha seleccionado grupo</p>
+
         </div>
     </div>
   </div>

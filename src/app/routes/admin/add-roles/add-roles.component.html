@@ -23,7 +23,7 @@
     </div>
     <div class="row">
         <div class="row">
-            <button [disabled]="formRoles.invalid" class="mb-sm btn btn-sm btn-success btn-outline pull-right" (click)="saveData()" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
+            <btn-check id='create' chkPrivilegiosButtons [disabled]="formRoles.invalid" class="pull-right" (click)="saveData()" matTooltip="Guardar Cambios"></btn-check>
         </div>
         <br/>
         <br/>
@@ -32,86 +32,27 @@
                 <ng-template #treeNodeTemplate let-node let-index= "index">
                     <mat-checkbox class="checkbox" [value]="node.data" [checked] = "node.data.checked" (change)="descendantsAllSelected(node, $event.checked, tree);">{{node.data.nombre}}</mat-checkbox>
                     <span class="pull-right-mio badge baed-info">{{ childrenCount(node) }}</span>
-                    <div *ngIf="node.data.checked&&node.data.tipoEstructuraId>2">
+                    <div *ngIf="node.data.checked && ( node.data.tipoEstructuraId >= 3 )">
                         <section class="checkbox">
-                            <mat-checkbox id="{{ 'C-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Create')">Crear</mat-checkbox>
-                            <mat-checkbox id="{{ 'R-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Read')" [checked]="node.data.checked">Leer</mat-checkbox>
-                            <mat-checkbox id="{{ 'U-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Update')">Modificar</mat-checkbox>
-                            <mat-checkbox id="{{ 'D-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Delete')">Borrar</mat-checkbox>
-                            <mat-checkbox id="{{ 'E-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Especial')">Especial</mat-checkbox>
+                            <mat-checkbox id="{{ 'C-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Create')" [checked] = "node.data['create']" >Crear</mat-checkbox>
+                            <mat-checkbox id="{{ 'R-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Read')" [checked] = "node.data['read']" >Leer</mat-checkbox>
+                            <mat-checkbox id="{{ 'U-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Update')" [checked] = "node.data['update']" >Modificar</mat-checkbox>
+                            <mat-checkbox id="{{ 'D-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Delete')" [checked] = "node.data['delete']" >Borrar</mat-checkbox>
+                            <mat-checkbox id="{{ 'E-' + node.data.estructuraId}}" (change)="descendantsChecked($event, node, 'Especial')" [checked] = "node.data['especial']">Especial</mat-checkbox>
                         </section><hr>
                     </div>
                 </ng-template>
             </tree-root> 
 
           
-            <!-- <div class="panel-body">
-                <p class="text-center pv">ROLES</p>
-                    <table class="table table-responsive table-bordered table-hover">
-                        <thead>
-                            <tr>
-                        
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let r of Roles; let rowIndex = index">
-                                <td class="text-center">
-                                    <span matTooltip="Double click to edit" (dblclick)="editing[rowIndex + '-' + columns[0]['title'] ] = true" *ngIf="!editing[rowIndex + '-' + columns[0]['title']]">
-                                        {{r[columns[0]['title'].toLowerCase()]}}
-                                    </span>
-                                    <input autofocus (blur)="updateValue($event, columns[0]['title'], rowIndex)" *ngIf="editing[rowIndex + '-' + columns[0]['title']]" type="text" [value] = "r[columns[0]['title'].toLowerCase()]" /> 
-                                </td>
-                                <td class="center">
-                                    <mat-checkbox (change)="updateValue($event, 'create', rowIndex)" class="checkbox" [checked]="r.create"></mat-checkbox>
-                                    <span></span>
-                                </td>
-                                <td>
-                                    <mat-checkbox (change)="updateValue($event, 'read', rowIndex)" class=" center-block checkbox" [checked]="r.read"></mat-checkbox>
-                                    <span></span>
-                                </td>
-                                <td class="center">
-                                    <mat-checkbox (change)="updateValue($event, 'update', rowIndex)" class="checkbox" [checked]="r.update"></mat-checkbox>
-                                    <span></span>
-                                </td>
-                                <td class="center">
-                                    <mat-checkbox (change)="updateValue($event, 'delete', rowIndex)" class="checkbox" [checked]="r.delete"></mat-checkbox>
-                                    <span></span>
-                                </td>
-                                <td class="center">
-                                    <mat-checkbox (change)="updateValue($event, 'especial', rowIndex)" class="checkbox" [checked]="r.especial"></mat-checkbox>
-                                    <span></span>
-                                </td>
-                                <td class="text-center">
-                                    <button [disabled]="false" (click)="updateRol($event, rowIndex)" class="mb-sm btn btn-sm btn-success btn-outline" matTooltip="Guardar Cambios">
-                                        <em class="fa fa-check"></em>
-                                    </button>
-                                    <button class="mb-sm btn btn-sm btn-danger btn-outline" matTooltip="Eliminar Rol" (click)="DeleteRoles($event,rowIndex)">
-                                        <em class="fa fa-trash-o"></em>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </div>
--->
-        
+      
     </div>
     <br/>
     <div class="row">
-            <button [disabled]="formRoles.invalid" class="mb-sm btn btn-sm btn-success btn-outline pull-right" (click)="saveData()" matTooltip="Guardar Cambios"><em class="fa fa-check"></em></button>
+            <btn-check id='create' chkPrivilegiosButtons [disabled]="formRoles.invalid" class="pull-right" (click)="saveData()" matTooltip="Guardar Cambios"></btn-check>
     </div>
     <br/>
     <br/>
-    <!-- <div class="row">
-                 
-   
-            <div class="col-md-6 pull-right">
-                <button [disabled]="formRoles.invalid" class="btn btn-primary example-label">Guardar</button>
-            </div>
-            <div class="col-md-4 pull-right">
-                <mat-checkbox class="checkbox" formControlName="Activo">Rol Activo</mat-checkbox>
-            </div>
-        </div>
-      -->
+    
     </div>
 </form>

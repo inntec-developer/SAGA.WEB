@@ -8,9 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ButtonDeleteComponent implements OnInit {
 
   @Input('disabled') disabled: boolean = true;
+  @Input('hidden') hidden: boolean = false;
   constructor() { }
 
   ngOnInit() {
+  
   }
 
 }
