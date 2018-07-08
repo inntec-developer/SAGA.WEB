@@ -26,9 +26,9 @@
 </div>
 <mat-accordion class="example-headers-align">
 
-  <mat-expansion-panel *ngFor="let item of Clasifica" [expanded]="step === item.id" (opened)="setStep(item.id)" hideToggle="true">
+  <mat-expansion-panel *ngFor="let item of Clasifica" [expanded]="step === item.id" (opened)="setStep(item.id)" hideToggle="true" class="{{item.publica?'':'hidden'}}">
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title style="font-weight: bold;">
         {{item.nombre}}
       </mat-panel-title>
       <mat-panel-description>
@@ -39,7 +39,7 @@
 
     <div class="row">
       <div *ngFor="let item2 of General">
-        <div class="col-lg-4 col-md-6 col-sm-12 Column width" *ngIf="item.id == item2.idPadre;" >
+        <div class="col-lg-4 col-md-6 col-sm-12 Column width {{item2.publica?'':'hidden'}}" *ngIf="item.id == item2.idPadre;" >
               <div class="panel panel-default"  >
 
                   <div class="panel-body">

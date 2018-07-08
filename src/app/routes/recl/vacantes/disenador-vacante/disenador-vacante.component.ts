@@ -75,82 +75,9 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     this.service.getGeneral(this.Requi)
     .subscribe( data => {
       this.General = data;
+      console.log(this.General);
     });
 
-    // this.service.getContrato(this.Requi)
-    // .subscribe( data => {
-    //   this.Contrato = data;
-    // });
-    //
-    // this.service.getPuestoReclutar(this.Requi)
-    // .subscribe( data => {
-    //   this.PuestoReclutar = data;
-    // });
-    //
-    // this.service.getHorario(this.Requi)
-    // .subscribe( data => {
-    //   this.Horario = data;
-    // });
-    //
-    // this.service.getsueldo(this.Requi)
-    // .subscribe( data => {
-    //   this.sueldo = data;
-    // });
-    //
-    // this.service.getOtros(this.Requi)
-    // .subscribe( data => {
-    //   this.Otros = data;
-    // });
-    //
-    // this.service.getActividad(this.Requi)
-    // .subscribe( data => {
-    //   this.Actividad = data;
-    // });
-    //
-    // this.service.getBeneficio(this.Requi)
-    // .subscribe( data => {
-    //   this.Beneficio = data;
-    // });
-    //
-    // this.service.getDireccion(this.Requi)
-    // .subscribe( data => {
-    //   this.Direccion = data;
-    // });
-    //
-    // this.service.getTelefono(this.Requi)
-    // .subscribe( data => {
-    //   this.Telefono = data;
-    // });
-    //
-    // this.service.getContacto(this.Requi)
-    // .subscribe( data => {
-    //   this.Contacto = data;
-    // });
-    //
-    // this.service.getPsicometria(this.Requi)
-    // .subscribe( data => {
-    //   this.Psicometria = data;
-    // });
-    //
-    // this.service.getDocumento(this.Requi)
-    // .subscribe( data => {
-    //   this.Documento = data;
-    // });
-    //
-    // this.service.getProceso(this.Requi)
-    // .subscribe( data => {
-    //   this.Proceso = data;
-    // });
-    //
-    // this.service.getCopetencia(this.Requi)
-    // .subscribe( data => {
-    //   this.Copetencia = data;
-    // });
-    //
-    // this.service.getUbicacion(this.Requi)
-    // .subscribe( data => {
-    //   this.Ubicacion = data;
-    // });
 
     this.service.getCampos()
     .subscribe( data => {
@@ -163,6 +90,7 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     this.service.getClasificaciones()
     .subscribe( data => {
       this.Clasifica = data;
+        console.log(this.Clasifica);
     });
   }
 
@@ -192,6 +120,13 @@ toasterconfig: ToasterConfig = new ToasterConfig({
    this.ListaCon = [];
 
   }
+
+  // public config: ToasterConfig =
+  //      new ToasterConfig({
+  //          showCloseButton: true,
+  //          tapToDismiss: false,
+  //          timeout: 0
+  //      });
 
   Descripcion(){
     this.toasterService.pop('warning', 'Trabajando', 'Se cambio la forma de como guardar la configuracion');
