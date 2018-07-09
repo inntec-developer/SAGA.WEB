@@ -13,9 +13,11 @@ export class UserblockComponent implements OnInit {
     constructor(
         public userblockService: UserblockService,
         private settings : SettingsService) {
-
+        debugger;
         this.user = {
-            picture: 'assets/img/user/01.jpg'
+            picture: localStorage.getItem('foto'),
+            name: localStorage.getItem('nombre'),
+            clave: localStorage.getItem('clave')
         };
     }
 
