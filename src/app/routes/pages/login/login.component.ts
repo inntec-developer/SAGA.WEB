@@ -54,8 +54,6 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     if(data != 404 && data != 406){
-                        debugger;
-                        console.log('DATA', data);
                         localStorage.setItem('ConexionBolsa', ApiConection.ServiceUrlBolsa);
                         localStorage.setItem('privilegios', JSON.stringify(data.privilegios));
                         localStorage.setItem('usuario',data.usuario);

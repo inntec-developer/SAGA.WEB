@@ -10,15 +10,17 @@ import { UserblockService } from './userblock.service';
 })
 export class UserblockComponent implements OnInit {
     user: any;
+    default: string;
     constructor(
         public userblockService: UserblockService,
         private settings : SettingsService) {
-        debugger;
         this.user = {
             picture: localStorage.getItem('foto'),
             name: localStorage.getItem('nombre'),
             clave: localStorage.getItem('clave')
         };
+        if(this.user.picture == null || this.user.picture == '')
+            this.user.picture = '/assets/img/user/default.jpg'
     }
 
     ngOnInit() {
