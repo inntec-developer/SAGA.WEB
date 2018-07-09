@@ -1,18 +1,23 @@
-import { Component, OnInit, Inject, ViewChild, Output, Input, EventEmitter, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
-import {FormControl,  FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
-import {ToasterService,ToasterConfig} from 'angular2-toaster';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
+import {ToasterConfig, ToasterService} from 'angular2-toaster';
+
+import { Apartado } from '../../../../models/recl/candidatos';
+import { BusquedaComponent } from '../busqueda/busqueda.component';
+import { CandidatosService } from '../../../../service/index';
+import { DialogcandidatosComponent } from './dialogcandidatos/dialogcandidatos.component';
 
 // Modelos
-import { Apartado } from '../../../../models/recl/candidatos';
+
 
 // Componentes
-import { DialogcandidatosComponent } from './dialogcandidatos/dialogcandidatos.component';
-import { BusquedaComponent } from '../busqueda/busqueda.component';
+
+
 
 // Servicios
-import { CandidatosService } from '../../../../service/index';
+
 
 @Component({
   selector: 'app-dt-candidatos',
@@ -51,7 +56,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Estructura de las tablas a mostrar. ***
   // Columnas de tabla de Vacantes. ***
-  displayedColumnsVacantes = ['Vacante', 'FechaCreacion', 'Cliente', 'Reclutamiento', 'Area', 'Accion'];
+  displayedColumnsVacantes = ['Folio','Vacante', 'FechaCreacion', 'Cliente', 'Reclutamiento', 'Area', 'Accion'];
   public dataSourcev = new MatTableDataSource(<any>[]);
   // Columnas de tabla de Postulaciones. ***
   displayedColumnsp = ['Vacante', 'Estatus'];
@@ -64,6 +69,8 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Variable para el consecutivo del detalle del candidato. ***
   step = 0;
+  ConexionBolsa: string;
+  fotoCandidato: any;
 
   setStep(index: number) {
     this.step = index;
@@ -95,7 +102,10 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   constructor(private service: CandidatosService, public dialog: MatDialog, private _Router: Router,
-      private _Route: ActivatedRoute, toasterService: ToasterService) { this.toasterService = toasterService;  }
+      private _Route: ActivatedRoute, toasterService: ToasterService) { 
+        this.toasterService = toasterService;
+        this.ConexionBolsa  = localStorage.getItem('ConexionBolsa');
+      }
 
  // Captamos la variable de la busqueda de candidatos para ver si tiene cambios. ***
  ngOnChanges(changes: SimpleChanges){
@@ -119,8 +129,10 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
    // Buscamos el detalle del candidato seleccionado. ***
     this.service.getcandidatodtl(id)
     .subscribe(data => {
-      debugger;
       this.candidatodtl = data;
+      console.log('Candidato:' ,this.candidatodtl);
+      this.fotoCandidato = this.ConexionBolsa + this.candidatodtl[0].candidato.imgProfileUrl;
+      console.log('Foto Candidato', this.fotoCandidato);
 
       // Buscamos el estatus del candidato del apartado o liberado. ***
       this.service.getEstatusCandidato(this.candidatodtl[0].candidatoId)
@@ -338,6 +350,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   }
  // Interface de la tabla de vacantes. ***
   export interface vacantes {
+    Folio: string;
     Vacante:   string;
     FechaCreacion: string;
     Cliente: string;

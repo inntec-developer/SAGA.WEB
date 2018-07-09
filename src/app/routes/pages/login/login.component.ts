@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
+import { ApiConection } from "../../../service";
 import { AuthService } from './../../../service/auth/auth.service';
 import { CustomValidators } from 'ng2-validation';
 import { SettingsService } from '../../../core/settings/settings.service';
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     if(data != 404 && data != 406){
+                        localStorage.setItem('ConexionBolsa', ApiConection.ServiceUrlBolsa);
                         localStorage.setItem('usuario',data.usuario);
                         localStorage.setItem('nombre', data.nombre);
                         localStorage.setItem('email', email);

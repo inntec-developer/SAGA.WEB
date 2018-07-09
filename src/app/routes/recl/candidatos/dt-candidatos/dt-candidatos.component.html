@@ -85,7 +85,7 @@
             </div>
             <div class="card-body text-center">
                   <div class="py-4">
-                    <img class="img-fluid rounded-circle img-thumbnail thumb96" src="assets/img/user/02.jpg" alt="Contact" />
+                    <img class="img-fluid rounded-circle img-thumbnail thumb96" src="{{fotoCandidato}}" alt="Contact" />
                   </div>
                   <h3 class="m-0 text-bold">{{candidatodtl[0]?.candidato?.nombre}}</h3>
                   <div class="my-3 text-left">
@@ -113,7 +113,7 @@
                           <h3 *ngIf="!Status == 0" class="m-0">Apartado por: {{Reclutador}}</h3>
                           <h3 *ngIf="Status == 0" >{{Reclutador}}</h3>
                           <p *ngIf="!Status == 0" ></p>
-                          <p *ngIf="!Status == 0" >Te restan {{timerest}} hrs.</p>
+                          <!-- <p *ngIf="!Status == 0" >Te restan {{timerest}} hrs.</p> -->
                       </div>
                   </div>
             </div>
@@ -198,6 +198,11 @@
             </mat-form-field>
           </div>
           <mat-table #table [dataSource]="dataSourcev">
+
+              <ng-container matColumnDef="Folio">
+                  <mat-header-cell *matHeaderCellDef> Folio </mat-header-cell>
+                  <mat-cell *matCellDef="let vacantes"><h5><small [ngClass]="{'label label-info': vacantes.id == requisicionId && Status != 0}">{{vacantes?.folio}}</small></h5></mat-cell>
+                </ng-container>
 
             <ng-container matColumnDef="Vacante">
               <mat-header-cell *matHeaderCellDef> Vacante </mat-header-cell>
