@@ -17,8 +17,6 @@ export class ChkButtonsDirective implements AfterViewInit {
     var btnupdate = document.querySelectorAll("#update");
     var btndelete = document.querySelectorAll("#delete");
     var btnspecial = document.querySelectorAll("#special");
-
-    console.log(btndelete)
     let privilegios = JSON.parse(localStorage.getItem('privilegios'))
     let ruta = this.activeRoute.snapshot.routeConfig.data;
 
@@ -97,9 +95,8 @@ export class ChkButtonsDirective implements AfterViewInit {
         }
 
       }
-      if(btnspecial.length > 0 && !campo.delete)
+      if(btnspecial.length > 0 && !campo.especial)
       {
-  
         for (var i = 0; i < btnspecial.length; i++)
         {
           btnspecial[i].setAttribute('hidden', 'true')
@@ -109,7 +106,7 @@ export class ChkButtonsDirective implements AfterViewInit {
           }
         }
       }
-      else if(btnspecial.length > 0 && campo.delete)
+      else if(btnspecial.length > 0 && campo.especial)
       {
         for (var i = 0; i < btnspecial.length; i++)
         {

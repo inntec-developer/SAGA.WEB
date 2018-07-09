@@ -1,8 +1,9 @@
-import { Element } from './../../recl/candidatos/dt-vacantes/dt-vacantes.component';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewChecked, ViewContainerRef, ElementRef } from '@angular/core';
-import {MatCheckbox} from '@angular/material';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {BrowserModule} from '@angular/platform-browser'
+import { Element } from './../../recl/candidatos/dt-vacantes/dt-vacantes.component';
+import {MatCheckbox} from '@angular/material';
 
 @Component({
   selector: 'app-rolls-struct',
@@ -22,8 +23,8 @@ export class RollsStructComponent implements OnInit {
     { title: 'NOMBRE ESTRUCTURA' },
     { title: "CREAR" },
     { title: "LEER" },
-    { title: "BORRAR" },
     { title: "MODIFICAR" },
+    { title: "BORRAR" },
     { title: "ESPECIAL" }
   ]
   filteredData: Array<any> = [];

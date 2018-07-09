@@ -23,7 +23,7 @@
     </div>
     <div class="row">
         <div class="row">
-            <btn-check id='create' chkPrivilegiosButtons [disabled]="formRoles.invalid" class="pull-right" (click)="saveData()" matTooltip="Guardar Cambios"></btn-check>
+            <btn-check id='create' chkPrivilegiosButtons [disabled]="!formRoles.invalid" class="pull-right" (click)="saveData()" matTooltip="Guardar Cambios"></btn-check>
         </div>
         <br/>
         <br/>
@@ -49,7 +49,7 @@
     </div>
     <br/>
     <div class="row">
-            <btn-check id='create' chkPrivilegiosButtons [disabled]="formRoles.invalid" class="pull-right" (click)="saveData()" matTooltip="Guardar Cambios"></btn-check>
+            <btn-check id='create' chkPrivilegiosButtons [disabled]="!formRoles.invalid" class="pull-right" (click)="saveData()" matTooltip="Guardar Cambios"></btn-check>
     </div>
     <br/>
     <br/>

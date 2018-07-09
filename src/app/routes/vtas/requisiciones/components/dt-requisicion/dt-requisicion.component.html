@@ -6,10 +6,9 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
     </mat-form-field>
   </div>
-  <button class="mb-sm btn-md btn btn-primary btn-outline" id="create" chkPrivilegiosButtons
-          [routerLink]="['/ventas/crearRequisicion']" type="button"  matTooltip="Nueva Requisición">
-    <em class="fa fa-plus"></em> Nueva Requisición
-  </button>
+  <btn-add id="create" chkPrivilegiosButtons [text]="textBtnAdd"
+    [routerLink]="['/ventas/crearRequisicion']"  matTooltip="Nueva Requisición">
+  </btn-add>
   <mat-table #table [dataSource]="dataSource">
     <!-- Folio -->
     <ng-container matColumnDef="folio">

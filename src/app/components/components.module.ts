@@ -3,12 +3,14 @@ import { INgxSelectOptions, NgxSelectModule } from 'ngx-select-ex'
 
 import { AsignarRequisicionComponent } from './asignar-requisicion/asignar-requisicion.component';
 import { ButtonAcceptComponent } from './buttons/button-accept/button-accept.component';
+import { ButtonAddComponent } from './buttons/button-add/button-add.component';
 import { ButtonAssignComponent } from './buttons/button-assign/button-assign.component';
 import { ButtonCancelComponent } from './buttons/button-cancel/button-cancel.component';
 import { ButtonCheckComponent } from './buttons/button-check/button-check.component';
 import { ButtonClosedComponent } from './buttons/button-closed/button-closed.component';
 import { ButtonDeleteComponent } from './buttons/button-delete/button-delete.component';
 import { ButtonDesignComponent } from './buttons/button-design/button-design.component';
+import { ButtonDesingReclComponent } from './buttons/button-desing-recl/button-desing-recl.component';
 import { ButtonDocsComponent } from './buttons/button-docs/button-docs.component';
 import { ButtonEditComponent } from './buttons/button-edit/button-edit.component';
 import { ButtonPrintComponent } from './buttons/button-print/button-print.component';
@@ -48,7 +50,9 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonAssignComponent,
     ButtonPrintComponent,
     ButtonAcceptComponent,
-    ButtonDocsComponent
+    ButtonDocsComponent,
+    ButtonDesingReclComponent,
+    ButtonAddComponent
 
   ],
   exports: [
@@ -66,9 +70,9 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonAssignComponent,
     ButtonPrintComponent,
     ButtonAcceptComponent,
-    ButtonDocsComponent
-
-
+    ButtonDocsComponent,
+    ButtonDesingReclComponent,
+    ButtonAddComponent
   ]
 })
 export class ComponentsModule { }

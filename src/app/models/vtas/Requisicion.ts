@@ -16,8 +16,7 @@ export class UpdateRequisicion{
 
 export class AsignarRequis {
   id: string;
-  fch_Cumplimiento : Date;
-  Aprobador: string;
-  DiasEnvio: number;
-  Usuario: string;
+  fch_Cumplimiento: Date;
+  diasEnvio: number;
+  usuario: string;
 }

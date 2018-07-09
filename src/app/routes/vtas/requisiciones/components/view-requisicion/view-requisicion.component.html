@@ -11,7 +11,7 @@
 <!-- Botones superiores Izquierdos -->
 <div class="row">
   <div class="col-md-12 text-right">
-    <btn-edit matTooltip="Editar Requisición" (click)="editRequi()" *ngIf="estatusId != 8"></btn-edit>
+    <btn-edit id="update" chkPrivilegiosButtons  matTooltip="Editar Requisición" (click)="editRequi()" *ngIf="estatusId != 8"></btn-edit>
     <btn-return matTooltip="Regresar" [routerLink]="['/ventas/requisicion']"></btn-return>
   </div>
 </div>

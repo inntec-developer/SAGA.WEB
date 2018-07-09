@@ -81,6 +81,7 @@ export class ViewCuerpoRequiComponent implements OnInit, AfterContentChecked {
     this.requiId = this.Requisicion;
     this.serviceRequisiciones.getNewRequi(this.requiId)
       .subscribe(data => {
+        console.log('Data:  ', data)
         this.formCliente.patchValue({
           nombrecomercial: data.cliente.nombrecomercial,
           razonSocial: data.cliente.razonSocial,

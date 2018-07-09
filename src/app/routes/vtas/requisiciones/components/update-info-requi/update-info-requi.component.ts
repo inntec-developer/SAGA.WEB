@@ -9,7 +9,6 @@ import { AsignarRequisicionComponent } from './../../../../../components/asignar
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SettingsService } from '../../../../../core/settings/settings.service';
 import { UpdateRequisicion } from '../../../../../models/vtas/Requisicion'
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-update-info-requi',

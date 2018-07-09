@@ -75,6 +75,7 @@ import { PcondiscapacidadComponent } from './candidatos/busqueda/pcondiscapacida
 import { PerfilComponent } from './candidatos/busqueda/perfil/perfil.component';
 import { ReubicacionComponent } from './candidatos/busqueda/reubicacion/reubicacion.component';
 import { SelectModule } from 'ng2-select';
+import { SharedModule } from '../../shared/shared.module';
 import { TagInputModule } from 'ngx-chips';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TplicenciaComponent } from './candidatos/busqueda/tplicencia/tplicencia.component';
@@ -93,14 +94,15 @@ import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/
 const routes: Routes = [
     { path: '290', component: Damfo290Component },
     { path: 'candidatos', component: CandidatosComponent },
-    { path: 'vacantes', component: VacantesComponent },
+    { path: 'vacantes', component: VacantesComponent, },
     { path: 'disenador', component: DisenadorVacanteComponent },
     { path: 'configuracionVacante/:Requi', component: DisenadorVacanteComponent },
-    { path: 'vacantesReclutador', component: VacantesReclutadorComponent }
+    { path: 'vacantesReclutador', component: VacantesReclutadorComponent, data:{componente:'Vacantes'} }
 ];
 
 @NgModule({
     imports: [
+        SharedModule,
         RouterModule.forChild(routes),
         SelectModule, ColorPickerModule, TextMaskModule,
         TagInputModule, CustomFormsModule, FileUploadModule,

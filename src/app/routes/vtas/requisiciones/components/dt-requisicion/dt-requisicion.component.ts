@@ -24,6 +24,11 @@ import { element } from 'protractor';
   providers: [RequisicionesService]
 })
 export class DtRequisicionComponent implements OnInit {
+   // Variables Globales
+   requisicion: any;
+   arrayRequisicion: any[];
+   public dataSource = new MatTableDataSource(<any>[]);
+   public textBtnAdd: string;
 
   constructor(
     private service: RequisicionesService,
@@ -33,7 +38,9 @@ export class DtRequisicionComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private toasterService: ToasterService
 
-  ) { }
+  ) {
+    this.textBtnAdd = 'Nueva Requisicion';
+   }
   // Configuracion de mensaje.
   toaster: any;
   toasterConfig: any;
@@ -53,11 +60,6 @@ export class DtRequisicionComponent implements OnInit {
     }
     this.toasterService.pop(toast);
   }
-
-  // Variables Globales
-  requisicion: any;
-  arrayRequisicion: any[];
-  public dataSource = new MatTableDataSource(<any>[]);
 
   ngOnInit() {
     /** spinner starts on init */

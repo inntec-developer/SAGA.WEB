@@ -8,10 +8,12 @@
 <br>
 <app-view-cuerpo-requi [Requisicion]="id"></app-view-cuerpo-requi>
 <mat-divider></mat-divider>
-<div mat-dialog-actions>
-  <div class=row>
-    <div class="col-md-5 col-sm-5 col-xs-5">
-      <btn-closed [text]="textBtnCerrar"  (click)="onCloseDialog()"></btn-closed>
+<footer>
+  <div mat-dialog-actions>
+    <div class="row">
+      <div class="col-md-5 col-sm-5 col-xs-5">
+        <btn-closed [text]="textBtnCerrar" (click)="onCloseDialog()"></btn-closed>
+      </div>
     </div>
   </div>
-</div>
+</footer>

@@ -55,6 +55,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
         height: '700px',
         data: this.requi
       });    
+      
   }
 
   openDialogAssingRequi(element){
@@ -63,6 +64,13 @@ export class DtVacantesReclutadorComponent implements OnInit {
       height: 'auto',
       data: element
     });   
+    dialogAssing.afterClosed().subscribe(result => {
+      this.getDateRequisiciones();
+    })
+  }
+
+  openDesignVacante($event){
+    this._Router.navigate(['/reclutamiento/disenador'], { queryParams: { Requi: $event } });
   }
 
    // Display para mostrar los objetos en el Grid
