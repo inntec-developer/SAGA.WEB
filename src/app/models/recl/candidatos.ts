@@ -32,3 +32,10 @@ export class Apartado {
   Estatus: any;
   TpContrato: number;
 }
+
+export class Comentarios{
+  Comentario: string;
+  CandidatoId: string;
+  RequisicionId: string;
+  Usuario: string;
+}

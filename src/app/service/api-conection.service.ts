@@ -56,6 +56,8 @@ export class ApiConection {
   public static GetEstatus = 'Candidatos/getestatuscandidato';
   public static Liberar = 'Candidatos/postliberado';
   public static VacantesDtl = 'Candidatos/getvacantesdtl';
+  public static Comentarios = 'Candidatos/getComentarios';
+  public static AddComentarios = 'Candidatos/addComentarios';
 
   /* Vacantes */
   public static getRequis = '/dvacante/get';
