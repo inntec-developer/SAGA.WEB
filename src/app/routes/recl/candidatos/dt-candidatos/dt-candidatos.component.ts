@@ -70,14 +70,15 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Variable para el consecutivo del detalle del candidato. ***
   step = 0;
-  ConexionBolsa: string;
-  fotoCandidato: any;
-  comentarios: any[] = [];
-  comentario: string;
+  ConexionBolsa: string; // asignamos la conexion de bolsa de trabajo que se encuentra en el ApiConection;
+  fotoCandidato: any; // Asignamos la ruta en la que se encuentra la foto del candidato; 
+  comentarios: any[] = []; // Asignamos todos lo comentaios que tiene ese candidato;
+  comentario: string; // [(ngModel)] para tomar el comentario que se va a ingresar;
   CountComent: number;
-  txtBtnAddComent: string;
-  msgError: boolean;
-  msgSuccess: boolean;
+  txtBtnAddComent: string; // Mensajes en el boton de inserta conentario;
+  msgError: boolean; // Mensajes a mostrar en la seccion de comentarios;
+  msgSuccess: boolean; // Mensajes a mostrar en la seccion de comentarios;
+  Usuario: string; // Asignamos el usario que ingreso al sistema en el constructor;
 
 
   setStep(index: number) {
@@ -113,7 +114,8 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       private _Route: ActivatedRoute, toasterService: ToasterService) { 
         this.toasterService = toasterService;
         this.ConexionBolsa  = localStorage.getItem('ConexionBolsa');
-        this.txtBtnAddComent = 'Comentar'
+        this.txtBtnAddComent = 'Comentar';
+        this.Usuario = localStorage.getItem('nombre');
       }
 
  // Captamos la variable de la busqueda de candidatos para ver si tiene cambios. ***
@@ -143,6 +145,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       // Buscamos el estatus del candidato del apartado o liberado. ***
       this.service.getEstatusCandidato(this.candidatodtl[0].candidatoId)
           .subscribe(estatus => {
+            console.log('Estatus: ', estatus);
             if (estatus.length == 0){
               this.Status = estatus.length;
               this.Reclutador = 'Candidato disponible';

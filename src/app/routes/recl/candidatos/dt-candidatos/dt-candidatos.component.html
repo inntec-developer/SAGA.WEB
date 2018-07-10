@@ -92,7 +92,7 @@
             <div class="col-md-12">
               <strong>Genero: </strong> {{candidatodtl[0]?.candidato?.genero?.genero}}
             </div>
-            <div *ngIf="Status == 0">
+            <div *ngIf="Status == 0 || Usuario == Reclutador">
               <div class="my-3" *ngFor="let correo of candidatodtl[0].candidato.emails">
                 <strong>Correos:</strong>
                 <strong class="text-success">{{correo?.email}}</strong>
