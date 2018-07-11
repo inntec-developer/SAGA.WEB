@@ -1,8 +1,10 @@
 export class ApiConection {
   /*Servicio de purbeas locales*/
   public static ServiceUrl = 'http://localhost:33333/api/';
-  // Agregar las conexiones necesarias para la comunicacion con bolsa.
+  // Conexiones a bolsa de trabajo.
   public static ServiceUrlBolsa = 'http://sagainn.com.mx:403';
+  // Conexion a FORMATO 290 
+  public static ServicioUrl290 = 'http://sagainn.com.mx:413/Home/';
 
   /* Componentes */
   public static GetUserGroup = 'AsignacionRequi/getUserGroup';

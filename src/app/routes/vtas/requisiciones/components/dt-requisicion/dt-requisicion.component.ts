@@ -9,6 +9,7 @@ import { DialogDeleteRequiComponent } from '../dialog-delete-requi/dialog-delete
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequisicionesService } from '../../../../../service/index';
 import { element } from 'protractor';
+import { forEach } from '@angular/router/src/utils/collection';
 
 // Component
 
@@ -24,11 +25,12 @@ import { element } from 'protractor';
   providers: [RequisicionesService]
 })
 export class DtRequisicionComponent implements OnInit {
-   // Variables Globales
-   requisicion: any;
-   arrayRequisicion: any[];
-   public dataSource = new MatTableDataSource(<any>[]);
-   public textBtnAdd: string;
+  // Variables Globales
+  requisicion: any;
+  arrayRequisicion: any[];
+  public dataSource = new MatTableDataSource(<any>[]);
+  public textBtnAdd: string;
+  Vacantes: number = 0;
 
   constructor(
     private service: RequisicionesService,
@@ -73,9 +75,10 @@ export class DtRequisicionComponent implements OnInit {
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;
       this.pageCount = Math.round(this.requisicion.length / this.rows);
-      this.TotalRecords = this.requisicion.length;
+      this.TotalRecords = this.requisicion.length
       this.paginador();
       this.spinner.hide();
+
     });
   }
 

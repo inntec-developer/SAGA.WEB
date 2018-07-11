@@ -32,11 +32,12 @@ export class DtVacantesReclutadorComponent implements OnInit {
   public dataSource = new MatTableDataSource(<any>[]);
 
   ngOnInit() {
-    this.getDateRequisiciones();
+    this.getDataRequisiciones();
   }
 
-  getDateRequisiciones(){
+  getDataRequisiciones(){
     this.service.getRequiReclutador(localStorage.getItem('id')).subscribe(data => {
+      console.log(data);
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;
@@ -65,7 +66,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
       data: element
     });   
     dialogAssing.afterClosed().subscribe(result => {
-      this.getDateRequisiciones();
+      this.getDataRequisiciones();
     })
   }
 
