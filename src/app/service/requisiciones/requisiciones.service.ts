@@ -34,6 +34,7 @@ export class RequisicionesService {
   private urlCancelRequisicion = ApiConection.ServiceUrl + ApiConection.CancelRequisicion;
   private urlReActivarRequisicion = ApiConection.ServiceUrl + ApiConection.ReActivarRequisicion;
   private UrlAsignarRequisicion = ApiConection.ServiceUrl + ApiConection.AsignarRequisicion;
+  private UrlGetDireccionRequisicion = ApiConection.ServiceUrl + ApiConection.GetDireccionRequisicion;
 
   constructor(private http: Http) { }
   // Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -82,6 +83,13 @@ export class RequisicionesService {
   // Recupera la información de las requisiciones que se han asignado al reclutador.
   getRequiReclutador(user : string) : Observable<any>{
     return this.http.get(this.urlGetRequiReclutador + user)
+      .map(result => result.json())
+      .catch(this.handleError);
+  }
+
+  // Recuperar la direccion que se registro en la requisicion.
+  getRequiDireccion(id : string) : Observable<any>{
+    return this.http.get(this.UrlGetDireccionRequisicion + id)
       .map(result => result.json())
       .catch(this.handleError);
   }

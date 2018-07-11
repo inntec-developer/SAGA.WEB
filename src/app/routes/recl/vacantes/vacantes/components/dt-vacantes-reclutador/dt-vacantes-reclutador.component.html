@@ -11,6 +11,11 @@
       <mat-header-cell *matHeaderCellDef>Folio </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element?.folio}} </mat-cell>
     </ng-container>
+     <!-- Solicitante -->
+     <ng-container matColumnDef="solicita">
+      <mat-header-cell *matHeaderCellDef>Solicita </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.solicita?.nombre | uppercase}} {{element?.solicita?.apellidoPaterno | uppercase}} </mat-cell>
+    </ng-container>
     <!-- Cliente <Razon Social> Column -->
     <ng-container matColumnDef="cliente">
       <mat-header-cell *matHeaderCellDef>Cliente </mat-header-cell>

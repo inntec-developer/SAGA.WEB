@@ -77,6 +77,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
    // Display para mostrar los objetos en el Grid
    private _displayedColumns = [
     'folio',
+    'solicita',
     'cliente',
     'rfc',
     'vBtra',
@@ -105,6 +106,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
 }
 export interface Element {
   folio: string;
+  solicita: string;
   id: string;
   cliente: string;
   rfc: string;

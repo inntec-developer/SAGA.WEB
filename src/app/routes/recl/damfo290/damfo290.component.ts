@@ -23,6 +23,7 @@ export class Damfo290Component implements OnInit {
   }
 
   goToDamfo(){
-    var window290 = window.open(this.UrlFormato+localStorage.getItem('usuario'), "_blank", "toolbar=no,scrollbars=no,resizable=no");
+    var window290 = window.open(this.UrlFormato+localStorage.getItem('usuario'), "_blank", 
+      "toolbar=no,scrollbars=no,resizable=no,status=no,menubar=no,location=no,fullscreen=yes,directories=no");
   }
 }

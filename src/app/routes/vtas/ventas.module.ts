@@ -56,6 +56,7 @@ import { DtContactosComponent } from './requisiciones/components/dt-contactos/dt
 import { DtCrearRequisicionComponent } from './requisiciones/components/dt-crear-requisicion/dt-crear-requisicion.component';
 import { DtDamfoComponent } from './requisiciones/components/dt-damfo/dt-damfo.component';
 import { DtDireccionComponent } from './requisiciones/components/dt-direccion/dt-direccion.component';
+import { DtDirecionRequiComponent } from './requisiciones/components/dt-direcion-requi/dt-direcion-requi.component'
 import { DtHorariosComponent } from './requisiciones/components/dt-horarios/dt-horarios.component';
 import { DtPsicometriasClienteComponent } from './requisiciones/components/dt-psicometrias-cliente/dt-psicometrias-cliente.component';
 import { DtPsicometriasDamsaComponent } from './requisiciones/components/dt-psicometrias-damsa/dt-psicometrias-damsa.component';
@@ -151,6 +152,7 @@ const routes: Routes = [
         DialogDeleteRequiComponent,
         DialogCancelRequiComponent,
         DialogActivarRequiComponent,
+        DtDirecionRequiComponent,
     ],
     entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent],
     exports: [

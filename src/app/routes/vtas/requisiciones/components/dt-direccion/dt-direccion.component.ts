@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit} from '@angular/core';
-import {MatTableDataSource, PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-dt-direccion',
@@ -30,20 +30,20 @@ export class DtDireccionComponent implements OnInit,  AfterViewInit {
   }
 
   //*******************************-- GRID-- *********************************************//
-    // Display para mostrar los objetos en el Grid
-    displayedColumns = [
-      'tipoDireccion',
-      'pais',
-      'estado',
-      'municipio',
-      'colonia',
-      'calle',
-      'numeroExterior',
-      'numeroInterior',
-      'codigoPostal',
-      'activo',
-      'esPrincipal'
-    ];
+  // Display para mostrar los objetos en el Grid
+  displayedColumns = [
+    'tipoDireccion',
+    'pais',
+    'estado',
+    'municipio',
+    'colonia',
+    'calle',
+    'numeroExterior',
+    'numeroInterior',
+    'codigoPostal',
+    'activo',
+    'esPrincipal'
+  ];
 
   }
 
