@@ -66,7 +66,6 @@ export class MenuService {
     {
         var privilegios = JSON.parse(localStorage.getItem('privilegios'));
 
-        console.log(privilegios)
         if(this.menuItems.length > 2)
         {
             this.menuItems.splice(2, this.menuItems.length - 2)

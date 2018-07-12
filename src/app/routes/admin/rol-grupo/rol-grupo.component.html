@@ -23,12 +23,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="empty-row" matTooltip="click to select" *ngFor="let g of Grupos; let i = index" (click)="onSelect(g, i)" [class.selected]="g.selected">
+          <tr class="empty-row" matTooltip="dblclick to select" *ngFor="let g of Grupos; let i = index" (dblclick)="onSelect(g, i)" [class.selected]="g.selected">
             <td><img class="center-block media img-responsive img-circle thumb32" src="{{g.foto}}" alt="" /></td>
             <td class="text-center">{{g.nombre + ' ' + g.apellidoPaterno}}</td>
             <td class="text-center">{{g.descripcion}}</td>
             <td class="center-block">
-              <tr class="text-center" *ngFor="let r of g.roles">{{r.rol}}</tr>
+              <tr class="text-center" *ngFor="let r of g.roles">
+                {{r.rol}}
+                <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUserRoles(g.id, r.rolId)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </tr>
             </td>
           </tr>
         </tbody>

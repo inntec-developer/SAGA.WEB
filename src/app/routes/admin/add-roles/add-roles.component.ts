@@ -1,19 +1,9 @@
-import { state } from '@angular/animations';
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+
+import { Component, OnInit, ViewChild, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import { TreeNode, TREE_ACTIONS, KEYS, IActionMapping, TreeModule, TreeComponent } from 'angular-tree-component';
-import { query } from '@angular/core/src/animation/dsl';
-
-export class estructura
-{
-  id = 0
-  idPadre = 0
-  nombre = ""
-  estructuraId = 0
-  children: Array<estructura> = [];
-  checked = false
-}
+import { TreeNode, TreeComponent } from 'angular-tree-component';
+import { expand } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-roles',
@@ -27,16 +17,17 @@ export class AddRolesComponent implements OnInit {
 
   formRoles: FormGroup;
   msj: string;
-  nodes: Array<estructura> = [];
+  nodes: Array<any> = [];
   privilegios = [];
-  indeterminate = false;
+  nodeAux : TreeNode;
 
   customTemplateStringOptions = {
     displayField: 'nombre',
     isExpandedField: 'expanded',
     idField: 'uuid',
     getChildren: this.getChildren.bind(this),
-    allowDrag: true, 
+    allowDrag: false, 
+    nodeHeight: 50
   };
 
   constructor(private service: AdminServiceService
@@ -46,6 +37,7 @@ export class AddRolesComponent implements OnInit {
     this.msj = '';
 
   }
+
 
   getChildren(node: any) {
       return new Promise((resolve, reject) => {
@@ -57,8 +49,10 @@ export class AddRolesComponent implements OnInit {
       });
   }
 
-  childrenCount(node: TreeNode): string {
-      return node && node.children ? `${node.children.length}` : '';
+  childrenCount(node: TreeNode) {
+ 
+
+       return node && node.children ? `${node.children.length}` : '';
   }
 
   filterNodes(text, tree) {
@@ -75,74 +69,45 @@ export class AddRolesComponent implements OnInit {
 
   descendantsChecked($event, node, title)
   {
- 
-      let eid = node.data.estructuraId;
-      node.data[title.toLowerCase()] = $event.checked;
+      node[title.toLowerCase()] = $event.checked;
 
-      if(node.data.children.length > 0)
+      if( this.privilegios.length > 0)
       {
-        node.children.forEach(element => {
-          this.descendantsChecked($event, element, title)
-        });
+         let idx = this.privilegios.findIndex( x => {
+           return x.id == node.id })
+         if( idx === -1)
+         {
+           this.privilegios.push(node);
+         }
+         else
+         {
+           this.privilegios[idx][title] = $event.checked;
+         }
       }
-      // this.nodes[ind][title.toLowerCase()] = $event.checked;
-   
-    //   let ind = this.nodes.forEach(function(item, index)
-    // {
-    //   console.log(eid)
-    //     if(item.estructuraId === eid)
-    //     {
-    //       console.log("entro")
-          
-        
-    //       console.log(item)
-    //       return index;
-    //     }
-      
-       
+      else
+      {
+         this.privilegios.push(node);
+      }
 
-    // } );
-      console.log(this.nodes)
-      
-   
+      node.children = this.nodes.filter(function(c){
+        return c.idPadre === node.id
+        });
 
-    //
-  }
-   /** Whether all the descendants of the node are selected */
-  descendantsAllSelected(node, value, tree)  
-  {
-     node.data.checked = value;
-
-     tree.treeModel.getNodeById(node.data.uuid)
-        .setActiveAndVisible(value);
-
-     if(node.children.length > 0)
-     {
-       node.children.forEach(element => {
-         this.descendantsAllSelected(element, value, tree)
+      if(node.children.length > 0)
+      {
+         node.children.forEach(element => {
+            this.descendantsChecked($event, element, title)
        });
-     }
+      }
+     
+      // console.log(this.nodes)
+      
+   
   }
- 
-  // updateValue($event, cell, rowIndex)
-  // {
-
-  //   if(cell.toLowerCase() !== 'rol')
-  //   {
-  //     this.nodes[rowIndex][cell] = $event.checked;
-  //   }
-  //   else if( cell.toLowerCase() === 'rol' && $event.target.value !== '' )
-  //   {
-  //     this.nodes[rowIndex][cell.toLowerCase()] = $event.target.value;
-  //   }
-    
-  //   this.editing[rowIndex + '-' + cell] = false;
-  //   this.nodes = [...this.nodes];
-  // }
 
   CrearEstructura(node)
   {
-    if(this.privilegios.length > 0 && node.checked)
+    if(this.privilegios.length > 0)
     {
       this.privilegios.push({
         estructuraId: node.estructuraId,
@@ -172,33 +137,35 @@ export class AddRolesComponent implements OnInit {
 
   saveData()
   {
-    let nom = this.formRoles.value.Rol;
-    console.log(this.nodes)
-
-    for( let item of this.nodes)
+    if(this.privilegios.length > 0)
     {
-      console.log(item.nombre)
-      console.log(item.checked)
-      if(item.checked)
+      let nom = this.formRoles.value.Rol;
+      console.log(this.nodes)
+
+      // for( let item of this.nodes)
+      // {
+      //   this.CrearEstructura(item)
+      // }
+    
+      let obj = this.privilegios.map(function(item) 
       {
-        this.CrearEstructura(item)
-      }
+        item.Nombre = nom;
+        return item;
+      });
+
+      console.log(obj)
+
+      this.service.AddRoles(obj)
+      .subscribe( data => {
+        this.msj = data;
+        console.log(this.msj)
+        this.ngOnInit();
+      });
     }
-  
-    let obj = this.privilegios.map(function(item) 
+    else
     {
-      item.Nombre = nom;
-      return item;
-    });
-
-    console.log(this.privilegios)
-
-    this.service.AddRoles(obj)
-    .subscribe( data => {
-      this.msj = data;
-      console.log(this.msj)
-      this.ngOnInit();
-     });
+      alert('No se ha seleccionado Estructuras')
+    }
   }
 
   // updateRol($event,rowIndex)
@@ -240,6 +207,15 @@ export class AddRolesComponent implements OnInit {
         console.log(this.nodes)
       })
   }
+  GetEstructura() {
+    this.service.GetEstructuraRoles()
+      .subscribe(
+        e => {
+          this.nodes = e;
+          console.log(this.nodes)
+        })
+  }
+
 
 
   ngOnInit() {
@@ -247,4 +223,8 @@ export class AddRolesComponent implements OnInit {
     this.iniciarForm();
   }
 
-}
+
+  }
+
+
+

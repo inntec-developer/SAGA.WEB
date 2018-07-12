@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,10 +17,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 import { AgGridModule } from 'ag-grid-angular/main';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable'
 import {MatDialogModule} from '@angular/material/dialog';
-import { TreeModule } from 'angular-tree-component';
 import {ModalModule} from 'ngx-bootstrap';
 import {PopoverModule} from 'ngx-popover';
-import { SharedModule} from './../../shared/shared.module';
+// import {TreeTableModule} from 'ng-treetable';
+import { TreeTableModule } from 'primeng/primeng';
+import {DataTableModule, SharedModule} from 'primeng/primeng'
+
+import { TreeModule } from 'angular-tree-component';
+
+import { TreeNode } from 'primeng/api';
 //Servicios
 
 
@@ -34,6 +40,7 @@ import { RollsStructComponent } from './rolls-struct/rolls-struct.component';
 import { RegistroComponent } from './registro/registro.component';
 import { PagesModule } from './../pages/pages.module';
 import {ComponentsModule} from './../../components/components.module';
+import { GridRolesComponent } from './add-roles/grid-roles/grid-roles.component';
 
 
 const routes: Routes = [
@@ -43,6 +50,7 @@ const routes: Routes = [
     { path: 'grupoAdd', component: AddGrupoComponent, data: {'componente':'Grupos'} },
     { path: 'rol', component: RolGrupoComponent, data: {'componente':'Grupos a roles'} },
     { path: 'privilegios', component: RollsStructComponent, data: {'componente':'Roles a privilegios'}},
+    { path: 'GridRoles', component: GridRolesComponent },
     { path: 'registro', component: RegistroComponent}
 
 ];
@@ -67,18 +75,19 @@ const routes: Routes = [
         FileUploadModule,
         ImageCropperModule,
         Ng2TableModule,
-        //PaginationModule.forRoot(),
         MatCheckboxModule,
         AgGridModule,
         NgxDatatableModule, 
         MatDialogModule, 
         MatTooltipModule,
-        TreeModule,
         PagesModule,
         ComponentsModule,
         ModalModule.forRoot(),
         PopoverModule,
-        SharedModule
+        TreeTableModule, 
+        DataTableModule,
+        SharedModule, 
+        TreeModule
         
       ],
     declarations:
@@ -90,7 +99,8 @@ const routes: Routes = [
       RolGrupoComponent,
       UploadImgsComponent,
       RollsStructComponent,
-      RegistroComponent
+      RegistroComponent,
+      GridRolesComponent 
 
     ],
     exports: [

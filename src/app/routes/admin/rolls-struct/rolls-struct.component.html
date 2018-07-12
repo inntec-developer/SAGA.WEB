@@ -1,35 +1,35 @@
-
-<br/>
-
-<div class="row">
-  <div class="panel panel-default panel-flat mat-elevation-z8">
-      <div class="panel-body">
-        <div class="col-md-8">
-          <select class="form-control" (change)="selected($event.target.value); id = $event.target.value; flag=true" >
-              <option  [value]="">Seleccionar Rol</option>
-              <option *ngFor="let rol of listRoles" [value]="rol.id">{{rol.rol}}</option>
-           </select>
-        </div>
-        <div>
-          <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)"></btn-delete>
-        </div>
+<div class="panel panel-default panel-flat mat-elevation-z8">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <select class="form-control" (change)="selected($event.target.value); id = $event.target.value; flag=true" >
+            <option  [value]="0">Seleccionar Rol</option>
+            <option *ngFor="let rol of listRoles" [value]="rol.id">{{rol.rol}}</option>
+        </select>
       </div>
-  </div>
-</div>
-<div class="row">
-  <div class="panel panel-default panel-flat mat-elevation-z8">
-    <div class="panel-body">
-      <div class="row">
+      <div class="col-md-2">
+        <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)"></btn-delete>
+        <btn-view (click)="staticModal.show()" data-toggle="modal" data-target="#staticModal" matTooltip="Ver integrantes del rol"></btn-view>
+      </div>
+      <div class="col-md-4">
           
-          <div class="col-md-2 pull-left">
-              <div class="input-group">
-                <input (input)="Search($event)" class="input-sm form-control" type="text" placeholder="Filtrar" />
-              </div> 
-            </div>
-            <div class="col-md-8 text-center">
-                <p class="text-center pv">ROLES - PRIVILEGIOS</p>
-                </div>
-        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-md-2 pull-left">
+        <div class="input-group">
+          <input (input)="Search($event)" class="input-sm form-control" type="text" placeholder="Filtrar" />
+        </div> 
+      </div>
+      <div class="col-md-8 text-center">
+        <p class="text-center pv">ROLES - PRIVILEGIOS</p>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
         <table #tbl class="table table-responsive table-bordered table-hover" (change)="UpdateFoto() ">
           <thead><tr><td *ngFor="let c of columns" class="text-center">{{c.title}}</td></tr></thead>
             <tbody>
@@ -74,4 +74,44 @@
             </tr>
           </tbody>
       </table>
+    </div>
   </div>
+
+    <!-- Modal  -->
+
+    <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h4 class="modal-title pull-left"></h4>
+             <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+              
+           <table class="table table-hover table-responsive">
+              <thead>
+                <tr>
+                  <th class="text-center">Imagen</th>
+                  <th class="text-center">Nombre</th>
+                  <th class="text-center">Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr matTooltip="click to select" *ngFor="let e of listAux; let i = index">
+                  <td><img class="center-block media img-responsive img-circle thumb32" src="{{e.foto}}" alt="" /></td>
+                  <td class="text-center">{{e.nombre + ' ' + e.apellidoPaterno}}</td>
+                  <td class="text-center">{{e.descripcion}}</td>
+                  <td><btn-delete id='delete' chkPrivilegiosButtons matTooltip="Borrar Usuario de Grupo" class="pull-right" (click)="DeleteUserRoles(e.id, id)"> 
+                    </btn-delete></td>
+                </tr>
+              </tbody>
+            </table>
+           <!-- <div class="modal-footer">
+               <btn-closed data-dismiss="modal" (click)="staticModal.hide()"></btn-closed>
+             </div> -->
+         </div>
+       </div>
+     </div>
+     </div>

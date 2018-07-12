@@ -131,7 +131,29 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
       .subscribe(
         e=>{
           this.Grupos = e;
+          console.log(this.Grupos)
         })
+    }
+  
+    DeleteUserRoles(user, rol)
+    {
+      console.log(user)
+      console.log(rol)
+        // var idx = this.listAux.findIndex(x => x.id == user);
+  
+        // if(idx != -1)
+        // {
+        //   this.listAux.splice(idx, 1)
+        // }
+  
+        // let dts = { RolId: rol, EntidadId: user};
+        // console.log(dts)
+        // this.service.DeleteUserRol(dts)
+        // .subscribe(
+        //   e=>{
+        //     console.log(e)
+        //   })
+  
     }
 
   ngOnInit() {

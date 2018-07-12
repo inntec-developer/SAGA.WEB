@@ -43,6 +43,8 @@ export class AdminServiceService {
   private UrlUpdatePrivilegios = ApiConection.ServiceUrl+ApiConection.modificarPrivilegios;
   private UrlGetUsuarioByGrupo = ApiConection.ServiceUrl+ApiConection.getUsuariosByGrupo;
   private UrlDeleteUserGroup = ApiConection.ServiceUrl+ApiConection.deleteUserGroup;
+  private UrlDeleteUserRol = ApiConection.ServiceUrl+ApiConection.deleteUserRol;
+  private UrlGetStruct = ApiConection.ServiceUrl+ApiConection.getStruct;
 
   // Error.
   private handleError(error: any) {
@@ -138,6 +140,13 @@ export class AdminServiceService {
   GetTreeRoles(): Observable<any>
   {
      return this.http.get(this.UrlGetTreeRoles)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
+
+  GetStruct(): Observable<any>
+  {
+     return this.http.get(this.UrlGetStruct)
          .map(result => result.json())
          .catch(this.handleError);
   }
@@ -267,6 +276,15 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlDeleteUserGroup, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+
+  }
+  DeleteUserRol(data: any) : Observable<any>
+  {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlDeleteUserRol, JSON.stringify(data), options)
             .map(result => result.json())
             .catch(this.handleError);
 

@@ -30,7 +30,8 @@ export class RollsStructComponent implements OnInit {
   filteredData: Array<any> = [];
   editing = {};
   listRoles: Array<any> = [];
-
+  listEntidades: Array<any> = [];
+  listAux: Array<any> = [];
   constructor(private service: AdminServiceService) { }
   
   GuardarCambios(row: any)
@@ -75,6 +76,26 @@ export class RollsStructComponent implements OnInit {
     //         });
 
   }
+
+  DeleteUserRoles(user, rol)
+  {
+      var idx = this.listAux.findIndex(x => x.id == user);
+
+      if(idx != -1)
+      {
+        this.listAux.splice(idx, 1)
+      }
+
+      let dts = { RolId: rol, EntidadId: user};
+      console.log(dts)
+      this.service.DeleteUserRol(dts)
+      .subscribe(
+        e=>{
+          console.log(e)
+        })
+
+  }
+
   setData() {
     this.onItemChanged.emit(this.StructList);
   }
@@ -97,17 +118,27 @@ export class RollsStructComponent implements OnInit {
 
   selected(value)
   {
+    this.listAux = [];
+    let aux = [];
+    console.log(value)
     let tempArray: Array<any> = [];
 
-    this.StructList.forEach(function (item) {
+    this.filteredData = this.StructList.filter(function(item){
+      return item.rolId == value
 
-       if (item.rolId == value) {
-         tempArray.push(item)
-      }
     });
+    this.listEntidades.forEach(element => {
+      aux = element.roles.filter(function(item)
+        {
+          return item.id == value;
 
-    this.filteredData = tempArray;
-
+        })
+      if(aux.length > 0)
+      {
+        this.listAux.push(element)
+      }
+      
+    });
   }
 
   DeleteRoles(id)
@@ -127,12 +158,22 @@ export class RollsStructComponent implements OnInit {
     .subscribe(
       e=>{
         this.listRoles = e;
-        console.log(this.listRoles)
       })
   }
+  GetEntidades()
+  {
+    this.service.GetEntidadesUG()
+    .subscribe(
+      e=>{
+        this.listEntidades = e;
+        console.log(this.listEntidades)
+      })
+  }
+
   ngOnInit() {
     this.GetEstructura();
     this.GetRoles();
+    this.GetEntidades();
   }
 
 }

@@ -1,3 +1,4 @@
+
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +32,7 @@ import { NowDirective } from './directives/now/now.directive';
 import { ScrollableDirective } from './directives/scrollable/scrollable.directive';
 import { JqcloudDirective } from './directives/jqcloud/jqcloud.directive';
 import { ChkButtonsDirective } from './directives/chk-privilegios-buttons/chk-buttons.directive';
+import {TreeGridDirective} from './directives/treeGrid/treeGrid.directive';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -68,7 +70,8 @@ import { ChkButtonsDirective } from './directives/chk-privilegios-buttons/chk-bu
         NowDirective,
         ScrollableDirective,
         JqcloudDirective,
-        ChkButtonsDirective
+        ChkButtonsDirective,
+        TreeGridDirective
     ],
     exports: [
         CommonModule,
@@ -100,7 +103,8 @@ import { ChkButtonsDirective } from './directives/chk-privilegios-buttons/chk-bu
         NowDirective,
         ScrollableDirective,
         JqcloudDirective,
-        ChkButtonsDirective
+        ChkButtonsDirective,
+        TreeGridDirective
     ]
 })
 
