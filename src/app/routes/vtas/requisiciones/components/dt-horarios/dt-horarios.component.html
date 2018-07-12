@@ -55,6 +55,13 @@
             </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="accion">
+            <mat-header-cell *matHeaderCellDef> Accion</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <btn-edit id="update" (click)="openDialogEdit(element)" chkPrivilegiosButtons  matTooltip="Editar Requisición"></btn-edit>
+            </mat-cell>
+          </ng-container>
+
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>

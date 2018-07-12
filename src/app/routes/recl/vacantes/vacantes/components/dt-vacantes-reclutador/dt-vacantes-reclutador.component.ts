@@ -17,6 +17,7 @@ import { element } from 'protractor';
 })
 export class DtVacantesReclutadorComponent implements OnInit {
   requi: { folio: any; id: any; };
+  ruta: any;
 
   constructor(
     private service: RequisicionesService,
@@ -24,19 +25,24 @@ export class DtVacantesReclutadorComponent implements OnInit {
     private _Router: Router,
     private _Route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toasterService: ToasterService
-  ) { }
+    private toasterService: ToasterService,
+    private activateRoute : ActivatedRoute
+  ) {
+    this.ruta = this.activateRoute.snapshot.routeConfig.data;
+    localStorage.setItem('ruta', this.ruta.componente);
+   }
   // Variables Globales
   requisicion: any;
   arrayRequisicion: any[];
   public dataSource = new MatTableDataSource(<any>[]);
 
   ngOnInit() {
-    this.getDateRequisiciones();
+    this.getDataRequisiciones();
   }
 
-  getDateRequisiciones(){
+  getDataRequisiciones(){
     this.service.getRequiReclutador(localStorage.getItem('id')).subscribe(data => {
+      console.log(data);
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;
@@ -65,7 +71,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
       data: element
     });   
     dialogAssing.afterClosed().subscribe(result => {
-      this.getDateRequisiciones();
+      this.getDataRequisiciones();
     })
   }
 
@@ -76,6 +82,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
    // Display para mostrar los objetos en el Grid
    private _displayedColumns = [
     'folio',
+    'solicita',
     'cliente',
     'rfc',
     'vBtra',
@@ -104,6 +111,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
 }
 export interface Element {
   folio: string;
+  solicita: string;
   id: string;
   cliente: string;
   rfc: string;

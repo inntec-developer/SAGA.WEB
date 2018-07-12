@@ -1,8 +1,10 @@
 export class ApiConection {
   /*Servicio de purbeas locales*/
   public static ServiceUrl = 'http://localhost:33333/api/';
-  // Agregar las conexiones necesarias para la comunicacion con bolsa.
+  // Conexiones a bolsa de trabajo.
   public static ServiceUrlBolsa = 'http://sagainn.com.mx:403';
+  // Conexion a FORMATO 290 
+  public static ServicioUrl290 = 'http://sagainn.com.mx:413/Home/';
 
   /* Componentes */
   public static GetUserGroup = 'AsignacionRequi/getUserGroup';
@@ -34,6 +36,9 @@ export class ApiConection {
   public static GetUserGroups = 'Requisiciones/getUserGroups'
   public static GetRequiReclutador = 'Requisiciones/getRequiReclutador?IdUsuario=';
   public static AsignarRequisicion = 'Requisiciones/asignacionRequisiciones'
+  public static GetDireccionRequisicion = 'Requisiciones/getDireccionRequisicon?id=';
+  public static UpdateVacantes = 'Requisiciones/upadateVacantes';
+  public static GetHorariosRequi = 'Requisiciones/getHorariosRequisicion?id=';
 
 
   /* Candidatos */
@@ -56,6 +61,8 @@ export class ApiConection {
   public static GetEstatus = 'Candidatos/getestatuscandidato';
   public static Liberar = 'Candidatos/postliberado';
   public static VacantesDtl = 'Candidatos/getvacantesdtl';
+  public static Comentarios = 'Candidatos/getComentarios';
+  public static AddComentarios = 'Candidatos/addComentarios';
 
   /* Vacantes */
   public static getRequis = '/dvacante/get';

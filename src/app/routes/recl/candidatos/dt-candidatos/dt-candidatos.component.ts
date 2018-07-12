@@ -4,9 +4,10 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
 import {ToasterConfig, ToasterService} from 'angular2-toaster';
 
-import { Apartado } from '../../../../models/recl/candidatos';
+import { Apartado } from './../../../../models/recl/candidatos';
 import { BusquedaComponent } from '../busqueda/busqueda.component';
 import { CandidatosService } from '../../../../service/index';
+import { Comentarios } from '../../../../models/recl/candidatos';
 import { DialogcandidatosComponent } from './dialogcandidatos/dialogcandidatos.component';
 
 // Modelos
@@ -69,8 +70,16 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Variable para el consecutivo del detalle del candidato. ***
   step = 0;
-  ConexionBolsa: string;
-  fotoCandidato: any;
+  ConexionBolsa: string; // asignamos la conexion de bolsa de trabajo que se encuentra en el ApiConection;
+  fotoCandidato: any; // Asignamos la ruta en la que se encuentra la foto del candidato; 
+  comentarios: any[] = []; // Asignamos todos lo comentaios que tiene ese candidato;
+  comentario: string; // [(ngModel)] para tomar el comentario que se va a ingresar;
+  CountComent: number;
+  txtBtnAddComent: string; // Mensajes en el boton de inserta conentario;
+  msgError: boolean; // Mensajes a mostrar en la seccion de comentarios;
+  msgSuccess: boolean; // Mensajes a mostrar en la seccion de comentarios;
+  Usuario: string; // Asignamos el usario que ingreso al sistema en el constructor;
+
 
   setStep(index: number) {
     this.step = index;
@@ -105,6 +114,8 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       private _Route: ActivatedRoute, toasterService: ToasterService) { 
         this.toasterService = toasterService;
         this.ConexionBolsa  = localStorage.getItem('ConexionBolsa');
+        this.txtBtnAddComent = 'Comentar';
+        this.Usuario = localStorage.getItem('nombre');
       }
 
  // Captamos la variable de la busqueda de candidatos para ver si tiene cambios. ***
@@ -126,20 +137,19 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Boton de ver de la tabla de candidatos. ***
   vercandidato(id): void {
-   // Buscamos el detalle del candidato seleccionado. ***
+    // Buscamos el detalle del candidato seleccionado. ***
     this.service.getcandidatodtl(id)
     .subscribe(data => {
       this.candidatodtl = data;
-      console.log('Candidato:' ,this.candidatodtl);
       this.fotoCandidato = this.ConexionBolsa + this.candidatodtl[0].candidato.imgProfileUrl;
-      console.log('Foto Candidato', this.fotoCandidato);
-
       // Buscamos el estatus del candidato del apartado o liberado. ***
       this.service.getEstatusCandidato(this.candidatodtl[0].candidatoId)
           .subscribe(estatus => {
+            console.log('Estatus: ', estatus);
             if (estatus.length == 0){
               this.Status = estatus.length;
               this.Reclutador = 'Candidato disponible';
+              this.requisicionId = null;
             }else{
               this.Status = estatus[0].estatus;
               this.Reclutador = estatus[0].reclutador;
@@ -165,8 +175,11 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
               this.NumVacantes = this.vacantes.length;
               this.paginadorv();
         });
+        // Buscar los comentarios agregados al candidato. ***
+        this.GetAllComments(id);
     });
-      this.expandir = true; // Expandemos los detalles del candidato seleccionado. ***
+    
+    this.expandir = true; // Expandemos los detalles del candidato seleccionado. ***
 
       // let dialogRef = this.dialog.open(DialogcandidatosComponent, {
       //   width: '1200px',
@@ -175,6 +188,15 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       // });
       // dialogRef.afterClosed().subscribe(result => {
       // });
+  }
+
+  // Funcion para obtener comentarios del candidato.
+  GetAllComments(id){
+    this.service.getComentarios(id)
+      .subscribe(comentarios => {
+        this.comentarios = comentarios;
+        this.CountComent = this.comentarios.length; 
+      })
   }
 
  // Abrimos el modal en donde mandamos el id de la requisicion para mostar los datos. ***
@@ -200,7 +222,6 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.service.postApartar(Apartar)
     .subscribe(data => {
       this.pop(data.mensaje, true, data.estatus, 'Apartado', data.reclutador);
-      debugger;
       let diaEnMils = 1000 * 60 * 60 * 24;
       let fchapartado = new Date(data.fch_Creacion.substr(0, 10));
       fchapartado.setDate(fchapartado.getDate() + 1);
@@ -223,6 +244,31 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.vercandidato(this.candidatodtl[0].candidatoId);
   }
 
+  // Agregar un nuevo comentaior para le candidato.
+  AddComentario(){
+    let Coment: Comentarios =  new Comentarios();
+    Coment.Comentario = this.comentario;
+    Coment.CandidatoId = this.candidatodtl[0].candidatoId;
+    Coment.RequisicionId = this.requisicionId;
+    Coment.Usuario = localStorage.getItem('usuario');
+    this.service.postComentarios(Coment)
+      .subscribe(data => {
+        if(data == 200){
+          this.msgSuccess = true;
+          this.GetAllComments(this.candidatodtl[0].candidatoId)
+          this.comentario = '';
+          setTimeout(() => {
+            this.msgSuccess = false;
+          }, 2000)
+        }
+        if(data == 404){
+          this.msgError = true;
+          setTimeout(() => {
+            this.msgError = false;
+          }, 2000)
+        }
+      });
+  }
   // Mensajes de confirmación o error. ***
   pop(mensaje:string,bandera:boolean,estatus:number,titulo:string,candidato:string) {
     if (bandera == true){ // mandamos la validación del apartado ***

@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { ApiConection } from './../../../service/api-conection.service';
 import { CustomValidators } from 'ng2-validation';
 import { SettingsService } from '../../../core/settings/settings.service';
-import { settings } from 'cluster';
 
 @Component({
     selector: 'app-damfo',
@@ -13,6 +13,7 @@ import { settings } from 'cluster';
 
 export class Damfo290Component implements OnInit {
   public URL: string;
+  private UrlFormato = ApiConection.ServicioUrl290
   constructor(
     private settings : SettingsService
   ) { }
@@ -22,6 +23,7 @@ export class Damfo290Component implements OnInit {
   }
 
   goToDamfo(){
-    window.location.href = 'http://192.168.8.130:444/Home/' + this.settings.user.name;
+    var window290 = window.open(this.UrlFormato+localStorage.getItem('usuario'), "_blank", 
+      "toolbar=no,scrollbars=no,resizable=no,status=no,menubar=no,location=no,fullscreen=yes,directories=no");
   }
 }

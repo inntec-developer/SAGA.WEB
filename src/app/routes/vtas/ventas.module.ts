@@ -44,6 +44,7 @@ import { ComponentsModule } from './../../components/components.module';
 import { DialogActivarRequiComponent } from './requisiciones/components/dialog-activar-requi/dialog-activar-requi.component';
 import { DialogCancelRequiComponent } from './requisiciones/components/dialog-cancel-requi/dialog-cancel-requi.component';
 import { DialogDeleteRequiComponent } from './requisiciones/components/dialog-delete-requi/dialog-delete-requi.component';
+import { DialogEditHorarioComponent } from './requisiciones/components/dt-horarios/dialog-edit-horario/dialog-edit-horario.component';
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
 import { DireccionautoComponent } from './requisiciones/components/direccionauto/direccionauto.component';
 import { DocumentosClienteComponent } from './requisiciones/components/documentos-cliente/documentos-cliente.component';
@@ -56,6 +57,7 @@ import { DtContactosComponent } from './requisiciones/components/dt-contactos/dt
 import { DtCrearRequisicionComponent } from './requisiciones/components/dt-crear-requisicion/dt-crear-requisicion.component';
 import { DtDamfoComponent } from './requisiciones/components/dt-damfo/dt-damfo.component';
 import { DtDireccionComponent } from './requisiciones/components/dt-direccion/dt-direccion.component';
+import { DtDirecionRequiComponent } from './requisiciones/components/dt-direcion-requi/dt-direcion-requi.component'
 import { DtHorariosComponent } from './requisiciones/components/dt-horarios/dt-horarios.component';
 import { DtPsicometriasClienteComponent } from './requisiciones/components/dt-psicometrias-cliente/dt-psicometrias-cliente.component';
 import { DtPsicometriasDamsaComponent } from './requisiciones/components/dt-psicometrias-damsa/dt-psicometrias-damsa.component';
@@ -151,8 +153,10 @@ const routes: Routes = [
         DialogDeleteRequiComponent,
         DialogCancelRequiComponent,
         DialogActivarRequiComponent,
+        DtDirecionRequiComponent,
+        DialogEditHorarioComponent,
     ],
-    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent],
+    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent, DialogEditHorarioComponent],
     exports: [
         RouterModule, ViewCuerpoRequiComponent, ViewInforRequiComponent
     ]

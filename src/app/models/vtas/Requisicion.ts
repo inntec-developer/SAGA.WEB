@@ -20,3 +20,10 @@ export class AsignarRequis {
   diasEnvio: number;
   usuario: string;
 }
+
+export class Vacante {
+  id: string;
+  requisicionId: string;
+  numeroVacantes: number;
+  usuario: string;
+}

@@ -7,6 +7,8 @@ import { ApiConection } from "../../../service";
 import { AuthService } from './../../../service/auth/auth.service';
 import { CustomValidators } from 'ng2-validation';
 import { SettingsService } from '../../../core/settings/settings.service';
+import { debug } from "util";
+import { looseIdentical } from "../../../../../node_modules/@angular/core/src/util";
 
 @Component({
     selector: 'app-login',
@@ -54,11 +56,14 @@ export class LoginComponent implements OnInit {
                 data => {
                     if(data != 404 && data != 406){
                         localStorage.setItem('ConexionBolsa', ApiConection.ServiceUrlBolsa);
+                        localStorage.setItem('privilegios', JSON.stringify(data.privilegios));
                         localStorage.setItem('usuario',data.usuario);
                         localStorage.setItem('nombre', data.nombre);
-                        localStorage.setItem('email', email);
+                        localStorage.setItem('email', data.email);
+                        localStorage.setItem('clave', data.clave)
+                        localStorage.setItem('foto', data.foto);
                         localStorage.setItem('id', data.id)
-                        localStorage.setItem('privilegios', JSON.stringify(data.privilegios));
+                        
                         this.router.navigate(['/home']);
                     }
                     if(data == 404){

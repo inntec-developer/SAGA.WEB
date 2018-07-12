@@ -23,6 +23,12 @@ export class ViewCuerpoRequiComponent implements OnInit, AfterContentChecked {
   public requiId: string;
   public requisicion: any[];
   public checked : boolean = false;
+  sueldoMinimo: any;
+  sueldoSemanalMin: number;
+  sueldoDiarioMin: number;
+  sueldoMaximo: number;
+  sueldoDiarioMax: number;
+  sueldoSemanalMax: number;
 
   constructor(
     private serviceRequisiciones: RequisicionesService,
@@ -117,6 +123,14 @@ export class ViewCuerpoRequiComponent implements OnInit, AfterContentChecked {
           periodoPago: data.periodoPago.periodoPago,
           especifique: data.especifique
         });
+        // Sueldos Minimos 
+        this.sueldoMinimo = parseFloat(data.sueldoMinimo);
+        this.sueldoDiarioMin = this.sueldoMinimo / 30;
+        this.sueldoSemanalMin = this.sueldoDiarioMin * 7; 
+        // Sueldos Maximos
+        this.sueldoMaximo = parseFloat(data.sueldoMaximo);
+        this.sueldoDiarioMax = this.sueldoMaximo / 30;
+        this.sueldoSemanalMax = this.sueldoDiarioMax * 7; 
         this.requisicion = data;
         this.spinner.hide();
       });
