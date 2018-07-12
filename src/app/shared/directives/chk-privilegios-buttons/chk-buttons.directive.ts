@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { AfterViewInit, Directive } from '@angular/core';
+import { AfterViewInit, Directive, Input } from '@angular/core';
 
 import { style } from '@angular/animations';
 
@@ -7,21 +7,26 @@ import { style } from '@angular/animations';
   selector: '[chkPrivilegiosButtons]'
 })
 export class ChkButtonsDirective implements AfterViewInit {
-  
+  @Input('ruta') ruta: any;
   constructor(private router: Router, private activeRoute: ActivatedRoute ) {
 
      }
 
   ngAfterViewInit(){ 
+    var ruta; 
     var btncreate = document.querySelectorAll("#create");
     var btnupdate = document.querySelectorAll("#update");
     var btndelete = document.querySelectorAll("#delete");
     var btnspecial = document.querySelectorAll("#special");
     let privilegios = JSON.parse(localStorage.getItem('privilegios'))
-    let ruta = this.activeRoute.snapshot.routeConfig.data;
+     ruta = this.activeRoute.snapshot.routeConfig ? 
+     this.activeRoute.routeConfig.data.componente : 
+     localStorage.getItem('ruta')
+
+    
 
     var campos = privilegios.filter(function(row){
-      return row.tipoEstructuraId === 4 && row.nombre == ruta.componente
+      return row.tipoEstructuraId === 4 && row.nombre == ruta
        });
 
     campos.forEach(campo =>{

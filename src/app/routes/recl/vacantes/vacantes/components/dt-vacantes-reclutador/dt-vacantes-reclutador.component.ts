@@ -17,6 +17,7 @@ import { element } from 'protractor';
 })
 export class DtVacantesReclutadorComponent implements OnInit {
   requi: { folio: any; id: any; };
+  ruta: any;
 
   constructor(
     private service: RequisicionesService,
@@ -24,8 +25,12 @@ export class DtVacantesReclutadorComponent implements OnInit {
     private _Router: Router,
     private _Route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toasterService: ToasterService
-  ) { }
+    private toasterService: ToasterService,
+    private activateRoute : ActivatedRoute
+  ) {
+    this.ruta = this.activateRoute.snapshot.routeConfig.data;
+    localStorage.setItem('ruta', this.ruta.componente);
+   }
   // Variables Globales
   requisicion: any;
   arrayRequisicion: any[];

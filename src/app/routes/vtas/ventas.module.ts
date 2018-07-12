@@ -44,6 +44,7 @@ import { ComponentsModule } from './../../components/components.module';
 import { DialogActivarRequiComponent } from './requisiciones/components/dialog-activar-requi/dialog-activar-requi.component';
 import { DialogCancelRequiComponent } from './requisiciones/components/dialog-cancel-requi/dialog-cancel-requi.component';
 import { DialogDeleteRequiComponent } from './requisiciones/components/dialog-delete-requi/dialog-delete-requi.component';
+import { DialogEditHorarioComponent } from './requisiciones/components/dt-horarios/dialog-edit-horario/dialog-edit-horario.component';
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
 import { DireccionautoComponent } from './requisiciones/components/direccionauto/direccionauto.component';
 import { DocumentosClienteComponent } from './requisiciones/components/documentos-cliente/documentos-cliente.component';
@@ -153,8 +154,9 @@ const routes: Routes = [
         DialogCancelRequiComponent,
         DialogActivarRequiComponent,
         DtDirecionRequiComponent,
+        DialogEditHorarioComponent,
     ],
-    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent],
+    entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent, DialogEditHorarioComponent],
     exports: [
         RouterModule, ViewCuerpoRequiComponent, ViewInforRequiComponent
     ]

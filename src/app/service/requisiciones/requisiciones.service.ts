@@ -33,8 +33,10 @@ export class RequisicionesService {
   private urlDeleteRequisicion = ApiConection.ServiceUrl + ApiConection.DeleteRequisicion;
   private urlCancelRequisicion = ApiConection.ServiceUrl + ApiConection.CancelRequisicion;
   private urlReActivarRequisicion = ApiConection.ServiceUrl + ApiConection.ReActivarRequisicion;
-  private UrlAsignarRequisicion = ApiConection.ServiceUrl + ApiConection.AsignarRequisicion;
-  private UrlGetDireccionRequisicion = ApiConection.ServiceUrl + ApiConection.GetDireccionRequisicion;
+  private urlAsignarRequisicion = ApiConection.ServiceUrl + ApiConection.AsignarRequisicion;
+  private urlGetDireccionRequisicion = ApiConection.ServiceUrl + ApiConection.GetDireccionRequisicion;
+  private urlUpdateVacantes = ApiConection.ServiceUrl + ApiConection.UpdateVacantes;
+  private urlGetHorariosReequisicion =  ApiConection.ServiceUrl + ApiConection.GetHorariosRequi;
 
   constructor(private http: Http) { }
   // Recupera todos los damfos que esten dados de alta y se encuentren activos
@@ -89,15 +91,29 @@ export class RequisicionesService {
 
   // Recuperar la direccion que se registro en la requisicion.
   getRequiDireccion(id : string) : Observable<any>{
-    return this.http.get(this.UrlGetDireccionRequisicion + id)
+    return this.http.get(this.urlGetDireccionRequisicion + id)
       .map(result => result.json())
       .catch(this.handleError);
+  }
+
+  getRequiHorarios(requisicionId : string){
+    return this.http.get(this.urlGetHorariosReequisicion + requisicionId)
+              .map(result => result.json())
+              .catch(this.handleError);
   }
 
   updateRequisicion(requi : any) : Observable<any>{
     let headers = new Headers({'Content-Type' : 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.urlUpdateRequisicion, JSON.stringify(requi), options )
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  updateVacanates(vacantes : any) : Observable<any>{
+    let headers = new Headers({'Content-Type' : 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.urlUpdateVacantes, JSON.stringify(vacantes), options )
             .map(result => result.json())
             .catch(this.handleError);
   }
@@ -129,7 +145,7 @@ export class RequisicionesService {
   asignarRequisicion(asignar : any) : Observable<any>{
     let headers = new Headers({'Content-Type' : 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.post(this.UrlAsignarRequisicion, JSON.stringify(asignar), options )
+    return this.http.post(this.urlAsignarRequisicion, JSON.stringify(asignar), options )
             .map(result => result.json())
             .catch(this.handleError);
   }

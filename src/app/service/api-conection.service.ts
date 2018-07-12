@@ -37,6 +37,8 @@ export class ApiConection {
   public static GetRequiReclutador = 'Requisiciones/getRequiReclutador?IdUsuario=';
   public static AsignarRequisicion = 'Requisiciones/asignacionRequisiciones'
   public static GetDireccionRequisicion = 'Requisiciones/getDireccionRequisicon?id=';
+  public static UpdateVacantes = 'Requisiciones/upadateVacantes';
+  public static GetHorariosRequi = 'Requisiciones/getHorariosRequisicion?id=';
 
 
   /* Candidatos */
