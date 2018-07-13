@@ -10,7 +10,7 @@
 
 <form [formGroup]="formRol" novalidate >
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <div class="mat-elevation-z8">
       <p class="text-center pv">GRUPOS</p>
       <table class="table table-hover table-responsive">
@@ -29,10 +29,12 @@
             <td class="text-center">{{g.descripcion}}</td>
             <td class="center-block">
               <tr class="text-center" *ngFor="let r of g.roles">
+                <div>
                 {{r.rol}}
-                <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUserRoles(g.id, r.rolId)">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUserRoles(g.id, r.id)">
                     <span aria-hidden="true">&times;</span>
                 </button>
+              </div>
               </tr>
             </td>
           </tr>
@@ -40,7 +42,7 @@
       </table>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="panel panel-default mat-elevation-z8">
         <div class="panel-heading">
             <select #slcRol class="form-control widthSelect" (change)="selected($event, i)" formControlName="slcRol" >

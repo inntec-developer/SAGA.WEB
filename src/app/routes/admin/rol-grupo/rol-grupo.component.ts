@@ -96,6 +96,7 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
 
   selected($event, rol: any)
   {
+
     this.flag = true;
     var id = $event.target.value;
     this.permisoRol = this.Roles.filter(item => item.id == id);
@@ -139,20 +140,28 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
     {
       console.log(user)
       console.log(rol)
-        // var idx = this.listAux.findIndex(x => x.id == user);
+        var idx = this.Grupos.findIndex(x => x.id == user);
+        
   
-        // if(idx != -1)
-        // {
-        //   this.listAux.splice(idx, 1)
-        // }
+        if(idx != -1)
+        {
+          var mocos = this.Grupos[idx]['roles'];
+          var id = mocos.findIndex(x => x.id == rol);
+          if(id != -1)
+          {
+            mocos.splice(id, 1);
+            this.Grupos[idx]['roles'] = mocos;
+          }
+          
+        }
   
-        // let dts = { RolId: rol, EntidadId: user};
-        // console.log(dts)
-        // this.service.DeleteUserRol(dts)
-        // .subscribe(
-        //   e=>{
-        //     console.log(e)
-        //   })
+        let dts = { RolId: rol, EntidadId: user};
+        console.log(dts)
+        this.service.DeleteUserRol(dts)
+        .subscribe(
+          e=>{
+            console.log(e)
+          })
   
     }
 

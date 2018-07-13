@@ -10,25 +10,16 @@
   </div>
 
   <form [formGroup]="formAdmin" novalidate >
-  <!-- <div class="row">
-    <div class="col-md-6">
-      <div class = "panel panel-default panel-body">
-        <p><span><select class="form-control" (change)="filtrar($event)">
-                <option value="">Filtrar por Departamento</option>
-                <option *ngFor="let d of ListDepas" [value]="d.id">{{d.nombre}}</option>
-                </select>
-        </span></p>
-      </div>
-    </div>
-  </div> -->
   <div class="row">
+
     <div class="col-md-6">
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-flat mat-elevation-z8">
         <div class="panel-heading text-center">USUARIOS</div>
           <div  class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades">
-              <!--  -->
+
+              <!-- dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades" -->
               <!--  <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
-            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i" dnd-draggable [dragData]="p">
+            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i" dnd-draggable [dragEnabled]="draggable">
                  <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.foto}}" /> 
                   <div class="media-body">
                     <div class="media-heading margintextthumb">
@@ -37,7 +28,11 @@
                     <p>Clave:{{ p.clave }}</p>
                     <p>Álias: {{ p.usuario }}</p>
                     <p *ngFor="let e of p.email">{{e.email}} </p>
-                    <p>Grupo: <span *ngFor="let e of p.grupos">{{e.nombre}},</span></p>
+                    <p>Grupo: <span *ngFor="let g of p.grupos"><div>{{g.grupo}}
+                      <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(g.id, p.entidadId)">
+                        <span aria-hidden="true">&times;</span>
+                      </button></div>
+                      </span></p>
                   </div>
                   </div>
             </div>
@@ -45,10 +40,10 @@
         </div>
       </div>
     <div class="col-md-6">
-      <div class="panel panel-default">
+      <div class="panel panel-default panel-flat mat-elevation-z8">
         <div class="panel-heading">Grupos:
-           <select class="form-control width-mio" formControlName="slcGrupo" (change)="selected($event); flag = true" >
-              <option *ngFor="let user of listGrupos" [value]="user.id">{{user.nombre}}</option>
+           <select class="form-control width-mio" #slcGrupo formControlName="slcGrupo" (change)="selected($event); flag = true" >
+              <option *ngFor="let grupos of listGrupos" [value]="grupos.id">{{grupos.nombre}}</option>
            </select>
           <span class="text-danger" *ngIf="formAdmin.controls['slcGrupo'].hasError('required')">Debe seleccionar un Grupo</span>
           <div class="pull-right margin-mio">
@@ -58,18 +53,19 @@
           </div>
         </div>
         <!--   -->
-        <!-- dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" -->
-        <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG">
+        <!-- dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" dnd-sortable [sortableIndex]="i" -->
+        <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
           <p [hidden]="ListaPG.length > 0">{{alert}}</p>
-          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event, i)" >
-            <btn-delete id='delete' chkPrivilegiosButtons matTooltip="Borrar Usuario de Grupo" class="pull-right" (click)="DeleteUsers($event, pg.entidadId)"> 
-            </btn-delete>
+          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" >
+              <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
                   <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                  <p>Grupo: <span *ngFor="let e of pg.grupos">{{e.grupo}},  </span></p>
+                  <p>Grupo: <span *ngFor="let g of pg.grupos">{{g.grupo}}, </span></p>
                 </div>
               </div>
          </div>

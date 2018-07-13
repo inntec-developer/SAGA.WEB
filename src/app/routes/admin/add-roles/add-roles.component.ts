@@ -20,6 +20,7 @@ export class AddRolesComponent implements OnInit {
   nodes: Array<any> = [];
   privilegios = [];
   nodeAux : TreeNode;
+  listAux = [];
 
   customTemplateStringOptions = {
     displayField: 'nombre',
@@ -74,7 +75,7 @@ export class AddRolesComponent implements OnInit {
       if( this.privilegios.length > 0)
       {
          let idx = this.privilegios.findIndex( x => {
-           return x.id == node.id })
+           return x.estructuraId == node.estructuraId })
          if( idx === -1)
          {
            this.privilegios.push(node);
@@ -90,7 +91,7 @@ export class AddRolesComponent implements OnInit {
       }
 
       node.children = this.nodes.filter(function(c){
-        return c.idPadre === node.id
+        return c.idPadre === node.estructuraId
         });
 
       if(node.children.length > 0)
@@ -107,32 +108,15 @@ export class AddRolesComponent implements OnInit {
 
   CrearEstructura(node)
   {
-    if(this.privilegios.length > 0)
+    this.listAux.push(node);
+
+    if(node.children.length > 0)
     {
-      this.privilegios.push({
-        estructuraId: node.estructuraId,
-        Create: node.create,
-        Read: node.read,
-        Update: node.update,
-        Delete: node.delete,
-        Especial: node.especial});
+      node.children.forEach(element => {
+        this.CrearEstructura(element)
+      });
     }
-    else if(node.checked)
-    {
-      this.privilegios = [{
-        estructuraId: node.estructuraId,
-        Create: node.create,
-        Read: node.read,
-        Update: node.update,
-        Delete: node.delete,
-        Especial: node.especial}];
-     }
-     if(node.children.length > 0)
-     {
-       node.children.forEach(element => {
-         this.CrearEstructura(element)
-       });
-     }
+    
   }
 
   saveData()
@@ -199,15 +183,24 @@ export class AddRolesComponent implements OnInit {
 
   GetTreeRoles()
   {
+    var aux = [];
     this.service.GetTreeRoles()
     .subscribe(
       e=>{
-        this.nodes = e;
-      
-        console.log(this.nodes)
+        aux = e;
+        aux.forEach(element => {
+          this.CrearEstructura(element)     
+         });
+  
+         this.nodes = this.listAux;
+         this.listAux = [];
+         console.log(this.nodes)
       })
+
+      
   }
   GetEstructura() {
+    //id == estructuraId
     this.service.GetEstructuraRoles()
       .subscribe(
         e => {
@@ -228,3 +221,32 @@ export class AddRolesComponent implements OnInit {
 
 
 
+  // CrearEstructura(node)
+  // {
+  //   if(this.privilegios.length > 0)
+  //   {
+  //     this.privilegios.push({
+  //       estructuraId: node.estructuraId,
+  //       Create: node.create,
+  //       Read: node.read,
+  //       Update: node.update,
+  //       Delete: node.delete,
+  //       Especial: node.especial});
+  //   }
+  //   else if(node.checked)
+  //   {
+  //     this.privilegios = [{
+  //       estructuraId: node.estructuraId,
+  //       Create: node.create,
+  //       Read: node.read,
+  //       Update: node.update,
+  //       Delete: node.delete,
+  //       Especial: node.especial}];
+  //    }
+  //    if(node.children.length > 0)
+  //    {
+  //      node.children.forEach(element => {
+  //        this.CrearEstructura(element)
+  //      });
+  //    }
+  // }

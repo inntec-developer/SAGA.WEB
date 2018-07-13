@@ -118,6 +118,7 @@ export class RollsStructComponent implements OnInit {
 
   selected(value)
   {
+    debugger;
     this.listAux = [];
     let aux = [];
     console.log(value)
@@ -158,6 +159,7 @@ export class RollsStructComponent implements OnInit {
     .subscribe(
       e=>{
         this.listRoles = e;
+        
       })
   }
   GetEntidades()

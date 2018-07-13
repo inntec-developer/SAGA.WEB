@@ -14,44 +14,57 @@ export class AddadminComponent implements OnInit {
 
     formAdmin: FormGroup;
     ListEntidades: Array<any> = [];
+    ListAuxEntidades: Array<any> = [];
+
     ListaPG: Array<any> = [];
     listGrupos: Array<any> = [];
     ListaBorrar:  Array<any> = [];
     IdGrupo: any = null;
     alert: string = "Drag users here...";
+    draggable = false;
+   
+   
 
     constructor( private service: AdminServiceService, public fb: FormBuilder )
-    {}
+    {}    
 
     addToGroups($event, index)
     {
-        // this.ListaPG.push($event.dragData);
+
+      this.ListaPG.push($event);
       let g = $event;
+
        console.log(g)
-       if(this.IdGrupo === g.id )
+//el drag me agrega solo el item por eso lo borro por que se repite
+
+       var idx = this.ListaPG.findIndex(x => x.entidadId == g.entidadId);
+
+       if(idx != -1)
        {
-         this.ListaPG.splice(index, 1)
+         this.ListaPG.splice(idx, 1)
        }
-     }
  
-    DeleteUsers($event, index)
+    }
+
+    DeleteUsers(grupo, user, index)
     {
-      console.log(this.IdGrupo)
-      console.log(index)
-      var idx = this.ListaPG.findIndex(x => x.entidadId === index);
+      console.log(grupo)
+      console.log(user)
+      var idx = this.ListaPG.findIndex(x => x.entidadId === user);
 
       if(idx != -1)
       {
         this.ListaPG.splice(idx, 1)
       }
 
-      let dts = { GrupoId: this.IdGrupo, EntidadId: index};
+      let dts = { GrupoId: grupo, EntidadId: user};
       console.log(dts)
-      this.service.DeleteUserGroup(dts)
+       this.service.DeleteUserGroup(dts)
       .subscribe(
         e=>{
-       
+          this.GetEntidades();
           console.log(e)
+
         })
 
 
@@ -63,36 +76,51 @@ export class AddadminComponent implements OnInit {
 
     selected($event)
     {
+      this.draggable = true;
       this.IdGrupo = $event.target.value; //dropdown grupos
-      var idx = this.ListaPG.findIndex(x => x.id === this.IdGrupo);
-      if(idx != -1)
-      {
-        this.ListaPG.splice(idx, 1)
-      }
-      this.GetUserByGroup(this.IdGrupo)
+
+      this.GetUserByGroup($event.target.value)
+
+      //por si arrastras un usuario y despues selecionas un grupo donde esta incluido el usuario i.e. para que no se repita el usuario
+      //ya no es necesario por que no puedes hacer el drag a menos que selecciones un grupo 
+
+      // var idx = this.ListaPG.findIndex(x => x.id == $event.target.value);
+
+      // if(idx != -1)
+      // {
+      //   this.ListaPG.splice(idx, 1)
+      // }
+
+
+      
     }
 
     GetUserByGroup( Id )
     {
+      this.ListAuxEntidades = [];
       this.service.GetUsuarioByGrupo(Id)
       .subscribe(
         e=>{
-          this.ListaPG = e;
-          console.log(this.ListaPG)
+          this.ListaPG = e; //para llenar el panel donde se hace drop solo se utiliza npara cunado le den select to grupo      
         })
     }
 
     addUsuarioGrupo()
     {
+
       let lug = [];
-      if(this.ListaPG.length > 0)
+
+       var uniq = this.ListaPG.filter( (elem, pos, arr) => {
+          return elem.grupos.findIndex(x => x.id == this.IdGrupo) < 0
+      
+       }); //me regresa los que no estan repetidos
+
+
+      if(uniq.length > 0)
       {
-        for(let ug of this.ListaPG)
+        for(let ug of uniq)
         {
-          if( ug.id != this.IdGrupo )
-          {
-            lug.push({EntidadId: ug.id, GrupoId: this.IdGrupo});
-          }
+           lug.push({EntidadId: ug.entidadId, GrupoId: this.IdGrupo});
         }
         this.service.addUserGroup( lug )
         .subscribe( data => {
@@ -105,6 +133,7 @@ export class AddadminComponent implements OnInit {
       {
         this.alert = "Debe agregar al menos un usuario";
       }
+      console.log(lug)
     }
 
     GetEntidades()
@@ -134,6 +163,8 @@ export class AddadminComponent implements OnInit {
 
       this.GetEntidades();
       this.GetGrupos();
+
+     
     }
 
 
