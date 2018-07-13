@@ -72,7 +72,7 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
       for(let rg of this.ListaRG)
       {
         let element = {
-          EntidadId: rg.id,
+          EntidadId: rg.entidadId,
           RolId: RolId,         
         }
         lrg.push(element);
@@ -160,6 +160,7 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
         this.service.DeleteUserRol(dts)
         .subscribe(
           e=>{
+            this.GetEntidades();
             console.log(e)
           })
   

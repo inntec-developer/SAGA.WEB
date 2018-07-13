@@ -29,9 +29,9 @@
             <td class="text-center">{{g.descripcion}}</td>
             <td class="center-block">
               <tr class="text-center" *ngFor="let r of g.roles">
-                <div>
+                <div class="text-center">
                 {{r.rol}}
-                <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUserRoles(g.id, r.id)">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUserRoles(g.entidadId, r.id)">
                     <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -50,7 +50,7 @@
             </select>
             <span class="text-danger" *ngIf="formRol.controls['slcRol'].hasError('required')">Debe seleccionar un Rol</span>
            <div class="pull-right marginButtons">
-             <btn-check id='create' chkPrivilegiosButtons [disabled]="formRol.invalid" matTooltip="Guardar Cambios" (click)="saveData(slcRol.value)"></btn-check>
+             <btn-check id='create' chkPrivilegiosButtons matTooltip="Guardar Cambios" (click)="saveData(slcRol.value)"></btn-check>
            </div>
          </div>
         <div class="panel-body">

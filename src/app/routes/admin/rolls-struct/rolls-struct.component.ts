@@ -118,7 +118,6 @@ export class RollsStructComponent implements OnInit {
 
   selected(value)
   {
-    debugger;
     this.listAux = [];
     let aux = [];
     console.log(value)
