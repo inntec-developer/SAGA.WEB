@@ -15,7 +15,7 @@ export class SettingsService {
         // -----------------------------------
         this.user = {
             name: '',
-            job: 'PROGRAMADOR',
+            job: 'USUARIO',
             picture: '',
             privilegios: Array<any>()
         };

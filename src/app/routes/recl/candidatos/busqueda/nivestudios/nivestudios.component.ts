@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
+import { CandidatosService } from '../../../../../service/index';
+import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+import {startWith} from 'rxjs/operators/startWith';
 
 // Servicios
-import { CandidatosService } from '../../../../../service/index';
+
 
 @Component({
   selector: 'app-nivestudios',

@@ -1,17 +1,19 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import {FormControl,  FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
+import { CandidatosService } from '../../../../service/index';
+import {DomSanitizer} from '@angular/platform-browser';
+import { Filtros } from '../../../../models/recl/candidatos';
+import {MatIconRegistry} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+import {startWith} from 'rxjs/operators/startWith';
 
 // Modelos
-import { Filtros } from '../../../../models/recl/candidatos';
+
 
 // Servicios
-import { CandidatosService } from '../../../../service/index';
+
 
 @Component({
   selector: 'app-busqueda',
@@ -44,9 +46,9 @@ export class BusquedaComponent implements OnInit {
   public Filtros: FormGroup;
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private service: CandidatosService){
-    iconRegistry.addSvgIcon(
-         'find',
-         sanitizer.bypassSecurityTrustResourceUrl('/assets/img/icon/ic_find_in_page_24px.svg'));
+    // iconRegistry.addSvgIcon(
+    //      'find',
+    //      sanitizer.bypassSecurityTrustResourceUrl('/assets/img/icon/ic_find_in_page_24px.svg'));
    }
 
    ngOnInit(){  }
@@ -131,8 +133,8 @@ export class BusquedaComponent implements OnInit {
     filtroX.IdIdiomas = this.IdIdioma;
     filtroX.Salario = this.Salario;
     filtroX.Edad = this.Edad;
-    filtroX.Reubica = this.Reubicacion;
-    filtroX.TpVehiculo = this.TpVehiculo;
+    // filtroX.Reubica = this.Reubicacion;
+    // filtroX.TpVehiculo = this.TpVehiculo;
     // filtroX.palabraClave = this.FiltroVacantes.get('palabraClave').value;
     this.service.getcandidatos(filtroX)
     .subscribe(data => {

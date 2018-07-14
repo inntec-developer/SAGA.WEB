@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, Output ,EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
+import { CandidatosService } from '../../../../../service/index';
+import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+import {startWith} from 'rxjs/operators/startWith';
 
 // Servicios
-import { CandidatosService } from '../../../../../service/index';
+
 
 @Component({
   selector: 'app-colonia',

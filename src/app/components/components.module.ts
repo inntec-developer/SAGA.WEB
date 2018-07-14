@@ -1,7 +1,44 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { INgxSelectOptions, NgxSelectModule } from 'ngx-select-ex'
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatOptionModule,
+  MatPaginatorIntl,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from '@angular/material';
 
 import { AsignarRequisicionComponent } from './asignar-requisicion/asignar-requisicion.component';
+import { BusquedaCandidatosComponent } from './busqueda-candidatos/busqueda-candidatos.component';
 import { ButtonAcceptComponent } from './buttons/button-accept/button-accept.component';
 import { ButtonAddComponent } from './buttons/button-add/button-add.component';
 import { ButtonAssignComponent } from './buttons/button-assign/button-assign.component';
@@ -18,9 +55,11 @@ import { ButtonRefreshComponent } from './buttons/button-refresh/button-refresh.
 import { ButtonReturnComponent } from './buttons/button-return/button-return.component';
 import { ButtonSaveComponent } from './buttons/button-save/button-save.component';
 import { ButtonViewComponent } from './buttons/button-view/button-view.component';
+import { ColorPickerService } from '../../../node_modules/ngx-color-picker';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material';
 import { NgModule } from '@angular/core';
+import { ToasterService } from '../../../node_modules/angular2-toaster';
+import { getSpanishPaginatorIntl } from '../core/translator/config-paginator/config-paginator.component';
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
   optionValueField: 'id',
@@ -33,7 +72,39 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     NgxSelectModule.forRoot(CustomSelectOptions),
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatOptionModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule
   ],
   declarations: [
     AsignarRequisicionComponent,
@@ -52,7 +123,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonAcceptComponent,
     ButtonDocsComponent,
     ButtonDesingReclComponent,
-    ButtonAddComponent
+    ButtonAddComponent,
+    BusquedaCandidatosComponent
 
   ],
   exports: [
@@ -72,7 +144,10 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonAcceptComponent,
     ButtonDocsComponent,
     ButtonDesingReclComponent,
-    ButtonAddComponent
-  ]
+    ButtonAddComponent,
+    BusquedaCandidatosComponent
+    
+  ],
+  providers: [ColorPickerService, { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }, ToasterService],
 })
 export class ComponentsModule { }
