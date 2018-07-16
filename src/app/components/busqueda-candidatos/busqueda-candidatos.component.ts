@@ -304,16 +304,18 @@ export class BusquedaCandidatosComponent implements OnInit {
     filtroCandidatos.Salario = this.salario  ,
     filtroCandidatos.IdGenero = this.filtrogenero ? this.filtrogenero[0].id : null,
     filtroCandidatos.Edad = this.edad,
-    filtroCandidatos.Reubica = this.checked,
+    filtroCandidatos.Reubicacion = this.checked,
     filtroCandidatos.IdPDiscapacidad = this.filtropd ? this.filtropd[0].id : null,
     filtroCandidatos.IdTpLicencia = this.filtrotplic ? this.filtrotplic[0].id : null,
     filtroCandidatos.TpVehiculo = this.checkedV,
-    // filtroCandidatos.IdIdiomas = this.idiomas ? this.idiomas[0].id : null;
-    // filtroCandidatos.IdNvEstudios = this.nvestuidios ? this.nvestuidios[0].id : null
+    filtroCandidatos.IdIdiomas = this.filtroidioma ? this.filtroidioma[0].id : null;
+    filtroCandidatos.IdNvEstudios = this.filtronv ? this.filtronv[0].id : null
 
+    console.log(filtroCandidatos);
     this.service.getcandidatos(filtroCandidatos).subscribe( data =>{
       this.Candidatos = data;
       this.filtro.emit(this.Candidatos);
+      console.log(this.Candidatos);
     })
   }
 
@@ -342,8 +344,8 @@ export class BusquedaCandidatosComponent implements OnInit {
     this.filtrotplic = null
     this.checkedV = false;
     this.nvestudiosCtrl.reset();
-    this.nvestuidios = null
+    this.filtronv = null
     this.idiomasCtrl.reset();
-    this.idiomas = null
+    this.filtroidioma = null
   }
 }

@@ -9,7 +9,7 @@ export class Filtros {
     Salario: number;
     IdGenero: number;
     Edad: number;
-    Reubica: boolean;
+    Reubicacion: boolean;
     IdPDiscapacidad: number;
     IdTpLicencia: number;
     IdNvEstudios: number;
