@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import { FileUploader } from 'ng2-file-upload';
 import { ApiConection } from './../api-conection.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -69,10 +70,29 @@ export class AdminServiceService {
  
     let formData = new FormData();
     formData.append('image', file, name );
+    let headers = new Headers({'Content-Type': 'image/.*'});
+      let options = new RequestOptions({headers: headers});
 
-    return this.http.post(this.UrlUploadImage, formData )
-            .map(result => result.json())
-            .catch(this.handleError);
+    // saveAs(file, '~/assets/img/user/' + name, true )
+
+    this.http.post('http://localhost:1337/mediaobject/upload',formData, options ) .map(result => result)
+    .catch(this.handleError);
+
+    // var xhr = new XMLHttpRequest();  
+    // xhr.addEventListener("load", formData, false);  
+    // xhr.open("POST", "http://localhost:53154/api/FileUploader/AttachFile", true);  
+    // $scope.progressVisible = true;  
+    // xhr.send(fd);  
+
+      var mediaType = 'image/.*';
+      let blob: Blob = new Blob([file], { type:'image/*'})
+      var mocos= window.URL.createObjectURL(blob);
+      // saveAs(blob, name )
+  
+
+    // return this.http.post(this.UrlUploadImage, formData )
+    //         .map(result => result.json())
+    //         .catch(this.handleError);
   }
  
   getPersonas(): Observable<any>

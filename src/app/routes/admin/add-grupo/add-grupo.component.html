@@ -103,7 +103,7 @@
         <div class="col-md-6">
           <input matInput placeholder="{{msj}}">
         </div>
-        <button [disabled]="formGrupos.invalid" (click)="saveData()" class="btn btn-primary example-label pull-right">Guardar</button>
+        <button [disabled]="!formGrupos.valid" (click)="saveData()" class="btn btn-primary example-label pull-right">Guardar</button>
        </section>
     </div>
   </div>

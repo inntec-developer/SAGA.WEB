@@ -98,7 +98,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
   }
   updateFoto()
   {
-    this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'assets/img/user/' +  this.someInput.name;
+    this.Grupos[this.rowAux]['foto'] = '/assets/img/user/' +  this.someInput.name;
     this.Grupos = [...this.Grupos];
     this.bandera = false;
     console.log(this.Grupos)
@@ -131,6 +131,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getGrupos();
   }
+
   ngAfterViewInit()
   {
     if(this.someInput)

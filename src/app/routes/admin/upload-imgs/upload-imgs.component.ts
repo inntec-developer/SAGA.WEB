@@ -1,9 +1,10 @@
+import { saveAs } from 'file-saver';
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-
+import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-upload-imgs',
@@ -29,7 +30,6 @@ export class UploadImgsComponent implements OnInit {
   image: any = new Image();
   selectedFile: File;
   bandera = true;
-  // public uploader: FileUploader = new FileUploader({ url: URL });
 
   constructor(private service: AdminServiceService, private http: Http) { }
 
@@ -53,7 +53,8 @@ export class UploadImgsComponent implements OnInit {
    
      this.selectedFile = $event.target.files[0]; 
      this.name =  this.name + '.' + this.selectedFile.type.split('/')[1];
-      
+
+    
     // let endPoint = 'assets/img/user/'
     //  let headers = new Headers();
     // headers.set('Content-Type', 'application/octet-stream');
@@ -71,9 +72,9 @@ export class UploadImgsComponent implements OnInit {
   {
     this.onItemChanged.emit(this.setImage());
     this.service.UploadImg(this.selectedFile, this.name)
-      .subscribe( data => {
-        console.log(data)
-    });
+    //   .subscribe( data => {
+    //     console.log(data)
+    // });
   }
 
   removeItem()
