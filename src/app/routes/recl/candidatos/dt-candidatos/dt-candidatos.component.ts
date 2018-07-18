@@ -141,6 +141,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.service.getcandidatodtl(id)
     .subscribe(data => {
       this.candidatodtl = data;
+      console.log(this.candidatodtl);
       this.fotoCandidato = this.ConexionBolsa + this.candidatodtl[0].candidato.imgProfileUrl;
       // Buscamos el estatus del candidato del apartado o liberado. ***
       this.service.getEstatusCandidato(this.candidatodtl[0].candidatoId)

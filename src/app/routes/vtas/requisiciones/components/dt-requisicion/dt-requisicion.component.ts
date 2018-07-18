@@ -8,15 +8,6 @@ import { DialogCancelRequiComponent } from './../dialog-cancel-requi/dialog-canc
 import { DialogDeleteRequiComponent } from '../dialog-delete-requi/dialog-delete-requi.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequisicionesService } from '../../../../../service/index';
-import { element } from 'protractor';
-import { forEach } from '@angular/router/src/utils/collection';
-
-// Component
-
-
-// Servicios
-
-
 
 @Component({
   selector: 'app-dt-requisicion',
@@ -24,6 +15,7 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./dt-requisicion.component.scss'],
   providers: [RequisicionesService]
 })
+
 export class DtRequisicionComponent implements OnInit {
   // Variables Globales
   requisicion: any;
@@ -178,8 +170,8 @@ export class DtRequisicionComponent implements OnInit {
   private _displayedColumns = [
     'folio',
     'cliente',
-    'rfc',
     'vBtra',
+    'vacantes',
     'empresa',
     'reclutamiento',
     'sueldoMinimo',
@@ -207,8 +199,9 @@ export interface Element {
   folio: string;
   id: string;
   cliente: string;
-  rfc: string;
+  // rfc: string;
   vBtra: string;
+  vacantes: number;
   tipoReclutamiento: string;
   claseReclutamiento: string;
   sueldoMinimo: string;

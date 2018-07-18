@@ -1,4 +1,5 @@
-﻿import {
+﻿import { Component, NgModule } from '@angular/core';
+import {
          MAT_DATE_LOCALE,
          MatAutocompleteModule,
          MatButtonModule,
@@ -39,6 +40,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { ActividadesComponent } from './requisiciones/components/actividades/actividades.component';
+import { ClientesComponent } from './directorio-empresarial/clientes/clientes.component';
 import { ColorPickerService } from 'ngx-color-picker';
 import { ComponentsModule } from './../../components/components.module';
 import { DialogActivarRequiComponent } from './requisiciones/components/dialog-activar-requi/dialog-activar-requi.component';
@@ -47,6 +49,7 @@ import { DialogDeleteRequiComponent } from './requisiciones/components/dialog-de
 import { DialogEditHorarioComponent } from './requisiciones/components/dt-horarios/dialog-edit-horario/dialog-edit-horario.component';
 import { DialogdamfoComponent } from './requisiciones/components/dialogdamfo/dialogdamfo.component';
 import { DireccionautoComponent } from './requisiciones/components/direccionauto/direccionauto.component';
+import { DirectorioEmpresarialComponent } from './directorio-empresarial/directorio-empresarial.component';
 import { DocumentosClienteComponent } from './requisiciones/components/documentos-cliente/documentos-cliente.component';
 import { DocumentosDamsaComponent } from './requisiciones/components/documentos-damsa/documentos-damsa.component';
 import { DtBeneficiosComponent } from './requisiciones/components/dt-beneficios/dt-beneficios.component';
@@ -65,13 +68,12 @@ import { DtRequisicionComponent } from './requisiciones/components/dt-requisicio
 import { DtTelefonosComponent } from './requisiciones/components/dt-telefonos/dt-telefonos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ObservacionesComponent } from './requisiciones/components/observaciones/observaciones.component';
 import { PrestacionesClienteComponent } from './requisiciones/components/prestaciones-cliente/prestaciones-cliente.component';
 import { PrestacionesLeyComponent } from './requisiciones/components/prestaciones-ley/prestaciones-ley.component';
 import { ProcesosComponent } from './requisiciones/components/procesos/procesos.component';
-import { ProspectoComponent } from './prospectos/prospecto.component';
+import { ProspectoComponent } from './directorio-empresarial/prospectos/prospecto.component';
 import { RequisicionComponent } from './requisiciones/requisicion.component';
 import { RequisicionNuevaComponent } from './requisiciones/components/requisicion-nueva/requisicion-nueva.component';
 import { SelectModule } from 'ng2-select';
@@ -85,12 +87,14 @@ import { ViewdamfoComponent } from './requisiciones/components/viewdamfo/viewdam
 import { getSpanishPaginatorIntl } from '../../core/translator/config-paginator/config-paginator.component';
 
 const routes: Routes = [
-    { path: 'prospecto', component: ProspectoComponent, },
+    { path: 'directorio', component: DirectorioEmpresarialComponent, data: {componente: 'Directorio Empresarial'}},
+    { path: 'prospectos', component: ProspectoComponent },
+    { path: 'clientes', component: ClientesComponent},
     { path: 'prospecto/:user', component: ProspectoComponent },
     { path: 'requisicion', component: RequisicionComponent, data:{componente:'Requisiciones'}},
     { path: 'crearRequisicion', component: DtCrearRequisicionComponent},
     { path: 'requisicionNueva/:IdDamfo/:IdDireccion', component: RequisicionNuevaComponent},
-    { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent },
+    { path: 'visualizarDamfo290/:IdDamfo', component: ViewdamfoComponent, data:{componente: 'Formato 290'} },
     { path: 'visualizarRequisicion/:IdRequi/:Folio', component: ViewRequisicionComponent, data:{componente:'Requisiciones'} },
     { path: 'edicionRequisicion/:IdRequi/:Folio', component: UpdateRequisicionComponent },
 ];
@@ -155,6 +159,8 @@ const routes: Routes = [
         DialogActivarRequiComponent,
         DtDirecionRequiComponent,
         DialogEditHorarioComponent,
+        DirectorioEmpresarialComponent,
+        ClientesComponent,
     ],
     entryComponents: [DialogdamfoComponent, DialogDeleteRequiComponent, DialogCancelRequiComponent, DialogActivarRequiComponent, DialogEditHorarioComponent],
     exports: [
