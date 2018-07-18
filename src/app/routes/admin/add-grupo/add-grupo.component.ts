@@ -2,6 +2,7 @@ import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
 import { Component, OnInit, AfterViewChecked, ViewChild, AfterViewInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ApiConection } from '../../../service';
 
 
 @Component({
@@ -31,8 +32,10 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
 
   CrearURL(idG: any)
   {
+    console.log('entro')
     this.name = idG;
   }
+
   iniciarForm()
   {
       this.formGrupos = this.fb.group({
@@ -83,7 +86,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
       Nombre: this.formGrupos.controls['Nombre'].value,
       Descripcion: this.formGrupos.controls['Descripcion'].value, 
       Activo: this.formGrupos.controls['Activo'].value,
-      Foto: "http://localhost:4200/assets/img/user/01.jpg"
+      Foto: "/assets/img/user/WorkTeam.jpg"
     }
     console.log(grupo)
     this.service.addGrupos(grupo)
@@ -95,10 +98,10 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
   }
   updateFoto()
   {
-    this.Grupos[this.rowAux]['foto'] = 'http://localhost:33333/utilerias/' + this.someInput.name;
+    this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'assets/img/user/' +  this.someInput.name;
     this.Grupos = [...this.Grupos];
-    console.log(this.Grupos)
     this.bandera = false;
+    console.log(this.Grupos)
   }
   updateGrupo($event,rowIndex)
   {

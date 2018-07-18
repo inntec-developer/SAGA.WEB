@@ -1,6 +1,7 @@
+import { FileUploader } from 'ng2-file-upload';
 import { ApiConection } from './../api-conection.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -45,6 +46,7 @@ export class AdminServiceService {
   private UrlDeleteUserGroup = ApiConection.ServiceUrl+ApiConection.deleteUserGroup;
   private UrlDeleteUserRol = ApiConection.ServiceUrl+ApiConection.deleteUserRol;
   private UrlGetStruct = ApiConection.ServiceUrl+ApiConection.getStruct;
+  private UrlUploadImage = ApiConection.ServiceUrl+ApiConection.uploadImage;
 
   // Error.
   private handleError(error: any) {
@@ -55,28 +57,24 @@ export class AdminServiceService {
          return Observable.throw(error || 'backend server error');
      }
 
-  constructor(private http: Http, private httpClient: HttpClient) {
+
+  constructor(private http: Http ) {
 
   }
 
   UploadImg( file: File, name: any)
   {
-
-//  let headers = new Headers({ 
-//   'Access-Control-Allow-Origin':'*', 
-//   'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-//   'Access-Control-Allow-Headers' : 'Origin, Content-Type, X-Auth-Token'
-// });
-    // let options = new RequestOptions({headers: headers});
+    let endPoint = 'assets/img/user'
+    let url = ApiConection.ServiceUrlWeb + endPoint + name;
  
-    const endpoint = 'http://localhost:33333/api/admin/UploadImage'
-    let fd = new FormData();
-    fd.append('image', file, name );
-    return this.http.post( endpoint, fd )
-    .subscribe(res => {console.log(res);});
-  }
-  
+    let formData = new FormData();
+    formData.append('image', file, name );
 
+    return this.http.post(this.UrlUploadImage, formData )
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+ 
   getPersonas(): Observable<any>
   {
      return this.http.get(this.Url)

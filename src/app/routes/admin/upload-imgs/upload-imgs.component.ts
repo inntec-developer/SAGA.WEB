@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, Input, Inject, EventEmitter, Output, ElementRef, Renderer, ViewChild, OnChanges } from '@angular/core';
-import { FileUploader, FileItem, FileLikeObject } from 'ng2-file-upload';
-import { HttpClient,HttpHeaders, HttpEvent,HttpParams,HttpRequest } from '@angular/common/http';
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
+import { Http } from '@angular/http';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'app-upload-imgs',
@@ -30,33 +31,49 @@ export class UploadImgsComponent implements OnInit {
   bandera = true;
   // public uploader: FileUploader = new FileUploader({ url: URL });
 
-  constructor(private service: AdminServiceService, private http: HttpClient, private el: ElementRef, private renderer: Renderer) { }
+  constructor(private service: AdminServiceService, private http: Http) { }
 
   ngOnInit()
   {
   }
 
+
   fileChangeListener($event) 
   {
+
+    //para visualizar la foto
     let file: File = $event.target.files[0];
+
     let myReader: FileReader = new FileReader();
     let that = this;
     myReader.onloadend = function(loadEvent: any) {
         that.image.src = loadEvent.target.result;
     };
-
     myReader.readAsDataURL(file);
    
-     this.name =  this.name + '.' + file.type.split('/')[1];
-     this.selectedFile = $event.target.files[0];   
+     this.selectedFile = $event.target.files[0]; 
+     this.name =  this.name + '.' + this.selectedFile.type.split('/')[1];
+      
+    // let endPoint = 'assets/img/user/'
+    //  let headers = new Headers();
+    // headers.set('Content-Type', 'application/octet-stream');
+    // headers.set('Upload-Content-Type', img.type)
+
+    // this.service.makeRequest(endPoint, 'POST', img, this.name, headers).subscribe(
+    //   response  => {
+    //     console.log(response)
+    //   }
+    // );
+
   }
 
   UploadImg()
   {
-
     this.onItemChanged.emit(this.setImage());
     this.service.UploadImg(this.selectedFile, this.name)
-    
+      .subscribe( data => {
+        console.log(data)
+    });
   }
 
   removeItem()

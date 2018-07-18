@@ -1,4 +1,5 @@
 export class ApiConection {
+  public static ServiceUrlWeb = 'http://localhost:4200/'
   /*Servicio de purbeas locales*/
   public static ServiceUrl = 'http://localhost:33333/api/';
   // Conexiones a bolsa de trabajo.
@@ -113,5 +114,5 @@ export class ApiConection {
   public static deleteUserGroup = 'admin/deleteUserGroup';
   public static deleteUserRol = 'admin/deleteUserRol';
   public static getStruct = 'admin/getStruct';
-
+  public static uploadImage = 'admin/UploadImage';
 }
