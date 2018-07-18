@@ -42,7 +42,6 @@ export class DtVacantesReclutadorComponent implements OnInit {
 
   getDataRequisiciones(){
     this.service.getRequiReclutador(localStorage.getItem('id')).subscribe(data => {
-      console.log(data);
       this.requisicion = data;
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;
@@ -84,9 +83,9 @@ export class DtVacantesReclutadorComponent implements OnInit {
     'folio',
     'solicita',
     'cliente',
-    'rfc',
+    // 'rfc',
     'vBtra',
-    'empresa',
+    'vacantes',
     'reclutamiento',
     'sueldoMinimo',
     'sueldoMaximo',
@@ -114,8 +113,9 @@ export interface Element {
   solicita: string;
   id: string;
   cliente: string;
-  rfc: string;
+  // rfc: string;
   vBtra: string;
+  vacantes: number;
   tipoReclutamiento: string;
   claseReclutamiento: string;
   sueldoMinimo: string;

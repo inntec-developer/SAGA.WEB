@@ -88,6 +88,7 @@ export class BusquedaCandidatosComponent implements OnInit {
   idiomasCtrl: FormControl;
   filteredidiomas: Observable<any[]>;
   filtroidioma: any;
+  loading: boolean;
 
 
   constructor(
@@ -290,9 +291,7 @@ export class BusquedaCandidatosComponent implements OnInit {
   
 
   Buscar() {
-    console.log(
-      
-    );
+    this.loading = true;
     let filtroCandidatos: Filtros = new Filtros();
     filtroCandidatos.IdPais = this.filtropais ? this.filtropais[0].id : null ,
     filtroCandidatos.IdEstado = this.filtroestado ? this.filtroestado[0].id : null,
@@ -315,7 +314,7 @@ export class BusquedaCandidatosComponent implements OnInit {
     this.service.getcandidatos(filtroCandidatos).subscribe( data =>{
       this.Candidatos = data;
       this.filtro.emit(this.Candidatos);
-      console.log(this.Candidatos);
+      this.loading = false;
     })
   }
 
