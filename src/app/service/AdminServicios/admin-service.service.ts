@@ -71,28 +71,23 @@ export class AdminServiceService {
     let formData = new FormData();
     formData.append('image', file, name );
     let headers = new Headers({'Content-Type': 'image/.*'});
-      let options = new RequestOptions({headers: headers});
+    let options = new RequestOptions({headers: headers});
 
     // saveAs(file, '~/assets/img/user/' + name, true )
 
-    this.http.post('http://localhost:1337/mediaobject/upload',formData, options ) .map(result => result)
-    .catch(this.handleError);
+    // this.http.post('localhost/assets/img/',formData, options ) .map(result => result)
+    // .catch(this.handleError);
 
-    // var xhr = new XMLHttpRequest();  
-    // xhr.addEventListener("load", formData, false);  
-    // xhr.open("POST", "http://localhost:53154/api/FileUploader/AttachFile", true);  
-    // $scope.progressVisible = true;  
-    // xhr.send(fd);  
 
-      var mediaType = 'image/.*';
-      let blob: Blob = new Blob([file], { type:'image/*'})
-      var mocos= window.URL.createObjectURL(blob);
+    //   var mediaType = 'image/.*';
+    //   let blob: Blob = new Blob([file], { type:'image/*'})
+    //   var mocos= window.URL.createObjectURL(blob);
       // saveAs(blob, name )
   
 
-    // return this.http.post(this.UrlUploadImage, formData )
-    //         .map(result => result.json())
-    //         .catch(this.handleError);
+    return this.http.post(this.UrlUploadImage, formData )
+            .map(result => result.json())
+            .catch(this.handleError);
   }
  
   getPersonas(): Observable<any>
