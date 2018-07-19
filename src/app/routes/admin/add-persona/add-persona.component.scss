@@ -1,0 +1,21 @@
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+@import '../../../shared/styles/app/variables';
+
+.ngx-datatable.bootstrap {
+    background-color: transparent;
+    box-shadow: 0 0 0 #000;
+}
+
+// workaround for use of detail rows
+// with other table in the same page
+.no-detail-row .datatable-row-detail {
+    display: none !important;
+}
+
+.ngx-datatable.bootstrap .empty-row {
+    text-align: center;
+    margin-top: 20px;
+}

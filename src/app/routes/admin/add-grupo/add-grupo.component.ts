@@ -86,7 +86,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
       Nombre: this.formGrupos.controls['Nombre'].value,
       Descripcion: this.formGrupos.controls['Descripcion'].value, 
       Activo: this.formGrupos.controls['Activo'].value,
-      Foto: "/utilerias/img/user/WorkTeam.jpg"
+      Foto: "/assets/img/user/WorkTeam.jpg"
     }
     console.log(grupo)
     this.service.addGrupos(grupo)
@@ -98,7 +98,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
   }
   updateFoto()
   {
-    this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' +  this.someInput.name;
+    this.Grupos[this.rowAux]['foto'] = '/assets/img/user/' +  this.someInput.name;
     this.Grupos = [...this.Grupos];
     this.bandera = false;
     console.log(this.Grupos)

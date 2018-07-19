@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
-import { ApiConection } from '../../../service';
 
 @Component({
   selector: 'app-add-persona',
@@ -21,9 +20,6 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   bandera = false;
   rowAux: any;
   name: string;
-  filteredData: Array<any> = [];
-  paginacion = [];
-  pagIndex = 0;
 
   @ViewChild('uploadImg') someInput: UploadImgsComponent;
 
@@ -31,52 +27,16 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   
   CrearURL(idP: any)
   {
+    this.name = idP;
     console.log(this.name)
   }
 
-  CrearPaginacion(pag)
-  {
-    console.log(pag)
-    this.paginacion = this.Users;
-    this.Users = this.filteredData;
-
-    this.pagIndex = pag;
-
-  
-    this.Users = this.Users.slice((pag-1) * 5, pag * 5)
-
-  }
   updateFoto()
   {
-    this.Users[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' + this.someInput.name;
+    this.Users[this.rowAux]['foto'] = 'http://localhost:33333/utilerias/' + this.someInput.name;
     this.Users = [...this.Users];
     console.log(this.Users)
     this.bandera = false;
-  }
-
-  public Search(data: any) {
-
-    let tempArray: Array<any> = [];
-    let colFiltar: Array<any> = [{ title: "clave" },{ title: "apellidoPaterno" }, { title: "nombre" }];
-
-    this.filteredData.forEach(function (item) {
-      let flag = false;
-      colFiltar.forEach(function (c) {
-        if (item[c.title].toString().match(data.target.value)) {
-          flag = true;
-        }
-      });
-
-      if (flag) {
-        tempArray.push(item)
-      }
-    });
-
-    this.Users = tempArray;
-    // this.filteredData = this.StructList.filter(function(item){
-    //             return item['nombre'].match(data.target.value);
-    //         });
-
   }
 
   updateValue(event, cell, rowIndex) 
@@ -130,16 +90,6 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
     .subscribe(
       e=>{
         this.Users = e;
-        this.filteredData = e;
-        this.paginacion = this.Users.slice(0, (this.Users.length / 10 ) );
-        //this.Users = this.Users.slice(0, 10)
-
-        // for(var c = 0; c <= this.Users.length / 5; c++)
-        // {
-        //   this.paginacion.push(c);
-
-        // }
-      console.log(this.paginacion)
       })
   }
   
@@ -166,7 +116,6 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
     this.getUsuarios();
     this.getDepartamentos();
     this.getTipos();
-    
   }
   ngAfterViewInit()
   {
