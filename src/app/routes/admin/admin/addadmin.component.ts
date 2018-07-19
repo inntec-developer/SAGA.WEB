@@ -1,3 +1,4 @@
+import { ApiConection } from './../../../service/api-conection.service';
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -117,6 +118,9 @@ export class AddadminComponent implements OnInit {
       .subscribe(
         e => {
           this.ListaPG = e; //para llenar el panel donde se hace drop solo se utiliza npara cunado le den select to grupo
+          this.ListaPG.forEach(item => {
+            item.foto = ApiConection.ServiceUrlFoto + item.foto;
+          })
         })
   }
 
@@ -153,7 +157,13 @@ export class AddadminComponent implements OnInit {
       .subscribe(
         e => {
           this.ListEntidades = e;
-          this.filteredData = e;
+
+          this.ListEntidades.forEach(item => {
+            item.foto = ApiConection.ServiceUrlFoto + item.foto;
+          })
+
+          this.filteredData = this.ListEntidades;
+
         })
   }
 

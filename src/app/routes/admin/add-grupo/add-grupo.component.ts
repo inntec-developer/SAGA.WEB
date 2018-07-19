@@ -67,7 +67,7 @@ export class AddGrupoComponent implements OnInit {
         this.Grupos = e;
 
         this.Grupos.forEach(item => {
-          item.foto = ApiConection.ServiceUrl + item.foto;
+          item.foto = ApiConection.ServiceUrlFoto + item.foto;
         })
         console.log(this.Grupos)
       });
@@ -110,7 +110,7 @@ export class AddGrupoComponent implements OnInit {
 
         if(data.ok)
         {
-          this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' +  this.someInput.name;
+          this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' +  this.someInput.name;
           this.Grupos = [...this.Grupos];
           this.someInput.removeItem();
           this.someInput.selectedFile = null;

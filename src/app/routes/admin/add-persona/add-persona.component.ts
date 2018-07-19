@@ -58,7 +58,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
 
         if(data.ok)
         {
-          this.Users[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' + this.name;
+          this.Users[this.rowAux]['foto'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' + this.name;
           this.Users = [...this.Users];
           this.someInput.removeItem();
           this.someInput.selectedFile = null;
@@ -159,7 +159,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
         this.paginacion = this.Users.slice(0, (this.Users.length / 10 ) );
 
         this.Users.forEach(item => {
-          item.foto = ApiConection.ServiceUrl + item.foto;
+          item.foto = ApiConection.ServiceUrlFoto + item.foto;
         })
 
         //this.Users = this.Users.slice(0, 10)
