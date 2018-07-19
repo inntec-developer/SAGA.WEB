@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import {FormBuilder } from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog } from '@angular/material';
 import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
 import { ApiConection } from '../../../service';
 
@@ -26,13 +26,13 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   pagIndex = 0;
 
   @ViewChild('uploadImg') someInput: UploadImgsComponent;
+  @ViewChild('staticModal') modal;
 
   constructor(private service: AdminServiceService ,public fb: FormBuilder, public dialog: MatDialog){}
   
   CrearURL(idP: any)
   {
     this.name = idP;
-    console.log(this.name)
   }
 
   CrearPaginacion(pag)
@@ -49,13 +49,24 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   }
   updateFoto()
   {
-    debugger;
+    this.name = this.name + '.' + this.someInput.selectedFile.type.split('/')[1];
 
-  
-    this.Users[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' + this.someInput.name;
-    this.Users = [...this.Users];
-    console.log(this.Users)
-    this.bandera = false;
+    this.service.UploadImg(this.someInput.selectedFile, this.name)
+      .subscribe( data => {
+        console.log(data)
+
+        if(data.ok)
+        {
+          this.Users[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' + this.name;
+          this.Users = [...this.Users];
+          this.someInput.removeItem();
+          this.someInput.selectedFile = null;
+
+          this.modal.hide();
+        }
+
+    }); 
+    
   }
 
   public Search(data: any) {
@@ -174,10 +185,6 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit()
   {
-    if(this.someInput)
-    {
-      this.updateFoto();
-    }
   }
 
 }

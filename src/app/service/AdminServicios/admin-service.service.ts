@@ -1,11 +1,6 @@
-import { saveAs } from 'file-saver';
-import { FileUploader } from 'ng2-file-upload';
 import { ApiConection } from './../api-conection.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -63,32 +58,16 @@ export class AdminServiceService {
 
   }
 
-  UploadImg( file: File, name: any)
+  UploadImg( file: File, name: any) : Observable<any>
   {
-    let endPoint = 'assets/img/user'
-    let url = ApiConection.ServiceUrlWeb + endPoint + name;
- 
     let formData = new FormData();
     formData.append('image', file, name );
     let headers = new Headers({'Content-Type': 'image/.*'});
     let options = new RequestOptions({headers: headers});
 
-    // saveAs(file, '~/assets/img/user/' + name, true )
-
-    // this.http.post('localhost/assets/img/',formData, options ) .map(result => result)
-    // .catch(this.handleError);
-
-
-    //   var mediaType = 'image/.*';
-    //   let blob: Blob = new Blob([file], { type:'image/*'})
-    //   var mocos= window.URL.createObjectURL(blob);
-      // saveAs(blob, name )
-  
-
     return this.http.post(this.UrlUploadImage, formData )
-            .map(result => result.json())
+            .map(result => result)
             .catch(this.handleError);
-    console.log('mocos')
   }
  
   getPersonas(): Observable<any>

@@ -1,6 +1,5 @@
-import { ApiConection } from './../../../service/api-conection.service';
 import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
-import { Component, OnInit, AfterViewChecked, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ApiConection } from '../../../service';
@@ -12,14 +11,14 @@ import { ApiConection } from '../../../service';
   styleUrls: ['./add-grupo.component.scss'],
   providers:[ AdminServiceService ]
 })
-export class AddGrupoComponent implements OnInit, AfterViewInit {
+export class AddGrupoComponent implements OnInit {
 
   @ViewChild('uploadImg') someInput: UploadImgsComponent;
+  @ViewChild('staticModal') modal;
 
   formGrupos: FormGroup;
   Grupos: Array<any> = [];
   editing = {};
-  bandera: boolean = false;
   name: string;
   rowAux: any;
   UsuariosList: Array<any> = [];
@@ -28,8 +27,6 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
   {
     this.iniciarForm();
   }
-
-
 
   CrearURL(idG: any)
   {
@@ -44,6 +41,7 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
       Activo: 1
       });
   }
+
   updateValue($event, cell, rowIndex)
   {
     if(cell === 'activo')
@@ -60,15 +58,16 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
     }
     this.Grupos = [...this.Grupos];
   }
+
   getGrupos()
   {
     this.service.getGrupos()
     .subscribe(
       e=>{
         this.Grupos = e;
-        console.log(this.Grupos)
       });
   }
+
   GetUsuarios(GrupoId : any)
   {
     console.log(GrupoId)
@@ -76,7 +75,6 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
     .subscribe(
       e=>{
         this.UsuariosList = e;
-        console.log(this.UsuariosList)
       });
   }
 
@@ -96,13 +94,28 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
       this.getGrupos();
     });
   }
+
   updateFoto()
   {
-    this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrl + '/utilerias/img/user/' +  this.someInput.name;
-    this.Grupos = [...this.Grupos];
-    this.bandera = false;
-    console.log(this.Grupos)
+    this.name = this.name + '.' + this.someInput.selectedFile.type.split('/')[1];
+
+    this.service.UploadImg(this.someInput.selectedFile, this.name)
+      .subscribe( data => {
+        console.log(data)
+
+        if(data.ok)
+        {
+          this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' +  this.someInput.name;
+          this.Grupos = [...this.Grupos];
+          this.someInput.removeItem();
+          this.someInput.selectedFile = null;
+
+          this.modal.hide();
+        }
+
+    }); 
   }
+
   updateGrupo($event,rowIndex)
   {
     let gu = this.Grupos[rowIndex]
@@ -128,15 +141,10 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
     });
     alert("los datos se borraron")
   }
+
   ngOnInit() {
     this.getGrupos();
   }
 
-  ngAfterViewInit()
-  {
-    if(this.someInput)
-    {
-      this.updateFoto();
-    }
-  }
+
 }

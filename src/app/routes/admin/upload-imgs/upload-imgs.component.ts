@@ -30,7 +30,6 @@ export class UploadImgsComponent implements OnInit {
   @Output() image: any = new Image();
   
   selectedFile: File;
-  bandera = true;
 
   constructor(private service: AdminServiceService, private http: Http) { }
 
@@ -52,7 +51,6 @@ export class UploadImgsComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
    
-    debugger;
      this.selectedFile = $event.target.files[0]; 
      this.name =  this.name + '.' + this.selectedFile.type.split('/')[1];
 
@@ -73,17 +71,16 @@ export class UploadImgsComponent implements OnInit {
   UploadImg()
   {
     this.onItemChanged.emit(this.setImage());
-    this.service.UploadImg(this.selectedFile, this.name)
-      .subscribe( data => {
-        console.log(data)
-    });
+    // this.service.UploadImg(this.selectedFile, this.name)
+    //   .subscribe( data => {
+    //     console.log(data)
+    // });
   }
 
   removeItem()
   {
     this.fileInput.nativeElement.value = '';
     this.selectedFile = null;
-    this.bandera = false;
   }
 
 
