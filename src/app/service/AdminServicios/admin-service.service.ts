@@ -85,7 +85,7 @@ export class AdminServiceService {
       // saveAs(blob, name )
   
 
-    return this.http.post(this.UrlUploadImage, formData)
+    return this.http.post(this.UrlUploadImage, formData )
             .map(result => result.json())
             .catch(this.handleError);
     console.log('mocos')

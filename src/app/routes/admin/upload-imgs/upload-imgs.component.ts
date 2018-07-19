@@ -74,9 +74,9 @@ export class UploadImgsComponent implements OnInit {
   {
     this.onItemChanged.emit(this.setImage());
     this.service.UploadImg(this.selectedFile, this.name)
-      .subscribe( data => {
-        console.log(data)
-    });
+    //   .subscribe( data => {
+    //     console.log(data)
+    // });
   }
 
   removeItem()
