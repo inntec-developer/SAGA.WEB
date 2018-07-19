@@ -1,16 +1,14 @@
-import { saveAs } from 'file-saver';
+
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
-import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { FileUploader } from 'ng2-file-upload';
+
 
 @Component({
   selector: 'app-upload-imgs',
   templateUrl: './upload-imgs.component.html',
   styleUrls: ['./upload-imgs.component.scss'],
-  providers: [ AdminServiceService ]
+  providers: [ ]
 })
 
 
@@ -31,7 +29,7 @@ export class UploadImgsComponent implements OnInit {
   
   selectedFile: File;
 
-  constructor(private service: AdminServiceService, private http: Http) { }
+  constructor() { }
 
   ngOnInit()
   {

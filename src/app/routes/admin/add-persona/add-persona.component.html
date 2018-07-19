@@ -128,14 +128,14 @@
         <div class="modal-dialog modal-lg">
          <div class="modal-content">
            <div class="modal-header">
-             <h4 class="modal-title pull-left"Actualizar Foto de Perfile></h4>
+             <h4 class="modal-title pull-left">Actualizar Foto de Perfil</h4>
              <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
                <span aria-hidden="true">&times;</span>
              </button>
            </div>
            <div class="modal-body">
-              
                 <div class="row">
+                    <div class="col-md-4">
                         <app-upload-imgs #uploadImg
                             [maxFileSize]="1*1024*1024"
                             [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
@@ -144,6 +144,7 @@
                             (onItemChanged)="updateFoto()"
                         ></app-upload-imgs>
                     </div>  
+                </div>
            <!-- <div class="modal-footer">
                <btn-closed data-dismiss="modal" (click)="staticModal.hide()"></btn-closed>
              </div>
