@@ -65,6 +65,11 @@ export class AddGrupoComponent implements OnInit {
     .subscribe(
       e=>{
         this.Grupos = e;
+
+        this.Grupos.forEach(item => {
+          item.foto = ApiConection.ServiceUrl + item.foto;
+        })
+        console.log(this.Grupos)
       });
   }
 
@@ -84,7 +89,7 @@ export class AddGrupoComponent implements OnInit {
       Nombre: this.formGrupos.controls['Nombre'].value,
       Descripcion: this.formGrupos.controls['Descripcion'].value, 
       Activo: this.formGrupos.controls['Activo'].value,
-      Foto: "/utilerias/img/user/WorkTeam.jpg"
+      Foto: "utilerias/img/user/WorkTeam.jpg"
     }
     console.log(grupo)
     this.service.addGrupos(grupo)

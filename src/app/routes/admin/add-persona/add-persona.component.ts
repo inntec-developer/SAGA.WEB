@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {FormBuilder } from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {MatDialog } from '@angular/material';
@@ -47,6 +47,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
     this.Users = this.Users.slice((pag-1) * 5, pag * 5)
 
   }
+
   updateFoto()
   {
     this.name = this.name + '.' + this.someInput.selectedFile.type.split('/')[1];
@@ -67,6 +68,15 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
 
     }); 
     
+  }
+
+  closeModal()
+  {
+    this.someInput.removeItem();
+    this.someInput.selectedFile = null;
+
+    this.modal.hide();
+
   }
 
   public Search(data: any) {
@@ -147,6 +157,11 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
         this.Users = e;
         this.filteredData = e;
         this.paginacion = this.Users.slice(0, (this.Users.length / 10 ) );
+
+        this.Users.forEach(item => {
+          item.foto = ApiConection.ServiceUrl + item.foto;
+        })
+
         //this.Users = this.Users.slice(0, 10)
 
         // for(var c = 0; c <= this.Users.length / 5; c++)
@@ -154,7 +169,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
         //   this.paginacion.push(c);
 
         // }
-      console.log(this.paginacion)
+      console.log(this.Users)
       })
   }
   

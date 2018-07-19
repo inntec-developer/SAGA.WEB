@@ -132,8 +132,8 @@
        </button>
      </div>
      <div class="modal-body">
-        
           <div class="row">
+              <div class="col-md-12">
                   <app-upload-imgs #uploadImg
                       [maxFileSize]="1*1024*1024"
                       [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
@@ -141,7 +141,8 @@
                       [name]="name"
                       (onItemChanged)="updateFoto()"
                   ></app-upload-imgs>
-              </div>  
+              </div>
+            </div>  
      <!-- <div class="modal-footer">
          <btn-closed data-dismiss="modal" (click)="staticModal.hide()"></btn-closed>
        </div>
