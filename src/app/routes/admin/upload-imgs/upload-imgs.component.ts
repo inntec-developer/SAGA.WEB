@@ -27,7 +27,8 @@ export class UploadImgsComponent implements OnInit {
   @Input() public errorMessageMaxSize: string = 'La imagen no debe pasar de 10 megas';
   @Input() public errorMessageWrongType: string = 'El archivo no es una imagen';
 
-  image: any = new Image();
+  @Output() image: any = new Image();
+  
   selectedFile: File;
   bandera = true;
 
@@ -51,6 +52,7 @@ export class UploadImgsComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
    
+    debugger;
      this.selectedFile = $event.target.files[0]; 
      this.name =  this.name + '.' + this.selectedFile.type.split('/')[1];
 

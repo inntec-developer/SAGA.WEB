@@ -32,7 +32,6 @@ export class AddGrupoComponent implements OnInit, AfterViewInit {
 
   CrearURL(idG: any)
   {
-    console.log('entro')
     this.name = idG;
   }
 

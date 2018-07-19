@@ -31,6 +31,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   
   CrearURL(idP: any)
   {
+    this.name = idP;
     console.log(this.name)
   }
 
@@ -48,6 +49,9 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   }
   updateFoto()
   {
+    debugger;
+
+  
     this.Users[this.rowAux]['foto'] = ApiConection.ServiceUrl + 'utilerias/img/user/' + this.someInput.name;
     this.Users = [...this.Users];
     console.log(this.Users)

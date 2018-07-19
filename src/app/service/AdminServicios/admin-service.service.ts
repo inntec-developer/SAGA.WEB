@@ -88,6 +88,7 @@ export class AdminServiceService {
     return this.http.post(this.UrlUploadImage, formData)
             .map(result => result.json())
             .catch(this.handleError);
+    console.log('mocos')
   }
  
   getPersonas(): Observable<any>
