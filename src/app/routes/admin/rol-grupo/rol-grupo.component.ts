@@ -1,10 +1,8 @@
 import { RollsStructComponent } from './../rolls-struct/rolls-struct.component';
-import { style } from '@angular/animations';
-import { element } from 'protractor';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ApiConection } from './../../../service/api-conection.service';
 
 @Component({
   selector: 'app-rol-grupo',
@@ -22,6 +20,7 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
   ListaRG: any = [];
   StructList: Array<any> = [];
   filteredData: Array<any> = [];
+  filteredGroups: Array<any> = [];
   permisoRol: Array<any> = [];
   msj: string = "";
   alert = "";
@@ -44,7 +43,7 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
   {
     item.selected ? item.selected = false : item.selected = true; //para poner el backgroun cuando seleccione
    
-    item.selected ? this.ListaRG.push(item) : this.ListaRG.splice(this.ListaRG.findIndex(x => x.id === item.id), 1); //agrega y quita el row seleccionado
+    item.selected ? this.ListaRG.push(item) : this.ListaRG.splice(this.ListaRG.findIndex(x => x.entidadId == item.entidadId), 1); //agrega y quita el row seleccionado
   }
 
   addToRol($event)
@@ -106,6 +105,27 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
     
   }
 
+  public Search(data: any) {
+    let tempArray: Array<any> = [];
+    let colFiltar: Array<any> = [ { title: "apellidoPaterno" }, { title: "nombre" }];
+
+    this.filteredGroups.forEach(function (item) {
+      let flag = false;
+      colFiltar.forEach(function (c) {
+        if (item[c.title].toString().match(data.target.value)) {
+          flag = true;
+        }
+      });
+
+      if (flag) {
+        tempArray.push(item)
+      }
+    });
+
+    this.Grupos = tempArray;
+  }
+
+
   getGrupos()
   {
     this.Grupos = [];
@@ -113,6 +133,10 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
     .subscribe(
       e=>{
         this.Grupos = e;
+
+        this.Grupos.forEach(item => {
+          item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
+        })
       })
   }
 
@@ -132,14 +156,19 @@ export class RolGrupoComponent implements OnInit, AfterViewInit {
       .subscribe(
         e=>{
           this.Grupos = e;
+          
+          this.Grupos.forEach(item => {
+            item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
+          })
+
           console.log(this.Grupos)
+          this.filteredGroups = this.Grupos;
+
         })
     }
   
     DeleteUserRoles(user, rol)
     {
-      console.log(user)
-      console.log(rol)
         var idx = this.Grupos.findIndex(x => x.id == user);
         
   

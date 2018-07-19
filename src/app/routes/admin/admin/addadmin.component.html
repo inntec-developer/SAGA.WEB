@@ -13,7 +13,7 @@
       <div class="row">
           <div class="col-md-4">
               <div class="input-group">
-                  <input #filterInput (input)="Search($event)" class="input-sm form-control" type="text" placeholder="Filtrar" />
+                  <input formControlName="filterInput" (input)="Search($event)" class="input-sm form-control" type="text" placeholder="Filtrar" />
               </div> 
           </div>
       </div>
@@ -32,9 +32,10 @@
                     <div class="media-heading margintextthumb">
                     <div class="pull-right badge baed-info tituloPuesto">{{p.departamento}}</div>
                     <h4>{{p.nombre + ' ' + p.apellidoPaterno + ' ' + p.apellidoMaterno }}</h4>
-                    <p>Clave:{{ p.clave }}</p>
-                    <p>Álias: {{ p.usuario }}</p>
-                    <p *ngFor="let e of p.email">{{e.email}} </p>
+                    <p *ngIf="p.clave != '' && p.clave != null">Clave: {{ p.clave }}</p>
+                    <p *ngIf="p.usuario != '' && p.usuario != null">Álias: {{ p.usuario }}</p>
+                    <p *ngFor="let e of p.email">email: {{e.email}} </p>
+                    <p *ngIf="p.descripcion != '' && p.descripcion != null">{{ p.descripcion }}</p>
                     <p>Grupo: <span *ngFor="let g of p.grupos"><div>{{g.grupo}}
                       <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(g.id, p.entidadId)">
                         <span aria-hidden="true">&times;</span>
@@ -62,7 +63,7 @@
         <!--   -->
         <!-- dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" dnd-sortable [sortableIndex]="i" -->
         <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
-          <p [hidden]="ListaPG.length > 0">{{alert}}</p>
+          <p [hidden]="ListaPG.length > 0">{{msj}}</p>
           <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" >
               <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
                   <span aria-hidden="true">&times;</span>

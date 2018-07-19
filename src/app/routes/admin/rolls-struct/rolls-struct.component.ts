@@ -1,9 +1,6 @@
-import { AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import {BrowserModule} from '@angular/platform-browser'
-import { Element } from './../../recl/candidatos/dt-vacantes/dt-vacantes.component';
-import {MatCheckbox} from '@angular/material';
+import { ApiConection } from './../../../service/api-conection.service';
 
 @Component({
   selector: 'app-rolls-struct',
@@ -14,8 +11,7 @@ import {MatCheckbox} from '@angular/material';
 export class RollsStructComponent implements OnInit {
 
   @Input() public StructList: Array<any> = null; // Url api process upload
-  @Input() public ocultar = false;
-  
+  @Input() public hiddenSelect = false;
   @Output('onItemChanged') public onItemChanged = new EventEmitter();
   columns = [
 
@@ -167,7 +163,11 @@ export class RollsStructComponent implements OnInit {
     .subscribe(
       e=>{
         this.listEntidades = e;
-        console.log(this.listEntidades)
+
+        this.listEntidades.forEach(item => {
+          item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
+        })
+
       })
   }
 

@@ -18,7 +18,7 @@
            <div class="table-responsive">
                <table class="table table-bordered table-hover">
                    <thead>
-                       <tr >s
+                       <tr >
                           <th class="text-center"></th>
                           <th class="text-center"></th>
                            <th class="text-center">Nombre</th>
@@ -58,7 +58,7 @@
                            </td>
                            <td class="text-center">
                               <btn-check id='update' chkPrivilegiosButtons (click)="updateGrupo($event, rowIndex)" matTooltip="Guardar Cambios"></btn-check>
-                              <btn-delete id='delete' chkPrivilegiosButtons matTooltip="Eliminar Usuario" (click)="DeleteGrupo($event,rowIndex)"></btn-delete>
+                              <btn-delete id='delete' chkPrivilegiosButtons matTooltip="Eliminar Grupo" (click)="DeleteGrupo($event,rowIndex)"></btn-delete>
                            </td>
                        </tr>
                    </tbody>
@@ -105,9 +105,9 @@
           >
           <div class="headermio">
               {{grupo}}
-              <btn-closed class="pull-right" aria-label="Close" (click)="myPopover.hide()">
-                <span aria-hidden="true">&times;</span>
-              </btn-closed>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="myPopover.hide()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
             </div>
           <div class="bodymio" *ngFor="let r of UsuariosList">
               <img class="pull-left media img-responsive img-circle thumb32" src={{r.fotoAux}} alt="Image" />

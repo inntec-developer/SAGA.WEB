@@ -1,6 +1,6 @@
 <div class="panel panel-default panel-flat mat-elevation-z8">
   <div class="panel-body">
-    <div class="row">
+    <div *ngIf="!hiddenSelect" class="row">
       <div class="col-md-4">
         <select class="form-control" (change)="selected($event.target.value); id = $event.target.value; flag=true" >
             <option  [value]="0">Seleccionar Rol</option>
@@ -8,11 +8,8 @@
         </select>
       </div>
       <div class="col-md-2">
-        <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)"></btn-delete>
+        <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)" matTooltip="Eliminar Rol Seleccionado"></btn-delete>
         <btn-view (click)="staticModal.show()" data-toggle="modal" data-target="#staticModal" matTooltip="Ver integrantes del rol"></btn-view>
-      </div>
-      <div class="col-md-4">
-          
       </div>
     </div>
     <br/>
@@ -50,25 +47,25 @@
                     <input autofocus (blur)="updateValue($event, 'nombre', rowIndex)" *ngIf="editing[rowIndex + '-' + 'nombre']" type="text" [value] = "r['nombre']" />  -->
                 </td>
                 <td class="center">
-                  <mat-checkbox #crear id="{{ 'C-' + rowIndex}}" (change)="r['create'] = crear.checked" class="checkbox" [checked]="r.create"></mat-checkbox><span></span>
+                  <mat-checkbox #crear id="{{ 'C-' + rowIndex}}" (change)="r['create'] = crear.checked" class="checkbox" [checked]="r.create" [disabled] = "hiddenSelect"></mat-checkbox><span></span>
                 </td>
                 <td>
-                  <mat-checkbox #leer id="{{ 'R-' + rowIndex}}" (change)="r['read'] = leer.checked" class=" center-block checkbox" [checked]="r.read"></mat-checkbox>
+                  <mat-checkbox #leer id="{{ 'R-' + rowIndex}}" (change)="r['read'] = leer.checked" class=" center-block checkbox" [checked]="r.read" [disabled] = "hiddenSelect"></mat-checkbox>
                   <span></span>
                 </td>
                 <td class="center">
-                  <mat-checkbox #modificar id="{{ 'U-' + rowIndex}}" (change)="r['update'] = modificar.checked" class="checkbox" [checked]="r.update"></mat-checkbox>
+                  <mat-checkbox #modificar id="{{ 'U-' + rowIndex}}" (change)="r['update'] = modificar.checked" class="checkbox" [checked]="r.update" [disabled] = "hiddenSelect"></mat-checkbox>
                   <span></span>
                 </td>
                 <td class="center">
-                  <mat-checkbox #borrar id="{{ 'D-' + rowIndex}}" (change)="r['delete'] = borrar.checked" class="checkbox" [checked]="r.delete"></mat-checkbox>
+                  <mat-checkbox #borrar id="{{ 'D-' + rowIndex}}" (change)="r['delete'] = borrar.checked" class="checkbox" [checked]="r.delete" [disabled] = "hiddenSelect"></mat-checkbox>
                   <span></span>
                 </td>
                 <td class="center">
-                  <mat-checkbox #especial (change)="r['especial'] = especial.checked" class="checkbox" [checked]="r.especial"></mat-checkbox>
+                  <mat-checkbox #especial (change)="r['especial'] = especial.checked" class="checkbox" [checked]="r.especial" [disabled] = "hiddenSelect"></mat-checkbox>
                   <span></span>
                 </td>
-                <td class="center-block" >
+                <td *ngIf="!hiddenSelect" class="center-block" >
                   <btn-check id='update' chkPrivilegiosButtons matTooltip="Guardar Cambios" (click)="GuardarCambios(r)"></btn-check>
                 </td>
             </tr>
@@ -100,7 +97,7 @@
               </thead>
               <tbody>
                 <tr matTooltip="click to select" *ngFor="let e of listAux; let i = index">
-                  <td><img class="center-block media img-responsive img-circle thumb32" src="{{e.foto}}" alt="" /></td>
+                  <td><img class="center-block media img-responsive img-circle thumb32" src="{{e.fotoAux}}" alt="" /></td>
                   <td class="text-center">{{e.nombre + ' ' + e.apellidoPaterno}}</td>
                   <td class="text-center">{{e.descripcion}}</td>
                   <!-- <td><btn-delete id='delete' chkPrivilegiosButtons matTooltip="Borrar Usuario de Grupo" class="pull-right" (click)="DeleteUserRoles(e.entidadId, id)"> 

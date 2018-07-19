@@ -1,7 +1,7 @@
 import { ApiConection } from './../../../service/api-conection.service';
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class AddadminComponent implements OnInit {
   filteredData: Array<any> = [];
   IdGrupo: any = null;
   draggable = false;
+  msj = 'Arrastrar usuario aqui'
 
   constructor(private service: AdminServiceService, public fb: FormBuilder) {}
 
@@ -34,7 +35,7 @@ export class AddadminComponent implements OnInit {
 
     this.GetEntidades();
     this.GetGrupos();
-
+    this.formAdmin.controls['filterInput'].reset();
   }
 
   public Search(data: any) {
@@ -60,7 +61,7 @@ export class AddadminComponent implements OnInit {
   resetBasket() {
     this.ListaPG = [];
     this.GetEntidades();
-    
+      
   }
 
   selected($event) {
@@ -69,7 +70,7 @@ export class AddadminComponent implements OnInit {
 
     this.GetUserByGroup($event.target.value)
 
-    this.fb.group({filterInput: ''});
+    
     //por si arrastras un usuario y despues selecionas un grupo donde esta incluido el usuario i.e. para que no se repita el usuario
     //ya no es necesario por que no puedes hacer el drag a menos que selecciones un grupo 
 
@@ -119,7 +120,7 @@ export class AddadminComponent implements OnInit {
         e => {
           this.ListaPG = e; //para llenar el panel donde se hace drop solo se utiliza npara cunado le den select to grupo
           this.ListaPG.forEach(item => {
-            item.foto = ApiConection.ServiceUrlFoto + item.foto;
+            item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
           })
         })
   }
