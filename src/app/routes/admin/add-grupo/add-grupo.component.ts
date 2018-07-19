@@ -67,8 +67,9 @@ export class AddGrupoComponent implements OnInit {
         this.Grupos = e;
 
         this.Grupos.forEach(item => {
-          item.foto = ApiConection.ServiceUrlFoto + item.foto;
+          item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
         })
+
         console.log(this.Grupos)
       });
   }
@@ -80,6 +81,10 @@ export class AddGrupoComponent implements OnInit {
     .subscribe(
       e=>{
         this.UsuariosList = e;
+
+        this.UsuariosList.forEach(item => {
+          item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
+        })
       });
   }
 
@@ -110,7 +115,8 @@ export class AddGrupoComponent implements OnInit {
 
         if(data.ok)
         {
-          this.Grupos[this.rowAux]['foto'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' +  this.someInput.name;
+          this.Grupos[this.rowAux]['foto'] = 'utilerias/img/user/' +  this.someInput.name;
+          this.Grupos[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' +  this.someInput.name;
           this.Grupos = [...this.Grupos];
           this.someInput.removeItem();
           this.someInput.selectedFile = null;

@@ -18,7 +18,7 @@
            <div class="table-responsive">
                <table class="table table-bordered table-hover">
                    <thead>
-                       <tr >
+                       <tr >s
                           <th class="text-center"></th>
                           <th class="text-center"></th>
                            <th class="text-center">Nombre</th>
@@ -35,7 +35,7 @@
                           </td>
                           <td class="text-center">
                               <div class="media">
-                                <a matTooltip="Click to edit" (click)="rowAux=rowIndex; CrearURL(g.id); staticModal.show()"><img class="img-responsive img-circle" src={{g.foto}} alt="Image" /></a>
+                                <a matTooltip="Click to edit" (click)="rowAux=rowIndex; CrearURL(g.id); staticModal.show()"><img class="img-responsive img-circle" src={{g.fotoAux}} alt="Image" /></a>
                               </div>
                           </td>
                            <td class="text-center">
@@ -110,7 +110,7 @@
               </btn-closed>
             </div>
           <div class="bodymio" *ngFor="let r of UsuariosList">
-              <img class="pull-left media img-responsive img-circle thumb32" src={{r.foto}} alt="Image" />
+              <img class="pull-left media img-responsive img-circle thumb32" src={{r.fotoAux}} alt="Image" />
               <p class="margenmio"> {{ ' ' + r.nombre + ' ' + r.apellidoPaterno + ' ' + r.apellidoMaterno}} </p>
           </div>
          

@@ -159,7 +159,7 @@ export class AddadminComponent implements OnInit {
           this.ListEntidades = e;
 
           this.ListEntidades.forEach(item => {
-            item.foto = ApiConection.ServiceUrlFoto + item.foto;
+            item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
           })
 
           this.filteredData = this.ListEntidades;

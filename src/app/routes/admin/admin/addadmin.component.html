@@ -27,7 +27,7 @@
               <!-- dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades" -->
               <!--  <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
             <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i" dnd-draggable [dragEnabled]="draggable">
-                 <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.foto}}" /> 
+                 <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.fotoAux}}" /> 
                   <div class="media-body">
                     <div class="media-heading margintextthumb">
                     <div class="pull-right badge baed-info tituloPuesto">{{p.departamento}}</div>
@@ -67,7 +67,7 @@
               <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
                   <span aria-hidden="true">&times;</span>
                 </button>
-              <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.foto}}" alt="" />
+              <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.fotoAux}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
