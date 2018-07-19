@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
                 DepartamentoId: this.valForm.controls['DepartamentoId'].value,
                 Email: this.email,
                 Password: this.passwordForm.controls['password'].value,
-                Foto: "http://localhost:4200/assets/img/user/01.jpg"
+                Foto: "/utilerias/img/user/01.jpg"
               };
               console.log(persona)
              

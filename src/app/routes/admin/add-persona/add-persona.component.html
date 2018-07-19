@@ -21,9 +21,16 @@
 <div class="row">
     <div class="panel panel-default panel-flat mat-elevation-z8">
         <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2 pull-left">
+                    <div class="input-group">
+                        <input (input)="Search($event)" class="input-sm form-control" type="text" placeholder="Filtrar" />
+                    </div> 
+                </div>
+            </div>
         <p class="text-center pv">USUARIOS</p>
             <div class="table-responsive">
-               <table class="table table-bordered table-hover">
+               <table class="bootstrap table table-bordered table-hover">
                  <thead>
                     <tr>
                         <th class="text-center"></th>
@@ -43,7 +50,7 @@
                     <tr *ngFor="let p of Users; let rowIndex = index">
                         <td class="text-center">
                           <div class="media">
-                            <a matTooltip="Click to edit" (click)="bandera = true; rowAux = rowIndex; CrearURL(p.id)"><img class="img-responsive img-circle" src="{{p.foto}}" alt="Image" /></a>
+                            <a matTooltip="Click to edit"  data-toggle="modal" data-target="#staticModal" (click)="bandera = true; rowAux = rowIndex; CrearURL(p.id);"><img class="img-responsive img-circle" src="{{p.foto}}" alt="Image" /></a>
                           </div>
                         </td>
                         <td class="text-center">
@@ -109,20 +116,49 @@
                     </tr>
                 </tbody>
             </table>
-        </div>   
+        </div> 
+    <div class="row">
+        <div class="panel-footer">
+                <div class="col-lg-2 pull-right text-right">
+                    <ul class="pagination pagination-sm">
+                        <li *ngFor='let pag of paginacion; let i = index' [ngClass]="{'active': i == pagIndex }" ><a><span>{{i + 1}}</span></a></li>
+                        <!-- <li><a href="">2</a></li>
+                        <li><a href="">3</a></li>
+                        <li><a href="">»</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>       
+</div>
 
-               <div class="panel-footer">
-                   <div class="row">
-                       <div class="col-lg-2">
-                           <div class="input-group">
+   <!-- Modal  -->
 
-                           </div>
-                       </div>
-                       <div class="col-lg-8"></div>
-                       <div class="col-lg-2">
-                        
-                       </div>
-                   </div>
-               </div>
-               <p><span class="text-center pv">{{msj}}</span></p>
-        
+   <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h4 class="modal-title pull-left"></h4>
+             <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+              
+                <div class="row">
+                        <app-upload-imgs #uploadImg
+                            [maxFileSize]="1*1024*1024"
+                            [accept]="['image/png', 'image/jpeg', 'image/jpg', 'image/bmp']"
+                            [errorMessageMaxSize]="'File size great than 1MB'"
+                            [name]="name"
+                            (onItemChanged)="updateFoto()"
+                        ></app-upload-imgs>
+                    </div>  
+           <!-- <div class="modal-footer">
+               <btn-closed data-dismiss="modal" (click)="staticModal.hide()"></btn-closed>
+             </div> -->
+         </div>
+       </div>
+     </div>
+     </div>
+

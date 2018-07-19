@@ -52,6 +52,7 @@ export class RollsStructComponent implements OnInit {
   {
     console.log(row)
   }
+  
   public Search(data: any) {
 
     let tempArray: Array<any> = [];
