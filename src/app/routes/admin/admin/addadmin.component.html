@@ -26,7 +26,7 @@
 
               <!-- dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListEntidades" -->
               <!--  <div *ngFor="let p of ListaPersonas; let i = index" class="panel panel-defaul" dnd-draggable [dragData]="p" (onDragSuccess)="popPerson(p, i)"  [dropZones]="['demo1']"> -->
-            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i" dnd-draggable [dragEnabled]="draggable">
+            <div *ngFor="let p of ListEntidades; let i = index" class="panel panel-defaul" dnd-sortable [sortableIndex]="i" dnd-draggable [dragData]="p" [dragEnabled]="draggable">
                  <img class="pull-left media img-responsive img-circle thumb64 marginimg" src="{{p.fotoAux}}" /> 
                   <div class="media-body">
                     <div class="media-heading margintextthumb">
@@ -50,7 +50,7 @@
     <div class="col-md-6">
       <div class="panel panel-default panel-flat mat-elevation-z8">
         <div class="panel-heading">Grupos:
-           <select class="form-control width-mio" #slcGrupo formControlName="slcGrupo" (change)="selected($event); flag = true" >
+           <select class="form-control width-mio" #slcGrupo formControlName="slcGrupo" (change)="flag = true; draggable = true; IdGrupo = $event.target.value; GetUserByGroup($event.target.value); " >
               <option *ngFor="let grupos of listGrupos" [value]="grupos.id">{{grupos.nombre}}</option>
            </select>
           <span class="text-danger" *ngIf="formAdmin.controls['slcGrupo'].hasError('required')">Debe seleccionar un Grupo</span>
@@ -64,7 +64,7 @@
         <!-- dnd-droppable (onDropSuccess)="addToGroups($event)" [dropZones]="['demo1']" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" dnd-sortable [sortableIndex]="i" -->
         <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
           <p [hidden]="ListaPG.length > 0">{{msj}}</p>
-          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" >
+          <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event)" >
               <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
                   <span aria-hidden="true">&times;</span>
                 </button>

@@ -64,36 +64,19 @@ export class AddadminComponent implements OnInit {
       
   }
 
-  selected($event) {
-    this.draggable = true;
-    this.IdGrupo = $event.target.value; //dropdown grupos
-
-    this.GetUserByGroup($event.target.value)
-
-    
-    //por si arrastras un usuario y despues selecionas un grupo donde esta incluido el usuario i.e. para que no se repita el usuario
-    //ya no es necesario por que no puedes hacer el drag a menos que selecciones un grupo 
-
-    // var idx = this.ListaPG.findIndex(x => x.id == $event.target.value);
-
-    // if(idx != -1)
-    // {
-    //   this.ListaPG.splice(idx, 1)
-    // }
-
-  }
-
   addToGroups($event, index) {
-    this.ListaPG.push($event);
-    let g = $event;
 
+    console.log($event)
     //el drag me agrega solo el item por eso lo borro por que se repite
 
-    var idx = this.ListaPG.findIndex(x => x.entidadId == g.entidadId);
+    var idx = this.ListaPG.findIndex(x => x.entidadId == $event.entidadId);
 
     if (idx != -1) {
       this.ListaPG.splice(idx, 1)
     }
+
+    this.ListEntidades.push($event);
+
 
   }
 
@@ -114,15 +97,29 @@ export class AddadminComponent implements OnInit {
   }
 
   GetUserByGroup(Id) {
-    this.ListAuxEntidades = [];
+    
     this.service.GetUsuarioByGrupo(Id)
       .subscribe(
         e => {
+          
           this.ListaPG = e; //para llenar el panel donde se hace drop solo se utiliza npara cunado le den select to grupo
+
           this.ListaPG.forEach(item => {
             item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
           })
+
+          //por si arrastras un usuario y despues selecionas un grupo donde esta incluido el usuario i.e. para que no se repita el usuario
+          //ya no es necesario por que no puedes hacer el drag a menos que selecciones un grupo 
+
+          // this.ListaPG.forEach(element => {
+          //   var idx = this.ListEntidades.findIndex(x => x.entidadId === element.entidadId);
+
+          //   if (idx != -1) {
+          //     this.ListEntidades.splice(idx, 1)
+          //   }
+          // });
         })
+        
   }
 
   addUsuarioGrupo() {
@@ -153,18 +150,17 @@ export class AddadminComponent implements OnInit {
   }
 
   GetEntidades() {
-    this.ListEntidades = [];
     this.service.GetEntidadesUG()
       .subscribe(
         e => {
           this.ListEntidades = e;
+          this.ListAuxEntidades = e;
 
           this.ListEntidades.forEach(item => {
             item.fotoAux = ApiConection.ServiceUrlFoto + item.foto;
           })
 
           this.filteredData = this.ListEntidades;
-
         })
   }
 
