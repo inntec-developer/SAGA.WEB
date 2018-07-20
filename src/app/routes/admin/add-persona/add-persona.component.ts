@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder } from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {MatDialog } from '@angular/material';
@@ -12,7 +12,7 @@ import { ApiConection } from '../../../service';
   providers:[ AdminServiceService ]
 
 })
-export class AddPersonaComponent implements OnInit, AfterViewInit {
+export class AddPersonaComponent implements OnInit {
 
   Users: Array<any> = [];
   ListDepas: Array<any> = [];
@@ -24,6 +24,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   filteredData: Array<any> = [];
   paginacion = [];
   pagIndex = 0;
+  alert: string = '';
 
   @ViewChild('uploadImg') someInput: UploadImgsComponent;
   @ViewChild('staticModal') modal;
@@ -102,7 +103,6 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
     //         });
 
   }
-
   
   updateValue(event, cell, rowIndex) 
   {
@@ -135,7 +135,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
     let u = this.Users[rowIndex];
     this.service.UpdateUsuario(u)
       .subscribe(data => {
-        console.log(data)
+        this.alert = data;
         this.ngOnInit();
       });
   }
@@ -144,7 +144,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
   {
     this.service.UDActivoUsers(id, $ev.target.checked )
         .subscribe( data => {
-          console.log(data)
+          this.alert = data;
           this.getUsuarios();
         });
   }
@@ -162,8 +162,6 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
           item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
         })
 
-
-
         //this.Users = this.Users.slice(0, 10)
 
         // for(var c = 0; c <= this.Users.length / 5; c++)
@@ -171,7 +169,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
         //   this.paginacion.push(c);
 
         // }
-      console.log(this.Users)
+
       })
   }
   
@@ -200,10 +198,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
     this.getTipos();
     
   }
-  ngAfterViewInit()
-  {
-  }
-
+  
 }
 
 

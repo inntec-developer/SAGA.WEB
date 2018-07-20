@@ -1,4 +1,8 @@
-.popover-content .popoverWidth { max-width: 300px !important; }
+#content .popover {
+    max-width: none;
+    width:700px !important;
+
+  }
 
 .headermio {
     margin: 0;

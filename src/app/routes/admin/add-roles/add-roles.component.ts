@@ -1,153 +1,124 @@
 
-import { Component, OnInit, ViewChild, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
-import { TreeNode, TreeComponent } from 'angular-tree-component';
-import { expand } from 'rxjs/operators';
+import { TreeNode } from 'angular-tree-component';
+
 
 @Component({
   selector: 'app-add-roles',
   templateUrl: './add-roles.component.html',
   styleUrls: ['./add-roles.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [ AdminServiceService ]
+  providers: [AdminServiceService]
 })
 
 export class AddRolesComponent implements OnInit {
 
   formRoles: FormGroup;
-  msj: string;
   nodes: Array<any> = [];
   privilegios = [];
-  nodeAux : TreeNode;
+  nodeAux: TreeNode;
   listAux = [];
+  alert: string = '';
 
   customTemplateStringOptions = {
     displayField: 'nombre',
     isExpandedField: 'expanded',
     idField: 'uuid',
     getChildren: this.getChildren.bind(this),
-    allowDrag: false, 
+    allowDrag: false,
     nodeHeight: 50
   };
 
   constructor(private service: AdminServiceService
-              ,public fb: FormBuilder )
-  {
+    , public fb: FormBuilder) {
     this.iniciarForm();
     this.msj = '';
 
   }
 
-
   getChildren(node: any) {
-      return new Promise((resolve, reject) => {
-            // setTimeout(() => resolve(this.nodes.map((c) => {
-            //     return Object.assign({}, c, {
-            //         checked: false
-            //     });
-            // })), 1000);
-      });
+    return new Promise((resolve, reject) => {
+      // setTimeout(() => resolve(this.nodes.map((c) => {
+      //     return Object.assign({}, c, {
+      //         checked: false
+      //     });
+      // })), 1000);
+    });
   }
 
   childrenCount(node: TreeNode) {
- 
-
-       return node && node.children ? `${node.children.length}` : '';
+    return node && node.children ? `${node.children.length}` : '';
   }
 
   filterNodes(text, tree) {
-      tree.treeModel.filterNodes(text, true);
+    tree.treeModel.filterNodes(text, true);
   }
 
-  iniciarForm()
-  {
+  iniciarForm() {
     this.formRoles = this.fb.group({
       Rol: ['', [Validators.required]]
     });
 
   }
 
-  descendantsChecked($event, node, title)
-  {
-      node[title.toLowerCase()] = $event.checked;
+  descendantsChecked($event, node, title) {
+    node[title.toLowerCase()] = $event.checked;
 
-      if( this.privilegios.length > 0)
-      {
-         let idx = this.privilegios.findIndex( x => {
-           return x.estructuraId == node.estructuraId })
-         if( idx === -1)
-         {
-           this.privilegios.push(node);
-         }
-         else
-         {
-           this.privilegios[idx][title] = $event.checked;
-         }
+    if (this.privilegios.length > 0) {
+      let idx = this.privilegios.findIndex(x => {
+        return x.estructuraId == node.estructuraId
+      })
+      if (idx === -1) {
+        this.privilegios.push(node);
       }
-      else
-      {
-         this.privilegios.push(node);
+      else {
+        this.privilegios[idx][title] = $event.checked;
       }
+    }
+    else {
+      this.privilegios.push(node);
+    }
 
-      node.children = this.nodes.filter(function(c){
-        return c.idPadre === node.estructuraId
-        });
+    node.children = this.nodes.filter(function (c) {
+      return c.idPadre === node.estructuraId
+    });
 
-      if(node.children.length > 0)
-      {
-         node.children.forEach(element => {
-            this.descendantsChecked($event, element, title)
-       });
-      }
-     
-      // console.log(this.nodes)
-      
-   
+    if (node.children.length > 0) {
+      node.children.forEach(element => {
+        this.descendantsChecked($event, element, title)
+      });
+    }
   }
 
-  CrearEstructura(node)
-  {
+  CrearEstructura(node) {
     this.listAux.push(node);
 
-    if(node.children.length > 0)
-    {
+    if (node.children.length > 0) {
       node.children.forEach(element => {
         this.CrearEstructura(element)
       });
     }
-    
+
   }
 
-  saveData()
-  {
-    if(this.privilegios.length > 0)
-    {
+  saveData() {
+    if (this.privilegios.length > 0) {
       let nom = this.formRoles.value.Rol;
-      console.log(this.nodes)
 
-      // for( let item of this.nodes)
-      // {
-      //   this.CrearEstructura(item)
-      // }
-    
-      let obj = this.privilegios.map(function(item) 
-      {
+      let obj = this.privilegios.map(function (item) {
         item.Nombre = nom;
         return item;
       });
 
-      console.log(obj)
-
       this.service.AddRoles(obj)
-      .subscribe( data => {
-        this.msj = data;
-        console.log(this.msj)
-        this.ngOnInit();
-      });
+        .subscribe(data => {
+          this.alert = data;
+          this.ngOnInit();
+        });
     }
-    else
-    {
+    else {
       alert('No se ha seleccionado Estructuras')
     }
   }
@@ -163,7 +134,7 @@ export class AddRolesComponent implements OnInit {
   //     this.iniciarForm();
   //     this.GetTreeRoles();
   //   });
-  
+
   // }
   // DeleteRoles( $even, rowIndex: any )
   // {
@@ -178,26 +149,23 @@ export class AddRolesComponent implements OnInit {
   //       this.nodes.splice(rowIndex, 1);
   //   this.nodes = [...this.nodes];
   //   });
-//  alert("los datos se borraron")
-//  }
+  //  alert("los datos se borraron")
+  //  }
 
-  GetTreeRoles()
-  {
+  GetTreeRoles() {
     var aux = [];
     this.service.GetTreeRoles()
-    .subscribe(
-      e=>{
-        aux = e;
-        aux.forEach(element => {
-          this.CrearEstructura(element)     
-         });
-  
-         this.nodes = this.listAux;
-         this.listAux = [];
-         console.log(this.nodes)
-      })
+      .subscribe(
+        e => {
+          aux = e;
+          aux.forEach(element => {
+            this.CrearEstructura(element)
+          });
 
-      
+          this.nodes = this.listAux;
+          this.listAux = [];
+
+        })
   }
   GetEstructura() {
     //id == estructuraId
@@ -205,19 +173,16 @@ export class AddRolesComponent implements OnInit {
       .subscribe(
         e => {
           this.nodes = e;
-          console.log(this.nodes)
+
         })
   }
-
-
 
   ngOnInit() {
     this.GetTreeRoles();
     this.iniciarForm();
   }
 
-
-  }
+}
 
 
 

@@ -22,6 +22,7 @@ export class AddGrupoComponent implements OnInit {
   name: string;
   rowAux: any;
   UsuariosList: Array<any> = [];
+  alert = '';
 
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
@@ -65,7 +66,6 @@ export class AddGrupoComponent implements OnInit {
     this.someInput.selectedFile = null;
 
     this.modal.hide();
-
   }
 
   getGrupos()
@@ -108,7 +108,7 @@ export class AddGrupoComponent implements OnInit {
     console.log(grupo)
     this.service.addGrupos(grupo)
     .subscribe( data => {
-      console.log(data)
+      this.alert = data;
       this.iniciarForm();
       this.getGrupos();
     });
@@ -140,7 +140,7 @@ export class AddGrupoComponent implements OnInit {
     console.log(gu)
     this.service.UpdateGrupo(gu)
       .subscribe( data => {
-        console.log(data)
+        this.alert = data;
         this.iniciarForm();
         this.getGrupos();
     });
@@ -152,12 +152,12 @@ export class AddGrupoComponent implements OnInit {
     console.log(g)
     this.service.DeleteGrupo(g)
       .subscribe( data => {
-        console.log(data)
+        this.alert = data;
         this.iniciarForm();
         this.Grupos.splice(rowIndex, 1);
         this.Grupos = [...this.Grupos];
     });
-    alert("los datos se borraron")
+   
   }
 
   ngOnInit() {
