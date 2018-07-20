@@ -61,10 +61,8 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
           this.Users[this.rowAux]['foto'] = 'utilerias/img/user/' + this.name;
           this.Users[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' + this.name;
           this.Users = [...this.Users];
-          this.someInput.removeItem();
-          this.someInput.selectedFile = null;
-
-          this.modal.hide();
+          
+          this.closeModal();
         }
 
     }); 
@@ -105,6 +103,7 @@ export class AddPersonaComponent implements OnInit, AfterViewInit {
 
   }
 
+  
   updateValue(event, cell, rowIndex) 
   {
     var aux;

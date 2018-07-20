@@ -59,6 +59,15 @@ export class AddGrupoComponent implements OnInit {
     this.Grupos = [...this.Grupos];
   }
 
+  closeModal()
+  {
+    this.someInput.removeItem();
+    this.someInput.selectedFile = null;
+
+    this.modal.hide();
+
+  }
+
   getGrupos()
   {
     this.service.getGrupos()
@@ -118,10 +127,8 @@ export class AddGrupoComponent implements OnInit {
           this.Grupos[this.rowAux]['foto'] = 'utilerias/img/user/' +  this.someInput.name;
           this.Grupos[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' +  this.someInput.name;
           this.Grupos = [...this.Grupos];
-          this.someInput.removeItem();
-          this.someInput.selectedFile = null;
-
-          this.modal.hide();
+          
+          this.closeModal();
         }
 
     }); 
