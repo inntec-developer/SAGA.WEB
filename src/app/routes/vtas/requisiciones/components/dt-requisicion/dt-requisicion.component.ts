@@ -1,13 +1,14 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-toaster/angular2-toaster';
-import { Component, OnInit } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource, PageEvent} from '@angular/material';
 
 import { DialogActivarRequiComponent } from './../dialog-activar-requi/dialog-activar-requi.component';
 import { DialogCancelRequiComponent } from './../dialog-cancel-requi/dialog-cancel-requi.component';
 import { DialogDeleteRequiComponent } from '../dialog-delete-requi/dialog-delete-requi.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequisicionesService } from '../../../../../service/index';
+import { tap } from '../../../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-dt-requisicion',
@@ -16,7 +17,9 @@ import { RequisicionesService } from '../../../../../service/index';
   providers: [RequisicionesService]
 })
 
-export class DtRequisicionComponent implements OnInit {
+export class DtRequisicionComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   // Variables Globales
   requisicion: any;
   arrayRequisicion: any[];
@@ -59,6 +62,7 @@ export class DtRequisicionComponent implements OnInit {
     /** spinner starts on init */
     this.spinner.show();
     this.getDateRequisiciones();
+    this.dataSource
   }
 
   getDateRequisiciones(){
@@ -68,7 +72,6 @@ export class DtRequisicionComponent implements OnInit {
       this.arrayRequisicion = this.requisicion;
       this.pageCount = Math.round(this.requisicion.length / this.rows);
       this.TotalRecords = this.requisicion.length
-      this.paginador();
       this.spinner.hide();
 
     });
@@ -118,6 +121,8 @@ export class DtRequisicionComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit(){
+  }
 
 
   //*******************************-- GRID-- *********************************************//
@@ -147,7 +152,7 @@ export class DtRequisicionComponent implements OnInit {
     this.paginador();
   }
 
-  paginador(){
+  paginador() {
     if(this.page < this.pageCount){
       this.requisicion = new Array(this.rows);
       for(var i = 0; i < this.rows; i++){
