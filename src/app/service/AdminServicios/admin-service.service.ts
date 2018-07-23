@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ApiConection } from './../api-conection.service';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -54,7 +55,7 @@ export class AdminServiceService {
      }
 
 
-  constructor(private http: Http ) {
+  constructor(private http: Http, private httpClient: HttpClient ) {
 
   }
 
@@ -65,9 +66,7 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'image/.*'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.post(this.UrlUploadImage, formData )
-            .map(result => result)
-            .catch(this.handleError);
+    return this.http.post(this.UrlUploadImage, formData ).map(result => result.json());
   }
  
   getPersonas(): Observable<any>

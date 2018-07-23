@@ -9,7 +9,6 @@
     <small>Administrar Grupos</small>
 </div>
 
-
 <form [formGroup]="formGrupos" novalidate >
   <div class="row">
       <span>{{alert}}</span>
@@ -17,7 +16,7 @@
      <div class="panel-body">
        <p class="text-center pv">GRUPOS</p>
            <div class="table-responsive">
-               <table class="table table-bordered table-hover">
+               <table #tableG class="table table-bordered table-hover">
                    <thead>
                        <tr >
                           <th class="text-center"></th>
@@ -32,7 +31,7 @@
                    <tbody>
                        <tr *ngFor="let g of Grupos; let rowIndex = index; let value = index">
                           <td class="text-center">
-                            <btn-view (click)="grupo=g.nombre; GetUsuarios(g.id)" [popover]="myPopover" data-container="#content" matTooltip="Ver integrantes del grupo"></btn-view>
+                            <btn-view (click)="grupo=g.nombre; GetUsuarios(g.id)" [popover]="myPopover" matTooltip="Ver integrantes del grupo"></btn-view>
                           </td>
                           <td class="text-center">
                               <div class="media">
@@ -92,15 +91,14 @@
        </section>
        <section>
         <div class="col-md-6">
-          <input matInput placeholder="{{msj}}">
+          <input matInput placeholder="{{alert}}">
         </div>
         <button [disabled]="!formGrupos.valid" (click)="saveData()" class="btn btn-primary example-label pull-right">Guardar</button>
        </section>
     </div>
   </div>
-
-
 </form>
+
 
 
   <!-- popover-->
@@ -124,6 +122,8 @@
  
 </popover-content>
 </div>
+ 
+  
  <!-- Modal  -->
 
  <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -146,14 +146,17 @@
                       (onItemChanged)="updateFoto()"
                   ></app-upload-imgs>
               </div>
-            </div>  
+            </div> 
      <!-- <div class="modal-footer">
          <btn-closed data-dismiss="modal" (click)="staticModal.hide()"></btn-closed>
        </div>
    </div> -->
- </div>
 </div>
 </div>
+</div>
+</div>
+
+
 
 
 

@@ -1,9 +1,10 @@
+import { ApiConection } from './../../../service/api-conection.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder } from '@angular/forms';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import {MatDialog } from '@angular/material';
 import { UploadImgsComponent } from './../upload-imgs/upload-imgs.component';
-import { ApiConection } from '../../../service';
+
 
 @Component({
   selector: 'app-add-persona',
@@ -53,20 +54,15 @@ export class AddPersonaComponent implements OnInit {
   {
     this.name = this.name + '.' + this.someInput.selectedFile.type.split('/')[1];
 
-    this.service.UploadImg(this.someInput.selectedFile, this.name)
-      .subscribe( data => {
-        console.log(data)
+     this.Users[this.rowAux]['foto'] = 'utilerias/img/user/' + this.name;
+     this.Users[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' + this.name;
+     this.Users = [...this.Users];
+   
+     this.modal.hide();
 
-        if(data.ok)
-        {
-          this.Users[this.rowAux]['foto'] = 'utilerias/img/user/' + this.name;
-          this.Users[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' + this.name;
-          this.Users = [...this.Users];
-          
-          this.closeModal();
-        }
-
-    }); 
+   
+    //       console.log(this.Users)
+        
     
   }
 
@@ -162,6 +158,7 @@ export class AddPersonaComponent implements OnInit {
           item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
         })
 
+        console.log(this.Users)
         //this.Users = this.Users.slice(0, 10)
 
         // for(var c = 0; c <= this.Users.length / 5; c++)

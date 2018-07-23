@@ -1,14 +1,16 @@
-
+import { HttpClient } from '@angular/common/http';
+import { ApiConection } from './../../../service/api-conection.service';
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 
 
 @Component({
   selector: 'app-upload-imgs',
   templateUrl: './upload-imgs.component.html',
   styleUrls: ['./upload-imgs.component.scss'],
-  providers: [ ]
+  providers: [AdminServiceService ]
 })
 
 
@@ -29,7 +31,7 @@ export class UploadImgsComponent implements OnInit {
   
   selectedFile: File;
 
-  constructor() { }
+  constructor( private service: AdminServiceService, private http: HttpClient) { }
 
   ngOnInit()
   {
@@ -49,10 +51,9 @@ export class UploadImgsComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
    
-     this.selectedFile = $event.target.files[0]; 
+     this.selectedFile = file;
      this.name =  this.name + '.' + this.selectedFile.type.split('/')[1];
 
-    
     // let endPoint = 'assets/img/user/'
     //  let headers = new Headers();
     // headers.set('Content-Type', 'application/octet-stream');
@@ -68,11 +69,12 @@ export class UploadImgsComponent implements OnInit {
 
   UploadImg()
   {
+     
     this.onItemChanged.emit(this.setImage());
-    // this.service.UploadImg(this.selectedFile, this.name)
-    //   .subscribe( data => {
-    //     console.log(data)
-    // });
+
+    this.service.UploadImg(this.selectedFile, this.name).subscribe(result => {
+      console.log(result)
+    });
   }
 
   removeItem()
@@ -90,6 +92,7 @@ export class UploadImgsComponent implements OnInit {
   {
     return this.name;
   }
+
  
 
   /**

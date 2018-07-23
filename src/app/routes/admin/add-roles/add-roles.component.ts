@@ -34,7 +34,7 @@ export class AddRolesComponent implements OnInit {
   constructor(private service: AdminServiceService
     , public fb: FormBuilder) {
     this.iniciarForm();
-    this.msj = '';
+  
 
   }
 
