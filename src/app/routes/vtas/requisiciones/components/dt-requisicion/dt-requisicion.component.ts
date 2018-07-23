@@ -172,7 +172,6 @@ export class DtRequisicionComponent implements OnInit {
     'cliente',
     'vBtra',
     'vacantes',
-    'empresa',
     'reclutamiento',
     'sueldoMinimo',
     'sueldoMaximo',

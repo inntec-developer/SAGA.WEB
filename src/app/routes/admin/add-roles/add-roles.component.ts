@@ -1,9 +1,8 @@
-
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import { TreeNode } from 'angular-tree-component';
-
 
 @Component({
   selector: 'app-add-roles',
@@ -34,7 +33,7 @@ export class AddRolesComponent implements OnInit {
   constructor(private service: AdminServiceService
     , public fb: FormBuilder) {
     this.iniciarForm();
-    this.msj = '';
+    
 
   }
 

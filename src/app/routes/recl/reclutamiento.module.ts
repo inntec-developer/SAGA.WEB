@@ -96,7 +96,7 @@ const routes: Routes = [
     { path: 'candidatos', component: CandidatosComponent },
     { path: 'vacantes', component: VacantesComponent, },
     { path: 'disenador', component: DisenadorVacanteComponent },
-    { path: 'configuracionVacante/:Requi', component: DisenadorVacanteComponent },
+    { path: 'configuracionVacante/:Requi/:Folio/:VBtra', component: DisenadorVacanteComponent },
     { path: 'vacantesReclutador', component: VacantesReclutadorComponent, data:{componente:'Vacantes'} }
 ];
 

@@ -46,6 +46,7 @@ export class DtVacantesReclutadorComponent implements OnInit {
       this.dataSource =  new MatTableDataSource(this.requisicion);
       this.arrayRequisicion = this.requisicion;
       this.spinner.hide();
+      console.log(this.requisicion);
     });
   }
 
@@ -74,8 +75,9 @@ export class DtVacantesReclutadorComponent implements OnInit {
     })
   }
 
-  openDesignVacante($event){
-    this._Router.navigate(['/reclutamiento/disenador'], { queryParams: { Requi: $event } });
+  openDesignVacante(id,folio,vBtra){
+    this._Router.navigate(['/reclutamiento/configuracionVacante/', id, folio, vBtra], {skipLocationChange:true});
+    // this._Router.navigate(['/reclutamiento/configuracionVacante'], { queryParams: { Requi: id, Folio: folio, VBtra: vBtra } });
   }
 
    // Display para mostrar los objetos en el Grid
@@ -93,6 +95,8 @@ export class DtVacantesReclutadorComponent implements OnInit {
     'fch_Cumplimiento',
     'estatus',
     'prioridad',
+    'postulados',
+    'enProceso',
     'accion'
   ];
   public get displayedColumns() {
@@ -124,5 +128,7 @@ export interface Element {
   fch_Cumplimiento: string;
   estatus: number;
   prioridad: number;
+  postulados: number;
+  enProceso: number;
 }
 
