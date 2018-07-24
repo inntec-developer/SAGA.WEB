@@ -8,9 +8,9 @@
         </select>
       </div>
       <div class="col-md-4">
-        <btn-view (click)="staticModal.show()" data-toggle="modal" data-target="#staticModal" matTooltip="Ver integrantes del rol"></btn-view>
+        <btn-view id='read' chkPrivilegiosButtons (click)="staticModal.show()" data-toggle="modal" data-target="#staticModal" matTooltip="Ver integrantes del rol"></btn-view>
 
-        <btn-add id='create' chkPrivilegiosButtons (click)="GetTreeRoles(id)" matTooltip="Agregar nueva sección"></btn-add>
+        <btn-add id='create' chkPrivilegiosButtons (click)="GetTreeRoles(id); modalNodes.show()" data-toggle="modal" data-target="#modalNodes" matTooltip="Agregar nueva sección"></btn-add>
 
         <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)" matTooltip="Eliminar Rol Seleccionado"></btn-delete>
         
@@ -31,6 +31,7 @@
     <br/>
     <br/>
     <div class="row">
+        <span>{{alert}}</span>
         <table #tbl class="table table-responsive table-bordered table-hover" (change)="UpdateFoto() ">
           <thead><tr><td *ngFor="let c of columns" class="text-center">{{c.title}}</td></tr></thead>
             <tbody>
@@ -75,6 +76,7 @@
             </tr>
           </tbody>
       </table>
+      <span>{{alert}}</span>
     </div>
   </div>
 
@@ -112,6 +114,25 @@
                <btn-closed data-dismiss="modal" (click)="staticModal.hide()"></btn-closed>
              </div> -->
          </div>
+       </div>
+     </div>
+     </div>
+
+     
+    <!-- Modal Nodes -->
+
+    <div class="modal fade" bsModal #modalNodes="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h4 class="modal-title pull-left"></h4>
+             <button type="button" class="close pull-right" aria-label="Close" (click)="modalNodes.hide()">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+            <grid-roles #gridTree [nodes] = "nodes"></grid-roles>
+          </div>
        </div>
      </div>
      </div>

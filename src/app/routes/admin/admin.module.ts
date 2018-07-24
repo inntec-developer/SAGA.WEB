@@ -49,7 +49,7 @@ const routes: Routes = [
     { path: 'grupo', component: AddadminComponent, data: {'componente':'Usuarios a grupos'} },
     { path: 'grupoAdd', component: AddGrupoComponent, data: {'componente':'Grupos'} },
     { path: 'rol', component: RolGrupoComponent, data: {'componente':'Grupos a roles'} },
-    { path: 'privilegios', component: RollsStructComponent, data: {'componente':'Roles a privilegios'}},
+    { path: 'privilegios', component: RollsStructComponent, data: {'componente':'Privilegios'}},
     { path: 'GridRoles', component: GridRolesComponent },
     { path: 'registro', component: RegistroComponent}
 

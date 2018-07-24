@@ -44,6 +44,7 @@ export class AdminServiceService {
   private UrlDeleteUserRol = ApiConection.ServiceUrl+ApiConection.deleteUserRol;
   private UrlGetStruct = ApiConection.ServiceUrl+ApiConection.getStruct;
   private UrlUploadImage = ApiConection.ServiceUrl+ApiConection.uploadImage;
+  private UrlAddSeccion = ApiConection.ServiceUrl+ApiConection.addSeccion;
 
   // Error.
   private handleError(error: any) {
@@ -167,6 +168,14 @@ export class AdminServiceService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.post(this.UrlAddGrupo, JSON.stringify(data), options)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  AddSeccion(data: any): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.UrlAddSeccion, JSON.stringify(data), options)
             .map(result => result.json())
             .catch(this.handleError);
   }

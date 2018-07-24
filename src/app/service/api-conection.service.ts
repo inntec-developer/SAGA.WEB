@@ -116,4 +116,5 @@ export class ApiConection {
   public static deleteUserRol = 'admin/deleteUserRol';
   public static getStruct = 'admin/getStruct';
   public static uploadImage = 'admin/UploadImage';
+  public static addSeccion = 'admin/agregarSeccion';
 }

@@ -90,6 +90,7 @@ export class AddRolesComponent implements OnInit {
     }
   }
 
+//de arbol la convierto en lista solo pra visualizar como grid
   CrearEstructura(node) {
     this.listAux.push(node);
 

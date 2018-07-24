@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import { ApiConection } from './../../../service/api-conection.service';
 
@@ -14,6 +14,7 @@ export class RollsStructComponent implements OnInit {
   @Input() public StructList: Array<any> = null; // Url api process upload
   @Input() public hiddenSelect = false;
   @Output('onItemChanged') public onItemChanged = new EventEmitter();
+
   columns = [
 
     { title: 'ROL' },
@@ -29,12 +30,18 @@ export class RollsStructComponent implements OnInit {
   listRoles: Array<any> = [];
   listEntidades: Array<any> = [];
   listAux: Array<any> = [];
+  nodesAux = [];
+  nodes: Array<any> = [];
+
+  alert = '';
   constructor(private service: AdminServiceService) { }
   
   GuardarCambios(row: any)
   {
     this.service.UpdatePrivilegios(row)
       .subscribe(data => {
+        console.log(data)
+        this.alert = data;
       });
   }
 
@@ -81,7 +88,7 @@ export class RollsStructComponent implements OnInit {
       this.service.DeleteUserRol(dts)
       .subscribe(
         e=>{
-          console.log(e)
+          this.alert = e;
         })
 
   }
@@ -95,28 +102,41 @@ export class RollsStructComponent implements OnInit {
 
   }
 
+  CrearEstructura(node, rolId) {
+    node.rolId = rolId;
+    this.nodesAux.push(node);
+
+    if (node.children.length > 0) {
+      node.children.forEach(element => {
+        this.CrearEstructura(element, rolId)
+      });
+    }
+
+  }
+
   filtrarTree(tree, modulo)
   {
-    console.log(modulo)
-    console.log(tree)
-    console.log(this.StructList)
-
-    var otro = this.StructList.filter( element =>{
+    var aux = this.StructList.filter( element =>{
       return element.rolId == modulo
     })
 
-    console.log(otro)
 
-    var mocos = tree.filter( item => {
-      var e =  otro.findIndex( x => x.estructuraId == item.estructuraId)
+    this.nodes = tree.filter( item => {
+      var e =  aux.findIndex( x => x.estructuraId == item.estructuraId)
       if( e < 0)
       {
         return item;
       }
     })
 
-    console.log(mocos)
+    this.nodes.forEach(element => {
+      this.CrearEstructura(element, modulo)
+    });
 
+    
+    this.nodes = this.nodesAux;
+    this.nodesAux = [];
+    console.log(this.nodes)
   }
   
   GetTreeRoles(modulo) {
@@ -126,7 +146,7 @@ export class RollsStructComponent implements OnInit {
         e => {
           aux = e;
         
-          this.filtrarTree(aux, modulo)
+         this.filtrarTree(aux, modulo)
         })
   }
 
