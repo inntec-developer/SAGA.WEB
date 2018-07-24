@@ -1,52 +1,56 @@
+import { ActivatedRoute, Router } from '@angular/router/';
 import { Component, OnInit } from '@angular/core';
+import {ToasterConfig, ToasterService} from 'angular2-toaster';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
 import { CatalogoConfiguracionService } from '../../../../service/DisenioVacante/catalogo-configuracion.service';
 import { ConfiguracionService } from '../../../../service/DisenioVacante/configuracion.service';
-import { ActivatedRoute,Router} from '@angular/router/';
 import {Http} from '@angular/http';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import {ToasterService,ToasterConfig} from 'angular2-toaster';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { RequisicionesService } from './../../../../service/requisiciones/requisiciones.service';
 
 @Component({
   selector: 'app-disenador-vacante',
   templateUrl: './disenador-vacante.component.html',
   styleUrls: ['./disenador-vacante.component.scss'],
-  providers:[CatalogoConfiguracionService,ConfiguracionService],
+  providers:[CatalogoConfiguracionService,ConfiguracionService, RequisicionesService],
 })
 
 export class DisenadorVacanteComponent implements OnInit {
-public General : any[];
-public Contrato : any[];
-public PuestoReclutar : any[];
-public Horario : any[];
-public sueldo : any[];
-public Otros : any[];
-public Actividad : any[];
-public Beneficio : any[];
-public Direccion : any[];
-public Telefono : any[];
-public Contacto : any[];
-public Psicometria : any[];
-public Documento : any[];
-public Proceso : any[];
-public Copetencia : any[];
-public Ubicacion : any[];
-public ListaCampo :Array<any> = [];
-public ListaCon : Array<any> = [];
-public Clasifica : any[];
+  public General : any[];
+  public Contrato : any[];
+  public PuestoReclutar : any[];
+  public Horario : any[];
+  public sueldo : any[];
+  public Otros : any[];
+  public Actividad : any[];
+  public Beneficio : any[];
+  public Direccion : any[];
+  public Telefono : any[];
+  public Contacto : any[];
+  public Psicometria : any[];
+  public Documento : any[];
+  public Proceso : any[];
+  public Copetencia : any[];
+  public Ubicacion : any[];
+  public ListaCampo :Array<any> = [];
+  public ListaCon : Array<any> = [];
+  public Clasifica : any[];
 
-public Requi : string;
-public Mensaje :string;
-public variable:boolean = false;
-private toasterService: ToasterService;
-public bol:boolean;
-step = 0;
-toaster: any;
-toasterConfig: any;
-toasterconfig: ToasterConfig = new ToasterConfig({
-    positionClass: 'toast-bottom-right',
-    showCloseButton: true
-});
+  public Requi : string;
+  public Mensaje :string;
+  public variable:boolean = false;
+  private toasterService: ToasterService;
+  public bol:boolean;
+  step = 0;
+  toaster: any;
+  toasterConfig: any;
+  toasterconfig: ToasterConfig = new ToasterConfig({
+      positionClass: 'toast-bottom-right',
+      showCloseButton: true
+  });
+  Folio: any;
+  VBtra: any;
 
   constructor(
           private service: CatalogoConfiguracionService
@@ -56,28 +60,21 @@ toasterconfig: ToasterConfig = new ToasterConfig({
           ,private Config: ConfiguracionService
           ,toasterService: ToasterService
           ,private spinner: NgxSpinnerService
+          ,private serviceRequi : RequisicionesService
         ) {
             this.toasterService = toasterService;
+            this.route.params.subscribe( params => {
+              this.Requi = params['Requi'];
+              this.Folio = params['Folio'];
+              this.VBtra = params['VBtra'];
+            });
         }
 
   ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //     this.Requi = params['Requi'];
-    // });
-    this.route.queryParams
-      .filter(params => params.Requi)
-      .subscribe(params => {
-        this.Requi = params.Requi;
-        console.log(this.Requi); // popular
-      });
-  //  this.Requi = this.route.queryParams._value.Requi;
-
     this.service.getGeneral(this.Requi)
     .subscribe( data => {
       this.General = data;
-      console.log(this.General);
     });
-
 
     this.service.getCampos()
     .subscribe( data => {
@@ -90,7 +87,6 @@ toasterconfig: ToasterConfig = new ToasterConfig({
     this.service.getClasificaciones()
     .subscribe( data => {
       this.Clasifica = data;
-        console.log(this.Clasifica);
     });
   }
 
@@ -113,7 +109,6 @@ toasterconfig: ToasterConfig = new ToasterConfig({
 
    this.Config.UpdatePublicar(this.ListaCon)
    .subscribe( data => {
-    console.log(data)
     this.popGenerico(data.mensaje,data.bandera,'Publicacion');
     this.spinner.hide();
    });
@@ -158,7 +153,6 @@ toasterconfig: ToasterConfig = new ToasterConfig({
   popGenerico(mensaje:string,bandera:boolean,titulo:string) {
     var type = 'success';
     if (bandera == false) {
-          console.log(mensaje);
           type = 'error';
           mensaje = 'Ocurrio algo inesperado intentelo mas tarde';
 

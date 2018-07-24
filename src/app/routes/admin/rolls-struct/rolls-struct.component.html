@@ -1,15 +1,19 @@
 <div class="panel panel-default panel-flat mat-elevation-z8">
   <div class="panel-body">
     <div *ngIf="!hiddenSelect" class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <select class="form-control" (change)="selected($event.target.value); id = $event.target.value; flag=true" >
             <option  [value]="0">Seleccionar Rol</option>
             <option *ngFor="let rol of listRoles" [value]="rol.id">{{rol.rol}}</option>
         </select>
       </div>
-      <div class="col-md-2">
-        <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)" matTooltip="Eliminar Rol Seleccionado"></btn-delete>
+      <div class="col-md-4">
         <btn-view (click)="staticModal.show()" data-toggle="modal" data-target="#staticModal" matTooltip="Ver integrantes del rol"></btn-view>
+
+        <btn-add id='create' chkPrivilegiosButtons (click)="GetTreeRoles(id)" matTooltip="Agregar nueva sección"></btn-add>
+
+        <btn-delete id='delete' chkPrivilegiosButtons (click)="DeleteRoles(id)" matTooltip="Eliminar Rol Seleccionado"></btn-delete>
+        
       </div>
     </div>
     <br/>

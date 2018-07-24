@@ -1,5 +1,5 @@
 <mat-accordion class="example-headers-align">
-  <mat-expansion-panel [expanded]="!expandir">
+  <mat-expansion-panel [expanded]="infoCnd === 0" (opened)="setInfoCnd(0)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <mat-icon class="text-primary">supervisor_account</mat-icon>
@@ -66,7 +66,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 <mat-accordion *ngIf="candidatodtl" class="example-headers-align">
-  <mat-expansion-panel [expanded]="expandir">
+  <mat-expansion-panel [expanded]="infoCnd === 1" (opened)="setInfoCnd(1)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <mat-icon class="text-primary">account_circle</mat-icon>
@@ -337,7 +337,7 @@
             </mat-expansion-panel-header>
             <div class="row">
               <div class="col-md-6 text-muted">
-                <strong class="text-primary">Fecha de nacimiento: </strong> {{candidatodtl[0]?.candidato?.fechaNacimiento | date}}
+                <strong class="text-primary">Fecha de nacimiento: </strong> {{candidatodtl[0]?.candidato?.fechaNacimiento | date: 'dd/MM/yy'}}
               </div>
               <div class="col-md-6 text-muted">
                 <strong class="text-primary">Lugar de nacimiento: </strong> {{candidatodtl[0]?.candidato?.municipioNacimiento?.municipio}}, {{candidatodtl[0]?.candidato?.estadoNacimiento?.estado}},

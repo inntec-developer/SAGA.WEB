@@ -36,7 +36,7 @@
                     <p *ngIf="p.usuario != '' && p.usuario != null">Álias: {{ p.usuario }}</p>
                     <p *ngFor="let e of p.email">email: {{e.email}} </p>
                     <p *ngIf="p.descripcion != '' && p.descripcion != null">{{ p.descripcion }}</p>
-                    <p>Grupo: <span *ngFor="let g of p.grupos"><div>{{g.grupo}}
+                    <p *ngIf="p.grupos.length > 0">Grupo: {{p.grupos.length}} <span *ngFor="let g of p.grupos"><div>{{g.grupo}}
                       <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(g.id, p.entidadId)">
                         <span aria-hidden="true">&times;</span>
                       </button></div>
@@ -73,7 +73,7 @@
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
                   <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                  <p>Grupo: <span *ngFor="let g of pg.grupos">{{g.grupo}}, </span></p>
+                  <p *ngIf="pg.grupos.length > 0">Grupo:<span *ngFor="let g of pg.grupos">{{g.grupo}}, </span></p>
                 </div>
               </div>
          </div>

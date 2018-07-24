@@ -5,10 +5,13 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSort, MatTableDataSource, 
 import {ToasterConfig, ToasterService} from 'angular2-toaster';
 
 import { Apartado } from './../../../../models/recl/candidatos';
+import { ApiConection } from './../../../../service/api-conection.service';
 import { BusquedaComponent } from '../busqueda/busqueda.component';
 import { CandidatosService } from '../../../../service/index';
 import { Comentarios } from '../../../../models/recl/candidatos';
 import { DialogcandidatosComponent } from './dialogcandidatos/dialogcandidatos.component';
+import { element } from 'protractor';
+import { forEach } from '@angular/router/src/utils/collection';
 
 // Modelos
 
@@ -79,7 +82,14 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
   msgError: boolean; // Mensajes a mostrar en la seccion de comentarios;
   msgSuccess: boolean; // Mensajes a mostrar en la seccion de comentarios;
   Usuario: string; // Asignamos el usario que ingreso al sistema en el constructor;
+  infoCnd = 0;
 
+
+
+  // Busqueda de candidatos y Visualizacion de candidatos, control de animacion
+  setInfoCnd(index: number) {
+    this.infoCnd = index;
+  }
 
   setStep(index: number) {
     this.step = index;
@@ -116,6 +126,7 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
         this.ConexionBolsa  = localStorage.getItem('ConexionBolsa');
         this.txtBtnAddComent = 'Comentar';
         this.Usuario = localStorage.getItem('nombre');
+        this.getVacantesReqclutador();
       }
 
  // Captamos la variable de la busqueda de candidatos para ver si tiene cambios. ***
@@ -135,6 +146,19 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     this.paginador();
   }
 
+  getVacantesReqclutador(){
+    // Buscamos las vacantes de la celula o los asignados al reclutador. ***
+    this.service.getvacantes(localStorage.getItem('id'))
+    .subscribe(vacantes => {
+      this.vacantes = vacantes;
+      this.arrayvacantes = this.vacantes;
+      this.pageCountv = Math.round(this.vacantes.length / this.rowsv);
+      this.TotalRecordsv = this.vacantes.length;
+      this.dataSourcev =  new MatTableDataSource(vacantes);
+      this.NumVacantes = this.vacantes.length;
+      this.paginadorv();
+    });
+  }
   // Boton de ver de la tabla de candidatos. ***
   vercandidato(id): void {
     // Buscamos el detalle del candidato seleccionado. ***
@@ -165,22 +189,13 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
               this.dataSourcep =  new MatTableDataSource(postulaciones);
               this.NumPostulaciones = postulaciones.length;
         });
-        // Buscamos las vacantes de la celula o los asignados al reclutador. ***
-        this.service.getvacantes(localStorage.getItem('id'))
-            .subscribe(vacantes => {
-              this.vacantes = vacantes;
-              this.arrayvacantes = this.vacantes;
-              this.pageCountv = Math.round(this.vacantes.length / this.rowsv);
-              this.TotalRecordsv = this.vacantes.length;
-              this.dataSourcev =  new MatTableDataSource(vacantes);
-              this.NumVacantes = this.vacantes.length;
-              this.paginadorv();
-        });
+        
         // Buscar los comentarios agregados al candidato. ***
         this.GetAllComments(id);
     });
     
-    this.expandir = true; // Expandemos los detalles del candidato seleccionado. ***
+    this.setInfoCnd(1); // Expandemos los detalles del candidato seleccionado. ***
+    // this.expandir = true; // Expandemos los detalles del candidato seleccionado. ***
 
       // let dialogRef = this.dialog.open(DialogcandidatosComponent, {
       //   width: '1200px',
@@ -197,6 +212,10 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
       .subscribe(comentarios => {
         this.comentarios = comentarios;
         this.CountComent = this.comentarios.length; 
+        console.log(comentarios);
+        this.comentarios.forEach( element => {
+            element.usuario.foto = ApiConection.ServiceUrlFoto +   element.usuario.foto;
+        });
       })
   }
 
@@ -404,3 +423,4 @@ export class DtCandidatosComponent implements OnInit, AfterViewInit, OnChanges {
     Reclutamiento: string;
     Area: string;
   }
+  

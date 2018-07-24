@@ -23,8 +23,6 @@ export class ViewRequisicionComponent implements OnInit {
       if(params['IdRequi'] != null  && params['Folio'] != null){
         this.requiId = params['IdRequi'];
         this.folio = params['Folio'];
-      }else {
-        console.log("Error al cargar la información.");
       }
     });
   }

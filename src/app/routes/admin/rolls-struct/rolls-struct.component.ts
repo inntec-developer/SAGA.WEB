@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { AdminServiceService } from '../../../service/AdminServicios/admin-service.service';
 import { ApiConection } from './../../../service/api-conection.service';
@@ -32,16 +33,9 @@ export class RollsStructComponent implements OnInit {
   
   GuardarCambios(row: any)
   {
-    console.log(row)
     this.service.UpdatePrivilegios(row)
       .subscribe(data => {
-        console.log(data)
-        this.ngOnInit()
-
       });
-  
-  
-    console.log(row);
   }
 
   BorrarEstructura(row: any)
@@ -99,6 +93,41 @@ export class RollsStructComponent implements OnInit {
   setStruct(data: any) {
     this.filteredData = data;
 
+  }
+
+  filtrarTree(tree, modulo)
+  {
+    console.log(modulo)
+    console.log(tree)
+    console.log(this.StructList)
+
+    var otro = this.StructList.filter( element =>{
+      return element.rolId == modulo
+    })
+
+    console.log(otro)
+
+    var mocos = tree.filter( item => {
+      var e =  otro.findIndex( x => x.estructuraId == item.estructuraId)
+      if( e < 0)
+      {
+        return item;
+      }
+    })
+
+    console.log(mocos)
+
+  }
+  
+  GetTreeRoles(modulo) {
+    var aux = [];
+    this.service.GetTreeRoles()
+      .subscribe(
+        e => {
+          aux = e;
+        
+          this.filtrarTree(aux, modulo)
+        })
   }
 
   GetEstructura() {

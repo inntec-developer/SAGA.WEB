@@ -1,11 +1,14 @@
-import { AuthService } from './../../service/auth/auth.service';
+import { AfterViewInit, Component, Injector, OnDestroy, OnInit } from '@angular/core';
 
-import { Component, OnInit, Injector, OnDestroy, AfterViewInit } from '@angular/core';
+import { AuthService } from './../../service/auth/auth.service';
+import { MenuService } from '../../core/menu/menu.service';
 import { Router } from '@angular/router';
+import { SettingsService } from '../../core/settings/settings.service';
+
 declare var $: any;
 
-import { MenuService } from '../../core/menu/menu.service';
-import { SettingsService } from '../../core/settings/settings.service';
+
+
 
 @Component({
     selector: 'app-sidebar',

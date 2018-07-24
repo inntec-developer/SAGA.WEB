@@ -22,7 +22,6 @@ export class UserblockComponent implements OnInit {
         };
         if(this.user.picture == null || this.user.picture == '')
             this.user.picture = '/assets/img/user/default.jpg'
-        console.log(this.user);
     }
 
     ngOnInit() {
