@@ -3,11 +3,15 @@ import { BodyOutputType, Toast, ToasterConfig, ToasterService } from 'angular2-t
 import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource, PageEvent} from '@angular/material';
 
-//Components
 import { DialogdamfoComponent } from '../dialogdamfo/dialogdamfo.component'
 import { NgxSpinnerService } from 'ngx-spinner';
-//Servicios
 import { RequisicionesService } from '../../../../../service/index';
+
+//Components
+
+
+//Servicios
+
 
 @Component({
   selector: 'app-dt-damfo',
@@ -59,9 +63,9 @@ export class DtDamfoComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         this.damfo = data;
         this.arrayDamfo = data;
-        this.pageCount = Math.round(this.damfo.length / this.rows);
-        this.TotalRecords = this.damfo.length;
-        this.paginador();
+        // this.pageCount = Math.round(this.damfo.length / this.rows);
+        // this.TotalRecords = this.damfo.length;
+        // this.paginador();
         this.spinner.hide();
       });
   }
@@ -81,46 +85,46 @@ export class DtDamfoComponent implements OnInit {
   }
 
 //*******************************-- GRID-- *********************************************//
-  // Paginador.
-  length = 0;
-  pageSize = 10;
-  pageSizeOptions = [10, 30, 50];
+  // // Paginador.
+  // length = 0;
+  // pageSize = 10;
+  // pageSizeOptions = [10, 30, 50];
 
-  rows: number = 10;
-  first: number = 0;
-  page: number = 1;
-  pageCount: number = 0;
-  TotalRecords: number = 0;
-  paginate(event?: PageEvent){
-      if(event.length > event.pageSize )
-      {
-        this.first = event.pageIndex;
-        this.rows = event.pageSize;
-        this.page = event.pageIndex;
-        this.pageCount = event.length;
-      }
-      else{
-        this.rows = event.length;
-      }
-      this.paginador();
-  }
+  // rows: number = 10;
+  // first: number = 0;
+  // page: number = 1;
+  // pageCount: number = 0;
+  // TotalRecords: number = 0;
+  // paginate(event?: PageEvent){
+  //     if(event.length > event.pageSize )
+  //     {
+  //       this.first = event.pageIndex;
+  //       this.rows = event.pageSize;
+  //       this.page = event.pageIndex;
+  //       this.pageCount = event.length;
+  //     }
+  //     else{
+  //       this.rows = event.length;
+  //     }
+  //     this.paginador();
+  // }
 
-  paginador(){
-      if (this.page < this.pageCount) {
-          this.damfo = new Array(this.rows);
-          for (var i = 0; i < this.rows; i++) {
-              this.damfo[i] = this.arrayDamfo[this.first + i];
-          }
-      }
-      else {
-          let length = this.arrayDamfo.length - this.first;
-          this.damfo = new Array(length);
-          for (var i = 0; i < length; i++) {
-              this.damfo[i] = this.arrayDamfo[this.first + i];
-          }
-      }
-      this.dataSource =  new MatTableDataSource(this.damfo);
-  }
+  // paginador(){
+  //     if (this.page < this.pageCount) {
+  //         this.damfo = new Array(this.rows);
+  //         for (var i = 0; i < this.rows; i++) {
+  //             this.damfo[i] = this.arrayDamfo[this.first + i];
+  //         }
+  //     }
+  //     else {
+  //         let length = this.arrayDamfo.length - this.first;
+  //         this.damfo = new Array(length);
+  //         for (var i = 0; i < length; i++) {
+  //             this.damfo[i] = this.arrayDamfo[this.first + i];
+  //         }
+  //     }
+  //     this.dataSource =  new MatTableDataSource(this.damfo);
+  // }
   //termina paginador
 
   // Display para mostrar los objetos en el Grid
