@@ -95,6 +95,13 @@
 <br/>
 <div class="row">
   <div class="col-md-12">
+    <!-- HORARIOS -->
+    <app-dt-horarios [Horarios]="requisicion?.horariosRequi"></app-dt-horarios>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12">
     <!-- DIRECCIONES -->
     <app-dt-direcion-requi [DireccionId]="requisicion?.direccionId"></app-dt-direcion-requi>
   </div>
@@ -208,11 +215,7 @@
 </div>
 <br/>
 <div class="row">
-  <div class="col-md-6">
-    <!-- HORARIOS -->
-    <app-dt-horarios [Horarios]="requisicion?.horariosRequi"></app-dt-horarios>
-  </div>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <!-- BENEFICIOS -->
     <app-dt-beneficios [Beneficios]="requisicion?.beneficiosRequi"></app-dt-beneficios>
   </div>
