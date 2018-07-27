@@ -16,6 +16,7 @@ export class AddGrupoComponent implements OnInit {
   @ViewChild('uploadImg') someInput: UploadImgsComponent;
   @ViewChild('staticModal') modal;
   @ViewChild('ModalMsg') modalMsg;
+  @ViewChild('pop') popover;
 
   formGrupos: FormGroup;
   Grupos: Array<any> = [];
@@ -89,6 +90,7 @@ export class AddGrupoComponent implements OnInit {
         this.UsuariosList.forEach(item => {
           item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
         })
+        
       });
   }
 

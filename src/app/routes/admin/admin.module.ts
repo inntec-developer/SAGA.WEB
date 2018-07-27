@@ -17,15 +17,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 import { AgGridModule } from 'ag-grid-angular/main';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable'
 import {MatDialogModule} from '@angular/material/dialog';
-import {ModalModule} from 'ngx-bootstrap';
-import {PopoverModule} from 'ngx-popover';
-// import {TreeTableModule} from 'ng-treetable';
-import { TreeTableModule } from 'primeng/primeng';
-import {DataTableModule, SharedModule} from 'primeng/primeng'
+import { ModalModule, PopoverModule } from 'ngx-bootstrap';
 
-import { TreeModule } from 'angular-tree-component';
-
-import { TreeNode } from 'primeng/api';
 //Servicios
 
 
@@ -41,6 +34,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { PagesModule } from './../pages/pages.module';
 import {ComponentsModule} from './../../components/components.module';
 import { GridRolesComponent } from './add-roles/grid-roles/grid-roles.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 const routes: Routes = [
@@ -82,13 +76,9 @@ const routes: Routes = [
         MatTooltipModule,
         PagesModule,
         ComponentsModule,
-        ModalModule.forRoot(),
-        PopoverModule,
-        TreeTableModule, 
-        DataTableModule,
-        SharedModule, 
-        TreeModule
-        
+        //ModalModule.forRoot(),
+        PopoverModule.forRoot(),
+        SharedModule       
       ],
     declarations:
     [

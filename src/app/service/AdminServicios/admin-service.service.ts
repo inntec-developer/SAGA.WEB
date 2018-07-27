@@ -45,6 +45,7 @@ export class AdminServiceService {
   private UrlGetStruct = ApiConection.ServiceUrl+ApiConection.getStruct;
   private UrlUploadImage = ApiConection.ServiceUrl+ApiConection.uploadImage;
   private UrlAddSeccion = ApiConection.ServiceUrl+ApiConection.addSeccion;
+  private UrlValidarEmail = ApiConection.ServiceUrl+ApiConection.validarEmail;
 
   // Error.
   private handleError(error: any) {
@@ -120,6 +121,12 @@ export class AdminServiceService {
 
   GetSession(mail :any, pass: any): Observable<any>{
     return this.http.get(this.UrlGetSession + '?p='+ pass + '&e=' + mail)
+            .map(result => result.json())
+            .catch(this.handleError);
+  }
+
+  ValidarEmail(mail :any, pass: any): Observable<any>{
+    return this.http.get(this.UrlValidarEmail + '?e=' + mail)
             .map(result => result.json())
             .catch(this.handleError);
   }

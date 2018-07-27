@@ -37,7 +37,7 @@
                     <p *ngFor="let e of p.email">email: {{e.email}} </p>
                     <p *ngIf="p.descripcion != '' && p.descripcion != null">{{ p.descripcion }}</p>
                     <p *ngIf="p.grupos.length > 0">Grupo: {{p.grupos.length}} <span *ngFor="let g of p.grupos"><div>{{g.grupo}}
-                      <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(g.id, p.entidadId)">
+                      <button id="delete" chkPrivilegiosButtons type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(g.id, p.entidadId)">
                         <span aria-hidden="true">&times;</span>
                       </button></div>
                       </span></p>
@@ -65,7 +65,7 @@
         <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
           <p [hidden]="ListaPG.length > 0">{{msj}}</p>
           <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event)" >
-              <button type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
+              <button id="delete" chkPrivilegiosButtons type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
                   <span aria-hidden="true">&times;</span>
                 </button>
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.fotoAux}}" alt="" />

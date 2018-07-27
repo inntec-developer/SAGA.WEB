@@ -29,9 +29,19 @@
                        </tr>
                    </thead>
                    <tbody>
+                      <ng-template #popTemplate>
+                        <div class="row">
+                              <div class="col-md-12 bodymio" *ngFor="let r of UsuariosList">
+                                <img class="pull-left margentop img-responsive img-circle thumb32" src={{r.fotoAux}} alt="Image" />
+                                <span class="margenmio margentop"> {{ ' ' + r.nombre + ' ' + r.apellidoPaterno + ' ' + r.apellidoMaterno}} </span>
+                              </div>
+                            </div>
+                           
+                      </ng-template>
                        <tr *ngFor="let g of Grupos; let rowIndex = index; let value = index">
                           <td class="text-center">
-                            <btn-view (click)="grupo=g.nombre; GetUsuarios(g.id)" [popover]="myPopover" matTooltip="Ver integrantes del grupo"></btn-view>
+                             
+                            <btn-view #pop="bs-popover" (click)="grupo=g.nombre; GetUsuarios(g.id)" [popover]="popTemplate" placement="right" popoverTitle="{{grupo}}" trigger="click" matTooltip="Ver integrantes del grupo"></btn-view>
                           </td>
                           <td class="text-center">
                               <div class="media">
@@ -93,36 +103,13 @@
         <div class="col-md-6">
           <input matInput placeholder="{{alert}}">
         </div>
-        <button [disabled]="!formGrupos.valid" (click)="saveData()" class="btn btn-primary example-label pull-right">Guardar</button>
+        <button id="create" chkPrivilegiosButtons [disabled]="!formGrupos.valid" (click)="saveData()" class="btn btn-primary example-label pull-right">Guardar</button>
        </section>
     </div>
   </div>
 </form>
 
 
-
-  <!-- popover-->
-
-  <div id="content">
-  <popover-content #myPopover
-  [closeOnClickOutside]="true"
-  placement="right"
-  [animation]="true" 
-  >
-  <div class="headermio">
-      {{grupo}}
-      <button type="button" class="close pull-right" aria-label="Close" (click)="myPopover.hide()">
-          <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <div class="bodymio" *ngFor="let r of UsuariosList">
-      <img class="pull-left media img-responsive img-circle thumb32" src={{r.fotoAux}} alt="Image" />
-      <p class="margenmio"> {{ ' ' + r.nombre + ' ' + r.apellidoPaterno + ' ' + r.apellidoMaterno}} </p>
-  </div>
- 
-</popover-content>
-</div>
- 
   
  <!-- Modal  -->
 

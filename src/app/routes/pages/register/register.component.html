@@ -1,19 +1,26 @@
+
+
 <div class="wrapper">
     <div class="block-center mt-xl wd-xl">
         <!-- START panel-->
         <div class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
-                <!-- <a href="#">
-                    <img class="block-center img-rounded" src="assets/img/logo.png" alt="Image" />
-                </a> -->
-            </div>
+                    <a href="#">
+                            <img class="block-center img-rounded" src="assets/img/damsa/logo.png" alt="Image" />
+                          </a>
+           </div>
+
+       
             <div class="panel-body">
-                <p class="text-center pv">REGISTRO</p>
+                <p class="text-center pv">SAGA INN - REGISTRO</p>
                 <form [formGroup]="valForm" class="form-validate mb-lg" role="form" name="registerForm" novalidate="" (submit)="submitForm($event, valForm.value)">
                     <div class="form-group has-feedback">
                       <label class="text-muted">Correo Electrónico</label>
-                      <input class="form-control" type="email" name="account_email" placeholder="Ingresar correo electrónico" autocomplete="off" formControlName="email" required="" />
-                      <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                      <input class="form-control" (change)="closePop()" (blur)="ValidarEmail($event.target.value)" placeholder="Ingresar correo electrónico" autocomplete="off" formControlName="email" required="" />
+                      <span class="fa fa-envelope form-control-feedback text-muted" popover= "El email:  {{valForm.controls['email'].value}}  ya se encuentra registrado" placement="right" trigger=""
+                      #pop="bs-popover" ></span>
+
+
                       <p><span class="text-danger" *ngIf="valForm.controls['email'].hasError('required') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">Correo electrónico es un campo requerido</span></p>
                       <p><span class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">Debe ingresar una cuenta de correo electrónico válido</span></p>
                       <div formGroupName="passwordGroup">
@@ -67,7 +74,7 @@
                     </div> -->
                     <p><span class="text-muted text-center">{{msj}}</span></p>
                     <!-- <span class="text-danger" *ngIf="valForm.controls['accountagreed'].hasError('required') && (valForm.controls['accountagreed'].dirty || valForm.controls['accountagreed'].touched)">You must agree the terms</span> -->
-                    <button class="btn btn-block btn-primary mt-lg" type="submit">Crear cuenta</button>
+                    <button [disabled]="!disabled" class="btn btn-block btn-primary mt-lg" type="submit">Crear cuenta</button>
                 </form>
                 <!-- <div class="alert alert-danger text-center"></div> -->
                 <p class="pt-lg text-center">Usuario Registrado</p><a class="btn btn-block btn-default" [routerLink]="'/admin/registro'">Ingresar</a>

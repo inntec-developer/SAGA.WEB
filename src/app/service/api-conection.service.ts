@@ -117,4 +117,5 @@ export class ApiConection {
   public static getStruct = 'admin/getStruct';
   public static uploadImage = 'admin/UploadImage';
   public static addSeccion = 'admin/agregarSeccion';
+  public static validarEmail = 'admin/validarEmail';
 }

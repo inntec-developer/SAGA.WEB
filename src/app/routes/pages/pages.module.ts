@@ -1,3 +1,4 @@
+import { PopoverModule } from 'ngx-bootstrap';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -26,7 +27,8 @@ const routes: Routes = [
     imports: [
         SharedModule,
         RouterModule.forChild(routes),
-        HttpModule
+        HttpModule,
+        PopoverModule.forRoot()
     ],
     declarations: [
         LoginComponent,
