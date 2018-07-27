@@ -116,7 +116,7 @@ export class AddGrupoComponent implements OnInit {
   {
     this.name = this.name + '.' + this.someInput.selectedFile.type.split('/')[1];
 
-    if(this.someInput.StatusCode == 201)
+    if(this.someInput.StatusCode == 201 || this.someInput.StatusCode == 500)
     {
       this.closeModal();
 
