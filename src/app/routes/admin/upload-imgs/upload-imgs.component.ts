@@ -30,6 +30,7 @@ export class UploadImgsComponent implements OnInit {
   @Output() image: any = new Image();
   
   selectedFile: File;
+  @Output() StatusCode: any;
 
   constructor( private service: AdminServiceService, private http: HttpClient) { }
 
@@ -69,12 +70,13 @@ export class UploadImgsComponent implements OnInit {
 
   UploadImg()
   {
-     
     this.onItemChanged.emit(this.setImage());
 
     this.service.UploadImg(this.selectedFile, this.name).subscribe(result => {
-      console.log(result)
+      this.StatusCode = result;
     });
+
+    this.onItemChanged.emit(this.isUpdate());
   }
 
   removeItem()
@@ -93,6 +95,22 @@ export class UploadImgsComponent implements OnInit {
     return this.name;
   }
 
+   /**
+   * Check file is image
+   *
+   * @param {*} fileType
+   * @returns {boolean}
+   */
+  public isUpdate(): boolean {
+    if(this.StatusCode == 201)
+    {
+      return true
+    }
+    else
+    {
+      return false
+    }
+  }
  
 
   /**

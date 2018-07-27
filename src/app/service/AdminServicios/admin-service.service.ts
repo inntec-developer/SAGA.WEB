@@ -78,6 +78,12 @@ export class AdminServiceService {
          .catch(this.handleError);
   }
 
+  GetImage(id): Observable<any>
+  {
+     return this.http.get(this.UrlGetImage + '?imageName=' + id)
+         .map(result => result.json())
+         .catch(this.handleError);
+  }
   GetEntidadesUG(): Observable<any>
   {
      return this.http.get(this.UrlGetEntidadesUG)

@@ -29,23 +29,24 @@
                        </tr>
                    </thead>
                    <tbody>
-                      <ng-template #popTemplate>
+                    <ng-template #popTemplate>
+
                         <div class="row">
-                              <div class="col-md-12 bodymio" *ngFor="let r of UsuariosList">
-                                <img class="pull-left margentop img-responsive img-circle thumb32" src={{r.fotoAux}} alt="Image" />
-                                <span class="margenmio margentop"> {{ ' ' + r.nombre + ' ' + r.apellidoPaterno + ' ' + r.apellidoMaterno}} </span>
+                              <div class="col-xs-12 bodymio" *ngFor="let r of UsuariosList">
+                                <img class="pull-left img-responsive img-circle thumb32" [src]='r.fotoAux' alt="Image" />
+                                <span class="margenmio"> {{ ' ' + r.nombre + ' ' + r.apellidoPaterno + ' ' + r.apellidoMaterno}} </span> 
                               </div>
-                            </div>
-                           
+                            </div> 
+                          
                       </ng-template>
                        <tr *ngFor="let g of Grupos; let rowIndex = index; let value = index">
                           <td class="text-center">
                              
-                            <btn-view #pop="bs-popover" (click)="grupo=g.nombre; GetUsuarios(g.id)" [popover]="popTemplate" placement="right" popoverTitle="{{grupo}}" trigger="click" matTooltip="Ver integrantes del grupo"></btn-view>
+                            <btn-view  (click)="grupo=g.nombre; GetUsuarios(g.id)" data-toggle="popover" [popover]="popTemplate" placement="right" popoverTitle="{{grupo}}" trigger="click" matTooltip="Ver integrantes del grupo"></btn-view>
                           </td>
                           <td class="text-center">
                               <div class="media">
-                                <a matTooltip="Click to edit" (click)="rowAux=rowIndex; CrearURL(g.id); staticModal.show()"><img class="img-responsive img-circle" src={{g.fotoAux}} alt="Image" /></a>
+                                <a matTooltip="Click to edit" (click)="rowAux=rowIndex; CrearURL(g.id); staticModal.show()"><img class="img-responsive img-circle" [src]='g.fotoAux' alt="Image" /></a>
                               </div>
                           </td>
                            <td class="text-center">

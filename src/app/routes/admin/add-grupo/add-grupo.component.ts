@@ -25,7 +25,7 @@ export class AddGrupoComponent implements OnInit {
   rowAux: any;
   UsuariosList: Array<any> = [];
   alert = '';
-
+  foto = null;
   constructor( public fb: FormBuilder, private service: AdminServiceService )
   {
     this.formGrupos = this.fb.group({
@@ -72,12 +72,13 @@ export class AddGrupoComponent implements OnInit {
       e=>{
         this.Grupos = e;
 
-        this.Grupos.forEach(item => {
-          item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
-        })
+        
+        // this.Grupos.forEach(item => {
+        //  item.fotoAux = 'data:image/jpeg;base64,' + item.fotoAux;
 
+        // })
         console.log(this.Grupos)
-      });
+     });
   }
 
   GetUsuarios(GrupoId : any)
@@ -88,7 +89,7 @@ export class AddGrupoComponent implements OnInit {
         this.UsuariosList = e;
 
         this.UsuariosList.forEach(item => {
-          item.fotoAux = ApiConection.ServiceUrlFoto + item.foto
+          item.fotoAux = 'data:image/jpeg;base64,' + item.fotoAux
         })
         
       });
@@ -115,20 +116,29 @@ export class AddGrupoComponent implements OnInit {
   {
     this.name = this.name + '.' + this.someInput.selectedFile.type.split('/')[1];
 
-    this.service.UploadImg(this.someInput.selectedFile, this.name)
-      .subscribe( data => {
+    if(this.someInput.StatusCode == 201)
+    {
+      this.closeModal();
 
-        this.closeModal();
+        this.Grupos[this.rowAux]['fotoAux'] = this.someInput.image.src;
+        this.Grupos = [...this.Grupos]; 
+        console.log(this.Grupos)
+    }
+    
+    // this.service.UploadImg(this.someInput.selectedFile, this.name)
+    //   .subscribe( data => {
+
+    //     this.closeModal();
           
-        this.alert = data;
+    //     this.alert = data;
 
-          this.Grupos[this.rowAux]['foto'] = 'utilerias/img/user/' +  this.someInput.name;
-          this.Grupos[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' +  this.someInput.name;
-          this.Grupos = [...this.Grupos];
+    //       this.Grupos[this.rowAux]['foto'] = 'utilerias/img/user/' +  this.someInput.name;
+    //       this.Grupos[this.rowAux]['fotoAux'] = ApiConection.ServiceUrlFoto + 'utilerias/img/user/' +  this.someInput.name;
+    //       this.Grupos = [...this.Grupos];
 
-          console.log(this.Grupos)
+    //       console.log(this.Grupos)
          
-    }); 
+    // }); 
   }
 
   updateGrupo($event,rowIndex)
