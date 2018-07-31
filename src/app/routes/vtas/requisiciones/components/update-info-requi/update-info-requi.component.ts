@@ -36,6 +36,7 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
   public loading: boolean;
 
   public formRequi : FormGroup;
+  minLimitDate: any;
 
 
     constructor(
@@ -124,6 +125,7 @@ export class UpdateInfoRequiComponent implements OnInit, AfterContentChecked {
               confidencial: data.confidencial,
           });
             this.checked = true;
+            this.minLimitDate = data.fch_Creacion;
         });
       }
     }
