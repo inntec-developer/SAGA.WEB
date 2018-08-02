@@ -64,19 +64,30 @@ export class AddadminComponent implements OnInit {
       
   }
 
-  addToGroups($event, index) {
+  addToGroups($event) {
 
     console.log($event)
     //el drag me agrega solo el item por eso lo borro por que se repite
 
-    var idx = this.ListaPG.findIndex(x => x.entidadId == $event.entidadId);
+     //el drag me agrega solo el item por eso lo borro por que se repite
+     var rep = this.ListaPG.filter(x => x.entidadId == $event.entidadId);
+
+     if(rep.length > 1)
+     {
+       var idx = this.ListaPG.findIndex(x => x.entidadId == $event.entidadId);
+       this.ListaPG.splice(idx, 1)
+       this.ListEntidades.push($event);
+     }
+
+  }
+
+  PopUsers(id)
+  {
+    var idx = this.ListaPG.findIndex(x => x.entidadId == id);
 
     if (idx != -1) {
       this.ListaPG.splice(idx, 1)
     }
-
-    this.ListEntidades.push($event);
-
 
   }
 

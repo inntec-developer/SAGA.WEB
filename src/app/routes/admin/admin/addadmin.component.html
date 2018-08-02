@@ -65,15 +65,15 @@
         <div class="panel-body" dnd-sortable-container [dropZones]="['demo1']" [sortableData]="ListaPG" >
           <p [hidden]="ListaPG.length > 0">{{msj}}</p>
           <div *ngFor="let pg of ListaPG; let i = index" class="panel panel-default mat-elevation-z8" dnd-sortable [sortableIndex]="i" dnd-droppable (onDropSuccess)="addToGroups($event)" >
-              <button id="delete" chkPrivilegiosButtons type="button" class="close pull-right" aria-label="Close" (click)="DeleteUsers(slcGrupo.value, pg.entidadId)">
+              <button id="delete" chkPrivilegiosButtons type="button" class="close pull-right" aria-label="Close" (click)="PopUsers(pg.entidadId)">
                   <span aria-hidden="true">&times;</span>
                 </button>
               <img class="pull-left media img-responsive img-circle thumb48 marginimg" src="{{pg.fotoAux}}" alt="" />
               <div class="media-body">
                 <div class="media-heading margintextthumb">
                   <div class="pull-right badge baed-info tituloPuesto">{{pg.departamento}}</div>
-                  <h4>{{pg.nombre + ' ' + pg.apellidoPaterno }}</h4>
-                  <p *ngIf="pg.grupos.length > 0">Grupo:<span *ngFor="let g of pg.grupos">{{g.grupo}}, </span></p>
+                  <h4>{{pg.nombre + ' ' + pg.apellidoPaterno + ' ' + apellidoMaterno }}</h4>
+                  <!-- <p *ngIf="pg.grupos.length > 0">Grupo:<span *ngFor="let g of pg.grupos">{{g.grupo}}, </span></p> -->
                 </div>
               </div>
          </div>

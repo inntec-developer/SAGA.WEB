@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     user: string = '';
     disabled = false;
     verMsj = false;
+    verMsj2 = false;
     @ViewChild('pop') epopover;
     @ViewChild('pop2') epopover2;
     disabledE = false;
@@ -69,6 +70,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         {
             if(this.disabledE)
             {
+                this.verMsj = false;
                 this.user = this.valForm.controls['email'].value.trim();
                 var idx =  this.user.indexOf( "@" ); 
                 this.user = "DAMSA." + this.user.substring(0, idx);
@@ -91,6 +93,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.service.AddUsers(persona)
                 .subscribe(data => {
                     this.msj = data;
+                    
+                    this.verMsj2 = true;
                     this.ngOnInit()
                 });
             }
