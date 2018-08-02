@@ -119,10 +119,9 @@ export class AddGrupoComponent implements OnInit {
     if(this.someInput.StatusCode == 201 || this.someInput.StatusCode == 500)
     {
       this.closeModal();
-
+        this.Grupos[this.rowAux]['foto'] = 'utilerias/img/user/' +  this.someInput.name;
         this.Grupos[this.rowAux]['fotoAux'] = this.someInput.image.src;
         this.Grupos = [...this.Grupos]; 
-        console.log(this.Grupos)
     }
     
     // this.service.UploadImg(this.someInput.selectedFile, this.name)
