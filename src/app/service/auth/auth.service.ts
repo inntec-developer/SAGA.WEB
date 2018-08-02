@@ -12,7 +12,7 @@ export class AuthService {
   IdUser;
   private UrlGetSession = ApiConection.ServiceUrl+ApiConection.getSession;
   private UrlValidarEmail = ApiConection.ServiceUrl+ApiConection.validarEmail;
-
+  private UrlValidarDAL = ApiConection.ServiceUrl+ApiConection.validarDAL;
   constructor(private http: HttpClient, public settings: SettingsService) { }
 
   login(email: string, password: string): Observable<any>
@@ -32,6 +32,14 @@ export class AuthService {
 public isUserActive(email: string) : Observable<any>
 {
   return this.http.get(this.UrlValidarEmail + '?e=' + email)
+        .map(user => {
+          return user;
+        });
+}
+
+public isUserDAL(dal: string) : Observable<any>
+{
+  return this.http.get(this.UrlValidarDAL + '?dal=' + dal)
         .map(user => {
           return user;
         });

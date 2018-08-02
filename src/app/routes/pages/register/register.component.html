@@ -1,69 +1,99 @@
-
-
 <div class="wrapper">
     <div class="block-center mt-xl wd-xl">
         <!-- START panel-->
         <div class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
-                    <a href="#">
-                            <img class="block-center img-rounded" src="assets/img/damsa/logo.png" alt="Image" />
-                          </a>
-           </div>
+                <a href="#">
+                    <img class="block-center img-rounded" src="assets/img/damsa/logo.png" alt="Image" />
+                </a>
+            </div>
 
-       
+
             <div class="panel-body">
                 <p class="text-center pv">SAGA INN - REGISTRO</p>
                 <form [formGroup]="valForm" class="form-validate mb-lg" role="form" name="registerForm" novalidate="" (submit)="submitForm($event, valForm.value)">
                     <div class="form-group has-feedback">
-                      <label class="text-muted">Correo Electrónico</label>
-                      <input class="form-control" (change)="closePop()" (blur)="ValidarEmail($event.target.value)" placeholder="Ingresar correo electrónico" autocomplete="off" formControlName="email" required="" />
-                      <span class="fa fa-envelope form-control-feedback text-muted" popover= "El email:  {{valForm.controls['email'].value}}  ya se encuentra registrado" placement="right" trigger=""
-                      #pop="bs-popover" ></span>
+                        <label class="text-muted">Correo Electrónico</label>
+                        <input class="form-control" (change)="closePop()" (blur)="ValidarEmail($event.target.value)" type="email" name="account_email"
+                            placeholder="Enter email" autocomplete="off" formControlName="email" required="" />
+                        <span class="fa fa-envelope form-control-feedback text-muted bg-transparent border-left-0" popover="El email:  {{valForm.controls['email'].value}}  ya se encuentra registrado"
+                            placement="right" trigger="" #pop="bs-popover"></span>
 
-
-                      <p><span class="text-danger" *ngIf="valForm.controls['email'].hasError('required') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">Correo electrónico es un campo requerido</span></p>
-                      <p><span class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">Debe ingresar una cuenta de correo electrónico válido</span></p>
-                      <div formGroupName="passwordGroup">
-                          <div class="form-group has-feedback">
-                              <label class="text-muted">Contraseña</label>
-                              <input class="form-control" id="id-password" type="password" name="password" formControlName="password" [formControl]="valForm.get('passwordGroup.password')"/>
-                              <span class="fa fa-lock form-control-feedback text-muted"></span>
-                              <p><span class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('required') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">Este campo es requerido</span></p>
-                              <p><span class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('pattern') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">La longitud de contraseña debe estar entre 6 y 10 caracteres alfanúmericos 'a-zA-Z0-9'</span></p>
-                          </div>
-                          <div class="form-group has-feedback">
-                              <label class="text-muted">Confirmar Contraseña</label>
-                              <input class="form-control" type="password" name="confirmPassword" formControlName="confirmPassword" [formControl]="valForm.get('passwordGroup.confirmPassword')"/>
-                              <span class="fa fa-lock form-control-feedback text-muted"></span>
-                              <p><span class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('equalTo')">Las contraseñas no coinciden</span></p>
-                          </div>
-                      </div>
+                        <p>
+                            <span class="text-danger" *ngIf="valForm.controls['email'].hasError('required') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">Correo electrónico es un campo requerido</span>
+                        </p>
+                        <p>
+                            <span class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">Debe ingresar una cuenta de correo electrónico válido</span>
+                        </p>
+                        <div formGroupName="passwordGroup">
+                            <div class="form-group has-feedback">
+                                <label class="text-muted">Contraseña</label>
+                                <input class="form-control" id="id-password" type="password" name="password" formControlName="password" [formControl]="valForm.get('passwordGroup.password')"
+                                />
+                                <span class="fa fa-lock form-control-feedback text-muted"></span>
+                                <p>
+                                    <span class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('required') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">Este campo es requerido</span>
+                                </p>
+                                <p>
+                                    <span class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('pattern') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">La longitud de contraseña debe estar entre 6 y 10 caracteres alfanúmericos 'a-zA-Z0-9'</span>
+                                </p>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="text-muted">Confirmar Contraseña</label>
+                                <input class="form-control" type="password" name="confirmPassword" formControlName="confirmPassword" [formControl]="valForm.get('passwordGroup.confirmPassword')"
+                                />
+                                <span class="fa fa-lock form-control-feedback text-muted"></span>
+                                <p>
+                                    <span class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('equalTo')">Las contraseñas no coinciden</span>
+                                </p>
+                            </div>
+                        </div>
                         <!-- mio registar -->
-                      <label class="text-muted">Clave</label>
-                      <input class="form-control" type="text" placeholder="Ingresar Clave" autocomplete="off" formControlName="Clave" />
-                      <p><span class="text-danger" *ngIf="valForm.controls['Clave'].touched && !valForm.controls['Clave'].valid">Clave es un campo requerido</span></p>
-                      <label class="text-muted">Nombre</label>
-                      <input class="form-control" type="text" placeholder="Ingresar Nombre" autocomplete="off" formControlName="Nombre" />
-                      <p><span class="text-danger" *ngIf="valForm.controls['Nombre'].touched && !valForm.controls['Nombre'].valid">Nombre es un campo requerido</span></p>
-                      <label class="text-muted">Apellido Paterno</label>
-                      <input class="form-control" type="text" placeholder="Ingresar Apellido Paterno" autocomplete="off" formControlName="ApellidoPaterno" />
-                      <p><span class="text-danger" *ngIf="valForm.controls['ApellidoPaterno'].touched && !valForm.controls['ApellidoPaterno'].valid">Apellido paterno es un campo requerido</span></p>
-                      <label class="text-muted">Apellido Materno</label>
-                      <input class="form-control" type="text" placeholder="Ingresar Apellido Materno" autocomplete="off" formControlName="ApellidoMaterno" />
-                      <p><span class="text-danger" *ngIf="valForm.controls['ApellidoMaterno'].touched && !valForm.controls['ApellidoMaterno'].valid">Apellido materno es un campo requerido</span></p>
-                      <label class="text-muted">Alias</label>
-                      <input class="form-control" type="text" placeholder="DAMSA.{{valForm.controls['Nombre'].value}}" autocomplete="off" formControlName="Usuario"/>
-                      <!-- <p><span class="text-danger" *ngIf="valForm.controls['Usuario'].touched">Si no selecciona usuario se le asignará uno</span></p>                       -->
-                      <label class="text-muted">Departamentos</label>
-                      <select class="form-control" formControlName="DepartamentoId" >
-                        <option value="">Seleccionar departamento</option> <!-- not selected / blank option -->
-                        <option *ngFor="let d of ListDepas" [value]="d.id">{{d.nombre}}</option>
-                      </select>
-                      <p><span class="text-danger" *ngIf="valForm.controls['DepartamentoId'].hasError('required')">Debe seleccionar un departamento</span></p>
+                        <div class="form-group has-feedback">
+                            <label class="text-muted">Clave</label>
+                            <input class="form-control" type="text" placeholder="DAL" autocomplete="off" formControlName="Clave" required="" (change)="closePop()"
+                                (blur)="ValidarDAL(valForm.controls['Clave'].value)" />
+
+                            <span class="form-control-feedback text-muted" popover="Clave: {{valForm.controls['Clave'].value}} ya se encuentra registrado"
+                                placement="right" trigger="" #pop2="bs-popover"></span>
+
+                            <p>
+                                <span class="text-danger" *ngIf="valForm.controls['Clave'].touched && !valForm.controls['Clave'].valid">Clave es un campo requerido</span>
+                            </p>
+                        </div>
+                        <label class="text-muted">Nombre</label>
+                        <input class="form-control" type="text" placeholder="Ingresar Nombre" autocomplete="off" formControlName="Nombre" />
+                        <p>
+                            <span class="text-danger" *ngIf="valForm.controls['Nombre'].touched && !valForm.controls['Nombre'].valid">Nombre es un campo requerido</span>
+                        </p>
+                        <label class="text-muted">Apellido Paterno</label>
+                        <input class="form-control" type="text" placeholder="Ingresar Apellido Paterno" autocomplete="off" formControlName="ApellidoPaterno"
+                        />
+                        <p>
+                            <span class="text-danger" *ngIf="valForm.controls['ApellidoPaterno'].touched && !valForm.controls['ApellidoPaterno'].valid">Apellido paterno es un campo requerido</span>
+                        </p>
+                        <label class="text-muted">Apellido Materno</label>
+                        <input class="form-control" type="text" placeholder="Ingresar Apellido Materno" autocomplete="off" formControlName="ApellidoMaterno"
+                        />
+                        <p>
+                            <span class="text-danger" *ngIf="valForm.controls['ApellidoMaterno'].touched && !valForm.controls['ApellidoMaterno'].valid">Apellido materno es un campo requerido</span>
+                        </p>
+                        <label class="text-muted">Alias</label>
+                        <input class="form-control" type="text" placeholder="{{user}}" autocomplete="off" formControlName="Usuario" />
+                        <!-- <p><span class="text-danger" *ngIf="valForm.controls['Usuario'].touched">Si no selecciona usuario se le asignará uno</span></p>                       -->
+                        <label class="text-muted">Departamentos</label>
+                        <select class="form-control" formControlName="DepartamentoId">
+                            <option value="">Seleccionar departamento</option>
+                            <!-- not selected / blank option -->
+                            <option *ngFor="let d of ListDepas" [value]="d.id">{{d.nombre}}</option>
+                        </select>
+                        <p>
+                            <span class="text-danger" *ngIf="valForm.controls['DepartamentoId'].hasError('required')">Debe seleccionar un departamento</span>
+                        </p>
                         <!-- final mio registrar -->
 
                     </div>
-
+                    <br/>
                     <!-- <div class="clearfix">
                         <div class="checkbox c-checkbox pull-left mt0">
                             <label>
@@ -72,12 +102,14 @@
                             </label>
                         </div>
                     </div> -->
-                    <p><span class="text-muted text-center">{{msj}}</span></p>
-                    <!-- <span class="text-danger" *ngIf="valForm.controls['accountagreed'].hasError('required') && (valForm.controls['accountagreed'].dirty || valForm.controls['accountagreed'].touched)">You must agree the terms</span> -->
-                    <button [disabled]="!disabled" class="btn btn-block btn-primary mt-lg" type="submit">Crear cuenta</button>
+                    <div *ngIf="verMsj" class="alert alert-success">
+                        {{msj}}
+                    </div>
+                    <button class="btn btn-block btn-primary mt-3" [disabled]="!disabledC" type="submit">Crear cuenta</button>
                 </form>
                 <!-- <div class="alert alert-danger text-center"></div> -->
-                <p class="pt-lg text-center">Usuario Registrado</p><a class="btn btn-block btn-default" [routerLink]="'/admin/registro'">Ingresar</a>
+                <p class="pt-lg text-center">Usuario Registrado</p>
+                <a class="btn btn-block btn-default" [routerLink]="'/admin/registro'">Ingresar</a>
             </div>
         </div>
         <!-- END panel-->
