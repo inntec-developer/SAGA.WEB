@@ -131,7 +131,8 @@ export class DtDamfoComponent implements OnInit {
   displayedColumns = [
     'cliente',
     'nombrePerfil',
-    'empresa',
+    // 'empresa',
+    'vacantes',
     'reclutamiento',
     'sueldoMinimo',
     'sueldoMaximo',
@@ -149,6 +150,7 @@ export interface Element {
   id: string;
   cliente: string;
   nombrePerfil: string;
+  vacantes: number;
   giroEmpresa: string;
   actividadEmpresa: string;
   tipoReclutamiento: string;

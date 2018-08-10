@@ -7,7 +7,7 @@
     </mat-form-field>
   </div>
   <btn-add id="create" chkPrivilegiosButtons [text]="textBtnAdd"
-    [routerLink]="['/ventas/crearRequisicion']"  matTooltip="Nueva Requisición">
+    [routerLink]="['/ventas/crearRequisicion']">
   </btn-add>
   <mat-table #table [dataSource]="dataSource">
     <!-- Folio -->
@@ -21,7 +21,7 @@
     <ng-container matColumnDef="cliente">
       <mat-header-cell *matHeaderCellDef>Cliente </mat-header-cell>
       <mat-cell *matCellDef="let element"> 
-        <small>{{element?.cliente?.nombrecomercial}} </small>
+        <small>{{element?.cliente}} </small>
       </mat-cell>
     </ng-container>
 
@@ -57,7 +57,7 @@
     <ng-container matColumnDef="reclutamiento">
       <mat-header-cell *matHeaderCellDef>Reclutamiento</mat-header-cell>
       <mat-cell *matCellDef="let element"> 
-        <small> {{element?.tipoReclutamiento?.tipoReclutamiento}} - {{element?.claseReclutamiento?.clasesReclutamiento}} </small>
+        <small> {{element?.tipoReclutamiento}} - {{element?.claseReclutamiento}} </small>
       </mat-cell>
     </ng-container>
 
@@ -97,11 +97,11 @@
       <mat-cell *matCellDef="let element">
         <h5>
           <small class="label"
-            [class.label-warning]="element.estatus.id  === 4"
-            [class.label-primary]="element.estatus.id  === 5"
-            [class.label-info]="element.estatus.id  === 6"
-            [class.label-success]="element.estatus.id  === 7"
-            [class.label-danger]="element.estatus.id  === 8"> {{element?.estatus?.descripcion}}
+            [class.label-warning]="element.estatusId  === 4"
+            [class.label-primary]="element.estatusId  === 5"
+            [class.label-info]="element.estatusId  === 6"
+            [class.label-success]="element.estatusId  === 7"
+            [class.label-danger]="element.estatusId  === 8"> {{element?.estatus}}
           </small>
         </h5>
       </mat-cell>
@@ -112,8 +112,8 @@
       <mat-cell *matCellDef="let element">
         <h5>
           <small class="label"
-            [class.label-danger]="element.prioridad.id  === 1"
-            [class.label-warning]="element.prioridad.id  === 2"> {{element?.prioridad?.descripcion}}
+            [class.label-danger]="element.prioridadId === 1"
+            [class.label-warning]="element.prioridadId  === 2"> {{element?.prioridad}}
           </small>
         </h5>
       </mat-cell>
@@ -124,9 +124,9 @@
       <mat-header-cell *matHeaderCellDef>Acciones </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <btn-view (click)="showRequi(element.id, element.folio)" matTooltip="Ver Requisición"></btn-view>
-          <btn-edit id="update" chkPrivilegiosButtons (click)="editRequi(element.id, element.folio)"  *ngIf="element.estatus.id != 8" matTooltip="Editar Requisición"></btn-edit>
-          <btn-cancel id="special" chkPrivilegiosButtons (click)="openDialogCancel(element)" *ngIf="element.estatus.id != 8 && element.enProceso == 0" matTooltip="Cancelar Requisición" ></btn-cancel>
-          <btn-refresh id="special" chkPrivilegiosButtons (click)="openDialogReActivar(element)" *ngIf="element.estatus.id == 8"  matTooltip="Re-activar Requisición" ></btn-refresh>
+          <btn-edit id="update" chkPrivilegiosButtons (click)="editRequi(element.id, element.folio)"  *ngIf="element.estatusId != 8" matTooltip="Editar Requisición"></btn-edit>
+          <btn-cancel id="special" chkPrivilegiosButtons (click)="openDialogCancel(element)" *ngIf="element.estatusId != 7 && element.enProceso == 0" matTooltip="Cancelar Requisición" ></btn-cancel>
+          <btn-refresh id="special" chkPrivilegiosButtons (click)="openDialogReActivar(element)" *ngIf="element.estatusId == 8"  matTooltip="Re-activar Requisición" ></btn-refresh>
           <btn-delete id="delete" chkPrivilegiosButtons (click)="openDialogDelete(element)" *ngIf="element.enProceso == 0" matTooltip="Eliminar Requisición"></btn-delete>
       </mat-cell>
 
